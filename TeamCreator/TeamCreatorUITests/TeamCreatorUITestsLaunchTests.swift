@@ -1,13 +1,13 @@
 //
-//  TeamCreaterUITestsLaunchTests.swift
-//  TeamCreaterUITests
+//  TeamCreatorUITestsLaunchTests.swift
+//  TeamCreatorUITests
 //
 //  Created by Melik Demiray on 29.07.2024.
 //
 
 import XCTest
 
-final class TeamCreaterUITestsLaunchTests: XCTestCase {
+final class TeamCreatorUITestsLaunchTests: XCTestCase {
 
     override class var runsForEachTargetApplicationUIConfiguration: Bool {
         true

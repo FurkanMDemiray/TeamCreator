@@ -1,14 +1,14 @@
 //
-//  TeamCreaterTests.swift
-//  TeamCreaterTests
+//  TeamCreatorTests.swift
+//  TeamCreatorTests
 //
 //  Created by Melik Demiray on 29.07.2024.
 //
 
 import XCTest
-@testable import TeamCreater
+@testable import TeamCreator
 
-final class TeamCreaterTests: XCTestCase {
+final class TeamCreatorTests: XCTestCase {
 
     override func setUpWithError() throws {
         // Put setup code here. This method is called before the invocation of each test method in the class.
