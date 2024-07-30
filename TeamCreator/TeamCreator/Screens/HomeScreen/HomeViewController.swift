@@ -1,22 +1,22 @@
 //
-//  ViewController.swift
+//  HomeViewController.swift
 //  TeamCreator
 //
-//  Created by Melik Demiray on 29.07.2024.
+//  Created by Melik Demiray on 30.07.2024.
 //
 
 import UIKit
 
-final class HomeViewController: UIViewController {
-
-    @IBOutlet weak var soccerImageView: UIImageView!
-    @IBOutlet weak var volleyballImageView: UIImageView!
+class HomeViewController: UIViewController {
 
     var viewModel: HomeViewModelProtocol! {
         didSet {
             viewModel.delegate = self
         }
     }
+
+    @IBOutlet weak var soccerImageView: UIImageView!
+    @IBOutlet weak var volleyballImageView: UIImageView!
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -55,4 +55,3 @@ final class HomeViewController: UIViewController {
 extension HomeViewController: HomeViewModelDelegate {
 
 }
-
