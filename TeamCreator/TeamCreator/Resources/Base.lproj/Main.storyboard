@@ -15,16 +15,44 @@
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="voleybol" translatesAutoresizingMaskIntoConstraints="NO" id="umB-mK-T8w">
+                                <rect key="frame" x="16" y="366" width="361" height="120"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="120" id="fnA-c6-YJI"/>
+                                </constraints>
+                            </imageView>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="futbol" translatesAutoresizingMaskIntoConstraints="NO" id="v0v-Go-chV">
+                                <rect key="frame" x="16" y="230" width="361" height="120"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="120" id="hMf-hf-nTC"/>
+                                </constraints>
+                            </imageView>
+                        </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="umB-mK-T8w" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="16" id="WFM-nM-cqg"/>
+                            <constraint firstItem="umB-mK-T8w" firstAttribute="top" secondItem="v0v-Go-chV" secondAttribute="bottom" constant="16" id="Y0U-4V-NOk"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="umB-mK-T8w" secondAttribute="trailing" constant="16" id="YEj-gc-b3Q"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="v0v-Go-chV" secondAttribute="trailing" constant="16" id="gCl-Cm-Fk2"/>
+                            <constraint firstItem="umB-mK-T8w" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="rQ3-sO-0AT"/>
+                            <constraint firstItem="v0v-Go-chV" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="16" id="tFJ-RV-yco"/>
+                        </constraints>
                     </view>
+                    <connections>
+                        <outlet property="soccerImageView" destination="v0v-Go-chV" id="VDM-Me-DQg"/>
+                        <outlet property="volleyballImageView" destination="umB-mK-T8w" id="lw3-sm-Y8G"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="132" y="-27"/>
+            <point key="canvasLocation" x="130.53435114503816" y="-27.464788732394368"/>
         </scene>
     </scenes>
     <resources>
+        <image name="futbol" width="650" height="344"/>
+        <image name="voleybol" width="913" height="550"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
