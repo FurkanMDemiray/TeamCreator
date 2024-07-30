@@ -14,10 +14,8 @@ protocol CreateHomeViewModelDelegate: AnyObject {
 
 protocol CreateHomeViewModelProtocol {
     var delegate: CreateHomeViewModelDelegate? { get set }
-    var longitude: Double { get }
-    var latitude: Double { get }
     var time: String { get }
-
+    var getCity: String { get }
 }
 
 final class CreateHomeViewModel: NSObject {
@@ -25,7 +23,9 @@ final class CreateHomeViewModel: NSObject {
     weak var delegate: CreateHomeViewModelDelegate?
     var networkManager: NetworkManagerProtocol?
 
+    private var city: String?
     private let locationManager = CLLocationManager()
+    private let geocoder = CLGeocoder()
     var locationData: CLLocation?
 
     override init() {
@@ -42,12 +42,8 @@ final class CreateHomeViewModel: NSObject {
 }
 
 extension CreateHomeViewModel: CreateHomeViewModelProtocol {
-    var longitude: Double {
-        locationData?.coordinate.longitude ?? 0
-    }
-
-    var latitude: Double {
-        locationData?.coordinate.latitude ?? 0
+    var getCity: String {
+        city ?? "Unknown"
     }
 
     var time: String {
@@ -62,6 +58,15 @@ extension CreateHomeViewModel: CLLocationManagerDelegate {
 
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         locationData = locations.first
+        geocoder.reverseGeocodeLocation(locationData!) { (placemarks, error) in
+            if let error {
+                print("Error \(error)")
+            }
+            if let placemark = placemarks?.first {
+                print("City: \(placemark.locality!)")
+                self.city = placemark.locality
+            }
+        }
         delegate?.didUpdateLocation()
     }
 

@@ -25,7 +25,7 @@ final class CreateMatchViewController: UIViewController {
 
 extension CreateMatchViewController: CreateHomeViewModelDelegate {
     func didUpdateLocation() {
-        locationTimeLabel.text = " \(viewModel.longitude)  \(viewModel.latitude) Time: \(viewModel.time)"
+        locationTimeLabel.text = "\(viewModel.getCity) - Time: \(viewModel.time)"
     }
 }
 
