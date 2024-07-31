@@ -24,7 +24,7 @@
 		DD1A24F42C58CDD70020AC04 /* HomeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = DD1A24F22C58CDD70020AC04 /* HomeViewController.xib */; };
 		DD1A24F72C58DC3E0020AC04 /* CreateMatchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD1A24F52C58DC3E0020AC04 /* CreateMatchViewController.swift */; };
 		DD1A24F82C58DC3E0020AC04 /* CreateMatchViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = DD1A24F62C58DC3E0020AC04 /* CreateMatchViewController.xib */; };
-		DD1A24FA2C58DC4A0020AC04 /* CreateHomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD1A24F92C58DC4A0020AC04 /* CreateHomeViewModel.swift */; };
+		DD1A24FA2C58DC4A0020AC04 /* CreateMatchViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD1A24F92C58DC4A0020AC04 /* CreateMatchViewModel.swift */; };
 		DD1A24FE2C594DDC0020AC04 /* PlayerCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD1A24FC2C594DDC0020AC04 /* PlayerCell.swift */; };
 		DD1A24FF2C594DDC0020AC04 /* PlayerCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = DD1A24FD2C594DDC0020AC04 /* PlayerCell.xib */; };
 		DD1A25022C5A30440020AC04 /* CreateMatchDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = DD1A25012C5A30440020AC04 /* CreateMatchDetailViewController.xib */; };
@@ -69,7 +69,7 @@
 		DD1A24F22C58CDD70020AC04 /* HomeViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HomeViewController.xib; sourceTree = "<group>"; };
 		DD1A24F52C58DC3E0020AC04 /* CreateMatchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = CreateMatchViewController.swift; path = TeamCreator/Screens/HomeScreen/CreateMatchViewController.swift; sourceTree = SOURCE_ROOT; };
 		DD1A24F62C58DC3E0020AC04 /* CreateMatchViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = CreateMatchViewController.xib; path = TeamCreator/Screens/HomeScreen/CreateMatchViewController.xib; sourceTree = SOURCE_ROOT; };
-		DD1A24F92C58DC4A0020AC04 /* CreateHomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = CreateHomeViewModel.swift; path = TeamCreator/Screens/HomeScreen/CreateHomeViewModel.swift; sourceTree = SOURCE_ROOT; };
+		DD1A24F92C58DC4A0020AC04 /* CreateMatchViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = CreateMatchViewModel.swift; path = TeamCreator/Screens/HomeScreen/CreateMatchViewModel.swift; sourceTree = SOURCE_ROOT; };
 		DD1A24FC2C594DDC0020AC04 /* PlayerCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerCell.swift; sourceTree = "<group>"; };
 		DD1A24FD2C594DDC0020AC04 /* PlayerCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PlayerCell.xib; sourceTree = "<group>"; };
 		DD1A25002C5A30440020AC04 /* CreateMatchDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateMatchDetailViewController.swift; sourceTree = "<group>"; };
@@ -217,7 +217,7 @@
 				DD1A24FB2C594DBB0020AC04 /* PlayerCell */,
 				DD1A24F52C58DC3E0020AC04 /* CreateMatchViewController.swift */,
 				DD1A24F62C58DC3E0020AC04 /* CreateMatchViewController.xib */,
-				DD1A24F92C58DC4A0020AC04 /* CreateHomeViewModel.swift */,
+				DD1A24F92C58DC4A0020AC04 /* CreateMatchViewModel.swift */,
 			);
 			path = CreateMatchScreen;
 			sourceTree = "<group>";
@@ -225,10 +225,10 @@
 		DD1A24E22C57ACCA0020AC04 /* MatchDetailScreen */ = {
 			isa = PBXGroup;
 			children = (
+				DD1A25062C5A31FA0020AC04 /* WeatherModel.swift */,
 				DD1A25002C5A30440020AC04 /* CreateMatchDetailViewController.swift */,
 				DD1A25012C5A30440020AC04 /* CreateMatchDetailViewController.xib */,
 				DD1A25042C5A30500020AC04 /* CreateMatchDetailViewModel.swift */,
-				DD1A25062C5A31FA0020AC04 /* WeatherModel.swift */,
 			);
 			path = MatchDetailScreen;
 			sourceTree = "<group>";
@@ -410,7 +410,7 @@
 				DD1A24F72C58DC3E0020AC04 /* CreateMatchViewController.swift in Sources */,
 				DD1A24A22C57AA2A0020AC04 /* AppDelegate.swift in Sources */,
 				DD1A24E82C57AE500020AC04 /* HomeViewModel.swift in Sources */,
-				DD1A24FA2C58DC4A0020AC04 /* CreateHomeViewModel.swift in Sources */,
+				DD1A24FA2C58DC4A0020AC04 /* CreateMatchViewModel.swift in Sources */,
 				DD1A24A42C57AA2A0020AC04 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

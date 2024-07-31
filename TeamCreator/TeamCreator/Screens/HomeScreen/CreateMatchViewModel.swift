@@ -8,25 +8,29 @@
 import Foundation
 import CoreLocation
 
-protocol CreateHomeViewModelDelegate: AnyObject {
+protocol CreateMatchViewModelDelegate: AnyObject {
     func didUpdateLocation()
 }
 
-protocol CreateHomeViewModelProtocol {
-    var delegate: CreateHomeViewModelDelegate? { get set }
+protocol CreateMatchViewModelProtocol {
+    var delegate: CreateMatchViewModelDelegate? { get set }
     var time: String { get }
     var getCity: String { get }
+    var getLongitude: Double? { get }
+    var getLatitude: Double? { get }
 }
 
-final class CreateHomeViewModel: NSObject {
+final class CreateMatchViewModel: NSObject {
 
-    weak var delegate: CreateHomeViewModelDelegate?
-    var networkManager: NetworkManagerProtocol?
+    weak var delegate: CreateMatchViewModelDelegate?
+    private var networkManager: NetworkManagerProtocol?
 
     private var city: String?
     private let locationManager = CLLocationManager()
     private let geocoder = CLGeocoder()
-    var locationData: CLLocation?
+    private var longitude: Double?
+    private var latitude: Double?
+    private var locationData: CLLocation?
 
     override init() {
         super.init()
@@ -41,7 +45,15 @@ final class CreateHomeViewModel: NSObject {
 
 }
 
-extension CreateHomeViewModel: CreateHomeViewModelProtocol {
+extension CreateMatchViewModel: CreateMatchViewModelProtocol {
+    var getLongitude: Double? {
+        longitude
+    }
+
+    var getLatitude: Double? {
+        latitude
+    }
+
     var getCity: String {
         guard let city else { return "" }
         return city
@@ -55,10 +67,12 @@ extension CreateHomeViewModel: CreateHomeViewModelProtocol {
     }
 }
 
-extension CreateHomeViewModel: CLLocationManagerDelegate {
+extension CreateMatchViewModel: CLLocationManagerDelegate {
 
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         locationData = locations.first
+        longitude = locationData?.coordinate.longitude
+        latitude = locationData?.coordinate.latitude
         geocoder.reverseGeocodeLocation(locationData!) { (placemarks, error) in
             if let error {
                 print("Error \(error)")
@@ -67,8 +81,9 @@ extension CreateHomeViewModel: CLLocationManagerDelegate {
                 print("City: \(placemark.locality!)")
                 self.city = placemark.locality
             }
+            self.delegate?.didUpdateLocation()
         }
-        delegate?.didUpdateLocation()
+
     }
 
     func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {

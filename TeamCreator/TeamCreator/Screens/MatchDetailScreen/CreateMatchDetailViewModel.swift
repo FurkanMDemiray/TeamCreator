@@ -13,16 +13,39 @@ protocol CreateMatchDetailViewModelDelegate: AnyObject {
 
 protocol CreateMatchDetailViewModelProtocol {
     var delegate: CreateMatchDetailViewModelDelegate? { get set }
+
+    func fetch()
 }
 
-final class CreateMatchDetailViewModel: CreateMatchDetailViewModelProtocol {
+final class CreateMatchDetailViewModel {
+
     weak var delegate: CreateMatchDetailViewModelDelegate?
+    var networkManager: NetworkManagerProtocol
+    var longitude: Double?
+    var latitude: Double?
 
+    init(networkManager: NetworkManagerProtocol = NetworkManager.shared) {
+        self.networkManager = networkManager
+    }
+
+    fileprivate func fetchWeather() {
+        guard let longitude, let latitude else { return }
+        networkManager.fetch(url: "https://api.openweathermap.org/data/2.5/weather?lat=\(latitude)&lon=\(longitude)&appid=7322abaed58e1f99fa30adbc734b7ae7&units=metric", method: .get, parameters: nil, headers: nil) { (result: Result<WeatherModel, Error>) in
+            switch result {
+            case .success(let weather):
+                print(weather)
+            case .failure(let error):
+                print(error)
+            }
+        }
+    }
 
 }
 
-extension CreateMatchDetailViewModel: CreateMatchDetailViewModelDelegate {
-
+extension CreateMatchDetailViewModel: CreateMatchDetailViewModelProtocol {
+    func fetch() {
+        fetchWeather()
+    }
 }
 
 

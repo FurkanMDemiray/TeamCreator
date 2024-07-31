@@ -19,19 +19,24 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         guard let window = (scene as? UIWindowScene) else { return }
         self.window = UIWindow(windowScene: window)
 
+        let navigationController = UINavigationController()
+        navigationController.navigationBar.isHidden = true
+        self.window?.rootViewController = navigationController
+
         let homeViewController = HomeViewController()
         let homeViewModel = HomeViewModel()
         homeViewController.viewModel = homeViewModel
 
         let createMatchViewController = CreateMatchViewController()
-        let createMatchViewModel = CreateHomeViewModel()
+        let createMatchViewModel = CreateMatchViewModel()
         createMatchViewController.viewModel = createMatchViewModel
+        //navigationController.pushViewController(createMatchViewController, animated: true)
 
         let createMatchDetailViewController = CreateMatchDetailViewController()
         let createMatchDetailViewModel = CreateMatchDetailViewModel()
         createMatchDetailViewController.viewModel = createMatchDetailViewModel
 
-        self.window?.rootViewController = createMatchDetailViewController
+        //self.window?.rootViewController = createMatchViewController
         self.window?.makeKeyAndVisible()
     }
 

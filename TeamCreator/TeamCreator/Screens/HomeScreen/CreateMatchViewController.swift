@@ -13,7 +13,7 @@ final class CreateMatchViewController: UIViewController {
     @IBOutlet weak var locationTimeLabel: UILabel!
     @IBOutlet weak var tableView: UITableView!
 
-    var viewModel: CreateHomeViewModelProtocol! {
+    var viewModel: CreateMatchViewModelProtocol! {
         didSet {
             viewModel.delegate = self
         }
@@ -33,12 +33,18 @@ final class CreateMatchViewController: UIViewController {
     }
 
     @IBAction func continueButtonClicked(_ sender: Any) {
-
+        let vc = CreateMatchDetailViewController()
+        let createMatchDetialViewModel = CreateMatchDetailViewModel()
+        vc.viewModel = createMatchDetialViewModel
+        createMatchDetialViewModel.longitude = viewModel.getLongitude
+        createMatchDetialViewModel.latitude = viewModel.getLatitude
+        navigationController?.pushViewController(vc, animated: true)
     }
 }
 
-extension CreateMatchViewController: CreateHomeViewModelDelegate {
+extension CreateMatchViewController: CreateMatchViewModelDelegate {
     func didUpdateLocation() {
+        guard let viewModel else { return }
         locationTimeLabel.text = "\(viewModel.getCity) - \(viewModel.time)"
     }
 }
