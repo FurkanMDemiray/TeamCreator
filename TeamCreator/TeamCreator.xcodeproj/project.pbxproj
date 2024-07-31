@@ -7,6 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		082723A02C5A6DDB00BE05C0 /* PlayersScreenVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0827239D2C5A6DDB00BE05C0 /* PlayersScreenVC.swift */; };
+		082723A12C5A6DDB00BE05C0 /* PlayersScreenVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0827239E2C5A6DDB00BE05C0 /* PlayersScreenVC.xib */; };
+		082723A52C5A6DE400BE05C0 /* PlayersCellVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 082723A22C5A6DE400BE05C0 /* PlayersCellVM.swift */; };
+		082723A62C5A6DE400BE05C0 /* PlayersScreenVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 082723A32C5A6DE400BE05C0 /* PlayersScreenVM.swift */; };
+		082723AA2C5A6DF000BE05C0 /* PlayersCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 082723A72C5A6DF000BE05C0 /* PlayersCell.swift */; };
+		082723AB2C5A6DF000BE05C0 /* PlayersCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 082723A82C5A6DF000BE05C0 /* PlayersCell.xib */; };
 		DD1A24A22C57AA2A0020AC04 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD1A24A12C57AA2A0020AC04 /* AppDelegate.swift */; };
 		DD1A24A42C57AA2A0020AC04 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD1A24A32C57AA2A0020AC04 /* SceneDelegate.swift */; };
 		DD1A24AB2C57AA2B0020AC04 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DD1A24AA2C57AA2B0020AC04 /* Assets.xcassets */; };
@@ -47,6 +53,12 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		0827239D2C5A6DDB00BE05C0 /* PlayersScreenVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlayersScreenVC.swift; sourceTree = "<group>"; };
+		0827239E2C5A6DDB00BE05C0 /* PlayersScreenVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PlayersScreenVC.xib; sourceTree = "<group>"; };
+		082723A22C5A6DE400BE05C0 /* PlayersCellVM.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlayersCellVM.swift; sourceTree = "<group>"; };
+		082723A32C5A6DE400BE05C0 /* PlayersScreenVM.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlayersScreenVM.swift; sourceTree = "<group>"; };
+		082723A72C5A6DF000BE05C0 /* PlayersCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlayersCell.swift; sourceTree = "<group>"; };
+		082723A82C5A6DF000BE05C0 /* PlayersCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PlayersCell.xib; sourceTree = "<group>"; };
 		DD1A249E2C57AA2A0020AC04 /* TeamCreator.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TeamCreator.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DD1A24A12C57AA2A0020AC04 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		DD1A24A32C57AA2A0020AC04 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -98,6 +110,33 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		0827239F2C5A6DDB00BE05C0 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				0827239D2C5A6DDB00BE05C0 /* PlayersScreenVC.swift */,
+				0827239E2C5A6DDB00BE05C0 /* PlayersScreenVC.xib */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		082723A42C5A6DE400BE05C0 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				082723A22C5A6DE400BE05C0 /* PlayersCellVM.swift */,
+				082723A32C5A6DE400BE05C0 /* PlayersScreenVM.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		082723A92C5A6DF000BE05C0 /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				082723A72C5A6DF000BE05C0 /* PlayersCell.swift */,
+				082723A82C5A6DF000BE05C0 /* PlayersCell.xib */,
+			);
+			path = Cell;
+			sourceTree = "<group>";
+		};
 		DD1A24952C57AA2A0020AC04 = {
 			isa = PBXGroup;
 			children = (
@@ -199,6 +238,9 @@
 		DD1A24E02C57ACB00020AC04 /* PlayersScreen */ = {
 			isa = PBXGroup;
 			children = (
+				082723A92C5A6DF000BE05C0 /* Cell */,
+				082723A42C5A6DE400BE05C0 /* ViewModel */,
+				0827239F2C5A6DDB00BE05C0 /* Controller */,
 			);
 			path = PlayersScreen;
 			sourceTree = "<group>";
@@ -360,7 +402,9 @@
 			files = (
 				DD1A24FF2C594DDC0020AC04 /* PlayerCell.xib in Resources */,
 				DD1A24AB2C57AA2B0020AC04 /* Assets.xcassets in Resources */,
+				082723A12C5A6DDB00BE05C0 /* PlayersScreenVC.xib in Resources */,
 				DD1A24DA2C57AB070020AC04 /* GoogleService-Info.plist in Resources */,
+				082723AB2C5A6DF000BE05C0 /* PlayersCell.xib in Resources */,
 				DD1A24F82C58DC3E0020AC04 /* CreateMatchViewController.xib in Resources */,
 				DD1A24AE2C57AA2B0020AC04 /* Base in Resources */,
 				DD1A24F42C58CDD70020AC04 /* HomeViewController.xib in Resources */,
@@ -388,12 +432,16 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				082723AA2C5A6DF000BE05C0 /* PlayersCell.swift in Sources */,
+				082723A62C5A6DE400BE05C0 /* PlayersScreenVM.swift in Sources */,
 				DD1A24FE2C594DDC0020AC04 /* PlayerCell.swift in Sources */,
 				DD1A24F32C58CDD70020AC04 /* HomeViewController.swift in Sources */,
 				DD1A24E62C57AD660020AC04 /* NetworkManager.swift in Sources */,
 				DD1A24F72C58DC3E0020AC04 /* CreateMatchViewController.swift in Sources */,
 				DD1A24A22C57AA2A0020AC04 /* AppDelegate.swift in Sources */,
+				082723A52C5A6DE400BE05C0 /* PlayersCellVM.swift in Sources */,
 				DD1A24E82C57AE500020AC04 /* HomeViewModel.swift in Sources */,
+				082723A02C5A6DDB00BE05C0 /* PlayersScreenVC.swift in Sources */,
 				DD1A24FA2C58DC4A0020AC04 /* CreateHomeViewModel.swift in Sources */,
 				DD1A24A42C57AA2A0020AC04 /* SceneDelegate.swift in Sources */,
 			);
