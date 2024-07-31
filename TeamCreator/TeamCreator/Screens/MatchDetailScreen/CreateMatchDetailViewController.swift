@@ -8,6 +8,7 @@
 import UIKit
 
 class CreateMatchDetailViewController: UIViewController {
+    @IBOutlet weak var locationTimeLabel: UILabel!
 
     var viewModel: CreateMatchDetailViewModelProtocol! {
         didSet {
@@ -18,8 +19,12 @@ class CreateMatchDetailViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         viewModel.fetch()
+        configureLabel()
     }
 
+    private func configureLabel() {
+        locationTimeLabel.text = "\(viewModel.getCity) - \(viewModel.getTime)"
+    }
 
 }
 

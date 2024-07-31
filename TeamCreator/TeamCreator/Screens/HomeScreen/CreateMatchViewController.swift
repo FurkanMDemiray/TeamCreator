@@ -38,6 +38,8 @@ final class CreateMatchViewController: UIViewController {
         vc.viewModel = createMatchDetialViewModel
         createMatchDetialViewModel.longitude = viewModel.getLongitude
         createMatchDetialViewModel.latitude = viewModel.getLatitude
+        createMatchDetialViewModel.time = viewModel.time
+        createMatchDetialViewModel.city = viewModel.getCity
         navigationController?.pushViewController(vc, animated: true)
     }
 }

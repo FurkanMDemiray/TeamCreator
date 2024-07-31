@@ -13,6 +13,8 @@ protocol CreateMatchDetailViewModelDelegate: AnyObject {
 
 protocol CreateMatchDetailViewModelProtocol {
     var delegate: CreateMatchDetailViewModelDelegate? { get set }
+    var getTime: String { get }
+    var getCity: String { get }
 
     func fetch()
 }
@@ -23,6 +25,8 @@ final class CreateMatchDetailViewModel {
     var networkManager: NetworkManagerProtocol
     var longitude: Double?
     var latitude: Double?
+    var time: String?
+    var city: String?
 
     init(networkManager: NetworkManagerProtocol = NetworkManager.shared) {
         self.networkManager = networkManager
@@ -43,6 +47,16 @@ final class CreateMatchDetailViewModel {
 }
 
 extension CreateMatchDetailViewModel: CreateMatchDetailViewModelProtocol {
+    var getCity: String {
+        guard let city else { return "" }
+        return city
+    }
+
+    var getTime: String {
+        guard let time else { return "" }
+        return time
+    }
+
     func fetch() {
         fetchWeather()
     }

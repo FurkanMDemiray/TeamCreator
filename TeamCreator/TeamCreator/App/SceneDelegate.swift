@@ -30,7 +30,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         let createMatchViewController = CreateMatchViewController()
         let createMatchViewModel = CreateMatchViewModel()
         createMatchViewController.viewModel = createMatchViewModel
-        //navigationController.pushViewController(createMatchViewController, animated: true)
+        navigationController.pushViewController(createMatchViewController, animated: true)
 
         let createMatchDetailViewController = CreateMatchDetailViewController()
         let createMatchDetailViewModel = CreateMatchDetailViewModel()
