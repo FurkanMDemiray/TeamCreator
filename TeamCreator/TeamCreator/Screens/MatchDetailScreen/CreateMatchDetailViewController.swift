@@ -19,8 +19,8 @@ class CreateMatchDetailViewController: UIViewController {
         }
     }
 
-    override func viewDidLoad() {
-        super.viewDidLoad()
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
         viewModel.fetch()
         configureLabel()
     }
@@ -40,7 +40,7 @@ extension CreateMatchDetailViewController: CreateMatchDetailViewModelDelegate {
     func didFetchWeather() {
         locationTimeLabel.text = "\(viewModel.getCity) - \(viewModel.getTime)"
         weatherLabel.text = viewModel.getWeather.weather?.first?.main
-        tempatureLabel.text = "\(viewModel.getWeather.main?.temp ?? 0)°"
+        tempatureLabel.text = "\(viewModel.getWeather.main?.temp ?? 0)°C"
     }
 
 }

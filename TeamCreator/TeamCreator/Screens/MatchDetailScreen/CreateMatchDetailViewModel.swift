@@ -43,19 +43,19 @@ final class CreateMatchDetailViewModel {
             case .success(let weather):
                 self.weather = weather
                 if ((weather.weather?.first?.main?.contains("cloud")) != nil) {
-                    self.delegate?.changeWeatherImage("cloudy")
+                    self.delegate?.changeWeatherImage("cloud")
                 }
                 else if ((weather.weather?.first?.main?.contains("thunder")) != nil) {
-                    self.delegate?.changeWeatherImage("rainThunder")
+                    self.delegate?.changeWeatherImage("thunder")
                 }
                 else if ((weather.weather?.first?.main?.contains("rainy")) != nil) {
-                    self.delegate?.changeWeatherImage("rainy")
+                    self.delegate?.changeWeatherImage("rain")
                 }
                 else if ((weather.weather?.first?.main?.contains("clear")) != nil) || ((weather.weather?.first?.main?.contains("sunny")) != nil) {
-                    self.delegate?.changeWeatherImage("sunny")
+                    self.delegate?.changeWeatherImage("sun")
                 }
                 else if ((weather.weather?.first?.main?.contains("snow")) != nil) {
-                    self.delegate?.changeWeatherImage("snowy")
+                    self.delegate?.changeWeatherImage("snow")
                 }
 
                 delegate?.didFetchWeather()
