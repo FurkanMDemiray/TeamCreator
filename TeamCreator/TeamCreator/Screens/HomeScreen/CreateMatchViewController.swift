@@ -33,12 +33,20 @@ final class CreateMatchViewController: UIViewController {
     }
 
     @IBAction func continueButtonClicked(_ sender: Any) {
-
+        let vc = CreateMatchDetailViewController()
+        let createMatchDetialViewModel = CreateMatchDetailViewModel()
+        vc.viewModel = createMatchDetialViewModel
+        createMatchDetialViewModel.longitude = viewModel.getLongitude
+        createMatchDetialViewModel.latitude = viewModel.getLatitude
+        createMatchDetialViewModel.time = viewModel.time
+        createMatchDetialViewModel.city = viewModel.getCity
+        navigationController?.pushViewController(vc, animated: true)
     }
 }
 
 extension CreateMatchViewController: CreateMatchViewModelDelegate {
     func didUpdateLocation() {
+        guard let viewModel else { return }
         locationTimeLabel.text = "\(viewModel.getCity) - \(viewModel.time)"
     }
 }
