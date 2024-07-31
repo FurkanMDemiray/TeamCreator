@@ -7,9 +7,9 @@
 
 import UIKit
 
-class PlayerCell: UITableViewCell {
+class CreateMatchCell: UITableViewCell {
 
-    static let id = "PlayerCell"
+    static let createMatchCellId = "PlayerCell"
     @IBOutlet weak var playerNameLabel: UILabel!
     @IBOutlet weak var checkButton: UIButton!
 
