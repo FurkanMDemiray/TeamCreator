@@ -27,7 +27,7 @@ final class CreateMatchViewController: UIViewController {
     private func configureTableView() {
         tableView.dataSource = self
         tableView.delegate = self
-        tableView.register(UINib(nibName: PlayerCell.id, bundle: nil), forCellReuseIdentifier: PlayerCell.id)
+        tableView.register(UINib(nibName: CreateMatchCell.createMatchCellId, bundle: nil), forCellReuseIdentifier: CreateMatchCell.createMatchCellId)
         tableView.showsVerticalScrollIndicator = false
         tableView.separatorStyle = .none
     }
@@ -49,7 +49,7 @@ extension CreateMatchViewController: UITableViewDataSource, UITableViewDelegate 
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: PlayerCell.id, for: indexPath) as! PlayerCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: CreateMatchCell.createMatchCellId, for: indexPath) as! CreateMatchCell
         cell.configure(with: "test")
         return cell
     }

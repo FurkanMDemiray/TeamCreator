@@ -7,11 +7,11 @@
 
 import UIKit
 
-class PlayerCell: UITableViewCell {
+class CreateMatchCell: UITableViewCell {
 
-    static let id = "PlayerCell"
-    @IBOutlet weak var playerNameLabel: UILabel!
-    @IBOutlet weak var checkButton: UIButton!
+    static let createMatchCellId = "CreateMatchCell"
+    @IBOutlet private weak var playerNameLabel: UILabel!
+    @IBOutlet private weak var checkButton: UIButton!
 
     private var isChecked: Bool = false
 
