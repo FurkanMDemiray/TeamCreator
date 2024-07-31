@@ -43,7 +43,7 @@ final class CreateHomeViewModel: NSObject {
 
 extension CreateHomeViewModel: CreateHomeViewModelProtocol {
     var getCity: String {
-        guard let city else { return "Unknown" }
+        guard let city else { return "" }
         return city
     }
 

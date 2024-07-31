@@ -31,11 +31,15 @@ final class CreateMatchViewController: UIViewController {
         tableView.showsVerticalScrollIndicator = false
         tableView.separatorStyle = .none
     }
+
+    @IBAction func continueButtonClicked(_ sender: Any) {
+
+    }
 }
 
 extension CreateMatchViewController: CreateHomeViewModelDelegate {
     func didUpdateLocation() {
-        locationTimeLabel.text = "\(viewModel.getCity) - Time: \(viewModel.time)"
+        locationTimeLabel.text = "\(viewModel.getCity) - \(viewModel.time)"
     }
 }
 
@@ -46,7 +50,7 @@ extension CreateMatchViewController: UITableViewDataSource, UITableViewDelegate 
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: PlayerCell.id, for: indexPath) as! PlayerCell
-        cell.configure(with: "furkan")
+        cell.configure(with: "test")
         return cell
     }
 }
