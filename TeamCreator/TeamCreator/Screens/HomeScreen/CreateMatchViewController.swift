@@ -13,7 +13,7 @@ final class CreateMatchViewController: UIViewController {
     @IBOutlet weak var locationTimeLabel: UILabel!
     @IBOutlet weak var tableView: UITableView!
 
-    var viewModel: CreateHomeViewModelProtocol! {
+    var viewModel: CreateMatchViewModelProtocol! {
         didSet {
             viewModel.delegate = self
         }
@@ -37,7 +37,7 @@ final class CreateMatchViewController: UIViewController {
     }
 }
 
-extension CreateMatchViewController: CreateHomeViewModelDelegate {
+extension CreateMatchViewController: CreateMatchViewModelDelegate {
     func didUpdateLocation() {
         locationTimeLabel.text = "\(viewModel.getCity) - \(viewModel.time)"
     }

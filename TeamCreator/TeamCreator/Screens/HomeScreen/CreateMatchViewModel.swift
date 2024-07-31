@@ -8,19 +8,19 @@
 import Foundation
 import CoreLocation
 
-protocol CreateHomeViewModelDelegate: AnyObject {
+protocol CreateMatchViewModelDelegate: AnyObject {
     func didUpdateLocation()
 }
 
-protocol CreateHomeViewModelProtocol {
-    var delegate: CreateHomeViewModelDelegate? { get set }
+protocol CreateMatchViewModelProtocol {
+    var delegate: CreateMatchViewModelDelegate? { get set }
     var time: String { get }
     var getCity: String { get }
 }
 
-final class CreateHomeViewModel: NSObject {
+final class CreateMatchViewModel: NSObject {
 
-    weak var delegate: CreateHomeViewModelDelegate?
+    weak var delegate: CreateMatchViewModelDelegate?
     var networkManager: NetworkManagerProtocol?
 
     private var city: String?
@@ -41,7 +41,7 @@ final class CreateHomeViewModel: NSObject {
 
 }
 
-extension CreateHomeViewModel: CreateHomeViewModelProtocol {
+extension CreateMatchViewModel: CreateMatchViewModelProtocol {
     var getCity: String {
         guard let city else { return "" }
         return city
@@ -55,7 +55,7 @@ extension CreateHomeViewModel: CreateHomeViewModelProtocol {
     }
 }
 
-extension CreateHomeViewModel: CLLocationManagerDelegate {
+extension CreateMatchViewModel: CLLocationManagerDelegate {
 
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         locationData = locations.first

@@ -24,7 +24,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         homeViewController.viewModel = homeViewModel
 
         let createMatchViewController = CreateMatchViewController()
-        let createMatchViewModel = CreateHomeViewModel()
+        let createMatchViewModel = CreateMatchViewModel()
         createMatchViewController.viewModel = createMatchViewModel
 
         self.window?.rootViewController = homeViewController
