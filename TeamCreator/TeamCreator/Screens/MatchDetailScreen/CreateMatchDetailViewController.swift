@@ -8,7 +8,10 @@
 import UIKit
 
 class CreateMatchDetailViewController: UIViewController {
-    @IBOutlet weak var locationTimeLabel: UILabel!
+    @IBOutlet private weak var locationTimeLabel: UILabel!
+    @IBOutlet private weak var weatherImageView: UIImageView!
+    @IBOutlet private weak var weatherLabel: UILabel!
+    @IBOutlet private weak var tempatureLabel: UILabel!
 
     var viewModel: CreateMatchDetailViewModelProtocol! {
         didSet {
@@ -23,11 +26,21 @@ class CreateMatchDetailViewController: UIViewController {
     }
 
     private func configureLabel() {
-        locationTimeLabel.text = "\(viewModel.getCity) - \(viewModel.getTime)"
+
     }
 
 }
 
 extension CreateMatchDetailViewController: CreateMatchDetailViewModelDelegate {
+
+    func changeWeatherImage(_ imageName: String) {
+        weatherImageView.image = UIImage(named: imageName)
+    }
+
+    func didFetchWeather() {
+        locationTimeLabel.text = "\(viewModel.getCity) - \(viewModel.getTime)"
+        weatherLabel.text = viewModel.getWeather.weather?.first?.main
+        tempatureLabel.text = "\(viewModel.getWeather.main?.temp ?? 0)°"
+    }
 
 }
