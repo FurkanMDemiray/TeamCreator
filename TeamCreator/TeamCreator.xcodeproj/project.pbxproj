@@ -33,6 +33,10 @@
 		DD1A24FA2C58DC4A0020AC04 /* CreateMatchViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD1A24F92C58DC4A0020AC04 /* CreateMatchViewModel.swift */; };
 		DD1A24FE2C594DDC0020AC04 /* CreateMatchCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD1A24FC2C594DDC0020AC04 /* CreateMatchCell.swift */; };
 		DD1A24FF2C594DDC0020AC04 /* CreateMatchCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = DD1A24FD2C594DDC0020AC04 /* CreateMatchCell.xib */; };
+		DD85DA102C5A82B300AF1652 /* CreateMatchDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD85DA0B2C5A82B300AF1652 /* CreateMatchDetailViewController.swift */; };
+		DD85DA112C5A82B300AF1652 /* CreateMatchDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = DD85DA0C2C5A82B300AF1652 /* CreateMatchDetailViewController.xib */; };
+		DD85DA122C5A82B300AF1652 /* CreateMatchDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD85DA0D2C5A82B300AF1652 /* CreateMatchDetailViewModel.swift */; };
+		DD85DA132C5A82B300AF1652 /* WeatherModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD85DA0E2C5A82B300AF1652 /* WeatherModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -80,6 +84,10 @@
 		DD1A24F92C58DC4A0020AC04 /* CreateMatchViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = CreateMatchViewModel.swift; path = TeamCreator/Screens/HomeScreen/CreateMatchViewModel.swift; sourceTree = SOURCE_ROOT; };
 		DD1A24FC2C594DDC0020AC04 /* CreateMatchCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateMatchCell.swift; sourceTree = "<group>"; };
 		DD1A24FD2C594DDC0020AC04 /* CreateMatchCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CreateMatchCell.xib; sourceTree = "<group>"; };
+		DD85DA0B2C5A82B300AF1652 /* CreateMatchDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreateMatchDetailViewController.swift; sourceTree = "<group>"; };
+		DD85DA0C2C5A82B300AF1652 /* CreateMatchDetailViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CreateMatchDetailViewController.xib; sourceTree = "<group>"; };
+		DD85DA0D2C5A82B300AF1652 /* CreateMatchDetailViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreateMatchDetailViewModel.swift; sourceTree = "<group>"; };
+		DD85DA0E2C5A82B300AF1652 /* WeatherModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WeatherModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -213,7 +221,7 @@
 				DD1A24E02C57ACB00020AC04 /* PlayersScreen */,
 				DD1A24E32C57ACEE0020AC04 /* AddPlayerScreen */,
 				DD1A24E12C57ACBD0020AC04 /* CreateMatchScreen */,
-				DD1A24E22C57ACCA0020AC04 /* MatchDetailScreen */,
+				DD85DA0F2C5A82B300AF1652 /* MatchDetailScreen */,
 			);
 			path = Screens;
 			sourceTree = "<group>";
@@ -256,13 +264,6 @@
 			path = CreateMatchScreen;
 			sourceTree = "<group>";
 		};
-		DD1A24E22C57ACCA0020AC04 /* MatchDetailScreen */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = MatchDetailScreen;
-			sourceTree = "<group>";
-		};
 		DD1A24E32C57ACEE0020AC04 /* AddPlayerScreen */ = {
 			isa = PBXGroup;
 			children = (
@@ -285,6 +286,17 @@
 				DD1A24FD2C594DDC0020AC04 /* CreateMatchCell.xib */,
 			);
 			path = CreateMatchCell;
+			sourceTree = "<group>";
+		};
+		DD85DA0F2C5A82B300AF1652 /* MatchDetailScreen */ = {
+			isa = PBXGroup;
+			children = (
+				DD85DA0B2C5A82B300AF1652 /* CreateMatchDetailViewController.swift */,
+				DD85DA0C2C5A82B300AF1652 /* CreateMatchDetailViewController.xib */,
+				DD85DA0D2C5A82B300AF1652 /* CreateMatchDetailViewModel.swift */,
+				DD85DA0E2C5A82B300AF1652 /* WeatherModel.swift */,
+			);
+			path = MatchDetailScreen;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -402,6 +414,7 @@
 			files = (
 				DD1A24FF2C594DDC0020AC04 /* CreateMatchCell.xib in Resources */,
 				DD1A24AB2C57AA2B0020AC04 /* Assets.xcassets in Resources */,
+				DD85DA112C5A82B300AF1652 /* CreateMatchDetailViewController.xib in Resources */,
 				08B464712C5A78A900529D6A /* PlayersScreenVC.xib in Resources */,
 				DD1A24DA2C57AB070020AC04 /* GoogleService-Info.plist in Resources */,
 				08B464762C5A78B700529D6A /* PlayerCell.xib in Resources */,
@@ -436,11 +449,14 @@
 				DD1A24FE2C594DDC0020AC04 /* CreateMatchCell.swift in Sources */,
 				DD1A24F32C58CDD70020AC04 /* HomeViewController.swift in Sources */,
 				DD1A24E62C57AD660020AC04 /* NetworkManager.swift in Sources */,
+				DD85DA132C5A82B300AF1652 /* WeatherModel.swift in Sources */,
 				DD1A24F72C58DC3E0020AC04 /* CreateMatchViewController.swift in Sources */,
 				08B4646B2C5A789B00529D6A /* PlayerCellVM.swift in Sources */,
+				DD85DA102C5A82B300AF1652 /* CreateMatchDetailViewController.swift in Sources */,
 				DD1A24A22C57AA2A0020AC04 /* AppDelegate.swift in Sources */,
 				DD1A24E82C57AE500020AC04 /* HomeViewModel.swift in Sources */,
 				DD1A24FA2C58DC4A0020AC04 /* CreateMatchViewModel.swift in Sources */,
+				DD85DA122C5A82B300AF1652 /* CreateMatchDetailViewModel.swift in Sources */,
 				DD1A24A42C57AA2A0020AC04 /* SceneDelegate.swift in Sources */,
 				08B4646C2C5A789B00529D6A /* PlayersScreenVM.swift in Sources */,
 				08B464702C5A78A900529D6A /* PlayersScreenVC.swift in Sources */,
