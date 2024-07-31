@@ -9,7 +9,9 @@ import UIKit
 
 
 final class CreateMatchViewController: UIViewController {
+
     @IBOutlet weak var locationTimeLabel: UILabel!
+    @IBOutlet weak var tableView: UITableView!
 
     var viewModel: CreateHomeViewModelProtocol! {
         didSet {
@@ -19,13 +21,33 @@ final class CreateMatchViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        configureTableView()
     }
 
+    private func configureTableView() {
+        tableView.dataSource = self
+        tableView.delegate = self
+        tableView.register(UINib(nibName: PlayerCell.id, bundle: nil), forCellReuseIdentifier: PlayerCell.id)
+        tableView.showsVerticalScrollIndicator = false
+        tableView.separatorStyle = .none
+    }
 }
 
 extension CreateMatchViewController: CreateHomeViewModelDelegate {
     func didUpdateLocation() {
         locationTimeLabel.text = "\(viewModel.getCity) - Time: \(viewModel.time)"
+    }
+}
+
+extension CreateMatchViewController: UITableViewDataSource, UITableViewDelegate {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        5
+    }
+
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: PlayerCell.id, for: indexPath) as! PlayerCell
+        cell.configure(with: "furkan")
+        return cell
     }
 }
 

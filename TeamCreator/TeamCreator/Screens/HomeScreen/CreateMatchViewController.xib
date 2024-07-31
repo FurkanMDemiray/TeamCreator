@@ -11,6 +11,7 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="CreateMatchViewController" customModule="TeamCreator" customModuleProvider="target">
             <connections>
                 <outlet property="locationTimeLabel" destination="wTK-LA-emy" id="CJY-I6-l5K"/>
+                <outlet property="tableView" destination="vp5-ml-uyn" id="kTq-h4-GSr"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -25,13 +26,21 @@
                     <nil key="textColor"/>
                     <nil key="highlightedColor"/>
                 </label>
+                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="vp5-ml-uyn">
+                    <rect key="frame" x="8" y="91" width="377" height="711"/>
+                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                </tableView>
             </subviews>
             <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
             <color key="backgroundColor" systemColor="systemBackgroundColor"/>
             <constraints>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="vp5-ml-uyn" secondAttribute="trailing" constant="8" id="0ez-Z2-jev"/>
+                <constraint firstItem="vp5-ml-uyn" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="8" id="3xk-Rp-gGv"/>
                 <constraint firstItem="wTK-LA-emy" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="16" id="5ZF-Jt-MS9"/>
                 <constraint firstItem="wTK-LA-emy" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" constant="16" id="Jdr-jt-Xes"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="wTK-LA-emy" secondAttribute="trailing" constant="16" id="Pzn-Nw-6Tx"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="vp5-ml-uyn" secondAttribute="bottom" constant="16" id="fUD-CE-e8b"/>
+                <constraint firstItem="vp5-ml-uyn" firstAttribute="top" secondItem="wTK-LA-emy" secondAttribute="bottom" constant="16" id="mEk-Pc-riS"/>
             </constraints>
             <point key="canvasLocation" x="132" y="-11"/>
         </view>
