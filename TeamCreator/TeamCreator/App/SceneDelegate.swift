@@ -22,23 +22,12 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         let navigationController = UINavigationController()
         navigationController.navigationBar.isHidden = false
         self.window?.rootViewController = navigationController
+        self.window?.makeKeyAndVisible()
 
         let homeViewController = HomeViewController()
         let homeViewModel = HomeViewModel()
         homeViewController.viewModel = homeViewModel
         navigationController.pushViewController(homeViewController, animated: true)
-
-        let createMatchViewController = CreateMatchViewController()
-        let createMatchViewModel = CreateMatchViewModel()
-        createMatchViewController.viewModel = createMatchViewModel
-
-
-        let createMatchDetailViewController = CreateMatchDetailViewController()
-        let createMatchDetailViewModel = CreateMatchDetailViewModel()
-        createMatchDetailViewController.viewModel = createMatchDetailViewModel
-
-        //self.window?.rootViewController = createMatchViewController
-        self.window?.makeKeyAndVisible()
     }
 
     func sceneDidDisconnect(_ scene: UIScene) {

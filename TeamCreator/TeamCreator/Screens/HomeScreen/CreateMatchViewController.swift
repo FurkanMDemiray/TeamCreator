@@ -33,14 +33,15 @@ final class CreateMatchViewController: UIViewController {
     }
 
     @IBAction func continueButtonClicked(_ sender: Any) {
-        let vc = CreateMatchDetailViewController()
-        let createMatchDetialViewModel = CreateMatchDetailViewModel()
-        vc.viewModel = createMatchDetialViewModel
-        createMatchDetialViewModel.longitude = viewModel.getLongitude
-        createMatchDetialViewModel.latitude = viewModel.getLatitude
-        createMatchDetialViewModel.time = viewModel.time
-        createMatchDetialViewModel.city = viewModel.getCity
-        navigationController?.pushViewController(vc, animated: true)
+        let createMatchDetailViewController = CreateMatchDetailViewController()
+        let createMatchDetailViewModel = CreateMatchDetailViewModel()
+        createMatchDetailViewController.viewModel = createMatchDetailViewModel
+
+        createMatchDetailViewModel.longitude = viewModel.getLongitude
+        createMatchDetailViewModel.latitude = viewModel.getLatitude
+        createMatchDetailViewModel.time = viewModel.time
+        createMatchDetailViewModel.city = viewModel.getCity
+        navigationController?.pushViewController(createMatchDetailViewController, animated: true)
     }
 }
 

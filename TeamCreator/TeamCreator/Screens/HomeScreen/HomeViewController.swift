@@ -43,7 +43,9 @@ class HomeViewController: UIViewController {
 
     @objc func soccerButtonTapped() {
         let vc = CreateMatchViewController()
-        navigationController?.pushViewController(vc, animated: true)
+        let createMatchViewModel = CreateMatchViewModel()
+        vc.viewModel = createMatchViewModel
+        self.navigationController?.pushViewController(vc, animated: true)
     }
 
     @objc func volleyballButtonTapped() {
