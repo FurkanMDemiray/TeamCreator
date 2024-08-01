@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		086B87832C5B60760065CF13 /* AddPlayerScreenVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 086B87822C5B60760065CF13 /* AddPlayerScreenVC.xib */; };
+		086B87842C5B60760065CF13 /* AddPlayerScreenVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 086B87812C5B60760065CF13 /* AddPlayerScreenVC.swift */; };
+		086B87862C5B60920065CF13 /* AddPlayerScreenVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 086B87852C5B60920065CF13 /* AddPlayerScreenVM.swift */; };
 		08B4646B2C5A789B00529D6A /* PlayerCellVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08B464682C5A789B00529D6A /* PlayerCellVM.swift */; };
 		08B4646C2C5A789B00529D6A /* PlayersScreenVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08B464692C5A789B00529D6A /* PlayersScreenVM.swift */; };
 		08B464702C5A78A900529D6A /* PlayersScreenVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08B4646D2C5A78A900529D6A /* PlayersScreenVC.swift */; };
@@ -57,6 +60,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		086B87812C5B60760065CF13 /* AddPlayerScreenVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddPlayerScreenVC.swift; sourceTree = "<group>"; };
+		086B87822C5B60760065CF13 /* AddPlayerScreenVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AddPlayerScreenVC.xib; sourceTree = "<group>"; };
+		086B87852C5B60920065CF13 /* AddPlayerScreenVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddPlayerScreenVM.swift; sourceTree = "<group>"; };
 		08B464682C5A789B00529D6A /* PlayerCellVM.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlayerCellVM.swift; sourceTree = "<group>"; };
 		08B464692C5A789B00529D6A /* PlayersScreenVM.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlayersScreenVM.swift; sourceTree = "<group>"; };
 		08B4646D2C5A78A900529D6A /* PlayersScreenVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlayersScreenVC.swift; sourceTree = "<group>"; };
@@ -118,6 +124,23 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		086B87802C5B60610065CF13 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				086B87812C5B60760065CF13 /* AddPlayerScreenVC.swift */,
+				086B87822C5B60760065CF13 /* AddPlayerScreenVC.xib */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		086B87872C5B60970065CF13 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				086B87852C5B60920065CF13 /* AddPlayerScreenVM.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
 		08B4646A2C5A789B00529D6A /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
@@ -267,6 +290,8 @@
 		DD1A24E32C57ACEE0020AC04 /* AddPlayerScreen */ = {
 			isa = PBXGroup;
 			children = (
+				086B87802C5B60610065CF13 /* Controller */,
+				086B87872C5B60970065CF13 /* ViewModel */,
 			);
 			path = AddPlayerScreen;
 			sourceTree = "<group>";
@@ -415,6 +440,7 @@
 				DD1A24FF2C594DDC0020AC04 /* CreateMatchCell.xib in Resources */,
 				DD1A24AB2C57AA2B0020AC04 /* Assets.xcassets in Resources */,
 				DD85DA112C5A82B300AF1652 /* CreateMatchDetailViewController.xib in Resources */,
+				086B87832C5B60760065CF13 /* AddPlayerScreenVC.xib in Resources */,
 				08B464712C5A78A900529D6A /* PlayersScreenVC.xib in Resources */,
 				DD1A24DA2C57AB070020AC04 /* GoogleService-Info.plist in Resources */,
 				08B464762C5A78B700529D6A /* PlayerCell.xib in Resources */,
@@ -445,7 +471,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				086B87862C5B60920065CF13 /* AddPlayerScreenVM.swift in Sources */,
 				08B464752C5A78B700529D6A /* PlayerCell.swift in Sources */,
+				086B87842C5B60760065CF13 /* AddPlayerScreenVC.swift in Sources */,
 				DD1A24FE2C594DDC0020AC04 /* CreateMatchCell.swift in Sources */,
 				DD1A24F32C58CDD70020AC04 /* HomeViewController.swift in Sources */,
 				DD1A24E62C57AD660020AC04 /* NetworkManager.swift in Sources */,
