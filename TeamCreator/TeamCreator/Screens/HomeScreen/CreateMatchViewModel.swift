@@ -78,7 +78,7 @@ extension CreateMatchViewModel: CLLocationManagerDelegate {
                 print("Error \(error)")
             }
             if let placemark = placemarks?.first {
-                print("City: \(placemark.locality!)")
+                //print("City: \(placemark.locality!)")
                 self.city = placemark.locality
             }
             self.delegate?.didUpdateLocation()

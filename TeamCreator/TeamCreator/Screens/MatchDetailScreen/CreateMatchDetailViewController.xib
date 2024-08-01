@@ -10,6 +10,8 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="CreateMatchDetailViewController" customModule="TeamCreator" customModuleProvider="target">
             <connections>
+                <outlet property="fenerbahceImageView" destination="PEW-ih-SVo" id="wxQ-ZX-rnT"/>
+                <outlet property="galatasarayImageView" destination="3ag-eO-HjI" id="BXI-bA-3rd"/>
                 <outlet property="locationTimeLabel" destination="oK6-Me-ouq" id="kko-Dx-deA"/>
                 <outlet property="tempatureLabel" destination="DgL-SW-UT5" id="Cnc-fa-2Ds"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
@@ -22,20 +24,20 @@
             <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oK6-Me-ouq">
-                    <rect key="frame" x="16" y="75" width="361" height="24"/>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oK6-Me-ouq">
+                    <rect key="frame" x="16" y="75" width="361" height="0.0"/>
                     <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="20"/>
                     <nil key="textColor"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DgL-SW-UT5">
-                    <rect key="frame" x="168.33333333333334" y="191" width="56.666666666666657" height="28.666666666666657"/>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DgL-SW-UT5">
+                    <rect key="frame" x="196.66666666666666" y="183" width="0.0" height="0.0"/>
                     <fontDescription key="fontDescription" type="system" pointSize="24"/>
                     <nil key="textColor"/>
                     <nil key="highlightedColor"/>
                 </label>
                 <stackView opaque="NO" contentMode="scaleToFill" alignment="center" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="V1J-15-gT2">
-                    <rect key="frame" x="138" y="115" width="117.33333333333331" height="60"/>
+                    <rect key="frame" x="158.66666666666666" y="107" width="76" height="60"/>
                     <subviews>
                         <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="7PT-Ss-kId">
                             <rect key="frame" x="0.0" y="0.0" width="60" height="60"/>
@@ -44,8 +46,8 @@
                                 <constraint firstAttribute="height" constant="60" id="fud-mD-oXy"/>
                             </constraints>
                         </imageView>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uzm-t5-8xH">
-                            <rect key="frame" x="76" y="20" width="41.333333333333343" height="20.333333333333329"/>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uzm-t5-8xH">
+                            <rect key="frame" x="76" y="30" width="0.0" height="0.0"/>
                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                             <nil key="textColor"/>
                             <nil key="highlightedColor"/>
@@ -55,6 +57,52 @@
                         <constraint firstAttribute="height" constant="60" id="YoN-mq-vcL"/>
                     </constraints>
                 </stackView>
+                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="77Q-pe-8O9">
+                    <rect key="frame" x="69" y="454" width="255" height="300"/>
+                    <subviews>
+                        <stackView opaque="NO" contentMode="scaleToFill" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="Qs6-hC-VSJ">
+                            <rect key="frame" x="0.0" y="0.0" width="255" height="100"/>
+                            <subviews>
+                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Galatasaray 4 Yıldız" translatesAutoresizingMaskIntoConstraints="NO" id="3ag-eO-HjI">
+                                    <rect key="frame" x="0.0" y="0.0" width="100" height="100"/>
+                                    <constraints>
+                                        <constraint firstAttribute="height" constant="100" id="KwO-7v-Ikx"/>
+                                        <constraint firstAttribute="width" constant="100" id="drO-PP-UdH"/>
+                                    </constraints>
+                                </imageView>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="VS" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4UQ-Gg-0dR">
+                                    <rect key="frame" x="108" y="0.0" width="39" height="100"/>
+                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                    <nil key="textColor"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
+                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="fenerbahçe" translatesAutoresizingMaskIntoConstraints="NO" id="PEW-ih-SVo">
+                                    <rect key="frame" x="155" y="0.0" width="100" height="100"/>
+                                    <constraints>
+                                        <constraint firstAttribute="width" constant="100" id="Frv-oy-qdB"/>
+                                        <constraint firstAttribute="height" constant="100" id="WsB-qZ-6FE"/>
+                                    </constraints>
+                                </imageView>
+                            </subviews>
+                        </stackView>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="e4E-TO-eTj">
+                            <rect key="frame" x="0.0" y="100" width="255" height="100"/>
+                            <state key="normal" title="Button"/>
+                            <buttonConfiguration key="configuration" style="plain" title="Teams">
+                                <fontDescription key="titleFontDescription" type="system" weight="medium" pointSize="24"/>
+                            </buttonConfiguration>
+                            <connections>
+                                <action selector="teamsButtonClicked:" destination="-1" eventType="touchUpInside" id="M1S-Qx-gzk"/>
+                            </connections>
+                        </button>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="TR980006259837915614611857" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="z5m-9l-2Ml">
+                            <rect key="frame" x="0.0" y="200" width="255" height="100"/>
+                            <fontDescription key="fontDescription" type="italicSystem" pointSize="17"/>
+                            <nil key="textColor"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                    </subviews>
+                </stackView>
             </subviews>
             <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
             <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -62,8 +110,10 @@
                 <constraint firstItem="DgL-SW-UT5" firstAttribute="top" secondItem="V1J-15-gT2" secondAttribute="bottom" constant="16" id="EH8-9O-kFy"/>
                 <constraint firstItem="oK6-Me-ouq" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="16" id="Wa4-Zl-TPo"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="oK6-Me-ouq" secondAttribute="trailing" constant="16" id="nK8-bM-Llf"/>
-                <constraint firstItem="V1J-15-gT2" firstAttribute="top" secondItem="oK6-Me-ouq" secondAttribute="bottom" constant="16" id="sub-hf-hbG"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="77Q-pe-8O9" secondAttribute="bottom" constant="64" id="rha-kT-od2"/>
+                <constraint firstItem="V1J-15-gT2" firstAttribute="top" secondItem="oK6-Me-ouq" secondAttribute="bottom" constant="32" id="sub-hf-hbG"/>
                 <constraint firstItem="V1J-15-gT2" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="vsH-Ql-9Jn"/>
+                <constraint firstItem="77Q-pe-8O9" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="xNS-Wn-8lK"/>
                 <constraint firstItem="DgL-SW-UT5" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="xOq-W8-BPz"/>
                 <constraint firstItem="oK6-Me-ouq" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" constant="16" id="zZg-oM-nUA"/>
             </constraints>
@@ -71,6 +121,8 @@
         </view>
     </objects>
     <resources>
+        <image name="Galatasaray 4 Yıldız" width="133.24159240722656" height="205.05731201171875"/>
+        <image name="fenerbahçe" width="781" height="782"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
