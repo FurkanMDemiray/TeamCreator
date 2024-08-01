@@ -8,7 +8,7 @@
 import Foundation
 
 protocol PlayersScreenVMDelegate: AnyObject {
-    
+    func navigateToAddPlayers()
 }
 
 protocol PlayersScreenVMProtocol {
@@ -17,6 +17,7 @@ protocol PlayersScreenVMProtocol {
     func numberOfRows() -> Int
     func cellForRow(at indexPath: IndexPath) -> PlayerCellVM
     func deletePlayer(at indexPath: IndexPath)
+    func addButtonTapped()
 }
 
 final class PlayersScreenVM {
@@ -35,13 +36,13 @@ extension PlayersScreenVM: PlayersScreenVMProtocol {
     }
     
     private func fetchPlayers() {
-        players.append(Players(name: "name1", position: "pos1", skill: 10))
-        players.append(Players(name: "name2", position: "pos2", skill: 11))
-        players.append(Players(name: "name3", position: "pos3", skill: 12))
-        players.append(Players(name: "name4", position: "pos4", skill: 13))
-        players.append(Players(name: "name5", position: "pos5", skill: 14))
-        players.append(Players(name: "name6", position: "pos6", skill: 15))
-        players.append(Players(name: "name7", position: "pos7", skill: 16))
+        players.append(Players(name: "name1", position: "pos1", skill: "10"))
+        players.append(Players(name: "name2", position: "pos2", skill: "11"))
+        players.append(Players(name: "name3", position: "pos3", skill: "12"))
+        players.append(Players(name: "name4", position: "pos4", skill: "13"))
+        players.append(Players(name: "name5", position: "pos5", skill: "14"))
+        players.append(Players(name: "name6", position: "pos6", skill: "15"))
+        players.append(Players(name: "name7", position: "pos7", skill: "16"))
         
         DispatchQueue.main.async {
             self.view?.reloadTableView()
@@ -62,10 +63,12 @@ extension PlayersScreenVM: PlayersScreenVMProtocol {
         view?.reloadTableView()
     }
     
+    func addButtonTapped() {
+        delegate?.navigateToAddPlayers()
+    }
 }
 
 //Silinecek
 struct Players {
-    var name, position: String
-    var skill: Int
+    var name, position, skill: String?
 }
