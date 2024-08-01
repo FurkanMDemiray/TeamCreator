@@ -14,16 +14,16 @@ final class PlayerCellVM {
         self.player = player
     }
     
-    var playerName: String {
+    var playerName: String? {
         player.name
     }
     
-    var playerPosition: String {
+    var playerPosition: String? {
         player.position
     }
     
-    var playerSkill: String {
-        String(player.skill)
+    var playerSkill: String? {
+        player.skill
     }
     
 }

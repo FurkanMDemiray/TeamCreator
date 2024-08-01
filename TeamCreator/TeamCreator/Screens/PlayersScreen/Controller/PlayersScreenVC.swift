@@ -21,6 +21,7 @@ final class PlayersScreenVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         viewModel.view = self
+        viewModel.delegate = self
         viewModel.viewDidLoad()
     }
 }
@@ -29,8 +30,12 @@ extension PlayersScreenVC: PlayersScreenVCProtocol {
     func setupNavBar() {
         let title = String(describing: Players.self)
         navigationItem.title = title
-        let addPlayerButton = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: nil)
+        let addPlayerButton = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(addButtonTapped))
         navigationItem.rightBarButtonItem = addPlayerButton
+    }
+    
+    @objc private func addButtonTapped() {
+        viewModel.addButtonTapped()
     }
     
     func registerTableView() {
@@ -77,4 +82,13 @@ extension PlayersScreenVC: UITableViewDelegate {
     func tableView(_ tableView: UITableView, editingStyleForRowAt indexPath: IndexPath) -> UITableViewCell.EditingStyle {
         return .delete
     }
+}
+
+extension PlayersScreenVC: PlayersScreenVMDelegate {
+    func navigateToAddPlayers() {
+        let addPlayerVC = AddPlayerScreenVC(nibName: String(describing: AddPlayerScreenVC.self), bundle: nil)
+        navigationController?.pushViewController(addPlayerVC, animated: true)
+    }
+    
+    
 }
