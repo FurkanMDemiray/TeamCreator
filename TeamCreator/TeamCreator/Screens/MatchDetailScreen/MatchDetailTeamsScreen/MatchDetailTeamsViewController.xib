@@ -10,7 +10,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="MatchDetailTeamsViewController" customModule="TeamCreator" customModuleProvider="target">
             <connections>
-                <outlet property="collectionVİew" destination="T8G-Qn-4yJ" id="DUQ-sb-oia"/>
+                <outlet property="collectionView" destination="T8G-Qn-4yJ" id="DUQ-sb-oia"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>

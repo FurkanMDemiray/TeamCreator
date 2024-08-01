@@ -9,15 +9,19 @@ import UIKit
 
 class MatchDetailTeamsViewController: UIViewController {
 
-    @IBOutlet private weak var collectionVİew: UICollectionView!
+    @IBOutlet private weak var collectionView: UICollectionView!
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        configureCollectionView()
 
-        // Do any additional setup after loading the view.
     }
 
-
+    private func configureCollectionView() {
+        collectionView.delegate = self
+        collectionView.dataSource = self
+        collectionView.register(UINib(nibName: MatchDetailTeamsCell.matchDetailTeamsCellId, bundle: nil), forCellWithReuseIdentifier: MatchDetailTeamsCell.matchDetailTeamsCellId)
+    }
 
 }
 
@@ -31,7 +35,7 @@ extension MatchDetailTeamsViewController: UICollectionViewDataSource {
     }
 
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        var cell = collectionView.dequeueReusableCell(withReuseIdentifier: MatchDetailTeamsCell.matchDetailTeamsCellId, for: indexPath) as! MatchDetailTeamsCell
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: MatchDetailTeamsCell.matchDetailTeamsCellId, for: indexPath) as! MatchDetailTeamsCell
         return cell
     }
 }
@@ -39,6 +43,14 @@ extension MatchDetailTeamsViewController: UICollectionViewDataSource {
 extension MatchDetailTeamsViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
 
+    }
+}
+
+extension MatchDetailTeamsViewController: UICollectionViewDelegateFlowLayout {
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        let width = (collectionView.frame.width - 30) / 2
+        let height: CGFloat = 100
+        return CGSize(width: width, height: height)
     }
 }
 
