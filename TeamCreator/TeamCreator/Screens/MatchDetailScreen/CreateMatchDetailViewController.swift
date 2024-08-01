@@ -12,6 +12,8 @@ class CreateMatchDetailViewController: UIViewController {
     @IBOutlet private weak var weatherImageView: UIImageView!
     @IBOutlet private weak var weatherLabel: UILabel!
     @IBOutlet private weak var tempatureLabel: UILabel!
+    @IBOutlet private weak var fenerbahceImageView: UIImageView!
+    @IBOutlet private weak var galatasarayImageView: UIImageView!
 
     var viewModel: CreateMatchDetailViewModelProtocol! {
         didSet {
@@ -22,6 +24,39 @@ class CreateMatchDetailViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         viewModel.fetch()
+        configureImages()
+    }
+
+    private func configureImages() {
+        galatasarayImageView.isUserInteractionEnabled = true
+        fenerbahceImageView.isUserInteractionEnabled = true
+        galatasarayImageView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(galatasarayTapped)))
+        fenerbahceImageView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(fenerbahceTapped)))
+        startPulseAnimation(for: fenerbahceImageView)
+        startPulseAnimation(for: galatasarayImageView)
+    }
+
+    //MARK: - Animations
+    private func startPulseAnimation(for imageView: UIImageView) {
+        let pulseAnimation = CABasicAnimation(keyPath: "transform.scale")
+        pulseAnimation.duration = 1.0
+        pulseAnimation.fromValue = 1.0
+        pulseAnimation.toValue = 1.2
+        pulseAnimation.timingFunction = CAMediaTimingFunction(name: .easeInEaseOut)
+        pulseAnimation.autoreverses = true
+        pulseAnimation.repeatCount = .infinity
+        imageView.layer.add(pulseAnimation, forKey: "pulse")
+    }
+
+    //MARK: - Actions
+    @objc private func fenerbahceTapped() {
+        let vc = MatchDetailTeamViewController()
+        navigationController?.pushViewController(vc, animated: true)
+    }
+
+    @objc private func galatasarayTapped() {
+        let vc = MatchDetailTeamViewController()
+        navigationController?.pushViewController(vc, animated: true)
     }
 
     @IBAction func teamsButtonClicked(_ sender: Any) {
@@ -31,7 +66,6 @@ class CreateMatchDetailViewController: UIViewController {
 }
 
 extension CreateMatchDetailViewController: CreateMatchDetailViewModelDelegate {
-
     func changeWeatherImage(_ imageName: String) {
         weatherImageView.image = UIImage(named: imageName)
     }

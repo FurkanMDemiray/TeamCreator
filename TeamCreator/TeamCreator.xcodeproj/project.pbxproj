@@ -42,6 +42,8 @@
 		DD85DA242C5BACD400AF1652 /* MatchDetailTeamsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD85DA222C5BACD400AF1652 /* MatchDetailTeamsCell.swift */; };
 		DD85DA252C5BACD400AF1652 /* MatchDetailTeamsCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = DD85DA232C5BACD400AF1652 /* MatchDetailTeamsCell.xib */; };
 		DD85DA272C5BACE200AF1652 /* MatchDetailTeamsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD85DA262C5BACE200AF1652 /* MatchDetailTeamsViewModel.swift */; };
+		DD85DA2B2C5BB96E00AF1652 /* MatchDetailTeamViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD85DA292C5BB96E00AF1652 /* MatchDetailTeamViewController.swift */; };
+		DD85DA2C2C5BB96E00AF1652 /* MatchDetailTeamViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = DD85DA2A2C5BB96E00AF1652 /* MatchDetailTeamViewController.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -98,6 +100,8 @@
 		DD85DA222C5BACD400AF1652 /* MatchDetailTeamsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MatchDetailTeamsCell.swift; sourceTree = "<group>"; };
 		DD85DA232C5BACD400AF1652 /* MatchDetailTeamsCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MatchDetailTeamsCell.xib; sourceTree = "<group>"; };
 		DD85DA262C5BACE200AF1652 /* MatchDetailTeamsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MatchDetailTeamsViewModel.swift; sourceTree = "<group>"; };
+		DD85DA292C5BB96E00AF1652 /* MatchDetailTeamViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MatchDetailTeamViewController.swift; sourceTree = "<group>"; };
+		DD85DA2A2C5BB96E00AF1652 /* MatchDetailTeamViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MatchDetailTeamViewController.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -306,6 +310,7 @@
 				DD85DA0D2C5A82B300AF1652 /* CreateMatchDetailViewModel.swift */,
 				DD85DA0E2C5A82B300AF1652 /* WeatherModel.swift */,
 				DD85DA1C2C5BABD100AF1652 /* MatchDetailTeamsScreen */,
+				DD85DA282C5BB94200AF1652 /* MatchDetailTeamScreen */,
 			);
 			path = MatchDetailScreen;
 			sourceTree = "<group>";
@@ -328,6 +333,15 @@
 				DD85DA232C5BACD400AF1652 /* MatchDetailTeamsCell.xib */,
 			);
 			path = MatchDetailTeamsCell;
+			sourceTree = "<group>";
+		};
+		DD85DA282C5BB94200AF1652 /* MatchDetailTeamScreen */ = {
+			isa = PBXGroup;
+			children = (
+				DD85DA292C5BB96E00AF1652 /* MatchDetailTeamViewController.swift */,
+				DD85DA2A2C5BB96E00AF1652 /* MatchDetailTeamViewController.xib */,
+			);
+			path = MatchDetailTeamScreen;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -447,6 +461,7 @@
 				DD1A24AB2C57AA2B0020AC04 /* Assets.xcassets in Resources */,
 				DD85DA202C5BAC5000AF1652 /* MatchDetailTeamsViewController.xib in Resources */,
 				DD85DA112C5A82B300AF1652 /* CreateMatchDetailViewController.xib in Resources */,
+				DD85DA2C2C5BB96E00AF1652 /* MatchDetailTeamViewController.xib in Resources */,
 				08B464712C5A78A900529D6A /* PlayersScreenVC.xib in Resources */,
 				DD1A24DA2C57AB070020AC04 /* GoogleService-Info.plist in Resources */,
 				08B464762C5A78B700529D6A /* PlayerCell.xib in Resources */,
@@ -490,6 +505,7 @@
 				DD85DA102C5A82B300AF1652 /* CreateMatchDetailViewController.swift in Sources */,
 				DD85DA1F2C5BAC5000AF1652 /* MatchDetailTeamsViewController.swift in Sources */,
 				DD1A24A22C57AA2A0020AC04 /* AppDelegate.swift in Sources */,
+				DD85DA2B2C5BB96E00AF1652 /* MatchDetailTeamViewController.swift in Sources */,
 				DD1A24E82C57AE500020AC04 /* HomeViewModel.swift in Sources */,
 				DD1A24FA2C58DC4A0020AC04 /* CreateMatchViewModel.swift in Sources */,
 				DD85DA122C5A82B300AF1652 /* CreateMatchDetailViewModel.swift in Sources */,
