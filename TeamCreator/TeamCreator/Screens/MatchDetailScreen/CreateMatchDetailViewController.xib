@@ -55,12 +55,57 @@
                         <constraint firstAttribute="height" constant="60" id="YoN-mq-vcL"/>
                     </constraints>
                 </stackView>
+                <stackView opaque="NO" contentMode="scaleToFill" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="Qs6-hC-VSJ">
+                    <rect key="frame" x="78.000000000000014" y="376" width="237.33333333333337" height="100"/>
+                    <subviews>
+                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Galatasaray 4 Yıldız" translatesAutoresizingMaskIntoConstraints="NO" id="3ag-eO-HjI">
+                            <rect key="frame" x="0.0" y="0.0" width="100" height="100"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="100" id="KwO-7v-Ikx"/>
+                                <constraint firstAttribute="width" constant="100" id="drO-PP-UdH"/>
+                            </constraints>
+                        </imageView>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="VS" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4UQ-Gg-0dR">
+                            <rect key="frame" x="108" y="0.0" width="21.333333333333343" height="100"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                            <nil key="textColor"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="fenerbahçe" translatesAutoresizingMaskIntoConstraints="NO" id="PEW-ih-SVo">
+                            <rect key="frame" x="137.33333333333334" y="0.0" width="100" height="100"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="100" id="Frv-oy-qdB"/>
+                                <constraint firstAttribute="height" constant="100" id="WsB-qZ-6FE"/>
+                            </constraints>
+                        </imageView>
+                    </subviews>
+                </stackView>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="e4E-TO-eTj">
+                    <rect key="frame" x="159.66666666666666" y="492" width="74" height="34.333333333333371"/>
+                    <state key="normal" title="Button"/>
+                    <buttonConfiguration key="configuration" style="plain" title="Teams"/>
+                    <connections>
+                        <action selector="teamsButtonClicked:" destination="-1" eventType="touchUpInside" id="M1S-Qx-gzk"/>
+                    </connections>
+                </button>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="TR980006259837915614611857" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="z5m-9l-2Ml">
+                    <rect key="frame" x="69.333333333333329" y="542.33333333333337" width="254.66666666666669" height="20.333333333333371"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <nil key="textColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
             </subviews>
             <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
             <color key="backgroundColor" systemColor="systemBackgroundColor"/>
             <constraints>
+                <constraint firstItem="z5m-9l-2Ml" firstAttribute="top" secondItem="e4E-TO-eTj" secondAttribute="bottom" constant="16" id="6l2-5U-bI0"/>
+                <constraint firstItem="e4E-TO-eTj" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="7eo-J8-eaS"/>
+                <constraint firstItem="Qs6-hC-VSJ" firstAttribute="centerY" secondItem="i5M-Pr-FkT" secondAttribute="centerY" id="Axg-4u-LqB"/>
                 <constraint firstItem="DgL-SW-UT5" firstAttribute="top" secondItem="V1J-15-gT2" secondAttribute="bottom" constant="16" id="EH8-9O-kFy"/>
+                <constraint firstItem="e4E-TO-eTj" firstAttribute="top" secondItem="Qs6-hC-VSJ" secondAttribute="bottom" constant="16" id="QaW-zy-pPs"/>
+                <constraint firstItem="Qs6-hC-VSJ" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="TRF-gH-4m0"/>
                 <constraint firstItem="oK6-Me-ouq" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="16" id="Wa4-Zl-TPo"/>
+                <constraint firstItem="z5m-9l-2Ml" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="Y00-RM-nZF"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="oK6-Me-ouq" secondAttribute="trailing" constant="16" id="nK8-bM-Llf"/>
                 <constraint firstItem="V1J-15-gT2" firstAttribute="top" secondItem="oK6-Me-ouq" secondAttribute="bottom" constant="16" id="sub-hf-hbG"/>
                 <constraint firstItem="V1J-15-gT2" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="vsH-Ql-9Jn"/>
@@ -71,6 +116,8 @@
         </view>
     </objects>
     <resources>
+        <image name="Galatasaray 4 Yıldız" width="133.24159240722656" height="205.05731201171875"/>
+        <image name="fenerbahçe" width="781" height="782"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

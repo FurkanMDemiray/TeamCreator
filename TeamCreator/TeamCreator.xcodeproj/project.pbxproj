@@ -37,6 +37,11 @@
 		DD85DA112C5A82B300AF1652 /* CreateMatchDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = DD85DA0C2C5A82B300AF1652 /* CreateMatchDetailViewController.xib */; };
 		DD85DA122C5A82B300AF1652 /* CreateMatchDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD85DA0D2C5A82B300AF1652 /* CreateMatchDetailViewModel.swift */; };
 		DD85DA132C5A82B300AF1652 /* WeatherModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD85DA0E2C5A82B300AF1652 /* WeatherModel.swift */; };
+		DD85DA1F2C5BAC5000AF1652 /* MatchDetailTeamsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD85DA1D2C5BAC5000AF1652 /* MatchDetailTeamsViewController.swift */; };
+		DD85DA202C5BAC5000AF1652 /* MatchDetailTeamsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = DD85DA1E2C5BAC5000AF1652 /* MatchDetailTeamsViewController.xib */; };
+		DD85DA242C5BACD400AF1652 /* MatchDetailTeamsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD85DA222C5BACD400AF1652 /* MatchDetailTeamsCell.swift */; };
+		DD85DA252C5BACD400AF1652 /* MatchDetailTeamsCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = DD85DA232C5BACD400AF1652 /* MatchDetailTeamsCell.xib */; };
+		DD85DA272C5BACE200AF1652 /* MatchDetailTeamsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD85DA262C5BACE200AF1652 /* MatchDetailTeamsViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -88,6 +93,11 @@
 		DD85DA0C2C5A82B300AF1652 /* CreateMatchDetailViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CreateMatchDetailViewController.xib; sourceTree = "<group>"; };
 		DD85DA0D2C5A82B300AF1652 /* CreateMatchDetailViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreateMatchDetailViewModel.swift; sourceTree = "<group>"; };
 		DD85DA0E2C5A82B300AF1652 /* WeatherModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WeatherModel.swift; sourceTree = "<group>"; };
+		DD85DA1D2C5BAC5000AF1652 /* MatchDetailTeamsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MatchDetailTeamsViewController.swift; sourceTree = "<group>"; };
+		DD85DA1E2C5BAC5000AF1652 /* MatchDetailTeamsViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MatchDetailTeamsViewController.xib; sourceTree = "<group>"; };
+		DD85DA222C5BACD400AF1652 /* MatchDetailTeamsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MatchDetailTeamsCell.swift; sourceTree = "<group>"; };
+		DD85DA232C5BACD400AF1652 /* MatchDetailTeamsCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MatchDetailTeamsCell.xib; sourceTree = "<group>"; };
+		DD85DA262C5BACE200AF1652 /* MatchDetailTeamsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MatchDetailTeamsViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -295,8 +305,29 @@
 				DD85DA0C2C5A82B300AF1652 /* CreateMatchDetailViewController.xib */,
 				DD85DA0D2C5A82B300AF1652 /* CreateMatchDetailViewModel.swift */,
 				DD85DA0E2C5A82B300AF1652 /* WeatherModel.swift */,
+				DD85DA1C2C5BABD100AF1652 /* MatchDetailTeamsScreen */,
 			);
 			path = MatchDetailScreen;
+			sourceTree = "<group>";
+		};
+		DD85DA1C2C5BABD100AF1652 /* MatchDetailTeamsScreen */ = {
+			isa = PBXGroup;
+			children = (
+				DD85DA212C5BACB000AF1652 /* MatchDetailTeamsCell */,
+				DD85DA1D2C5BAC5000AF1652 /* MatchDetailTeamsViewController.swift */,
+				DD85DA1E2C5BAC5000AF1652 /* MatchDetailTeamsViewController.xib */,
+				DD85DA262C5BACE200AF1652 /* MatchDetailTeamsViewModel.swift */,
+			);
+			path = MatchDetailTeamsScreen;
+			sourceTree = "<group>";
+		};
+		DD85DA212C5BACB000AF1652 /* MatchDetailTeamsCell */ = {
+			isa = PBXGroup;
+			children = (
+				DD85DA222C5BACD400AF1652 /* MatchDetailTeamsCell.swift */,
+				DD85DA232C5BACD400AF1652 /* MatchDetailTeamsCell.xib */,
+			);
+			path = MatchDetailTeamsCell;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -414,11 +445,13 @@
 			files = (
 				DD1A24FF2C594DDC0020AC04 /* CreateMatchCell.xib in Resources */,
 				DD1A24AB2C57AA2B0020AC04 /* Assets.xcassets in Resources */,
+				DD85DA202C5BAC5000AF1652 /* MatchDetailTeamsViewController.xib in Resources */,
 				DD85DA112C5A82B300AF1652 /* CreateMatchDetailViewController.xib in Resources */,
 				08B464712C5A78A900529D6A /* PlayersScreenVC.xib in Resources */,
 				DD1A24DA2C57AB070020AC04 /* GoogleService-Info.plist in Resources */,
 				08B464762C5A78B700529D6A /* PlayerCell.xib in Resources */,
 				DD1A24F82C58DC3E0020AC04 /* CreateMatchViewController.xib in Resources */,
+				DD85DA252C5BACD400AF1652 /* MatchDetailTeamsCell.xib in Resources */,
 				DD1A24AE2C57AA2B0020AC04 /* Base in Resources */,
 				DD1A24F42C58CDD70020AC04 /* HomeViewController.xib in Resources */,
 			);
@@ -446,13 +479,16 @@
 			buildActionMask = 2147483647;
 			files = (
 				08B464752C5A78B700529D6A /* PlayerCell.swift in Sources */,
+				DD85DA242C5BACD400AF1652 /* MatchDetailTeamsCell.swift in Sources */,
 				DD1A24FE2C594DDC0020AC04 /* CreateMatchCell.swift in Sources */,
 				DD1A24F32C58CDD70020AC04 /* HomeViewController.swift in Sources */,
+				DD85DA272C5BACE200AF1652 /* MatchDetailTeamsViewModel.swift in Sources */,
 				DD1A24E62C57AD660020AC04 /* NetworkManager.swift in Sources */,
 				DD85DA132C5A82B300AF1652 /* WeatherModel.swift in Sources */,
 				DD1A24F72C58DC3E0020AC04 /* CreateMatchViewController.swift in Sources */,
 				08B4646B2C5A789B00529D6A /* PlayerCellVM.swift in Sources */,
 				DD85DA102C5A82B300AF1652 /* CreateMatchDetailViewController.swift in Sources */,
+				DD85DA1F2C5BAC5000AF1652 /* MatchDetailTeamsViewController.swift in Sources */,
 				DD1A24A22C57AA2A0020AC04 /* AppDelegate.swift in Sources */,
 				DD1A24E82C57AE500020AC04 /* HomeViewModel.swift in Sources */,
 				DD1A24FA2C58DC4A0020AC04 /* CreateMatchViewModel.swift in Sources */,

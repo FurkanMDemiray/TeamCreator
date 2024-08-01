@@ -7,11 +7,13 @@
 
 import Foundation
 
+//MARK: - Delegate
 protocol CreateMatchDetailViewModelDelegate: AnyObject {
     func didFetchWeather()
     func changeWeatherImage(_ imageName: String)
 }
 
+//MARK: - Protocol
 protocol CreateMatchDetailViewModelProtocol {
     var delegate: CreateMatchDetailViewModelDelegate? { get set }
     var getTime: String { get }
@@ -21,10 +23,11 @@ protocol CreateMatchDetailViewModelProtocol {
     func fetch()
 }
 
+//MARK: - ViewModel
 final class CreateMatchDetailViewModel {
 
     weak var delegate: CreateMatchDetailViewModelDelegate?
-    var networkManager: NetworkManagerProtocol
+    private var networkManager: NetworkManagerProtocol
     var longitude: Double?
     var latitude: Double?
     var time: String?
@@ -42,22 +45,21 @@ final class CreateMatchDetailViewModel {
             switch result {
             case .success(let weather):
                 self.weather = weather
-                if ((weather.weather?.first?.main?.contains("cloud")) != nil) {
+                if ((weather.weather?.first?.main?.contains("Cloud")) == true) {
                     self.delegate?.changeWeatherImage("cloud")
                 }
-                else if ((weather.weather?.first?.main?.contains("thunder")) != nil) {
+                else if ((weather.weather?.first?.main?.contains("Thunder")) == true) {
                     self.delegate?.changeWeatherImage("thunder")
                 }
-                else if ((weather.weather?.first?.main?.contains("rainy")) != nil) {
+                else if ((weather.weather?.first?.main?.contains("Rainy")) == true) {
                     self.delegate?.changeWeatherImage("rain")
                 }
-                else if ((weather.weather?.first?.main?.contains("clear")) != nil) || ((weather.weather?.first?.main?.contains("sunny")) != nil) {
+                else if ((weather.weather?.first?.main?.contains("Clear")) == true) || ((weather.weather?.first?.main?.contains("sunny")) == true) {
                     self.delegate?.changeWeatherImage("sun")
                 }
-                else if ((weather.weather?.first?.main?.contains("snow")) != nil) {
+                else if ((weather.weather?.first?.main?.contains("Snow")) == true) {
                     self.delegate?.changeWeatherImage("snow")
                 }
-
                 delegate?.didFetchWeather()
             case .failure(let error):
                 print(error)
@@ -67,6 +69,7 @@ final class CreateMatchDetailViewModel {
 
 }
 
+//MARK: - Protocol Extension
 extension CreateMatchDetailViewModel: CreateMatchDetailViewModelProtocol {
     var getWeather: WeatherModel {
         guard let weather else { return WeatherModel(coord: nil, weather: nil, base: nil, main: nil, visibility: nil, wind: nil, clouds: nil, dt: nil, sys: nil, timezone: nil, id: nil, name: nil, cod: nil) }

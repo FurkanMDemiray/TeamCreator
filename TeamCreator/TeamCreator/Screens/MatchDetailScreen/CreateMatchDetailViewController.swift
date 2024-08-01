@@ -22,13 +22,12 @@ class CreateMatchDetailViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         viewModel.fetch()
-        configureLabel()
     }
 
-    private func configureLabel() {
-
+    @IBAction func teamsButtonClicked(_ sender: Any) {
+        let vc = MatchDetailTeamsViewController()
+        navigationController?.pushViewController(vc, animated: true)
     }
-
 }
 
 extension CreateMatchDetailViewController: CreateMatchDetailViewModelDelegate {
