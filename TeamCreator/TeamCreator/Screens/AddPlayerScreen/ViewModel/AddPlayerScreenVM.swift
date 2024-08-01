@@ -29,6 +29,7 @@ final class AddPlayerScreenVM {
 extension AddPlayerScreenVM: AddPlayerScreenVMProtocol {
     func viewDidLoad() {
         view?.setupVC()
+        view?.setupImageView()
         view?.setupPickerView()
     }
     

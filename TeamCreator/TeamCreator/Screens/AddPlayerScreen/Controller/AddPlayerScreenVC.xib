@@ -10,6 +10,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="AddPlayerScreenVC" customModule="TeamCreator" customModuleProvider="target">
             <connections>
+                <outlet property="addPlayerButton" destination="Fne-1O-k9B" id="668-LJ-Wky"/>
                 <outlet property="imageView" destination="740-5f-7Uf" id="6QL-HG-v31"/>
                 <outlet property="nameTextField" destination="8Qw-Uy-8Tn" id="aJC-Nf-4UJ"/>
                 <outlet property="positionTextField" destination="QfA-Qg-xGh" id="9Na-wN-1gd"/>

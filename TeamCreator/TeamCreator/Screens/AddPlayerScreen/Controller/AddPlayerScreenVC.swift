@@ -10,6 +10,7 @@ import UIKit
 protocol AddPlayersScreenVCProtocol: AnyObject {
     func setupVC()
     func setupPickerView()
+    func setupImageView()
     func showError(message: String)
     func clearFields()
 }
@@ -23,7 +24,7 @@ final class AddPlayerScreenVC: UIViewController {
     @IBOutlet private weak var surnameTextField: UITextField!
     @IBOutlet private weak var positionTextField: UITextField!
     @IBOutlet private weak var ratingTextField: UITextField!
-    
+    @IBOutlet weak var addPlayerButton: UIButton!
     private let positionPickerView = UIPickerView()
     
     override func viewDidLoad() {
@@ -32,6 +33,12 @@ final class AddPlayerScreenVC: UIViewController {
         viewModel.delegate = self
         viewModel.viewDidLoad()
         
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
+    }
+    
+    deinit {
+        NotificationCenter.default.removeObserver(self)
     }
     
     @IBAction private func addPlayerButtonTapped(_ sender: UIButton) {
@@ -46,7 +53,19 @@ final class AddPlayerScreenVC: UIViewController {
 
     }
     
-
+    @objc private func keyboardWillShow(notification: NSNotification) {
+        if let keyboardFrame = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? CGRect {
+            let keyboardHeight = keyboardFrame.height
+            let bottomSpace = self.view.frame.height - (addPlayerButton.frame.origin.y + addPlayerButton.frame.height)
+            if bottomSpace < keyboardHeight {
+                self.view.frame.origin.y = 0 - (keyboardHeight - (bottomSpace * 0.5))
+            }
+        }
+    }
+    
+    @objc private func keyboardWillHide(notification: NSNotification) {
+        self.view.frame.origin.y = 0
+    }
 }
 
 extension AddPlayerScreenVC: AddPlayersScreenVCProtocol {
@@ -96,6 +115,19 @@ extension AddPlayerScreenVC: AddPlayersScreenVCProtocol {
         ratingTextField.resignFirstResponder()
     }
     
+    func setupImageView() {
+        let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(imageViewTapped))
+        imageView.isUserInteractionEnabled = true
+        imageView.addGestureRecognizer(tapGestureRecognizer)
+    }
+    
+    @objc private func imageViewTapped() {
+        let imagePickerController = UIImagePickerController()
+        imagePickerController.delegate = self
+        imagePickerController.sourceType = .photoLibrary
+        present(imagePickerController, animated: true)
+    }
+    
     func showError(message: String) {
         let alert = UIAlertController(title: "Empty Field", message: message, preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "OK", style: .default))
@@ -109,7 +141,6 @@ extension AddPlayerScreenVC: AddPlayersScreenVCProtocol {
         ratingTextField.text = ""
     }
 
-    
 }
 
 extension AddPlayerScreenVC: UITextFieldDelegate {
@@ -144,6 +175,20 @@ extension AddPlayerScreenVC: UIPickerViewDataSource {
 extension AddPlayerScreenVC: UIPickerViewDelegate {
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         positionTextField.text = viewModel.titleForRow(row: row)
+    }
+}
+
+extension AddPlayerScreenVC: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+        if let selectedImage = info[UIImagePickerController.InfoKey.originalImage] as? UIImage {
+            imageView.image = selectedImage
+            //TODO: save image?
+        }
+        picker.dismiss(animated: true)
+    }
+    
+    func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
+        picker.dismiss(animated: true)
     }
 }
 
