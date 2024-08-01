@@ -10,6 +10,8 @@ import UIKit
 protocol AddPlayersScreenVCProtocol: AnyObject {
     func setupVC()
     func setupPickerView()
+    func showError(message: String)
+    func clearFields()
 }
 
 final class AddPlayerScreenVC: UIViewController {
@@ -27,20 +29,20 @@ final class AddPlayerScreenVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         viewModel.view = self
+        viewModel.delegate = self
         viewModel.viewDidLoad()
         
     }
     
     @IBAction private func addPlayerButtonTapped(_ sender: UIButton) {
-        guard let name = nameTextField.text, !name.isEmpty,
-              let surname = surnameTextField.text, !surname.isEmpty,
-              let position = positionTextField.text, !position.isEmpty,
-              let ratingText = ratingTextField.text, let rating = Int(ratingText), rating >= 1, rating <= 99
-        else {
-            print("Please fill out all fields correctly.")
-            return
-        }
-        print("Name: \(name) \(surname), Position: \(position), Rating: \(rating)")
+        let name = nameTextField.text
+        let surname = surnameTextField.text
+        let position = positionTextField.text
+        let rating = ratingTextField.text
+        
+        let newPlayer = Players(name: name, position: position, skill: rating)
+        
+        viewModel.addPlayer(player: newPlayer)
 
     }
     
@@ -93,6 +95,19 @@ extension AddPlayerScreenVC: AddPlayersScreenVCProtocol {
     @objc private func doneTapped() {
         ratingTextField.resignFirstResponder()
     }
+    
+    func showError(message: String) {
+        let alert = UIAlertController(title: "Empty Field", message: message, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "OK", style: .default))
+        present(alert, animated: true)
+    }
+    
+    func clearFields() {
+        nameTextField.text = ""
+        surnameTextField.text = ""
+        positionTextField.text = ""
+        ratingTextField.text = ""
+    }
 
     
 }
@@ -129,5 +144,11 @@ extension AddPlayerScreenVC: UIPickerViewDataSource {
 extension AddPlayerScreenVC: UIPickerViewDelegate {
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         positionTextField.text = viewModel.titleForRow(row: row)
+    }
+}
+
+extension AddPlayerScreenVC: AddPlayerScreenVMDelegate {
+    func navigateBackToPlayers() {
+        navigationController?.popViewController(animated: true)
     }
 }
