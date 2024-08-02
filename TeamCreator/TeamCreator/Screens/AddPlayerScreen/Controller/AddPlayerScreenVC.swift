@@ -17,7 +17,7 @@ protocol AddPlayersScreenVCProtocol: AnyObject {
 
 final class AddPlayerScreenVC: UIViewController {
 
-    private let viewModel = AddPlayerScreenVM()
+    var viewModel = AddPlayerScreenVM()
     
     @IBOutlet private weak var imageView: UIImageView!
     @IBOutlet private weak var nameTextField: UITextField!
@@ -58,7 +58,7 @@ final class AddPlayerScreenVC: UIViewController {
             let keyboardHeight = keyboardFrame.height
             let bottomSpace = self.view.frame.height - (addPlayerButton.frame.origin.y + addPlayerButton.frame.height)
             if bottomSpace < keyboardHeight {
-                self.view.frame.origin.y = 0 - (keyboardHeight - (bottomSpace * 0.5))
+                self.view.frame.origin.y = 0 - (keyboardHeight - (bottomSpace))
             }
         }
     }

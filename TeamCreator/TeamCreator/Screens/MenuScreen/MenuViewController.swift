@@ -8,6 +8,8 @@
 import UIKit
 
 class MenuViewController: UIViewController {
+    
+    var selectedSport: Sport?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -21,6 +23,7 @@ class MenuViewController: UIViewController {
     @IBAction func playersButtonClicked(_ sender: Any) {
         let vc = PlayersScreenVC()
         let playersViewModel = PlayersScreenVM()
+        playersViewModel.selectedSport = selectedSport
         vc.viewModel = playersViewModel
         navigationController?.pushViewController(vc, animated: true)
     }

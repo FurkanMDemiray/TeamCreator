@@ -87,6 +87,9 @@ extension PlayersScreenVC: UITableViewDelegate {
 extension PlayersScreenVC: PlayersScreenVMDelegate {
     func navigateToAddPlayers() {
         let addPlayerVC = AddPlayerScreenVC(nibName: String(describing: AddPlayerScreenVC.self), bundle: nil)
+        let addPlayerVM = AddPlayerScreenVM()
+        addPlayerVM.selectedSport = viewModel.selectedSport
+        addPlayerVC.viewModel = addPlayerVM
         navigationController?.pushViewController(addPlayerVC, animated: true)
     }
 
