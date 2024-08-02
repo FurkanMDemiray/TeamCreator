@@ -14,10 +14,10 @@ protocol PlayersScreenVCProtocol: AnyObject {
 }
 
 final class PlayersScreenVC: UIViewController {
-    
-    private let viewModel = PlayersScreenVM()
+
+    var viewModel = PlayersScreenVM()
     @IBOutlet private weak var tableView: UITableView!
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
         viewModel.view = self
@@ -33,17 +33,17 @@ extension PlayersScreenVC: PlayersScreenVCProtocol {
         let addPlayerButton = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(addButtonTapped))
         navigationItem.rightBarButtonItem = addPlayerButton
     }
-    
+
     @objc private func addButtonTapped() {
         viewModel.addButtonTapped()
     }
-    
+
     func registerTableView() {
         let playerCellName = String(describing: PlayerCell.self)
         let playerCellNib = UINib(nibName: playerCellName, bundle: nil)
         tableView.register(playerCellNib, forCellReuseIdentifier: playerCellName)
     }
-    
+
     func reloadTableView() {
         tableView.reloadData()
     }
@@ -53,7 +53,7 @@ extension PlayersScreenVC: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         viewModel.numberOfRows()
     }
-    
+
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: PlayerCell.self)) as? PlayerCell {
             cell.prepareCell(with: viewModel.cellForRow(at: indexPath))
@@ -61,7 +61,7 @@ extension PlayersScreenVC: UITableViewDataSource {
         }
         return UITableViewCell()
     }
-    
+
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
             let alert = UIAlertController(title: "Delete", message: "Are you sure?", preferredStyle: .alert)
@@ -78,7 +78,7 @@ extension PlayersScreenVC: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         print("tapped")
     }
-    
+
     func tableView(_ tableView: UITableView, editingStyleForRowAt indexPath: IndexPath) -> UITableViewCell.EditingStyle {
         return .delete
     }
@@ -89,6 +89,6 @@ extension PlayersScreenVC: PlayersScreenVMDelegate {
         let addPlayerVC = AddPlayerScreenVC(nibName: String(describing: AddPlayerScreenVC.self), bundle: nil)
         navigationController?.pushViewController(addPlayerVC, animated: true)
     }
-    
-    
+
+
 }
