@@ -7,7 +7,7 @@
 
 import UIKit
 
-class HomeViewController: UIViewController {
+final class HomeViewController: UIViewController {
 
     var viewModel: HomeViewModelProtocol! {
         didSet {
@@ -43,11 +43,13 @@ class HomeViewController: UIViewController {
 
     @objc func soccerButtonTapped() {
         let vc = MenuViewController()
+        vc.selectedSport = .football
         self.navigationController?.pushViewController(vc, animated: true)
     }
 
     @objc func volleyballButtonTapped() {
         let vc = MenuViewController()
+        vc.selectedSport = .volleyball
         self.navigationController?.pushViewController(vc, animated: true)
     }
 

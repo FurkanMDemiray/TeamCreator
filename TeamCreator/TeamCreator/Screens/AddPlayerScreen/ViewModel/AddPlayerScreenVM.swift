@@ -6,7 +6,7 @@
 //
 
 import Foundation
-
+import FirebaseFirestore
 
 protocol AddPlayerScreenVMDelegate: AnyObject {
     func navigateBackToPlayers()
@@ -23,7 +23,9 @@ protocol AddPlayerScreenVMProtocol {
 final class AddPlayerScreenVM {
     weak var view: AddPlayersScreenVCProtocol?
     weak var delegate: AddPlayerScreenVMDelegate?
+    var selectedSport: Sport?
     private var position = ["Goalkeeper", "Defence", "Midfielder", "Attacker"]
+    let db = Firestore.firestore()
 }
 
 extension AddPlayerScreenVM: AddPlayerScreenVMProtocol {
@@ -44,13 +46,27 @@ extension AddPlayerScreenVM: AddPlayerScreenVMProtocol {
     func addPlayer(player: Players) {
         guard let name = player.name, !name.isEmpty,
               let position = player.position, !position.isEmpty,
-              let skill = player.skill, !skill.isEmpty else {
+              let skill = player.skill, !skill.isEmpty,
+              let sport = selectedSport?.rawValue else {
             view?.showError(message: "Please fill out all fields correctly")
             return
         }
         
-        print(name, position, skill)
-        view?.clearFields()
-        delegate?.navigateBackToPlayers()
+        let playerData: [String: Any] = [
+            "name": name,
+            "position": position,
+            "skill": skill
+        ]
+        
+        db.collection("sports").document(sport).collection("players").addDocument(data: playerData) { error in
+                if let error = error {
+                    print("error adding players \(error.localizedDescription)")
+                    self.view?.showError(message: "Failed to add player. Try Again.")
+                } else {
+                    print("added players success")
+                    self.view?.clearFields()
+                    self.delegate?.navigateBackToPlayers()
+                }
+            }
     }
 }
