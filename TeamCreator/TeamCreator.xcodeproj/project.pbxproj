@@ -38,6 +38,8 @@
 		DD1A24FF2C594DDC0020AC04 /* CreateMatchCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = DD1A24FD2C594DDC0020AC04 /* CreateMatchCell.xib */; };
 		DD3A08A12C5CB7750056C8D7 /* MenuViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = DD3A08A02C5CB7750056C8D7 /* MenuViewController.xib */; };
 		DD3A08A22C5CB7750056C8D7 /* MenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD3A089F2C5CB7750056C8D7 /* MenuViewController.swift */; };
+		DD3A08A52C5E22790056C8D7 /* FirebaseManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD3A08A42C5E22790056C8D7 /* FirebaseManager.swift */; };
+		DD3A08A72C5E253B0056C8D7 /* Player.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD3A08A62C5E253B0056C8D7 /* Player.swift */; };
 		DD85DA102C5A82B300AF1652 /* CreateMatchDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD85DA0B2C5A82B300AF1652 /* CreateMatchDetailViewController.swift */; };
 		DD85DA112C5A82B300AF1652 /* CreateMatchDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = DD85DA0C2C5A82B300AF1652 /* CreateMatchDetailViewController.xib */; };
 		DD85DA122C5A82B300AF1652 /* CreateMatchDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD85DA0D2C5A82B300AF1652 /* CreateMatchDetailViewModel.swift */; };
@@ -101,6 +103,8 @@
 		DD1A24FD2C594DDC0020AC04 /* CreateMatchCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CreateMatchCell.xib; sourceTree = "<group>"; };
 		DD3A089F2C5CB7750056C8D7 /* MenuViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuViewController.swift; sourceTree = "<group>"; };
 		DD3A08A02C5CB7750056C8D7 /* MenuViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MenuViewController.xib; sourceTree = "<group>"; };
+		DD3A08A42C5E22790056C8D7 /* FirebaseManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseManager.swift; sourceTree = "<group>"; };
+		DD3A08A62C5E253B0056C8D7 /* Player.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Player.swift; sourceTree = "<group>"; };
 		DD85DA0B2C5A82B300AF1652 /* CreateMatchDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreateMatchDetailViewController.swift; sourceTree = "<group>"; };
 		DD85DA0C2C5A82B300AF1652 /* CreateMatchDetailViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CreateMatchDetailViewController.xib; sourceTree = "<group>"; };
 		DD85DA0D2C5A82B300AF1652 /* CreateMatchDetailViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreateMatchDetailViewModel.swift; sourceTree = "<group>"; };
@@ -209,6 +213,7 @@
 		DD1A24A02C57AA2A0020AC04 /* TeamCreator */ = {
 			isa = PBXGroup;
 			children = (
+				DD3A08A32C5E22680056C8D7 /* FirebaseManager */,
 				DD1A24E42C57AD530020AC04 /* NetworkManager */,
 				DD1A24DD2C57AC3E0020AC04 /* Screens */,
 				DD1A24DC2C57AC360020AC04 /* App */,
@@ -312,6 +317,7 @@
 			children = (
 				086B87802C5B60610065CF13 /* Controller */,
 				086B87872C5B60970065CF13 /* ViewModel */,
+				DD3A08A62C5E253B0056C8D7 /* Player.swift */,
 			);
 			path = AddPlayerScreen;
 			sourceTree = "<group>";
@@ -331,6 +337,14 @@
 				DD1A24FD2C594DDC0020AC04 /* CreateMatchCell.xib */,
 			);
 			path = CreateMatchCell;
+			sourceTree = "<group>";
+		};
+		DD3A08A32C5E22680056C8D7 /* FirebaseManager */ = {
+			isa = PBXGroup;
+			children = (
+				DD3A08A42C5E22790056C8D7 /* FirebaseManager.swift */,
+			);
+			path = FirebaseManager;
 			sourceTree = "<group>";
 		};
 		DD85DA0F2C5A82B300AF1652 /* MatchDetailScreen */ = {
@@ -530,6 +544,7 @@
 				08B464752C5A78B700529D6A /* PlayerCell.swift in Sources */,
 				DD85DA242C5BACD400AF1652 /* MatchDetailTeamsCell.swift in Sources */,
 				086B87842C5B60760065CF13 /* AddPlayerScreenVC.swift in Sources */,
+				DD3A08A72C5E253B0056C8D7 /* Player.swift in Sources */,
 				DD1A24FE2C594DDC0020AC04 /* CreateMatchCell.swift in Sources */,
 				DD1A24F32C58CDD70020AC04 /* HomeViewController.swift in Sources */,
 				DD85DA272C5BACE200AF1652 /* MatchDetailTeamsViewModel.swift in Sources */,
@@ -546,6 +561,7 @@
 				DD1A24FA2C58DC4A0020AC04 /* CreateMatchViewModel.swift in Sources */,
 				DD85DA122C5A82B300AF1652 /* CreateMatchDetailViewModel.swift in Sources */,
 				DD1A24A42C57AA2A0020AC04 /* SceneDelegate.swift in Sources */,
+				DD3A08A52C5E22790056C8D7 /* FirebaseManager.swift in Sources */,
 				08B4646C2C5A789B00529D6A /* PlayersScreenVM.swift in Sources */,
 				08B464702C5A78A900529D6A /* PlayersScreenVC.swift in Sources */,
 			);

@@ -7,7 +7,7 @@
 
 import Foundation
 
-enum Sport: String {
+enum Sport: String, Codable {
     case football
     case volleyball
 }

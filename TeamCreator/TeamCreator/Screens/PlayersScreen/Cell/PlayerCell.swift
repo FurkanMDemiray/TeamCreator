@@ -32,7 +32,7 @@ final class PlayerCell: UITableViewCell {
     func prepareCell(with model: PlayerCellVM) {
         playerNameLabel.text = model.playerName
         playerPositonLabel.text = model.playerPosition
-        playerSkillLabel.text = model.playerSkill
+        //playerSkillLabel.text = model.playerSkill
     }
     
     override func setSelected(_ selected: Bool, animated: Bool) {

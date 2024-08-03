@@ -8,7 +8,7 @@
 import UIKit
 
 class MenuViewController: UIViewController {
-    
+
     var selectedSport: Sport?
 
     override func viewDidLoad() {

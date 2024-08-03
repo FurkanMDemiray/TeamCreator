@@ -28,7 +28,7 @@ final class PlayersScreenVC: UIViewController {
 
 extension PlayersScreenVC: PlayersScreenVCProtocol {
     func setupNavBar() {
-        let title = String(describing: Players.self)
+        let title = String(describing: Player.self)
         navigationItem.title = title
         let addPlayerButton = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(addButtonTapped))
         navigationItem.rightBarButtonItem = addPlayerButton
@@ -86,10 +86,11 @@ extension PlayersScreenVC: UITableViewDelegate {
 
 extension PlayersScreenVC: PlayersScreenVMDelegate {
     func navigateToAddPlayers() {
-        let addPlayerVC = AddPlayerScreenVC(nibName: String(describing: AddPlayerScreenVC.self), bundle: nil)
+        let addPlayerVC = AddPlayerScreenVC()
         let addPlayerVM = AddPlayerScreenVM()
-        addPlayerVM.selectedSport = viewModel.selectedSport
         addPlayerVC.viewModel = addPlayerVM
+        
+
         navigationController?.pushViewController(addPlayerVC, animated: true)
     }
 

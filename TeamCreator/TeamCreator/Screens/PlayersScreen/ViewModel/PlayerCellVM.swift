@@ -8,9 +8,9 @@
 import Foundation
 
 final class PlayerCellVM {
-    private let player: Players
+    private let player: Player
     
-    init(player: Players) {
+    init(player: Player) {
         self.player = player
     }
     
@@ -22,8 +22,8 @@ final class PlayerCellVM {
         player.position
     }
     
-    var playerSkill: String? {
-        player.skill
+    var playerSkill: Int? {
+        player.skillPoint
     }
     
 }

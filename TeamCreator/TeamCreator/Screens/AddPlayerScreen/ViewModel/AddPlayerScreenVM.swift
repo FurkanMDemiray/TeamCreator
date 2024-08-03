@@ -6,7 +6,6 @@
 //
 
 import Foundation
-import FirebaseFirestore
 
 protocol AddPlayerScreenVMDelegate: AnyObject {
     func navigateBackToPlayers()
@@ -17,7 +16,7 @@ protocol AddPlayerScreenVMProtocol {
     func viewDidLoad()
     func numberOfRows() -> Int
     func titleForRow(row: Int) -> String
-    func addPlayer(player: Players)
+    func addPlayer(player: Player)
 }
 
 final class AddPlayerScreenVM {
@@ -25,7 +24,11 @@ final class AddPlayerScreenVM {
     weak var delegate: AddPlayerScreenVMDelegate?
     var selectedSport: Sport?
     private var position = ["Goalkeeper", "Defence", "Midfielder", "Attacker"]
-    let db = Firestore.firestore()
+    let firebaseManager: FirebaseManagerProtocol
+
+    init(firebaseManager: FirebaseManagerProtocol = FirebaseManager()) {
+        self.firebaseManager = firebaseManager
+    }
 }
 
 extension AddPlayerScreenVM: AddPlayerScreenVMProtocol {
@@ -34,25 +37,37 @@ extension AddPlayerScreenVM: AddPlayerScreenVMProtocol {
         view?.setupImageView()
         view?.setupPickerView()
     }
-    
+
     func numberOfRows() -> Int {
         position.count
     }
-    
+
     func titleForRow(row: Int) -> String {
         position[row]
     }
-    
-    func addPlayer(player: Players) {
-        guard let name = player.name, !name.isEmpty,
-              let position = player.position, !position.isEmpty,
-              let skill = player.skill, !skill.isEmpty,
-              let sport = selectedSport?.rawValue else {
+
+    func addPlayer(player: Player) {
+       /* guard let name = player.name, !name.isEmpty,
+            let position = player.position, !position.isEmpty,
+            let skill = player.skillPoint,
+            let sport = selectedSport?.rawValue else {
             view?.showError(message: "Please fill out all fields correctly")
             return
+        }*/
+
+
+        firebaseManager.addPlayer(player: player) { result in
+            switch result {
+            case .success:
+                self.view?.clearFields()
+                self.delegate?.navigateBackToPlayers()
+            case .failure(let error):
+                print("error adding players \(error.localizedDescription)")
+                self.view?.showError(message: "Failed to add player. Try Again.")
+            }
         }
-        
-        let playerData: [String: Any] = [
+
+        /*let playerData: [String: Any] = [
             "name": name,
             "position": position,
             "skill": skill
@@ -68,5 +83,7 @@ extension AddPlayerScreenVM: AddPlayerScreenVMProtocol {
                     self.delegate?.navigateBackToPlayers()
                 }
             }
+         */
+
     }
 }
