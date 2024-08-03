@@ -17,6 +17,11 @@ final class PlayersScreenVC: UIViewController {
 
     var viewModel = PlayersScreenVM()
     @IBOutlet private weak var tableView: UITableView!
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        viewModel.viewWillAppear()
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -89,8 +94,7 @@ extension PlayersScreenVC: PlayersScreenVMDelegate {
         let addPlayerVC = AddPlayerScreenVC()
         let addPlayerVM = AddPlayerScreenVM()
         addPlayerVC.viewModel = addPlayerVM
-        
-
+        addPlayerVC.viewModel.selectedSport = viewModel.selectedSport
         navigationController?.pushViewController(addPlayerVC, animated: true)
     }
 

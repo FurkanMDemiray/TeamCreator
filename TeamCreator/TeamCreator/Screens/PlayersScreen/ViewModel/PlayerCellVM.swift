@@ -22,8 +22,8 @@ final class PlayerCellVM {
         player.position
     }
     
-    var playerSkill: Int? {
-        player.skillPoint
+    var playerSkill: String? {
+        String(describing: player.skillPoint ?? 0)
     }
     
 }

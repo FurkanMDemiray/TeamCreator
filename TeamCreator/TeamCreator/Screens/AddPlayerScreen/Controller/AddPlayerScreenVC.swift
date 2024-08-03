@@ -76,7 +76,7 @@ extension AddPlayerScreenVC: AddPlayersScreenVCProtocol {
         positionPickerView.dataSource = self
         positionTextField.inputView = positionPickerView
     }
-
+    
     func setupVC() {
         setupPickerViewToolBar(for: positionTextField)
         setupNumberPadToolBar(for: ratingTextField)

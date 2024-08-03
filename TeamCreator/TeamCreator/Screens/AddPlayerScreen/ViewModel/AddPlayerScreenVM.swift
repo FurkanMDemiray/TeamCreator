@@ -22,13 +22,27 @@ protocol AddPlayerScreenVMProtocol {
 final class AddPlayerScreenVM {
     weak var view: AddPlayersScreenVCProtocol?
     weak var delegate: AddPlayerScreenVMDelegate?
-    var selectedSport: Sport?
-    private var position = ["Goalkeeper", "Defence", "Midfielder", "Attacker"]
+    var selectedSport: Sport? {
+        didSet {
+            setupPositions()
+        }
+    }
+    private var positions = [String]()
+    private let sportPositions: [Sport: [String]] = [
+        .football: FootballPosition.allCases.map { $0.rawValue },
+        .volleyball: VolleyballPosition.allCases.map { $0.rawValue }
+    ]
     let firebaseManager: FirebaseManagerProtocol
 
     init(firebaseManager: FirebaseManagerProtocol = FirebaseManager()) {
         self.firebaseManager = firebaseManager
     }
+    
+    private func setupPositions() {
+        guard let sport = selectedSport else { return }
+        positions = sportPositions[sport] ?? []
+    }
+    
 }
 
 extension AddPlayerScreenVM: AddPlayerScreenVMProtocol {
@@ -39,23 +53,14 @@ extension AddPlayerScreenVM: AddPlayerScreenVMProtocol {
     }
 
     func numberOfRows() -> Int {
-        position.count
+        positions.count
     }
 
     func titleForRow(row: Int) -> String {
-        position[row]
+        positions[row]
     }
 
     func addPlayer(player: Player) {
-       /* guard let name = player.name, !name.isEmpty,
-            let position = player.position, !position.isEmpty,
-            let skill = player.skillPoint,
-            let sport = selectedSport?.rawValue else {
-            view?.showError(message: "Please fill out all fields correctly")
-            return
-        }*/
-
-
         firebaseManager.addPlayer(player: player) { result in
             switch result {
             case .success:
@@ -66,24 +71,5 @@ extension AddPlayerScreenVM: AddPlayerScreenVMProtocol {
                 self.view?.showError(message: "Failed to add player. Try Again.")
             }
         }
-
-        /*let playerData: [String: Any] = [
-            "name": name,
-            "position": position,
-            "skill": skill
-        ]
-        
-        db.collection("sports").document(sport).collection("players").addDocument(data: playerData) { error in
-                if let error = error {
-                    print("error adding players \(error.localizedDescription)")
-                    self.view?.showError(message: "Failed to add player. Try Again.")
-                } else {
-                    print("added players success")
-                    self.view?.clearFields()
-                    self.delegate?.navigateBackToPlayers()
-                }
-            }
-         */
-
     }
 }

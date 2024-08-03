@@ -7,11 +7,6 @@
 
 import Foundation
 
-enum Sport: String, Codable {
-    case football
-    case volleyball
-}
-
 protocol HomeViewModelDelegate: AnyObject {
 
 }

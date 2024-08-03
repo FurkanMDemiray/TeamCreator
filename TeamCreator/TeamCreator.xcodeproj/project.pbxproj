@@ -10,6 +10,9 @@
 		086B87832C5B60760065CF13 /* AddPlayerScreenVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 086B87822C5B60760065CF13 /* AddPlayerScreenVC.xib */; };
 		086B87842C5B60760065CF13 /* AddPlayerScreenVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 086B87812C5B60760065CF13 /* AddPlayerScreenVC.swift */; };
 		086B87862C5B60920065CF13 /* AddPlayerScreenVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 086B87852C5B60920065CF13 /* AddPlayerScreenVM.swift */; };
+		0871D8302C5E694300B9EC1E /* Sport.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0871D82F2C5E694300B9EC1E /* Sport.swift */; };
+		0871D8322C5E69C300B9EC1E /* FootballPosition.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0871D8312C5E69C300B9EC1E /* FootballPosition.swift */; };
+		0871D8342C5E6A4900B9EC1E /* VolleyballPosition.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0871D8332C5E6A4900B9EC1E /* VolleyballPosition.swift */; };
 		08B4646B2C5A789B00529D6A /* PlayerCellVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08B464682C5A789B00529D6A /* PlayerCellVM.swift */; };
 		08B4646C2C5A789B00529D6A /* PlayersScreenVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08B464692C5A789B00529D6A /* PlayersScreenVM.swift */; };
 		08B464702C5A78A900529D6A /* PlayersScreenVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08B4646D2C5A78A900529D6A /* PlayersScreenVC.swift */; };
@@ -74,6 +77,9 @@
 		086B87812C5B60760065CF13 /* AddPlayerScreenVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddPlayerScreenVC.swift; sourceTree = "<group>"; };
 		086B87822C5B60760065CF13 /* AddPlayerScreenVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AddPlayerScreenVC.xib; sourceTree = "<group>"; };
 		086B87852C5B60920065CF13 /* AddPlayerScreenVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddPlayerScreenVM.swift; sourceTree = "<group>"; };
+		0871D82F2C5E694300B9EC1E /* Sport.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sport.swift; sourceTree = "<group>"; };
+		0871D8312C5E69C300B9EC1E /* FootballPosition.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FootballPosition.swift; sourceTree = "<group>"; };
+		0871D8332C5E6A4900B9EC1E /* VolleyballPosition.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VolleyballPosition.swift; sourceTree = "<group>"; };
 		08B464682C5A789B00529D6A /* PlayerCellVM.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlayerCellVM.swift; sourceTree = "<group>"; };
 		08B464692C5A789B00529D6A /* PlayersScreenVM.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlayersScreenVM.swift; sourceTree = "<group>"; };
 		08B4646D2C5A78A900529D6A /* PlayersScreenVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlayersScreenVC.swift; sourceTree = "<group>"; };
@@ -163,11 +169,21 @@
 			path = ViewModel;
 			sourceTree = "<group>";
 		};
+		0871D82E2C5E692100B9EC1E /* Utilities */ = {
+			isa = PBXGroup;
+			children = (
+				0871D82F2C5E694300B9EC1E /* Sport.swift */,
+				0871D8312C5E69C300B9EC1E /* FootballPosition.swift */,
+				0871D8332C5E6A4900B9EC1E /* VolleyballPosition.swift */,
+			);
+			path = Utilities;
+			sourceTree = "<group>";
+		};
 		08B4646A2C5A789B00529D6A /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
-				08B464682C5A789B00529D6A /* PlayerCellVM.swift */,
 				08B464692C5A789B00529D6A /* PlayersScreenVM.swift */,
+				08B464682C5A789B00529D6A /* PlayerCellVM.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -216,6 +232,7 @@
 				DD3A08A32C5E22680056C8D7 /* FirebaseManager */,
 				DD1A24E42C57AD530020AC04 /* NetworkManager */,
 				DD1A24DD2C57AC3E0020AC04 /* Screens */,
+				0871D82E2C5E692100B9EC1E /* Utilities */,
 				DD1A24DC2C57AC360020AC04 /* App */,
 				DD1A24DB2C57AC1A0020AC04 /* Resources */,
 				DD1A24AF2C57AA2B0020AC04 /* Info.plist */,
@@ -546,6 +563,7 @@
 				086B87842C5B60760065CF13 /* AddPlayerScreenVC.swift in Sources */,
 				DD3A08A72C5E253B0056C8D7 /* Player.swift in Sources */,
 				DD1A24FE2C594DDC0020AC04 /* CreateMatchCell.swift in Sources */,
+				0871D8302C5E694300B9EC1E /* Sport.swift in Sources */,
 				DD1A24F32C58CDD70020AC04 /* HomeViewController.swift in Sources */,
 				DD85DA272C5BACE200AF1652 /* MatchDetailTeamsViewModel.swift in Sources */,
 				DD1A24E62C57AD660020AC04 /* NetworkManager.swift in Sources */,
@@ -554,6 +572,8 @@
 				08B4646B2C5A789B00529D6A /* PlayerCellVM.swift in Sources */,
 				DD85DA102C5A82B300AF1652 /* CreateMatchDetailViewController.swift in Sources */,
 				DD85DA1F2C5BAC5000AF1652 /* MatchDetailTeamsViewController.swift in Sources */,
+				0871D8342C5E6A4900B9EC1E /* VolleyballPosition.swift in Sources */,
+				0871D8322C5E69C300B9EC1E /* FootballPosition.swift in Sources */,
 				DD1A24A22C57AA2A0020AC04 /* AppDelegate.swift in Sources */,
 				DD85DA2B2C5BB96E00AF1652 /* MatchDetailTeamViewController.swift in Sources */,
 				DD3A08A22C5CB7750056C8D7 /* MenuViewController.swift in Sources */,
