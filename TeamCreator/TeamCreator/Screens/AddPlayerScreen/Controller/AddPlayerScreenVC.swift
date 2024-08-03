@@ -7,9 +7,10 @@
 
 import UIKit
 
-protocol AddPlayersScreenVCProtocol: AnyObject {
+protocol AddPlayerScreenVCProtocol: AnyObject {
     func setupVC()
     func setupPickerView()
+    func reloadPickerView()
     func setupImageView()
     func showError(message: String)
     func clearFields()
@@ -17,7 +18,12 @@ protocol AddPlayersScreenVCProtocol: AnyObject {
 
 final class AddPlayerScreenVC: UIViewController {
 
-    var viewModel = AddPlayerScreenVM()
+    var viewModel: AddPlayerScreenVMProtocol! {
+        didSet {
+            viewModel.view = self
+            viewModel.delegate = self
+        }
+    }
 
     @IBOutlet private weak var imageView: UIImageView!
     @IBOutlet private weak var nameTextField: UITextField!
@@ -29,8 +35,6 @@ final class AddPlayerScreenVC: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        viewModel.view = self
-        viewModel.delegate = self
         viewModel.viewDidLoad()
 
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
@@ -48,7 +52,7 @@ final class AddPlayerScreenVC: UIViewController {
         let rating = ratingTextField.text
         let id = UUID().uuidString
 
-        let newPlayer = Player(id: id, name: "\(name!) \(surname!)", age: 18, skillPoint: Int(rating ?? "0"), position: position)
+        let newPlayer = Player(id: id, name: "\(name!) \(surname!)", age: 18, skillPoint: Int(rating ?? "0"), position: position, sport: viewModel.selectedSport)
 
         viewModel.addPlayer(player: newPlayer)
 
@@ -69,12 +73,16 @@ final class AddPlayerScreenVC: UIViewController {
     }
 }
 
-extension AddPlayerScreenVC: AddPlayersScreenVCProtocol {
+extension AddPlayerScreenVC: AddPlayerScreenVCProtocol {
 
     func setupPickerView() {
         positionPickerView.delegate = self
         positionPickerView.dataSource = self
         positionTextField.inputView = positionPickerView
+    }
+    
+    func reloadPickerView() {
+        positionPickerView.reloadAllComponents()
     }
     
     func setupVC() {

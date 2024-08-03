@@ -15,7 +15,13 @@ protocol PlayersScreenVCProtocol: AnyObject {
 
 final class PlayersScreenVC: UIViewController {
 
-    var viewModel = PlayersScreenVM()
+    var viewModel: PlayersScreenVMProtocol! {
+        didSet {
+            viewModel.view = self
+            viewModel.delegate = self
+        }
+    }
+    
     @IBOutlet private weak var tableView: UITableView!
     
     override func viewWillAppear(_ animated: Bool) {
@@ -25,8 +31,6 @@ final class PlayersScreenVC: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        viewModel.view = self
-        viewModel.delegate = self
         viewModel.viewDidLoad()
     }
 }
@@ -90,11 +94,10 @@ extension PlayersScreenVC: UITableViewDelegate {
 }
 
 extension PlayersScreenVC: PlayersScreenVMDelegate {
-    func navigateToAddPlayers() {
+    func navigateToAddPlayers(with selectedSport: Sport) {
         let addPlayerVC = AddPlayerScreenVC()
-        let addPlayerVM = AddPlayerScreenVM()
+        let addPlayerVM = AddPlayerScreenVM(selectedSport: selectedSport)
         addPlayerVC.viewModel = addPlayerVM
-        addPlayerVC.viewModel.selectedSport = viewModel.selectedSport
         navigationController?.pushViewController(addPlayerVC, animated: true)
     }
 

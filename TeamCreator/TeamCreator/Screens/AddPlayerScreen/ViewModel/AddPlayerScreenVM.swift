@@ -12,7 +12,9 @@ protocol AddPlayerScreenVMDelegate: AnyObject {
 }
 
 protocol AddPlayerScreenVMProtocol {
+    var view: AddPlayerScreenVCProtocol? { get set }
     var delegate: AddPlayerScreenVMDelegate? { get set }
+    var selectedSport: Sport { get }
     func viewDidLoad()
     func numberOfRows() -> Int
     func titleForRow(row: Int) -> String
@@ -20,13 +22,9 @@ protocol AddPlayerScreenVMProtocol {
 }
 
 final class AddPlayerScreenVM {
-    weak var view: AddPlayersScreenVCProtocol?
+    weak var view: AddPlayerScreenVCProtocol?
     weak var delegate: AddPlayerScreenVMDelegate?
-    var selectedSport: Sport? {
-        didSet {
-            setupPositions()
-        }
-    }
+    var selectedSport: Sport
     private var positions = [String]()
     private let sportPositions: [Sport: [String]] = [
         .football: FootballPosition.allCases.map { $0.rawValue },
@@ -34,22 +32,26 @@ final class AddPlayerScreenVM {
     ]
     let firebaseManager: FirebaseManagerProtocol
 
-    init(firebaseManager: FirebaseManagerProtocol = FirebaseManager()) {
+    init(firebaseManager: FirebaseManagerProtocol = FirebaseManager(), selectedSport: Sport) {
         self.firebaseManager = firebaseManager
+        self.selectedSport = selectedSport
+        setupPositions()
     }
     
     private func setupPositions() {
-        guard let sport = selectedSport else { return }
-        positions = sportPositions[sport] ?? []
+        positions = sportPositions[selectedSport] ?? []
+        view?.reloadPickerView()
     }
     
 }
 
 extension AddPlayerScreenVM: AddPlayerScreenVMProtocol {
+    
     func viewDidLoad() {
         view?.setupVC()
         view?.setupImageView()
         view?.setupPickerView()
+        
     }
 
     func numberOfRows() -> Int {

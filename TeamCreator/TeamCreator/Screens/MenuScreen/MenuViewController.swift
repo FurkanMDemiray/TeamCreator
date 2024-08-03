@@ -22,9 +22,8 @@ class MenuViewController: UIViewController {
 
     @IBAction func playersButtonClicked(_ sender: Any) {
         let vc = PlayersScreenVC()
-        let playersViewModel = PlayersScreenVM()
-        playersViewModel.selectedSport = selectedSport
-        vc.viewModel = playersViewModel
+        let viewModel = PlayersScreenVM(selectedSport: selectedSport!)
+        vc.viewModel = viewModel
         navigationController?.pushViewController(vc, animated: true)
     }
 

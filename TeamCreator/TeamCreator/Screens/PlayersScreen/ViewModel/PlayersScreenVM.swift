@@ -8,11 +8,12 @@
 import Foundation
 
 protocol PlayersScreenVMDelegate: AnyObject {
-    func navigateToAddPlayers()
+    func navigateToAddPlayers(with selectedSport: Sport)
 }
 
 protocol PlayersScreenVMProtocol {
     var delegate: PlayersScreenVMDelegate? { get set }
+    var view: PlayersScreenVCProtocol? { get set }
     func viewWillAppear()
     func viewDidLoad()
     func numberOfRows() -> Int
@@ -24,13 +25,14 @@ protocol PlayersScreenVMProtocol {
 final class PlayersScreenVM {
     weak var view: PlayersScreenVCProtocol?
     weak var delegate: PlayersScreenVMDelegate?
-    var selectedSport: Sport?
+    var selectedSport: Sport
     var players = [Player]()
     
     let firebaseManager: FirebaseManagerProtocol
-
-    init(firebaseManager: FirebaseManagerProtocol = FirebaseManager()) {
+    
+    init(firebaseManager: FirebaseManagerProtocol = FirebaseManager(), selectedSport: Sport) {
         self.firebaseManager = firebaseManager
+        self.selectedSport = selectedSport
     }
     
     private func fetchPlayers() {
@@ -38,7 +40,7 @@ final class PlayersScreenVM {
             switch result {
             case .success(let data):
                 DispatchQueue.main.async {
-                    self.players = data
+                    self.players = data.filter { $0.sport == self.selectedSport }
                     self.view?.reloadTableView()
                 }
             case .failure(let error):
@@ -53,7 +55,6 @@ extension PlayersScreenVM: PlayersScreenVMProtocol {
     
     func viewWillAppear() {
         fetchPlayers()
-        print(players)
     }
     
     func viewDidLoad() {
@@ -87,7 +88,7 @@ extension PlayersScreenVM: PlayersScreenVMProtocol {
     }
     
     func addButtonTapped() {
-        delegate?.navigateToAddPlayers()
+        delegate?.navigateToAddPlayers(with: selectedSport)
     }
 }
 
