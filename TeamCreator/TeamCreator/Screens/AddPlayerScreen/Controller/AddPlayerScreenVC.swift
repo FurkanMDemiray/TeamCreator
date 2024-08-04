@@ -52,7 +52,7 @@ final class AddPlayerScreenVC: UIViewController {
         let rating = ratingTextField.text
         let id = UUID().uuidString
 
-        let newPlayer = Player(id: id, name: "\(name!) \(surname!)", age: 18, skillPoint: Int(rating ?? "0"), position: position, sport: viewModel.selectedSport)
+        let newPlayer = Player(id: id, name: "\(name!) \(surname!)", age: 18, skillPoint: Int(rating ?? "0"), position: position, sport: HomeViewModel.whichSport)
 
         viewModel.addPlayer(player: newPlayer)
 
@@ -80,11 +80,11 @@ extension AddPlayerScreenVC: AddPlayerScreenVCProtocol {
         positionPickerView.dataSource = self
         positionTextField.inputView = positionPickerView
     }
-    
+
     func reloadPickerView() {
         positionPickerView.reloadAllComponents()
     }
-    
+
     func setupVC() {
         setupPickerViewToolBar(for: positionTextField)
         setupNumberPadToolBar(for: ratingTextField)

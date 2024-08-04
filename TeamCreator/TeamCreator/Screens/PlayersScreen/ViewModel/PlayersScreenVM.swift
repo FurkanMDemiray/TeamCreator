@@ -40,7 +40,7 @@ final class PlayersScreenVM {
             switch result {
             case .success(let data):
                 DispatchQueue.main.async {
-                    self.players = data.filter { $0.sport == self.selectedSport }
+                    self.players = data.filter { $0.sport == self.selectedSport.rawValue }
                     self.view?.reloadTableView()
                 }
             case .failure(let error):

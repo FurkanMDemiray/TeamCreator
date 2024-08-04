@@ -44,12 +44,14 @@ final class HomeViewController: UIViewController {
     @objc func soccerButtonTapped() {
         let vc = MenuViewController()
         vc.selectedSport = .football
+        HomeViewModel.whichSport = "Football"
         self.navigationController?.pushViewController(vc, animated: true)
     }
 
     @objc func volleyballButtonTapped() {
         let vc = MenuViewController()
         vc.selectedSport = .volleyball
+        HomeViewModel.whichSport = "Volleyball"
         self.navigationController?.pushViewController(vc, animated: true)
     }
 

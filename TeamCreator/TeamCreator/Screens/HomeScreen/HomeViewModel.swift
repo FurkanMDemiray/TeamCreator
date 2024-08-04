@@ -20,10 +20,12 @@ final class HomeViewModel {
 
     weak var delegate: HomeViewModelDelegate?
     var networkManager: NetworkManagerProtocol?
+    static var whichSport = ""
 
 
 }
 
 extension HomeViewModel: HomeViewModelProtocol {
+
 
 }

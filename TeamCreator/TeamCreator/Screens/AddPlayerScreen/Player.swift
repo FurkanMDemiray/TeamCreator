@@ -13,5 +13,6 @@ struct Player: Codable {
     var age: Int?
     var skillPoint: Int?
     var position: String?
-    var sport: Sport?
+    var sport: String?
+    var picture: String?
 }
