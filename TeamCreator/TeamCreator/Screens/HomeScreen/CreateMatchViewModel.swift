@@ -10,6 +10,7 @@ import CoreLocation
 
 protocol CreateMatchViewModelDelegate: AnyObject {
     func didUpdateLocation()
+    func reloadTableView()
 }
 
 protocol CreateMatchViewModelProtocol {
@@ -18,6 +19,10 @@ protocol CreateMatchViewModelProtocol {
     var getCity: String { get }
     var getLongitude: Double? { get }
     var getLatitude: Double? { get }
+    var getPlayersCount: Int { get }
+    var getPlayers: [Player] { get }
+
+    func fetchPlayers()
 }
 
 final class CreateMatchViewModel: NSObject {
@@ -27,12 +32,15 @@ final class CreateMatchViewModel: NSObject {
 
     private var city: String?
     private let locationManager = CLLocationManager()
+    private let firebaseManager: FirebaseManagerProtocol?
     private let geocoder = CLGeocoder()
     private var longitude: Double?
     private var latitude: Double?
     private var locationData: CLLocation?
+    private var players = [Player]()
 
-    override init() {
+    init(firebaseManager: FirebaseManagerProtocol = FirebaseManager.shared) {
+        self.firebaseManager = firebaseManager
         super.init()
         locationManager.delegate = self
         locationManager.requestWhenInUseAuthorization()
@@ -43,9 +51,34 @@ final class CreateMatchViewModel: NSObject {
         locationManager.stopUpdatingLocation()
     }
 
+    fileprivate func fetch() {
+        firebaseManager?.fetchPlayers { result in
+            switch result {
+            case .success(let data):
+                self.players = data.filter { $0.sport == HomeViewModel.whichSport }
+                self.delegate?.reloadTableView()
+            case .failure(let error):
+                print(error.localizedDescription)
+            }
+        }
+    }
 }
 
 extension CreateMatchViewModel: CreateMatchViewModelProtocol {
+
+    func fetchPlayers() {
+        fetch()
+    }
+
+//MARK: Getters
+    var getPlayers: [Player] {
+        players
+    }
+
+    var getPlayersCount: Int {
+        players.count
+    }
+
     var getLongitude: Double? {
         longitude
     }

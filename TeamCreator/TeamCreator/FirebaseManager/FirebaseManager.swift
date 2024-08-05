@@ -31,7 +31,6 @@ final class FirebaseManager: FirebaseManagerProtocol {
     func addPlayer(player: Player, completion: @escaping (Result<Void, Error>) -> Void) {
         let db = Firestore.firestore()
         do {
-            // auto generated id
             let _ = try db.collection("players").addDocument(from: player)
             completion(.success(()))
         } catch {

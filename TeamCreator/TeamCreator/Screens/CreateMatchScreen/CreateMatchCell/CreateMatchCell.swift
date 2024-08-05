@@ -12,17 +12,20 @@ class CreateMatchCell: UITableViewCell {
     static let createMatchCellId = "CreateMatchCell"
     @IBOutlet private weak var playerNameLabel: UILabel!
     @IBOutlet private weak var checkButton: UIButton!
+    @IBOutlet private weak var positionLabel: UILabel!
+    @IBOutlet private weak var skillPointLabel: UILabel!
 
     private var isChecked: Bool = false
 
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
         configureButton()
     }
 
-    func configure(with name: String) {
-        playerNameLabel.text = name
+    func configure(with player: Player) {
+        playerNameLabel.text = player.name
+        positionLabel.text = player.position
+        skillPointLabel.text = "\(player.skillPoint ?? 0)"
     }
 
     private func configureButton() {
