@@ -16,9 +16,11 @@ protocol PlayersScreenVMProtocol {
     var view: PlayersScreenVCProtocol? { get set }
     func viewWillAppear()
     func viewDidLoad()
-    func numberOfRows() -> Int
-    func cellForRow(at indexPath: IndexPath) -> PlayerCellVM
-    func deletePlayer(at indexPath: IndexPath)
+    //func numberOfRows() -> Int
+    //func cellForRow(at indexPath: IndexPath) -> PlayerCellVM
+    //func deletePlayer(at indexPath: IndexPath)
+    func numberOfItem(in section: Int) -> Int
+    func cellForItem(at indexPath: IndexPath) -> PlayersCardCellVM
     func addButtonTapped()
 }
 
@@ -41,7 +43,7 @@ final class PlayersScreenVM {
             case .success(let data):
                 DispatchQueue.main.async {
                     self.players = data.filter { $0.sport == HomeViewModel.whichSport }
-                    self.view?.reloadTableView()
+                    self.view?.reloadCollectionView()
                 }
             case .failure(let error):
                 print(error.localizedDescription)
@@ -59,18 +61,26 @@ extension PlayersScreenVM: PlayersScreenVMProtocol {
 
     func viewDidLoad() {
         view?.setupNavBar()
-        view?.registerTableView()
+        view?.registerCollectionView()
     }
 
-
-    func numberOfRows() -> Int {
-        return players.count
+    func numberOfItem(in section: Int) -> Int {
+        players.count
+    }
+    
+    func cellForItem(at indexPath: IndexPath) -> PlayersCardCellVM {
+        let playersCardCellVM = PlayersCardCellVM(player: players[indexPath.row])
+        return playersCardCellVM
     }
 
-    func cellForRow(at indexPath: IndexPath) -> PlayerCellVM {
-        let playerCellVM = PlayerCellVM(player: players[indexPath.row])
-        return playerCellVM
-    }
+    //func numberOfRows() -> Int {
+    //    return players.count
+    //}
+    //
+    //func cellForRow(at indexPath: IndexPath) -> PlayerCellVM {
+    //    let playerCellVM = PlayerCellVM(player: players[indexPath.row])
+    //    return playerCellVM
+    //}
 
     func deletePlayer(at indexPath: IndexPath) {
         let player = players[indexPath.row]
@@ -78,7 +88,7 @@ extension PlayersScreenVM: PlayersScreenVMProtocol {
             switch result {
             case .success:
                 self.players.remove(at: indexPath.row)
-                self.view?.reloadTableView()
+                //self.view?.reloadTableView()
             case .failure(let error):
                 print(error.localizedDescription)
             }
