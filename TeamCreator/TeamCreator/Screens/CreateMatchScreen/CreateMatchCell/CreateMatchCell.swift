@@ -32,6 +32,12 @@ class CreateMatchCell: UITableViewCell {
         checkButton.setImage(UIImage(systemName: "square"), for: .normal)
     }
 
+    func toggleCheckButton() {
+        isChecked.toggle()
+        let imageName = isChecked ? "checkmark.square" : "square"
+        checkButton.setImage(UIImage(systemName: imageName), for: .normal)
+    }
+
     @IBAction func checkButtonClicked(_ sender: UIButton) {
         isChecked.toggle()
         let imageName = isChecked ? "checkmark.square" : "square"

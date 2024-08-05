@@ -21,8 +21,10 @@ protocol CreateMatchViewModelProtocol {
     var getLatitude: Double? { get }
     var getPlayersCount: Int { get }
     var getPlayers: [Player] { get }
+    //var selectedPlayers: [Player] { get }
 
     func fetchPlayers()
+    func addSelectedPlayer(indexPath: IndexPath)
 }
 
 final class CreateMatchViewModel: NSObject {
@@ -38,6 +40,7 @@ final class CreateMatchViewModel: NSObject {
     private var latitude: Double?
     private var locationData: CLLocation?
     private var players = [Player]()
+    private var selectedPlayers = [Player]()
 
     init(firebaseManager: FirebaseManagerProtocol = FirebaseManager.shared) {
         self.firebaseManager = firebaseManager
@@ -62,9 +65,19 @@ final class CreateMatchViewModel: NSObject {
             }
         }
     }
+
 }
 
 extension CreateMatchViewModel: CreateMatchViewModelProtocol {
+    func addSelectedPlayer(indexPath: IndexPath) {
+        if selectedPlayers.contains(where: { $0 == players[indexPath.row] }) {
+            selectedPlayers.removeAll { $0 == players[indexPath.row] }
+            selectedPlayers.forEach { print("----",$0.name!) }
+            return
+        }
+        selectedPlayers.append(players[indexPath.row])
+        selectedPlayers.forEach { print("----",$0.name!) }
+    }
 
     func fetchPlayers() {
         fetch()
@@ -100,6 +113,7 @@ extension CreateMatchViewModel: CreateMatchViewModelProtocol {
     }
 }
 
+//MARK: - CLLocationManagerDelegate
 extension CreateMatchViewModel: CLLocationManagerDelegate {
 
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {

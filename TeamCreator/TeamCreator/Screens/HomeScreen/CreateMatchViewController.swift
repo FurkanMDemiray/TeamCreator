@@ -53,10 +53,12 @@ final class CreateMatchViewController: UIViewController {
 }
 
 extension CreateMatchViewController: CreateMatchViewModelDelegate {
+
+
     func reloadTableView() {
         tableView.reloadData()
     }
-    
+
     func didUpdateLocation() {
         guard let viewModel else { return }
         locationTimeLabel.text = "\(viewModel.getCity) - \(viewModel.time)"
@@ -72,6 +74,13 @@ extension CreateMatchViewController: UITableViewDataSource, UITableViewDelegate 
         let cell = tableView.dequeueReusableCell(withIdentifier: CreateMatchCell.createMatchCellId, for: indexPath) as! CreateMatchCell
         cell.configure(with: viewModel.getPlayers[indexPath.row])
         return cell
+    }
+
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if let cell = tableView.cellForRow(at: indexPath) as? CreateMatchCell {
+            viewModel.addSelectedPlayer(indexPath: indexPath)
+            cell.toggleCheckButton()
+        }
     }
 }
 
