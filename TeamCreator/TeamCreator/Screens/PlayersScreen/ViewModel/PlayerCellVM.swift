@@ -8,22 +8,26 @@
 import Foundation
 
 final class PlayerCellVM {
-    private let player: Players
-    
-    init(player: Players) {
+    private let player: Player
+
+    init(player: Player) {
         self.player = player
     }
-    
+
     var playerName: String? {
         player.name
     }
-    
+
     var playerPosition: String? {
         player.position
     }
-    
+
     var playerSkill: String? {
-        player.skill
+        String(describing: player.skillPoint ?? 0)
     }
-    
+
+    var playerImage: String? {
+        player.picture
+    }
+
 }

@@ -6,67 +6,72 @@
 //
 
 import Foundation
-import FirebaseFirestore
 
 protocol AddPlayerScreenVMDelegate: AnyObject {
     func navigateBackToPlayers()
 }
 
 protocol AddPlayerScreenVMProtocol {
+    var view: AddPlayerScreenVCProtocol? { get set }
     var delegate: AddPlayerScreenVMDelegate? { get set }
+    var selectedSport: Sport { get }
     func viewDidLoad()
     func numberOfRows() -> Int
     func titleForRow(row: Int) -> String
-    func addPlayer(player: Players)
+    func addPlayer(player: Player)
 }
 
 final class AddPlayerScreenVM {
-    weak var view: AddPlayersScreenVCProtocol?
+    weak var view: AddPlayerScreenVCProtocol?
     weak var delegate: AddPlayerScreenVMDelegate?
-    var selectedSport: Sport?
-    private var position = ["Goalkeeper", "Defence", "Midfielder", "Attacker"]
-    let db = Firestore.firestore()
+    var selectedSport: Sport
+    private var positions = [String]()
+    private let sportPositions: [Sport: [String]] = [
+        .football: FootballPosition.allCases.map { $0.rawValue },
+        .volleyball: VolleyballPosition.allCases.map { $0.rawValue }
+    ]
+    let firebaseManager: FirebaseManagerProtocol
+
+    init(firebaseManager: FirebaseManagerProtocol = FirebaseManager(), selectedSport: Sport) {
+        self.firebaseManager = firebaseManager
+        self.selectedSport = selectedSport
+        setupPositions()
+    }
+    
+    private func setupPositions() {
+        positions = sportPositions[selectedSport] ?? []
+        view?.reloadPickerView()
+    }
+    
 }
 
 extension AddPlayerScreenVM: AddPlayerScreenVMProtocol {
+    
     func viewDidLoad() {
         view?.setupVC()
         view?.setupImageView()
         view?.setupPickerView()
+        
     }
-    
+
     func numberOfRows() -> Int {
-        position.count
+        positions.count
     }
-    
+
     func titleForRow(row: Int) -> String {
-        position[row]
+        positions[row]
     }
-    
-    func addPlayer(player: Players) {
-        guard let name = player.name, !name.isEmpty,
-              let position = player.position, !position.isEmpty,
-              let skill = player.skill, !skill.isEmpty,
-              let sport = selectedSport?.rawValue else {
-            view?.showError(message: "Please fill out all fields correctly")
-            return
-        }
-        
-        let playerData: [String: Any] = [
-            "name": name,
-            "position": position,
-            "skill": skill
-        ]
-        
-        db.collection("sports").document(sport).collection("players").addDocument(data: playerData) { error in
-                if let error = error {
-                    print("error adding players \(error.localizedDescription)")
-                    self.view?.showError(message: "Failed to add player. Try Again.")
-                } else {
-                    print("added players success")
-                    self.view?.clearFields()
-                    self.delegate?.navigateBackToPlayers()
-                }
+
+    func addPlayer(player: Player) {
+        firebaseManager.addPlayer(player: player) { result in
+            switch result {
+            case .success:
+                self.view?.clearFields()
+                self.delegate?.navigateBackToPlayers()
+            case .failure(let error):
+                print("error adding players \(error.localizedDescription)")
+                self.view?.showError(message: "Failed to add player. Try Again.")
             }
+        }
     }
 }

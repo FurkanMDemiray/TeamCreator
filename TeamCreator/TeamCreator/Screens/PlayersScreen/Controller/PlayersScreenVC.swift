@@ -15,20 +15,29 @@ protocol PlayersScreenVCProtocol: AnyObject {
 
 final class PlayersScreenVC: UIViewController {
 
-    var viewModel = PlayersScreenVM()
+    var viewModel: PlayersScreenVMProtocol! {
+        didSet {
+            viewModel.view = self
+            viewModel.delegate = self
+        }
+    }
+    
     @IBOutlet private weak var tableView: UITableView!
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        viewModel.viewWillAppear()
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        viewModel.view = self
-        viewModel.delegate = self
         viewModel.viewDidLoad()
     }
 }
 
 extension PlayersScreenVC: PlayersScreenVCProtocol {
     func setupNavBar() {
-        let title = String(describing: Players.self)
+        let title = String(describing: Player.self)
         navigationItem.title = title
         let addPlayerButton = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(addButtonTapped))
         navigationItem.rightBarButtonItem = addPlayerButton
@@ -85,10 +94,9 @@ extension PlayersScreenVC: UITableViewDelegate {
 }
 
 extension PlayersScreenVC: PlayersScreenVMDelegate {
-    func navigateToAddPlayers() {
-        let addPlayerVC = AddPlayerScreenVC(nibName: String(describing: AddPlayerScreenVC.self), bundle: nil)
-        let addPlayerVM = AddPlayerScreenVM()
-        addPlayerVM.selectedSport = viewModel.selectedSport
+    func navigateToAddPlayers(with selectedSport: Sport) {
+        let addPlayerVC = AddPlayerScreenVC()
+        let addPlayerVM = AddPlayerScreenVM(selectedSport: selectedSport)
         addPlayerVC.viewModel = addPlayerVM
         navigationController?.pushViewController(addPlayerVC, animated: true)
     }

@@ -8,11 +8,13 @@
 import Foundation
 
 protocol PlayersScreenVMDelegate: AnyObject {
-    func navigateToAddPlayers()
+    func navigateToAddPlayers(with selectedSport: Sport)
 }
 
 protocol PlayersScreenVMProtocol {
     var delegate: PlayersScreenVMDelegate? { get set }
+    var view: PlayersScreenVCProtocol? { get set }
+    func viewWillAppear()
     func viewDidLoad()
     func numberOfRows() -> Int
     func cellForRow(at indexPath: IndexPath) -> PlayerCellVM
@@ -23,53 +25,67 @@ protocol PlayersScreenVMProtocol {
 final class PlayersScreenVM {
     weak var view: PlayersScreenVCProtocol?
     weak var delegate: PlayersScreenVMDelegate?
-    var selectedSport: Sport?
-    var players = [Players]()
-    
+    var selectedSport: Sport
+    var players = [Player]()
+
+    let firebaseManager: FirebaseManagerProtocol
+
+    init(firebaseManager: FirebaseManagerProtocol = FirebaseManager(), selectedSport: Sport) {
+        self.firebaseManager = firebaseManager
+        self.selectedSport = selectedSport
+    }
+
+    private func fetchPlayers() {
+        firebaseManager.fetchPlayers { result in
+            switch result {
+            case .success(let data):
+                DispatchQueue.main.async {
+                    self.players = data.filter { $0.sport == HomeViewModel.whichSport }
+                    self.view?.reloadTableView()
+                }
+            case .failure(let error):
+                print(error.localizedDescription)
+            }
+        }
+    }
+
 }
 
 extension PlayersScreenVM: PlayersScreenVMProtocol {
-    
-    func viewDidLoad() {
+
+    func viewWillAppear() {
         fetchPlayers()
+    }
+
+    func viewDidLoad() {
         view?.setupNavBar()
         view?.registerTableView()
     }
-    
-    private func fetchPlayers() {
-        players.append(Players(name: "name1", position: "pos1", skill: "10"))
-        players.append(Players(name: "name2", position: "pos2", skill: "11"))
-        players.append(Players(name: "name3", position: "pos3", skill: "12"))
-        players.append(Players(name: "name4", position: "pos4", skill: "13"))
-        players.append(Players(name: "name5", position: "pos5", skill: "14"))
-        players.append(Players(name: "name6", position: "pos6", skill: "15"))
-        players.append(Players(name: "name7", position: "pos7", skill: "16"))
-        
-        DispatchQueue.main.async {
-            self.view?.reloadTableView()
-        }
-    }
-    
+
+
     func numberOfRows() -> Int {
         return players.count
     }
-    
+
     func cellForRow(at indexPath: IndexPath) -> PlayerCellVM {
         let playerCellVM = PlayerCellVM(player: players[indexPath.row])
         return playerCellVM
     }
-    
-    func deletePlayer(at indexPath: IndexPath) {
-        players.remove(at: indexPath.row)
-        view?.reloadTableView()
-    }
-    
-    func addButtonTapped() {
-        delegate?.navigateToAddPlayers()
-    }
-}
 
-//Silinecek
-struct Players {
-    var name, position, skill: String?
+    func deletePlayer(at indexPath: IndexPath) {
+        let player = players[indexPath.row]
+        firebaseManager.deletePlayer(player: player) { result in
+            switch result {
+            case .success:
+                self.players.remove(at: indexPath.row)
+                self.view?.reloadTableView()
+            case .failure(let error):
+                print(error.localizedDescription)
+            }
+        }
+    }
+
+    func addButtonTapped() {
+        delegate?.navigateToAddPlayers(with: selectedSport)
+    }
 }

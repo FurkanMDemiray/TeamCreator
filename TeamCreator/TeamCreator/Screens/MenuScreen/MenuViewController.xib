@@ -10,6 +10,8 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="MenuViewController" customModule="TeamCreator" customModuleProvider="target">
             <connections>
+                <outlet property="createMatchView" destination="trY-71-GOA" id="Ndh-lg-SKa"/>
+                <outlet property="playersView" destination="kNF-Qe-13B" id="LB0-5B-2kE"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -18,35 +20,77 @@
             <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zNV-AR-fJ8">
-                    <rect key="frame" x="157" y="408.66666666666669" width="79" height="35"/>
-                    <state key="normal" title="Button"/>
-                    <buttonConfiguration key="configuration" style="plain" title="Players"/>
-                    <connections>
-                        <action selector="playersButtonClicked:" destination="-1" eventType="touchUpInside" id="P3y-H4-P6G"/>
-                    </connections>
-                </button>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="oXt-wt-sEb">
-                    <rect key="frame" x="133" y="451.66666666666669" width="127" height="35"/>
-                    <state key="normal" title="Button"/>
-                    <buttonConfiguration key="configuration" style="plain" title="Create Match"/>
-                    <connections>
-                        <action selector="createMatchClicked:" destination="-1" eventType="touchUpInside" id="MT4-Wi-bOj"/>
-                    </connections>
-                </button>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="kNF-Qe-13B">
+                    <rect key="frame" x="16" y="159" width="361" height="200"/>
+                    <subviews>
+                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="footballPlayers" translatesAutoresizingMaskIntoConstraints="NO" id="rt8-iN-1yO">
+                            <rect key="frame" x="0.0" y="0.0" width="361" height="150"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="150" id="8Av-Tu-oq4"/>
+                            </constraints>
+                        </imageView>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Players" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NiJ-i3-jeM">
+                            <rect key="frame" x="16" y="166" width="329" height="21"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                            <nil key="textColor"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                    </subviews>
+                    <constraints>
+                        <constraint firstItem="NiJ-i3-jeM" firstAttribute="leading" secondItem="kNF-Qe-13B" secondAttribute="leading" constant="16" id="7q0-B5-IbL"/>
+                        <constraint firstItem="rt8-iN-1yO" firstAttribute="leading" secondItem="kNF-Qe-13B" secondAttribute="leading" id="9dv-MO-rGa"/>
+                        <constraint firstAttribute="height" constant="200" id="Cxt-9h-s1t"/>
+                        <constraint firstItem="NiJ-i3-jeM" firstAttribute="top" secondItem="rt8-iN-1yO" secondAttribute="bottom" constant="16" id="iLC-cb-nQ5"/>
+                        <constraint firstAttribute="trailing" secondItem="rt8-iN-1yO" secondAttribute="trailing" id="lfo-FO-NWX"/>
+                        <constraint firstAttribute="bottom" secondItem="rt8-iN-1yO" secondAttribute="bottom" constant="50" id="p3h-AV-XBN"/>
+                        <constraint firstItem="rt8-iN-1yO" firstAttribute="top" secondItem="kNF-Qe-13B" secondAttribute="top" id="rY7-T3-F5A"/>
+                        <constraint firstAttribute="trailing" secondItem="NiJ-i3-jeM" secondAttribute="trailing" constant="16" id="vOA-BO-S5c"/>
+                    </constraints>
+                </view>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="trY-71-GOA">
+                    <rect key="frame" x="16" y="375" width="361" height="200"/>
+                    <subviews>
+                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="footballMatch" translatesAutoresizingMaskIntoConstraints="NO" id="TPt-gj-Taw">
+                            <rect key="frame" x="0.0" y="0.0" width="361" height="150"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="150" id="Qp2-nE-jXL"/>
+                            </constraints>
+                        </imageView>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Create Match" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4Aa-gd-62T">
+                            <rect key="frame" x="16" y="166" width="329" height="21"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                            <nil key="textColor"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                    </subviews>
+                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    <constraints>
+                        <constraint firstItem="4Aa-gd-62T" firstAttribute="top" secondItem="TPt-gj-Taw" secondAttribute="bottom" constant="16" id="2pe-i8-rn6"/>
+                        <constraint firstItem="4Aa-gd-62T" firstAttribute="leading" secondItem="trY-71-GOA" secondAttribute="leading" constant="16" id="58c-G4-6He"/>
+                        <constraint firstAttribute="trailing" secondItem="TPt-gj-Taw" secondAttribute="trailing" id="KI6-wo-Odd"/>
+                        <constraint firstAttribute="trailing" secondItem="4Aa-gd-62T" secondAttribute="trailing" constant="16" id="Ppk-cg-ggA"/>
+                        <constraint firstAttribute="height" constant="200" id="fm4-4m-rZ4"/>
+                        <constraint firstItem="TPt-gj-Taw" firstAttribute="top" secondItem="trY-71-GOA" secondAttribute="top" id="k38-3F-vJW"/>
+                        <constraint firstItem="TPt-gj-Taw" firstAttribute="leading" secondItem="trY-71-GOA" secondAttribute="leading" id="oeW-nM-rBm"/>
+                    </constraints>
+                </view>
             </subviews>
             <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
             <color key="backgroundColor" systemColor="systemBackgroundColor"/>
             <constraints>
-                <constraint firstItem="zNV-AR-fJ8" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="3zQ-BN-zMP"/>
-                <constraint firstItem="oXt-wt-sEb" firstAttribute="top" secondItem="zNV-AR-fJ8" secondAttribute="bottom" constant="8" id="eid-JH-M8F"/>
-                <constraint firstItem="zNV-AR-fJ8" firstAttribute="centerY" secondItem="i5M-Pr-FkT" secondAttribute="centerY" id="i7Q-G9-9oy"/>
-                <constraint firstItem="oXt-wt-sEb" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="yhe-D4-Y61"/>
+                <constraint firstItem="kNF-Qe-13B" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="16" id="6VE-LR-tsy"/>
+                <constraint firstItem="kNF-Qe-13B" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" constant="100" id="GO9-zM-FtM"/>
+                <constraint firstItem="trY-71-GOA" firstAttribute="top" secondItem="kNF-Qe-13B" secondAttribute="bottom" constant="16" id="cAE-mJ-qOI"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="kNF-Qe-13B" secondAttribute="trailing" constant="16" id="e8H-Ri-upd"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="trY-71-GOA" secondAttribute="trailing" constant="16" id="itc-BP-wMj"/>
+                <constraint firstItem="trY-71-GOA" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="16" id="n9I-wH-TP9"/>
             </constraints>
-            <point key="canvasLocation" x="132" y="-11"/>
+            <point key="canvasLocation" x="130.53435114503816" y="-11.267605633802818"/>
         </view>
     </objects>
     <resources>
+        <image name="footballMatch" width="1000" height="449"/>
+        <image name="footballPlayers" width="626" height="417"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

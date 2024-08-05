@@ -7,11 +7,6 @@
 
 import Foundation
 
-enum Sport: String {
-    case football
-    case volleyball
-}
-
 protocol HomeViewModelDelegate: AnyObject {
 
 }
@@ -25,10 +20,12 @@ final class HomeViewModel {
 
     weak var delegate: HomeViewModelDelegate?
     var networkManager: NetworkManagerProtocol?
+    static var whichSport = ""
 
 
 }
 
 extension HomeViewModel: HomeViewModelProtocol {
+
 
 }

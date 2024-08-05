@@ -8,32 +8,35 @@
 import UIKit
 
 class MenuViewController: UIViewController {
-    
-    var selectedSport: Sport?
 
+    var selectedSport: Sport?
+    @IBOutlet private weak var playersView: UIView!
+    @IBOutlet private weak var createMatchView: UIView!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
+        setupTapGesture()
+    }
+    
+    
+    private func setupTapGesture() {
+        let playersTapGesture = UITapGestureRecognizer(target: self, action: #selector(playersViewTapped))
+        playersView.addGestureRecognizer(playersTapGesture)
+        let createMatchTapGesture = UITapGestureRecognizer(target: self, action: #selector(createMathcViewTapped))
+        createMatchView.addGestureRecognizer(createMatchTapGesture)
     }
 
-
-
-
-    @IBAction func playersButtonClicked(_ sender: Any) {
+    @objc private func playersViewTapped() {
         let vc = PlayersScreenVC()
-        let playersViewModel = PlayersScreenVM()
-        playersViewModel.selectedSport = selectedSport
-        vc.viewModel = playersViewModel
+        let viewModel = PlayersScreenVM(selectedSport: selectedSport!)
+        vc.viewModel = viewModel
         navigationController?.pushViewController(vc, animated: true)
     }
-
-
-    @IBAction func createMatchClicked(_ sender: Any) {
+    
+    @objc private func createMathcViewTapped() {
         let vc = CreateMatchViewController()
         let createMatchViewModel = CreateMatchViewModel()
         vc.viewModel = createMatchViewModel
         navigationController?.pushViewController(vc, animated: true)
     }
-
 }

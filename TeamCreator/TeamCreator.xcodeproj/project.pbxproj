@@ -10,6 +10,9 @@
 		086B87832C5B60760065CF13 /* AddPlayerScreenVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 086B87822C5B60760065CF13 /* AddPlayerScreenVC.xib */; };
 		086B87842C5B60760065CF13 /* AddPlayerScreenVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 086B87812C5B60760065CF13 /* AddPlayerScreenVC.swift */; };
 		086B87862C5B60920065CF13 /* AddPlayerScreenVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 086B87852C5B60920065CF13 /* AddPlayerScreenVM.swift */; };
+		0871D8302C5E694300B9EC1E /* Sport.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0871D82F2C5E694300B9EC1E /* Sport.swift */; };
+		0871D8322C5E69C300B9EC1E /* FootballPosition.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0871D8312C5E69C300B9EC1E /* FootballPosition.swift */; };
+		0871D8342C5E6A4900B9EC1E /* VolleyballPosition.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0871D8332C5E6A4900B9EC1E /* VolleyballPosition.swift */; };
 		08B4646B2C5A789B00529D6A /* PlayerCellVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08B464682C5A789B00529D6A /* PlayerCellVM.swift */; };
 		08B4646C2C5A789B00529D6A /* PlayersScreenVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08B464692C5A789B00529D6A /* PlayersScreenVM.swift */; };
 		08B464702C5A78A900529D6A /* PlayersScreenVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08B4646D2C5A78A900529D6A /* PlayersScreenVC.swift */; };
@@ -38,6 +41,8 @@
 		DD1A24FF2C594DDC0020AC04 /* CreateMatchCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = DD1A24FD2C594DDC0020AC04 /* CreateMatchCell.xib */; };
 		DD3A08A12C5CB7750056C8D7 /* MenuViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = DD3A08A02C5CB7750056C8D7 /* MenuViewController.xib */; };
 		DD3A08A22C5CB7750056C8D7 /* MenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD3A089F2C5CB7750056C8D7 /* MenuViewController.swift */; };
+		DD3A08A52C5E22790056C8D7 /* FirebaseManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD3A08A42C5E22790056C8D7 /* FirebaseManager.swift */; };
+		DD3A08A72C5E253B0056C8D7 /* Player.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD3A08A62C5E253B0056C8D7 /* Player.swift */; };
 		DD3A08AB2C5E96A40056C8D7 /* VolleyballViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD3A08A92C5E96A40056C8D7 /* VolleyballViewController.swift */; };
 		DD3A08AC2C5E96A40056C8D7 /* VolleyballViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = DD3A08AA2C5E96A40056C8D7 /* VolleyballViewController.xib */; };
 		DD85DA102C5A82B300AF1652 /* CreateMatchDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD85DA0B2C5A82B300AF1652 /* CreateMatchDetailViewController.swift */; };
@@ -74,6 +79,9 @@
 		086B87812C5B60760065CF13 /* AddPlayerScreenVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddPlayerScreenVC.swift; sourceTree = "<group>"; };
 		086B87822C5B60760065CF13 /* AddPlayerScreenVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AddPlayerScreenVC.xib; sourceTree = "<group>"; };
 		086B87852C5B60920065CF13 /* AddPlayerScreenVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddPlayerScreenVM.swift; sourceTree = "<group>"; };
+		0871D82F2C5E694300B9EC1E /* Sport.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sport.swift; sourceTree = "<group>"; };
+		0871D8312C5E69C300B9EC1E /* FootballPosition.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FootballPosition.swift; sourceTree = "<group>"; };
+		0871D8332C5E6A4900B9EC1E /* VolleyballPosition.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VolleyballPosition.swift; sourceTree = "<group>"; };
 		08B464682C5A789B00529D6A /* PlayerCellVM.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlayerCellVM.swift; sourceTree = "<group>"; };
 		08B464692C5A789B00529D6A /* PlayersScreenVM.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlayersScreenVM.swift; sourceTree = "<group>"; };
 		08B4646D2C5A78A900529D6A /* PlayersScreenVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlayersScreenVC.swift; sourceTree = "<group>"; };
@@ -103,6 +111,8 @@
 		DD1A24FD2C594DDC0020AC04 /* CreateMatchCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CreateMatchCell.xib; sourceTree = "<group>"; };
 		DD3A089F2C5CB7750056C8D7 /* MenuViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuViewController.swift; sourceTree = "<group>"; };
 		DD3A08A02C5CB7750056C8D7 /* MenuViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MenuViewController.xib; sourceTree = "<group>"; };
+		DD3A08A42C5E22790056C8D7 /* FirebaseManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseManager.swift; sourceTree = "<group>"; };
+		DD3A08A62C5E253B0056C8D7 /* Player.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Player.swift; sourceTree = "<group>"; };
 		DD3A08A92C5E96A40056C8D7 /* VolleyballViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VolleyballViewController.swift; sourceTree = "<group>"; };
 		DD3A08AA2C5E96A40056C8D7 /* VolleyballViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = VolleyballViewController.xib; sourceTree = "<group>"; };
 		DD85DA0B2C5A82B300AF1652 /* CreateMatchDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreateMatchDetailViewController.swift; sourceTree = "<group>"; };
@@ -163,11 +173,21 @@
 			path = ViewModel;
 			sourceTree = "<group>";
 		};
+		0871D82E2C5E692100B9EC1E /* Utilities */ = {
+			isa = PBXGroup;
+			children = (
+				0871D82F2C5E694300B9EC1E /* Sport.swift */,
+				0871D8312C5E69C300B9EC1E /* FootballPosition.swift */,
+				0871D8332C5E6A4900B9EC1E /* VolleyballPosition.swift */,
+			);
+			path = Utilities;
+			sourceTree = "<group>";
+		};
 		08B4646A2C5A789B00529D6A /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
-				08B464682C5A789B00529D6A /* PlayerCellVM.swift */,
 				08B464692C5A789B00529D6A /* PlayersScreenVM.swift */,
+				08B464682C5A789B00529D6A /* PlayerCellVM.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -213,8 +233,10 @@
 		DD1A24A02C57AA2A0020AC04 /* TeamCreator */ = {
 			isa = PBXGroup;
 			children = (
+				DD3A08A32C5E22680056C8D7 /* FirebaseManager */,
 				DD1A24E42C57AD530020AC04 /* NetworkManager */,
 				DD1A24DD2C57AC3E0020AC04 /* Screens */,
+				0871D82E2C5E692100B9EC1E /* Utilities */,
 				DD1A24DC2C57AC360020AC04 /* App */,
 				DD1A24DB2C57AC1A0020AC04 /* Resources */,
 				DD1A24AF2C57AA2B0020AC04 /* Info.plist */,
@@ -316,6 +338,7 @@
 			children = (
 				086B87802C5B60610065CF13 /* Controller */,
 				086B87872C5B60970065CF13 /* ViewModel */,
+				DD3A08A62C5E253B0056C8D7 /* Player.swift */,
 			);
 			path = AddPlayerScreen;
 			sourceTree = "<group>";
@@ -335,6 +358,14 @@
 				DD1A24FD2C594DDC0020AC04 /* CreateMatchCell.xib */,
 			);
 			path = CreateMatchCell;
+			sourceTree = "<group>";
+		};
+		DD3A08A32C5E22680056C8D7 /* FirebaseManager */ = {
+			isa = PBXGroup;
+			children = (
+				DD3A08A42C5E22790056C8D7 /* FirebaseManager.swift */,
+			);
+			path = FirebaseManager;
 			sourceTree = "<group>";
 		};
 		DD3A08A82C5E965B0056C8D7 /* MatchDetailVolleyball */ = {
@@ -485,6 +516,7 @@
 			packageReferences = (
 				DD1A24D12C57AA410020AC04 /* XCRemoteSwiftPackageReference "Alamofire" */,
 				DD1A24D42C57AADF0020AC04 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
+				DD38C18A2C60A7710028E515 /* XCRemoteSwiftPackageReference "SDWebImage" */,
 			);
 			productRefGroup = DD1A249F2C57AA2A0020AC04 /* Products */;
 			projectDirPath = "";
@@ -545,7 +577,9 @@
 				08B464752C5A78B700529D6A /* PlayerCell.swift in Sources */,
 				DD85DA242C5BACD400AF1652 /* MatchDetailTeamsCell.swift in Sources */,
 				086B87842C5B60760065CF13 /* AddPlayerScreenVC.swift in Sources */,
+				DD3A08A72C5E253B0056C8D7 /* Player.swift in Sources */,
 				DD1A24FE2C594DDC0020AC04 /* CreateMatchCell.swift in Sources */,
+				0871D8302C5E694300B9EC1E /* Sport.swift in Sources */,
 				DD1A24F32C58CDD70020AC04 /* HomeViewController.swift in Sources */,
 				DD85DA272C5BACE200AF1652 /* MatchDetailTeamsViewModel.swift in Sources */,
 				DD3A08AB2C5E96A40056C8D7 /* VolleyballViewController.swift in Sources */,
@@ -555,6 +589,8 @@
 				08B4646B2C5A789B00529D6A /* PlayerCellVM.swift in Sources */,
 				DD85DA102C5A82B300AF1652 /* CreateMatchDetailViewController.swift in Sources */,
 				DD85DA1F2C5BAC5000AF1652 /* MatchDetailTeamsViewController.swift in Sources */,
+				0871D8342C5E6A4900B9EC1E /* VolleyballPosition.swift in Sources */,
+				0871D8322C5E69C300B9EC1E /* FootballPosition.swift in Sources */,
 				DD1A24A22C57AA2A0020AC04 /* AppDelegate.swift in Sources */,
 				DD85DA2B2C5BB96E00AF1652 /* MatchDetailTeamViewController.swift in Sources */,
 				DD3A08A22C5CB7750056C8D7 /* MenuViewController.swift in Sources */,
@@ -562,6 +598,7 @@
 				DD1A24FA2C58DC4A0020AC04 /* CreateMatchViewModel.swift in Sources */,
 				DD85DA122C5A82B300AF1652 /* CreateMatchDetailViewModel.swift in Sources */,
 				DD1A24A42C57AA2A0020AC04 /* SceneDelegate.swift in Sources */,
+				DD3A08A52C5E22790056C8D7 /* FirebaseManager.swift in Sources */,
 				08B4646C2C5A789B00529D6A /* PlayersScreenVM.swift in Sources */,
 				08B464702C5A78A900529D6A /* PlayersScreenVC.swift in Sources */,
 			);
@@ -910,6 +947,14 @@
 			requirement = {
 				kind = upToNextMajorVersion;
 				minimumVersion = 10.29.0;
+			};
+		};
+		DD38C18A2C60A7710028E515 /* XCRemoteSwiftPackageReference "SDWebImage" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/SDWebImage/SDWebImage";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.19.5;
 			};
 		};
 /* End XCRemoteSwiftPackageReference section */
