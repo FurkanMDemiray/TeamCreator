@@ -52,7 +52,13 @@ final class AddPlayerScreenVC: UIViewController {
         let rating = ratingTextField.text
         let id = UUID().uuidString
 
-        let newPlayer = Player(id: id, name: "\(name!) \(surname!)", age: 18, skillPoint: Int(rating ?? "0"), position: position, sport: HomeViewModel.whichSport)
+        // convert image to binary data
+        let imageData = imageView.image?.jpegData(compressionQuality: 0.5)
+        // convert binary data to base64 string
+        let imageString = imageData?.base64EncodedString()
+        guard let imageString else { return }
+
+        let newPlayer = Player(id: id, name: "\(name!) \(surname!)", age: 18, skillPoint: Int(rating ?? "0"), position: position, sport: HomeViewModel.whichSport, picture: imageString)
 
         viewModel.addPlayer(player: newPlayer)
 

@@ -27,20 +27,20 @@ final class PlayersScreenVM {
     weak var delegate: PlayersScreenVMDelegate?
     var selectedSport: Sport
     var players = [Player]()
-    
+
     let firebaseManager: FirebaseManagerProtocol
-    
+
     init(firebaseManager: FirebaseManagerProtocol = FirebaseManager(), selectedSport: Sport) {
         self.firebaseManager = firebaseManager
         self.selectedSport = selectedSport
     }
-    
+
     private func fetchPlayers() {
         firebaseManager.fetchPlayers { result in
             switch result {
             case .success(let data):
                 DispatchQueue.main.async {
-                    self.players = data.filter { $0.sport == self.selectedSport.rawValue }
+                    self.players = data.filter { $0.sport == HomeViewModel.whichSport }
                     self.view?.reloadTableView()
                 }
             case .failure(let error):
@@ -48,30 +48,30 @@ final class PlayersScreenVM {
             }
         }
     }
-    
+
 }
 
 extension PlayersScreenVM: PlayersScreenVMProtocol {
-    
+
     func viewWillAppear() {
         fetchPlayers()
     }
-    
+
     func viewDidLoad() {
         view?.setupNavBar()
         view?.registerTableView()
     }
-    
+
 
     func numberOfRows() -> Int {
         return players.count
     }
-    
+
     func cellForRow(at indexPath: IndexPath) -> PlayerCellVM {
         let playerCellVM = PlayerCellVM(player: players[indexPath.row])
         return playerCellVM
     }
-    
+
     func deletePlayer(at indexPath: IndexPath) {
         let player = players[indexPath.row]
         firebaseManager.deletePlayer(player: player) { [weak self] result in
@@ -86,7 +86,7 @@ extension PlayersScreenVM: PlayersScreenVMProtocol {
             }
         }
     }
-    
+
     func addButtonTapped() {
         delegate?.navigateToAddPlayers(with: selectedSport)
     }
