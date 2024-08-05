@@ -31,6 +31,7 @@ final class FirebaseManager: FirebaseManagerProtocol {
     func addPlayer(player: Player, completion: @escaping (Result<Void, Error>) -> Void) {
         let db = Firestore.firestore()
         do {
+            // auto generated id
             let _ = try db.collection("players").addDocument(from: player)
             completion(.success(()))
         } catch {
@@ -80,11 +81,33 @@ final class FirebaseManager: FirebaseManagerProtocol {
 
     func deletePlayer(player: Player, completion: @escaping (Result<Void, Error>) -> Void) {
         let db = Firestore.firestore()
-        db.collection("players").document(player.id).delete { error in
+        let collectionRef = db.collection("players")
+
+        // player.id alanına göre belgeyi sorgula
+        collectionRef.whereField("id", isEqualTo: player.id).getDocuments { (querySnapshot, error) in
             if let error = error {
+                print("Error querying player: \(error.localizedDescription)")
                 completion(.failure(error))
-            } else {
-                completion(.success(()))
+                return
+            }
+
+            guard let documents = querySnapshot?.documents, !documents.isEmpty else {
+                print("No matching player found")
+                completion(.failure(NSError(domain: "", code: 404, userInfo: [NSLocalizedDescriptionKey: "No matching player found"])))
+                return
+            }
+
+            // Belgeyi sil
+            for document in documents {
+                document.reference.delete { error in
+                    if let error = error {
+                        print("Error deleting player: \(error.localizedDescription)")
+                        completion(.failure(error))
+                    } else {
+                        print("Successfully deleted player with id \(player.id)")
+                        completion(.success(()))
+                    }
+                }
             }
         }
     }
@@ -100,6 +123,6 @@ final class FirebaseManager: FirebaseManagerProtocol {
         }
     }*/
 
-    
+
 
 }

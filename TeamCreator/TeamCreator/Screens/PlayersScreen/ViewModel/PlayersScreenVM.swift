@@ -74,13 +74,11 @@ extension PlayersScreenVM: PlayersScreenVMProtocol {
 
     func deletePlayer(at indexPath: IndexPath) {
         let player = players[indexPath.row]
-        firebaseManager.deletePlayer(player: player) { [weak self] result in
+        firebaseManager.deletePlayer(player: player) { result in
             switch result {
             case .success:
-                DispatchQueue.main.async {
-                    self?.players.remove(at: indexPath.row)
-                    self?.view?.reloadTableView()
-                }
+                self.players.remove(at: indexPath.row)
+                self.view?.reloadTableView()
             case .failure(let error):
                 print(error.localizedDescription)
             }
@@ -91,4 +89,3 @@ extension PlayersScreenVM: PlayersScreenVMProtocol {
         delegate?.navigateToAddPlayers(with: selectedSport)
     }
 }
-
