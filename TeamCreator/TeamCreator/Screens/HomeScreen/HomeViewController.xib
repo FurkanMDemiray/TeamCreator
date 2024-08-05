@@ -20,28 +20,31 @@
             <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="voleybol" translatesAutoresizingMaskIntoConstraints="NO" id="BQa-2O-HuY">
-                    <rect key="frame" x="16" y="366" width="361" height="120"/>
-                    <constraints>
-                        <constraint firstAttribute="height" constant="120" id="QtP-bL-joz"/>
-                    </constraints>
-                </imageView>
-                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="futbol" translatesAutoresizingMaskIntoConstraints="NO" id="F5f-cs-nDw">
-                    <rect key="frame" x="16" y="230" width="361" height="120"/>
-                    <constraints>
-                        <constraint firstAttribute="height" constant="120" id="3Qk-bo-dt0"/>
-                    </constraints>
-                </imageView>
+                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="m0t-4K-jYD">
+                    <rect key="frame" x="8" y="302" width="377" height="248"/>
+                    <subviews>
+                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="futbol" translatesAutoresizingMaskIntoConstraints="NO" id="F5f-cs-nDw">
+                            <rect key="frame" x="0.0" y="0.0" width="377" height="120"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="120" id="3Qk-bo-dt0"/>
+                            </constraints>
+                        </imageView>
+                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="voleybol" translatesAutoresizingMaskIntoConstraints="NO" id="BQa-2O-HuY">
+                            <rect key="frame" x="0.0" y="128" width="377" height="120"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="120" id="QtP-bL-joz"/>
+                            </constraints>
+                        </imageView>
+                    </subviews>
+                </stackView>
             </subviews>
             <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
             <color key="backgroundColor" systemColor="systemBackgroundColor"/>
             <constraints>
-                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="BQa-2O-HuY" secondAttribute="trailing" constant="16" id="Oll-0U-O7O"/>
-                <constraint firstItem="BQa-2O-HuY" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="16" id="OvC-IO-cps"/>
-                <constraint firstItem="F5f-cs-nDw" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="16" id="UlW-Ln-vKH"/>
-                <constraint firstItem="BQa-2O-HuY" firstAttribute="top" secondItem="F5f-cs-nDw" secondAttribute="bottom" constant="16" id="mlh-G3-iPh"/>
-                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="F5f-cs-nDw" secondAttribute="trailing" constant="16" id="ttr-9U-GbR"/>
-                <constraint firstItem="BQa-2O-HuY" firstAttribute="centerY" secondItem="i5M-Pr-FkT" secondAttribute="centerY" id="xNh-ou-iNr"/>
+                <constraint firstItem="m0t-4K-jYD" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="8" id="0U7-mJ-7Sk"/>
+                <constraint firstItem="m0t-4K-jYD" firstAttribute="centerY" secondItem="i5M-Pr-FkT" secondAttribute="centerY" id="X82-GW-bcu"/>
+                <constraint firstAttribute="trailing" secondItem="m0t-4K-jYD" secondAttribute="trailing" constant="8" id="hRL-VH-rfB"/>
+                <constraint firstItem="m0t-4K-jYD" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="zft-15-aqI"/>
             </constraints>
             <point key="canvasLocation" x="132" y="-11"/>
         </view>
