@@ -7,7 +7,7 @@
 
 import UIKit
 
-class MatchDetailTeamViewController: UIViewController {
+final class MatchDetailTeamViewController: UIViewController {
 
     @IBOutlet private weak var gkImage: UIImageView!
     @IBOutlet private weak var gkLabel: UILabel!
@@ -32,14 +32,81 @@ class MatchDetailTeamViewController: UIViewController {
     @IBOutlet private weak var secondCFImage: UIImageView!
     @IBOutlet private weak var secondCFLabel: UILabel!
 
+    var viewModel: MatchDetailTeamViewModelProtocol! {
+        didSet {
+            viewModel.delegate = self
+        }
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
+        setPlayers()
     }
 
+    private func setPlayers() {
+        let players = viewModel.getTeam
+        for player in players {
+            switch player.position {
+            case "Goalkeeper":
+                gkImage.loadImage(from: player.picture)
+                gkLabel.text = player.name
+            case "Left Back":
+                lbImage.loadImage(from: player.picture)
+                lbLabel.text = player.name
+            case "Center Back":
+                if cbLabel.text == nil {
+                    cbImage.loadImage(from: player.picture)
+                    cbLabel.text = player.name
+                } else {
+                    secondCBImage.loadImage(from: player.picture)
+                    secondCBLabel.text = player.name
+                }
+            case "Right Back":
+                rbImage.loadImage(from: player.picture)
+                rbLabel.text = player.name
+            case "Center Midfielder":
+                if cmLabel.text == nil {
+                    cmImage.loadImage(from: player.picture)
+                    cmLabel.text = player.name
+                } else {
+                    secondCMImage.loadImage(from: player.picture)
+                    secondCMLabel.text = player.name
+                }
+            case "Right Winger":
+                rwImage.loadImage(from: player.picture)
+                rwLabel.text = player.name
+            case "Left Winger":
+                lwImage.loadImage(from: player.picture)
+                lwLabel.text = player.name
+            case "Center Forward":
+                if cfLabel.text == nil {
+                    cfImage.loadImage(from: player.picture)
+                    cfLabel.text = player.name
+                } else {
+                    secondCFImage.loadImage(from: player.picture)
+                    secondCFLabel.text = player.name
+                }
+            default:
+                break
+            }
+        }
+    }
 
+}
+extension UIImageView {
+    func loadImage(from binaryString: String?) {
+        // encode
+        guard let binaryString = binaryString else { return }
+        let imageData = Data(base64Encoded: binaryString, options: .ignoreUnknownCharacters)
+        // decode
+        guard let data = imageData else { return }
+        let image = UIImage(data: data)
+        DispatchQueue.main.async {
+            self.image = image
+        }
+    }
+}
 
+extension MatchDetailTeamViewController: MatchDetailTeamViewModelDelegate {
 
 }

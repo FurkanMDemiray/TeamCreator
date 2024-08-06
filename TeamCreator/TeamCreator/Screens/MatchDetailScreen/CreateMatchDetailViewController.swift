@@ -7,13 +7,15 @@
 
 import UIKit
 
-class CreateMatchDetailViewController: UIViewController {
+final class CreateMatchDetailViewController: UIViewController {
     @IBOutlet private weak var locationTimeLabel: UILabel!
     @IBOutlet private weak var weatherImageView: UIImageView!
     @IBOutlet private weak var weatherLabel: UILabel!
     @IBOutlet private weak var tempatureLabel: UILabel!
     @IBOutlet private weak var fenerbahceImageView: UIImageView!
     @IBOutlet private weak var galatasarayImageView: UIImageView!
+    @IBOutlet private weak var weatherOuterView: UIView!
+    @IBOutlet private weak var activityIndicator: UIActivityIndicatorView!
 
     var viewModel: CreateMatchDetailViewModelProtocol! {
         didSet {
@@ -25,7 +27,7 @@ class CreateMatchDetailViewController: UIViewController {
         super.viewWillAppear(animated)
         viewModel.fetch()
         configureImages()
-        //print("\(viewModel.setSelectedPlayers.forEach { print($0.name!) })")
+        configureWeatherOuterView()
     }
 
     private func configureImages() {
@@ -35,6 +37,15 @@ class CreateMatchDetailViewController: UIViewController {
         fenerbahceImageView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(fenerbahceTapped)))
         startPulseAnimation(for: fenerbahceImageView)
         startPulseAnimation(for: galatasarayImageView)
+    }
+
+    private func configureWeatherOuterView() {
+        weatherOuterView.layer.cornerRadius = 10
+        weatherOuterView.layer.shadowColor = UIColor.black.cgColor
+        weatherOuterView.layer.shadowOpacity = 0.5
+        weatherOuterView.layer.shadowOffset = .zero
+        weatherOuterView.layer.shadowRadius = 5
+        weatherOuterView.backgroundColor = UIColor(hex: "E4F1FF")
     }
 
     //MARK: - Animations
@@ -50,14 +61,36 @@ class CreateMatchDetailViewController: UIViewController {
     }
 
     //MARK: - Actions
-    @objc private func fenerbahceTapped() {
-        let vc = MatchDetailTeamViewController()
-        navigationController?.pushViewController(vc, animated: true)
+    @objc private func galatasarayTapped() {
+        if HomeViewModel.whichSport == "Football" {
+            let vc = MatchDetailTeamViewController()
+            let matchDetailTeamViewModel = MatchDetailTeamViewModel()
+            vc.viewModel = matchDetailTeamViewModel
+            matchDetailTeamViewModel.getTeam = viewModel.getSetTeam1
+            navigationController?.pushViewController(vc, animated: true)
+        } else {
+            let vc = VolleyballViewController()
+            let volleyballViewModel = VolleyballViewModel()
+            vc.viewModel = volleyballViewModel
+            volleyballViewModel.getTeam = viewModel.getSetTeam1
+            navigationController?.pushViewController(vc, animated: true)
+        }
     }
 
-    @objc private func galatasarayTapped() {
-        let vc = MatchDetailTeamViewController()
-        navigationController?.pushViewController(vc, animated: true)
+    @objc private func fenerbahceTapped() {
+        if HomeViewModel.whichSport == "Football" {
+            let vc = MatchDetailTeamViewController()
+            let matchDetailTeamViewModel = MatchDetailTeamViewModel()
+            vc.viewModel = matchDetailTeamViewModel
+            matchDetailTeamViewModel.getTeam = viewModel.getSetTeam2
+            navigationController?.pushViewController(vc, animated: true)
+        } else {
+            let vc = VolleyballViewController()
+            let volleyballViewModel = VolleyballViewModel()
+            vc.viewModel = volleyballViewModel
+            volleyballViewModel.getTeam = viewModel.getSetTeam2
+            navigationController?.pushViewController(vc, animated: true)
+        }
     }
 
     @IBAction func teamsButtonClicked(_ sender: Any) {
@@ -70,7 +103,17 @@ class CreateMatchDetailViewController: UIViewController {
     }
 }
 
+//MARK: - ViewModel Delegate
 extension CreateMatchDetailViewController: CreateMatchDetailViewModelDelegate {
+    func loadingIndicator() {
+        activityIndicator.startAnimating()
+    }
+
+    func stopLoadingIndicator() {
+        activityIndicator.stopAnimating()
+
+    }
+
     func changeWeatherImage(_ imageName: String) {
         weatherImageView.image = UIImage(named: imageName)
     }

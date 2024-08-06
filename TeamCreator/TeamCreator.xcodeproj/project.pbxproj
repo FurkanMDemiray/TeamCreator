@@ -40,6 +40,8 @@
 		DD1A24FE2C594DDC0020AC04 /* CreateMatchCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD1A24FC2C594DDC0020AC04 /* CreateMatchCell.swift */; };
 		DD1A24FF2C594DDC0020AC04 /* CreateMatchCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = DD1A24FD2C594DDC0020AC04 /* CreateMatchCell.xib */; };
 		DD38C18F2C6215680028E515 /* UIColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD38C18E2C6215680028E515 /* UIColor.swift */; };
+		DD38C1912C6264020028E515 /* MatchDetailTeamViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD38C1902C6264020028E515 /* MatchDetailTeamViewModel.swift */; };
+		DD38C1932C6265160028E515 /* VolleyballViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD38C1922C6265160028E515 /* VolleyballViewModel.swift */; };
 		DD3A08A12C5CB7750056C8D7 /* MenuViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = DD3A08A02C5CB7750056C8D7 /* MenuViewController.xib */; };
 		DD3A08A22C5CB7750056C8D7 /* MenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD3A089F2C5CB7750056C8D7 /* MenuViewController.swift */; };
 		DD3A08A52C5E22790056C8D7 /* FirebaseManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD3A08A42C5E22790056C8D7 /* FirebaseManager.swift */; };
@@ -111,6 +113,8 @@
 		DD1A24FC2C594DDC0020AC04 /* CreateMatchCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateMatchCell.swift; sourceTree = "<group>"; };
 		DD1A24FD2C594DDC0020AC04 /* CreateMatchCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CreateMatchCell.xib; sourceTree = "<group>"; };
 		DD38C18E2C6215680028E515 /* UIColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIColor.swift; sourceTree = "<group>"; };
+		DD38C1902C6264020028E515 /* MatchDetailTeamViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MatchDetailTeamViewModel.swift; sourceTree = "<group>"; };
+		DD38C1922C6265160028E515 /* VolleyballViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VolleyballViewModel.swift; sourceTree = "<group>"; };
 		DD3A089F2C5CB7750056C8D7 /* MenuViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuViewController.swift; sourceTree = "<group>"; };
 		DD3A08A02C5CB7750056C8D7 /* MenuViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MenuViewController.xib; sourceTree = "<group>"; };
 		DD3A08A42C5E22790056C8D7 /* FirebaseManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseManager.swift; sourceTree = "<group>"; };
@@ -384,6 +388,7 @@
 			children = (
 				DD3A08A92C5E96A40056C8D7 /* VolleyballViewController.swift */,
 				DD3A08AA2C5E96A40056C8D7 /* VolleyballViewController.xib */,
+				DD38C1922C6265160028E515 /* VolleyballViewModel.swift */,
 			);
 			path = MatchDetailVolleyball;
 			sourceTree = "<group>";
@@ -427,6 +432,7 @@
 			children = (
 				DD85DA292C5BB96E00AF1652 /* MatchDetailTeamViewController.swift */,
 				DD85DA2A2C5BB96E00AF1652 /* MatchDetailTeamViewController.xib */,
+				DD38C1902C6264020028E515 /* MatchDetailTeamViewModel.swift */,
 			);
 			path = MatchDetailTeamScreen;
 			sourceTree = "<group>";
@@ -600,6 +606,7 @@
 				DD1A24F72C58DC3E0020AC04 /* CreateMatchViewController.swift in Sources */,
 				08B4646B2C5A789B00529D6A /* PlayerCellVM.swift in Sources */,
 				DD85DA102C5A82B300AF1652 /* CreateMatchDetailViewController.swift in Sources */,
+				DD38C1912C6264020028E515 /* MatchDetailTeamViewModel.swift in Sources */,
 				DD85DA1F2C5BAC5000AF1652 /* MatchDetailTeamsViewController.swift in Sources */,
 				0871D8342C5E6A4900B9EC1E /* VolleyballPosition.swift in Sources */,
 				0871D8322C5E69C300B9EC1E /* FootballPosition.swift in Sources */,
@@ -607,6 +614,7 @@
 				DD85DA2B2C5BB96E00AF1652 /* MatchDetailTeamViewController.swift in Sources */,
 				DD3A08A22C5CB7750056C8D7 /* MenuViewController.swift in Sources */,
 				DD1A24E82C57AE500020AC04 /* HomeViewModel.swift in Sources */,
+				DD38C1932C6265160028E515 /* VolleyballViewModel.swift in Sources */,
 				DD1A24FA2C58DC4A0020AC04 /* CreateMatchViewModel.swift in Sources */,
 				DD85DA122C5A82B300AF1652 /* CreateMatchDetailViewModel.swift in Sources */,
 				DD1A24A42C57AA2A0020AC04 /* SceneDelegate.swift in Sources */,

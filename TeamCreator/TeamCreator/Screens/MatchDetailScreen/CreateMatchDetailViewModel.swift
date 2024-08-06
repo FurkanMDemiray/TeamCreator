@@ -11,6 +11,8 @@ import Foundation
 protocol CreateMatchDetailViewModelDelegate: AnyObject {
     func didFetchWeather()
     func changeWeatherImage(_ imageName: String)
+    func loadingIndicator()
+    func stopLoadingIndicator()
 }
 
 //MARK: - Protocol
@@ -45,6 +47,7 @@ final class CreateMatchDetailViewModel {
     }
 
     fileprivate func fetchWeather() {
+        delegate?.loadingIndicator()
         guard let longitude, let latitude else { return }
         networkManager.fetch(url: "https://api.openweathermap.org/data/2.5/weather?lat=\(latitude)&lon=\(longitude)&appid=7322abaed58e1f99fa30adbc734b7ae7&units=metric", method: .get, parameters: nil, headers: nil) { [weak self] (result: Result<WeatherModel, Error>) in
             guard let self else { return }
@@ -67,6 +70,7 @@ final class CreateMatchDetailViewModel {
                     self.delegate?.changeWeatherImage("snow")
                 }
                 delegate?.didFetchWeather()
+                delegate?.stopLoadingIndicator()
             case .failure(let error):
                 print(error)
             }

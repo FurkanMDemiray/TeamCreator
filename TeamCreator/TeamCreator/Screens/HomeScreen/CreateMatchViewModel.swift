@@ -8,11 +8,14 @@
 import Foundation
 import CoreLocation
 
+//MARK: - Delegate
 protocol CreateMatchViewModelDelegate: AnyObject {
     func didUpdateLocation()
     func reloadTableView()
+    func loadingIndicator()
+    func stopLoadingIndicator()
 }
-
+//MARK: - Protocol
 protocol CreateMatchViewModelProtocol {
     var delegate: CreateMatchViewModelDelegate? { get set }
     var time: String { get }
@@ -84,12 +87,15 @@ final class CreateMatchViewModel: NSObject {
         locationManager.stopUpdatingLocation()
     }
 
+//MARK: - Private Functions
     fileprivate func fetch() {
+        delegate?.loadingIndicator()
         firebaseManager?.fetchPlayers { result in
             switch result {
             case .success(let data):
                 self.players = data.filter { $0.sport == HomeViewModel.whichSport }
                 self.delegate?.reloadTableView()
+                self.delegate?.stopLoadingIndicator()
             case .failure(let error):
                 print(error.localizedDescription)
             }
@@ -142,6 +148,7 @@ final class CreateMatchViewModel: NSObject {
 
 }
 
+//MARK: - Protocol Extension
 extension CreateMatchViewModel: CreateMatchViewModelProtocol {
 
     func setTeams() {

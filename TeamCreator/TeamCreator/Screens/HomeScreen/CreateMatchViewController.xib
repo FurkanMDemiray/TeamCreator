@@ -10,6 +10,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="CreateMatchViewController" customModule="TeamCreator" customModuleProvider="target">
             <connections>
+                <outlet property="activityIndicator" destination="80a-gH-cTe" id="fOJ-GX-jQ7"/>
                 <outlet property="locationTimeLabel" destination="wTK-LA-emy" id="CJY-I6-l5K"/>
                 <outlet property="tableView" destination="vp5-ml-uyn" id="kTq-h4-GSr"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
@@ -43,6 +44,9 @@
                         <action selector="continueButtonClicked:" destination="-1" eventType="touchUpInside" id="PJy-nx-4xQ"/>
                     </connections>
                 </button>
+                <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="large" translatesAutoresizingMaskIntoConstraints="NO" id="80a-gH-cTe">
+                    <rect key="frame" x="178" y="407.66666666666669" width="37" height="37"/>
+                </activityIndicatorView>
             </subviews>
             <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
             <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -50,6 +54,8 @@
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="vp5-ml-uyn" secondAttribute="trailing" constant="8" id="0ez-Z2-jev"/>
                 <constraint firstItem="vp5-ml-uyn" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="8" id="3xk-Rp-gGv"/>
                 <constraint firstItem="wTK-LA-emy" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="16" id="5ZF-Jt-MS9"/>
+                <constraint firstItem="80a-gH-cTe" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="AWB-3V-X8v"/>
+                <constraint firstItem="80a-gH-cTe" firstAttribute="centerY" secondItem="i5M-Pr-FkT" secondAttribute="centerY" id="Fi4-jU-AF5"/>
                 <constraint firstItem="wTK-LA-emy" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" constant="16" id="Jdr-jt-Xes"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="wTK-LA-emy" secondAttribute="trailing" constant="16" id="Pzn-Nw-6Tx"/>
                 <constraint firstItem="lQd-0i-zqn" firstAttribute="top" secondItem="vp5-ml-uyn" secondAttribute="bottom" constant="32" id="Qfc-uU-Ejn"/>

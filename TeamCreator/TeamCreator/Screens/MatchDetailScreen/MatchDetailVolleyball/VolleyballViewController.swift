@@ -7,7 +7,7 @@
 
 import UIKit
 
-class VolleyballViewController: UIViewController {
+final class VolleyballViewController: UIViewController {
 
     @IBOutlet private weak var oImage: UIImageView!
     @IBOutlet private weak var oLabel: UILabel!
@@ -22,10 +22,20 @@ class VolleyballViewController: UIViewController {
     @IBOutlet private weak var sImage: UIImageView!
     @IBOutlet private weak var sLabel: UILabel!
 
+    var viewModel: VolleyballViewModelProtocol! {
+        didSet {
+            viewModel.delegate = self
+        }
+    }
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
     }
+
+}
+
+extension VolleyballViewController: VolleyballViewModelDelegate {
 
 }

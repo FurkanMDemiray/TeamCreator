@@ -12,6 +12,7 @@ final class CreateMatchViewController: UIViewController {
 
     @IBOutlet private weak var locationTimeLabel: UILabel!
     @IBOutlet private weak var tableView: UITableView!
+    @IBOutlet private weak var activityIndicator: UIActivityIndicatorView!
 
     var viewModel: CreateMatchViewModelProtocol! {
         didSet {
@@ -56,7 +57,15 @@ final class CreateMatchViewController: UIViewController {
     }
 }
 
+//MARK: - ViewModel Delegate
 extension CreateMatchViewController: CreateMatchViewModelDelegate {
+    func loadingIndicator() {
+        activityIndicator.startAnimating()
+    }
+
+    func stopLoadingIndicator() {
+        activityIndicator.stopAnimating()
+    }
 
     func reloadTableView() {
         tableView.reloadData()
@@ -68,6 +77,7 @@ extension CreateMatchViewController: CreateMatchViewModelDelegate {
     }
 }
 
+//MARK: - TableView Delegate & DataSource
 extension CreateMatchViewController: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         viewModel.getPlayersCount
