@@ -40,6 +40,7 @@ final class CreateMatchViewController: UIViewController {
 
 //MARK: - Actions
     @IBAction func continueButtonClicked(_ sender: Any) {
+        viewModel.setTeams()
         let createMatchDetailViewController = CreateMatchDetailViewController()
         let createMatchDetailViewModel = CreateMatchDetailViewModel()
         createMatchDetailViewController.viewModel = createMatchDetailViewModel
@@ -49,6 +50,8 @@ final class CreateMatchViewController: UIViewController {
         createMatchDetailViewModel.time = viewModel.time
         createMatchDetailViewModel.city = viewModel.getCity
         createMatchDetailViewModel.setSelectedPlayers = viewModel.getSelectedPlayers
+        createMatchDetailViewModel.getSetTeam1 = viewModel.getTeam1
+        createMatchDetailViewModel.getSetTeam2 = viewModel.getTeam2
         navigationController?.pushViewController(createMatchDetailViewController, animated: true)
     }
 }

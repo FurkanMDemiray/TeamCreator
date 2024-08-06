@@ -25,7 +25,7 @@ class CreateMatchDetailViewController: UIViewController {
         super.viewWillAppear(animated)
         viewModel.fetch()
         configureImages()
-        print("\(viewModel.setSelectedPlayers.forEach { print($0.name!) })")
+        //print("\(viewModel.setSelectedPlayers.forEach { print($0.name!) })")
     }
 
     private func configureImages() {
@@ -62,6 +62,10 @@ class CreateMatchDetailViewController: UIViewController {
 
     @IBAction func teamsButtonClicked(_ sender: Any) {
         let vc = MatchDetailTeamsViewController()
+        let matchDetailTeamsViewModel = MatchDetailTeamsViewModel()
+        vc.viewModel = matchDetailTeamsViewModel
+        vc.viewModel.team1 = viewModel.getSetTeam1
+        vc.viewModel.team2 = viewModel.getSetTeam2
         navigationController?.pushViewController(vc, animated: true)
     }
 }

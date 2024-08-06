@@ -39,6 +39,7 @@
 		DD1A24FA2C58DC4A0020AC04 /* CreateMatchViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD1A24F92C58DC4A0020AC04 /* CreateMatchViewModel.swift */; };
 		DD1A24FE2C594DDC0020AC04 /* CreateMatchCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD1A24FC2C594DDC0020AC04 /* CreateMatchCell.swift */; };
 		DD1A24FF2C594DDC0020AC04 /* CreateMatchCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = DD1A24FD2C594DDC0020AC04 /* CreateMatchCell.xib */; };
+		DD38C18F2C6215680028E515 /* UIColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD38C18E2C6215680028E515 /* UIColor.swift */; };
 		DD3A08A12C5CB7750056C8D7 /* MenuViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = DD3A08A02C5CB7750056C8D7 /* MenuViewController.xib */; };
 		DD3A08A22C5CB7750056C8D7 /* MenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD3A089F2C5CB7750056C8D7 /* MenuViewController.swift */; };
 		DD3A08A52C5E22790056C8D7 /* FirebaseManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD3A08A42C5E22790056C8D7 /* FirebaseManager.swift */; };
@@ -109,6 +110,7 @@
 		DD1A24F92C58DC4A0020AC04 /* CreateMatchViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = CreateMatchViewModel.swift; path = TeamCreator/Screens/HomeScreen/CreateMatchViewModel.swift; sourceTree = SOURCE_ROOT; };
 		DD1A24FC2C594DDC0020AC04 /* CreateMatchCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateMatchCell.swift; sourceTree = "<group>"; };
 		DD1A24FD2C594DDC0020AC04 /* CreateMatchCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CreateMatchCell.xib; sourceTree = "<group>"; };
+		DD38C18E2C6215680028E515 /* UIColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIColor.swift; sourceTree = "<group>"; };
 		DD3A089F2C5CB7750056C8D7 /* MenuViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuViewController.swift; sourceTree = "<group>"; };
 		DD3A08A02C5CB7750056C8D7 /* MenuViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MenuViewController.xib; sourceTree = "<group>"; };
 		DD3A08A42C5E22790056C8D7 /* FirebaseManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseManager.swift; sourceTree = "<group>"; };
@@ -176,6 +178,7 @@
 		0871D82E2C5E692100B9EC1E /* Utilities */ = {
 			isa = PBXGroup;
 			children = (
+				DD38C18D2C62155A0028E515 /* Extensions */,
 				0871D82F2C5E694300B9EC1E /* Sport.swift */,
 				0871D8312C5E69C300B9EC1E /* FootballPosition.swift */,
 				0871D8332C5E6A4900B9EC1E /* VolleyballPosition.swift */,
@@ -358,6 +361,14 @@
 				DD1A24FD2C594DDC0020AC04 /* CreateMatchCell.xib */,
 			);
 			path = CreateMatchCell;
+			sourceTree = "<group>";
+		};
+		DD38C18D2C62155A0028E515 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				DD38C18E2C6215680028E515 /* UIColor.swift */,
+			);
+			path = Extensions;
 			sourceTree = "<group>";
 		};
 		DD3A08A32C5E22680056C8D7 /* FirebaseManager */ = {
@@ -577,6 +588,7 @@
 				08B464752C5A78B700529D6A /* PlayerCell.swift in Sources */,
 				DD85DA242C5BACD400AF1652 /* MatchDetailTeamsCell.swift in Sources */,
 				086B87842C5B60760065CF13 /* AddPlayerScreenVC.swift in Sources */,
+				DD38C18F2C6215680028E515 /* UIColor.swift in Sources */,
 				DD3A08A72C5E253B0056C8D7 /* Player.swift in Sources */,
 				DD1A24FE2C594DDC0020AC04 /* CreateMatchCell.swift in Sources */,
 				0871D8302C5E694300B9EC1E /* Sport.swift in Sources */,
