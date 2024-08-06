@@ -48,12 +48,12 @@ final class CreateMatchViewController: UIViewController {
         createMatchDetailViewModel.latitude = viewModel.getLatitude
         createMatchDetailViewModel.time = viewModel.time
         createMatchDetailViewModel.city = viewModel.getCity
+        createMatchDetailViewModel.setSelectedPlayers = viewModel.getSelectedPlayers
         navigationController?.pushViewController(createMatchDetailViewController, animated: true)
     }
 }
 
 extension CreateMatchViewController: CreateMatchViewModelDelegate {
-
 
     func reloadTableView() {
         tableView.reloadData()

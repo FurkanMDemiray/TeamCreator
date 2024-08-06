@@ -21,7 +21,7 @@ protocol CreateMatchViewModelProtocol {
     var getLatitude: Double? { get }
     var getPlayersCount: Int { get }
     var getPlayers: [Player] { get }
-    //var selectedPlayers: [Player] { get }
+    var getSelectedPlayers: [Player] { get }
 
     func fetchPlayers()
     func addSelectedPlayer(indexPath: IndexPath)
@@ -69,14 +69,15 @@ final class CreateMatchViewModel: NSObject {
 }
 
 extension CreateMatchViewModel: CreateMatchViewModelProtocol {
+
     func addSelectedPlayer(indexPath: IndexPath) {
         if selectedPlayers.contains(where: { $0 == players[indexPath.row] }) {
             selectedPlayers.removeAll { $0 == players[indexPath.row] }
-            selectedPlayers.forEach { print("----",$0.name!) }
+            selectedPlayers.forEach { print("----", $0.name!) }
             return
         }
         selectedPlayers.append(players[indexPath.row])
-        selectedPlayers.forEach { print("----",$0.name!) }
+        selectedPlayers.forEach { print("----", $0.name!) }
     }
 
     func fetchPlayers() {
@@ -84,6 +85,10 @@ extension CreateMatchViewModel: CreateMatchViewModelProtocol {
     }
 
 //MARK: Getters
+    var getSelectedPlayers: [Player] {
+        selectedPlayers
+    }
+
     var getPlayers: [Player] {
         players
     }

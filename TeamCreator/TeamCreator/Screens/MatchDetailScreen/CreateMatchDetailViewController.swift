@@ -25,6 +25,7 @@ class CreateMatchDetailViewController: UIViewController {
         super.viewWillAppear(animated)
         viewModel.fetch()
         configureImages()
+        print("\(viewModel.setSelectedPlayers.forEach { print($0.name!) })")
     }
 
     private func configureImages() {

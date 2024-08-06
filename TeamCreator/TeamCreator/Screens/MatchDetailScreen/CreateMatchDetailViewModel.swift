@@ -19,6 +19,7 @@ protocol CreateMatchDetailViewModelProtocol {
     var getTime: String { get }
     var getCity: String { get }
     var getWeather: WeatherModel { get }
+    var setSelectedPlayers: [Player] { get set }
 
     func fetch()
 }
@@ -28,6 +29,7 @@ final class CreateMatchDetailViewModel {
 
     weak var delegate: CreateMatchDetailViewModelDelegate?
     private var networkManager: NetworkManagerProtocol
+    private var selectedPlayers = [Player]()
     var longitude: Double?
     var latitude: Double?
     var time: String?
@@ -71,6 +73,15 @@ final class CreateMatchDetailViewModel {
 
 //MARK: - Protocol Extension
 extension CreateMatchDetailViewModel: CreateMatchDetailViewModelProtocol {
+    var setSelectedPlayers: [Player] {
+        get {
+            return selectedPlayers
+        }
+        set {
+            selectedPlayers = newValue
+        }
+    }
+    
     var getWeather: WeatherModel {
         guard let weather else { return WeatherModel(coord: nil, weather: nil, base: nil, main: nil, visibility: nil, wind: nil, clouds: nil, dt: nil, sys: nil, timezone: nil, id: nil, name: nil, cod: nil) }
         return weather
