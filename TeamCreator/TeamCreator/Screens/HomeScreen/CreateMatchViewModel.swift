@@ -68,8 +68,8 @@ final class CreateMatchViewModel: NSObject {
     // Volleyball position limits
     let volleyballPositionLimits: [String: Int] = [
         "Setter": 1,
-        "Outside Hitter": 2,
-        "Middle Blocker": 2,
+        "Outside Hitter": 1,
+        "Middle Blocker": 1,
         "Opposite": 1,
         "Libero": 1,
         "Right Side Hitter": 1
