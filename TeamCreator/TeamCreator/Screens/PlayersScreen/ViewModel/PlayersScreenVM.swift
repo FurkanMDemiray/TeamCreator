@@ -9,7 +9,7 @@ import Foundation
 
 protocol PlayersScreenVMDelegate: AnyObject {
     func navigateToAddPlayers(with selectedSport: Sport)
-    func navigateToDetail(at indexPath: IndexPath)
+    func navigateToDetail(at indexPath: IndexPath, with selectedSport: Sport)
 }
 
 protocol PlayersScreenVMProtocol {
@@ -43,7 +43,6 @@ final class PlayersScreenVM {
             case .success(let data):
                 DispatchQueue.main.async {
                     self.players = data.filter { $0.sport == HomeViewModel.whichSport }
-                    print("fetchplayers")
                     self.view?.reloadCollectionView()
                 }
             case .failure(let error):
@@ -78,7 +77,7 @@ extension PlayersScreenVM: PlayersScreenVMProtocol {
     }
     
     func cellTapped(at indexPath: IndexPath) {
-        delegate?.navigateToDetail(at: indexPath)
+        delegate?.navigateToDetail(at: indexPath, with: selectedSport)
     }
     
     func updateCollectionData() {

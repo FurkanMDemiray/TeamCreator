@@ -52,9 +52,7 @@ final class AddPlayerScreenVC: UIViewController {
         let rating = ratingTextField.text
         let id = UUID().uuidString
 
-        // convert image to binary data
         let imageData = imageView.image?.jpegData(compressionQuality: 0.5)
-        // convert binary data to base64 string
         let imageString = imageData?.base64EncodedString()
         guard let imageString else { return }
 
@@ -69,7 +67,7 @@ final class AddPlayerScreenVC: UIViewController {
             let keyboardHeight = keyboardFrame.height
             let bottomSpace = self.view.frame.height - (addPlayerButton.frame.origin.y + addPlayerButton.frame.height)
             if bottomSpace < keyboardHeight {
-                self.view.frame.origin.y = 0 - (keyboardHeight - (bottomSpace))
+                self.view.frame.origin.y = 0 - (keyboardHeight - (bottomSpace) + 10)
             }
         }
     }

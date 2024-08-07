@@ -7,6 +7,12 @@
 
 import Foundation
 
+enum CardType: String {
+    case silver
+    case gold
+    case icon
+}
+
 final class PlayersCardCellVM {
     let player: Player
     
@@ -28,5 +34,16 @@ final class PlayersCardCellVM {
     
     var playerImage: String? {
         player.picture
+    }
+    
+    var cardImage: String {
+        guard let skillPoint = player.skillPoint else { return CardType.silver.rawValue }
+        if skillPoint < 70 {
+            return CardType.silver.rawValue
+        } else if skillPoint < 90 {
+            return CardType.gold.rawValue
+        } else {
+            return CardType.icon.rawValue
+        }
     }
 }
