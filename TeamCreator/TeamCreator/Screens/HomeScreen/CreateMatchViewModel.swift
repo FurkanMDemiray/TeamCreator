@@ -62,7 +62,7 @@ final class CreateMatchViewModel: NSObject {
         "Center Midfielder": 2,
         "Right Winger": 1,
         "Left Winger": 1,
-        "Center Forward": 1
+        "Center Forward": 2
     ]
 
     // Volleyball position limits

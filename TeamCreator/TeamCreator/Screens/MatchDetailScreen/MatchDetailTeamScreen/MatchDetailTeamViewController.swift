@@ -80,7 +80,7 @@ final class MatchDetailTeamViewController: UIViewController {
                 lbImage.loadImage(from: player.picture)
                 lbLabel.text = player.name
             case "Center Back":
-                if cbLabel.text == nil {
+                if cbLabel.text?.isEmpty ?? true {
                     cbImage.loadImage(from: player.picture)
                     cbLabel.text = player.name
                 } else {
@@ -91,7 +91,7 @@ final class MatchDetailTeamViewController: UIViewController {
                 rbImage.loadImage(from: player.picture)
                 rbLabel.text = player.name
             case "Center Midfielder":
-                if cmLabel.text == nil {
+                if cmLabel.text?.isEmpty ?? true {
                     cmImage.loadImage(from: player.picture)
                     cmLabel.text = player.name
                 } else {
@@ -105,7 +105,7 @@ final class MatchDetailTeamViewController: UIViewController {
                 lwImage.loadImage(from: player.picture)
                 lwLabel.text = player.name
             case "Center Forward":
-                if cfLabel.text == nil {
+                if cfLabel.text?.isEmpty ?? true {
                     cfImage.loadImage(from: player.picture)
                     cfLabel.text = player.name
                 } else {
