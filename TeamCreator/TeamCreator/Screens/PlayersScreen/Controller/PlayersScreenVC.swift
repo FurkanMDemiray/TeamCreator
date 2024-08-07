@@ -73,7 +73,9 @@ extension PlayersScreenVC: UICollectionViewDataSource {
 }
 
 extension PlayersScreenVC: UICollectionViewDelegate {
-    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        viewModel.cellTapped(at: indexPath)
+    }
 }
 
 extension PlayersScreenVC: UICollectionViewDelegateFlowLayout {
@@ -88,10 +90,25 @@ extension PlayersScreenVC: UICollectionViewDelegateFlowLayout {
 }
 
 extension PlayersScreenVC: PlayersScreenVMDelegate {
+    func navigateToDetail(at indexPath: IndexPath) {
+        let playerCellVM = viewModel.cellForItem(at: indexPath)
+        let detailVC = PlayerDetailScreenVC()
+        let detailVM = PlayerDetailScreenVM(player: playerCellVM.player)
+        detailVM.delegate = self
+        detailVC.viewModel = detailVM as any PLayerDetailScreenVMProtocol
+        navigationController?.pushViewController(detailVC, animated: true)
+    }
+    
     func navigateToAddPlayers(with selectedSport: Sport) {
         let addPlayerVC = AddPlayerScreenVC()
         let addPlayerVM = AddPlayerScreenVM(selectedSport: selectedSport)
         addPlayerVC.viewModel = addPlayerVM
         navigationController?.pushViewController(addPlayerVC, animated: true)
+    }
+}
+
+extension PlayersScreenVC: PlayerDetailScreenVmDelegate {
+    func playerDetailScreenDidDeletePlayer() {
+        viewModel.updateCollectionData()
     }
 }

@@ -8,7 +8,7 @@
 import Foundation
 
 final class PlayersCardCellVM {
-    private let player: Player
+    let player: Player
     
     init(player: Player) {
         self.player = player
