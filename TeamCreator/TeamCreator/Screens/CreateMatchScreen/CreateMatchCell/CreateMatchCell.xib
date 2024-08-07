@@ -18,13 +18,13 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ZDx-Vb-IeO">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="50.333333333333336"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="48"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="vMx-N0-Vc2">
-                                <rect key="frame" x="8" y="8" width="304" height="34.333333333333336"/>
+                                <rect key="frame" x="8" y="8" width="304" height="32"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="K98-hq-hvt">
-                                        <rect key="frame" x="0.0" y="0.0" width="32" height="34.333333333333336"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="32" height="32"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="32" id="93t-SQ-4ei"/>
                                             <constraint firstAttribute="width" constant="32" id="h6A-H3-woA"/>
@@ -36,8 +36,27 @@
                                             <action selector="checkButtonClicked:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="wvO-PF-a4u"/>
                                         </connections>
                                     </button>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="D9l-HW-avo">
-                                        <rect key="frame" x="40" y="0.0" width="264" height="34.333333333333336"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="252" verticalHuggingPriority="251" horizontalCompressionResistancePriority="751" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="D9l-HW-avo">
+                                        <rect key="frame" x="40" y="0.0" width="41.333333333333343" height="32"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bsn-Mn-a1R">
+                                        <rect key="frame" x="89.333333333333329" y="0.0" width="166.66666666666669" height="32"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="32" id="lrl-R6-iAS"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cJd-dR-AVc">
+                                        <rect key="frame" x="264" y="0.0" width="40" height="32"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="40" id="DBe-0R-mbx"/>
+                                            <constraint firstAttribute="height" constant="32" id="eD8-AV-iay"/>
+                                        </constraints>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
@@ -65,6 +84,8 @@
             <connections>
                 <outlet property="checkButton" destination="K98-hq-hvt" id="PlU-a0-htf"/>
                 <outlet property="playerNameLabel" destination="D9l-HW-avo" id="fR4-yc-SKJ"/>
+                <outlet property="positionLabel" destination="bsn-Mn-a1R" id="T0G-wp-Pnc"/>
+                <outlet property="skillPointLabel" destination="cJd-dR-AVc" id="rgX-fb-q9a"/>
             </connections>
             <point key="canvasLocation" x="131" y="-11"/>
         </tableViewCell>

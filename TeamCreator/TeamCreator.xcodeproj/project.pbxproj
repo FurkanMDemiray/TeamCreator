@@ -42,6 +42,10 @@
 		DD1A24FA2C58DC4A0020AC04 /* CreateMatchViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD1A24F92C58DC4A0020AC04 /* CreateMatchViewModel.swift */; };
 		DD1A24FE2C594DDC0020AC04 /* CreateMatchCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD1A24FC2C594DDC0020AC04 /* CreateMatchCell.swift */; };
 		DD1A24FF2C594DDC0020AC04 /* CreateMatchCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = DD1A24FD2C594DDC0020AC04 /* CreateMatchCell.xib */; };
+		DD38C18F2C6215680028E515 /* UIColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD38C18E2C6215680028E515 /* UIColor.swift */; };
+		DD38C1912C6264020028E515 /* MatchDetailTeamViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD38C1902C6264020028E515 /* MatchDetailTeamViewModel.swift */; };
+		DD38C1932C6265160028E515 /* VolleyballViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD38C1922C6265160028E515 /* VolleyballViewModel.swift */; };
+		DD38C1952C634C280028E515 /* UIImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD38C1942C634C280028E515 /* UIImage.swift */; };
 		DD3A08A12C5CB7750056C8D7 /* MenuViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = DD3A08A02C5CB7750056C8D7 /* MenuViewController.xib */; };
 		DD3A08A22C5CB7750056C8D7 /* MenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD3A089F2C5CB7750056C8D7 /* MenuViewController.swift */; };
 		DD3A08A52C5E22790056C8D7 /* FirebaseManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD3A08A42C5E22790056C8D7 /* FirebaseManager.swift */; };
@@ -115,6 +119,10 @@
 		DD1A24F92C58DC4A0020AC04 /* CreateMatchViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = CreateMatchViewModel.swift; path = TeamCreator/Screens/HomeScreen/CreateMatchViewModel.swift; sourceTree = SOURCE_ROOT; };
 		DD1A24FC2C594DDC0020AC04 /* CreateMatchCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateMatchCell.swift; sourceTree = "<group>"; };
 		DD1A24FD2C594DDC0020AC04 /* CreateMatchCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CreateMatchCell.xib; sourceTree = "<group>"; };
+		DD38C18E2C6215680028E515 /* UIColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIColor.swift; sourceTree = "<group>"; };
+		DD38C1902C6264020028E515 /* MatchDetailTeamViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MatchDetailTeamViewModel.swift; sourceTree = "<group>"; };
+		DD38C1922C6265160028E515 /* VolleyballViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VolleyballViewModel.swift; sourceTree = "<group>"; };
+		DD38C1942C634C280028E515 /* UIImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIImage.swift; sourceTree = "<group>"; };
 		DD3A089F2C5CB7750056C8D7 /* MenuViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuViewController.swift; sourceTree = "<group>"; };
 		DD3A08A02C5CB7750056C8D7 /* MenuViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MenuViewController.xib; sourceTree = "<group>"; };
 		DD3A08A42C5E22790056C8D7 /* FirebaseManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseManager.swift; sourceTree = "<group>"; };
@@ -208,6 +216,7 @@
 		0871D82E2C5E692100B9EC1E /* Utilities */ = {
 			isa = PBXGroup;
 			children = (
+				DD38C18D2C62155A0028E515 /* Extensions */,
 				0871D82F2C5E694300B9EC1E /* Sport.swift */,
 				0871D8312C5E69C300B9EC1E /* FootballPosition.swift */,
 				0871D8332C5E6A4900B9EC1E /* VolleyballPosition.swift */,
@@ -393,6 +402,15 @@
 			path = CreateMatchCell;
 			sourceTree = "<group>";
 		};
+		DD38C18D2C62155A0028E515 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				DD38C18E2C6215680028E515 /* UIColor.swift */,
+				DD38C1942C634C280028E515 /* UIImage.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
 		DD3A08A32C5E22680056C8D7 /* FirebaseManager */ = {
 			isa = PBXGroup;
 			children = (
@@ -406,6 +424,7 @@
 			children = (
 				DD3A08A92C5E96A40056C8D7 /* VolleyballViewController.swift */,
 				DD3A08AA2C5E96A40056C8D7 /* VolleyballViewController.xib */,
+				DD38C1922C6265160028E515 /* VolleyballViewModel.swift */,
 			);
 			path = MatchDetailVolleyball;
 			sourceTree = "<group>";
@@ -449,6 +468,7 @@
 			children = (
 				DD85DA292C5BB96E00AF1652 /* MatchDetailTeamViewController.swift */,
 				DD85DA2A2C5BB96E00AF1652 /* MatchDetailTeamViewController.xib */,
+				DD38C1902C6264020028E515 /* MatchDetailTeamViewModel.swift */,
 			);
 			path = MatchDetailTeamScreen;
 			sourceTree = "<group>";
@@ -611,10 +631,12 @@
 				084DC9922C61007F00F3356D /* PlayerDetailScreenVC.swift in Sources */,
 				DD85DA242C5BACD400AF1652 /* MatchDetailTeamsCell.swift in Sources */,
 				086B87842C5B60760065CF13 /* AddPlayerScreenVC.swift in Sources */,
+				DD38C18F2C6215680028E515 /* UIColor.swift in Sources */,
 				DD3A08A72C5E253B0056C8D7 /* Player.swift in Sources */,
 				DD1A24FE2C594DDC0020AC04 /* CreateMatchCell.swift in Sources */,
 				0871D8302C5E694300B9EC1E /* Sport.swift in Sources */,
 				DD1A24F32C58CDD70020AC04 /* HomeViewController.swift in Sources */,
+				DD38C1952C634C280028E515 /* UIImage.swift in Sources */,
 				DD85DA272C5BACE200AF1652 /* MatchDetailTeamsViewModel.swift in Sources */,
 				DD3A08AB2C5E96A40056C8D7 /* VolleyballViewController.swift in Sources */,
 				DD1A24E62C57AD660020AC04 /* NetworkManager.swift in Sources */,
@@ -622,6 +644,7 @@
 				08CC858D2C60C54A007A5B2B /* PlayersCardCell.swift in Sources */,
 				DD1A24F72C58DC3E0020AC04 /* CreateMatchViewController.swift in Sources */,
 				DD85DA102C5A82B300AF1652 /* CreateMatchDetailViewController.swift in Sources */,
+				DD38C1912C6264020028E515 /* MatchDetailTeamViewModel.swift in Sources */,
 				DD85DA1F2C5BAC5000AF1652 /* MatchDetailTeamsViewController.swift in Sources */,
 				0871D8342C5E6A4900B9EC1E /* VolleyballPosition.swift in Sources */,
 				0871D8322C5E69C300B9EC1E /* FootballPosition.swift in Sources */,
@@ -631,6 +654,7 @@
 				DD3A08A22C5CB7750056C8D7 /* MenuViewController.swift in Sources */,
 				DD1A24E82C57AE500020AC04 /* HomeViewModel.swift in Sources */,
 				08CC85902C60C901007A5B2B /* PlayersCardCellVM.swift in Sources */,
+				DD38C1932C6265160028E515 /* VolleyballViewModel.swift in Sources */,
 				DD1A24FA2C58DC4A0020AC04 /* CreateMatchViewModel.swift in Sources */,
 				DD85DA122C5A82B300AF1652 /* CreateMatchDetailViewModel.swift in Sources */,
 				DD1A24A42C57AA2A0020AC04 /* SceneDelegate.swift in Sources */,

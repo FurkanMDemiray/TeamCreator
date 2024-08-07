@@ -11,6 +11,8 @@ import Foundation
 protocol CreateMatchDetailViewModelDelegate: AnyObject {
     func didFetchWeather()
     func changeWeatherImage(_ imageName: String)
+    func loadingIndicator()
+    func stopLoadingIndicator()
 }
 
 //MARK: - Protocol
@@ -19,6 +21,9 @@ protocol CreateMatchDetailViewModelProtocol {
     var getTime: String { get }
     var getCity: String { get }
     var getWeather: WeatherModel { get }
+    var setSelectedPlayers: [Player] { get set }
+    var getSetTeam1: [Player] { get set }
+    var getSetTeam2: [Player] { get set }
 
     func fetch()
 }
@@ -28,6 +33,9 @@ final class CreateMatchDetailViewModel {
 
     weak var delegate: CreateMatchDetailViewModelDelegate?
     private var networkManager: NetworkManagerProtocol
+    private var selectedPlayers = [Player]()
+    private var team1 = [Player]()
+    private var team2 = [Player]()
     var longitude: Double?
     var latitude: Double?
     var time: String?
@@ -39,6 +47,7 @@ final class CreateMatchDetailViewModel {
     }
 
     fileprivate func fetchWeather() {
+        delegate?.loadingIndicator()
         guard let longitude, let latitude else { return }
         networkManager.fetch(url: "https://api.openweathermap.org/data/2.5/weather?lat=\(latitude)&lon=\(longitude)&appid=7322abaed58e1f99fa30adbc734b7ae7&units=metric", method: .get, parameters: nil, headers: nil) { [weak self] (result: Result<WeatherModel, Error>) in
             guard let self else { return }
@@ -61,6 +70,7 @@ final class CreateMatchDetailViewModel {
                     self.delegate?.changeWeatherImage("snow")
                 }
                 delegate?.didFetchWeather()
+                delegate?.stopLoadingIndicator()
             case .failure(let error):
                 print(error)
             }
@@ -71,6 +81,33 @@ final class CreateMatchDetailViewModel {
 
 //MARK: - Protocol Extension
 extension CreateMatchDetailViewModel: CreateMatchDetailViewModelProtocol {
+    var getSetTeam1: [Player] {
+        get {
+            team1
+        }
+        set {
+            team1 = newValue
+        }
+    }
+
+    var getSetTeam2: [Player] {
+        get {
+            team2
+        }
+        set {
+            team2 = newValue
+        }
+    }
+
+    var setSelectedPlayers: [Player] {
+        get {
+            return selectedPlayers
+        }
+        set {
+            selectedPlayers = newValue
+        }
+    }
+
     var getWeather: WeatherModel {
         guard let weather else { return WeatherModel(coord: nil, weather: nil, base: nil, main: nil, visibility: nil, wind: nil, clouds: nil, dt: nil, sys: nil, timezone: nil, id: nil, name: nil, cod: nil) }
         return weather

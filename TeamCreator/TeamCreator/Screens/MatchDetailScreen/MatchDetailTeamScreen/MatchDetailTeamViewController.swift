@@ -7,7 +7,7 @@
 
 import UIKit
 
-class MatchDetailTeamViewController: UIViewController {
+final class MatchDetailTeamViewController: UIViewController {
 
     @IBOutlet private weak var gkImage: UIImageView!
     @IBOutlet private weak var gkLabel: UILabel!
@@ -32,14 +32,93 @@ class MatchDetailTeamViewController: UIViewController {
     @IBOutlet private weak var secondCFImage: UIImageView!
     @IBOutlet private weak var secondCFLabel: UILabel!
 
+    var viewModel: MatchDetailTeamViewModelProtocol! {
+        didSet {
+            viewModel.delegate = self
+        }
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
+        configureImages()
+        setPlayers()
     }
 
+    private func configureImages() {
+        gkImage.layer.cornerRadius = gkImage.frame.width / 2
+        gkImage.clipsToBounds = true
+        rbImage.layer.cornerRadius = rbImage.frame.width / 2
+        rbImage.clipsToBounds = true
+        cbImage.layer.cornerRadius = cbImage.frame.width / 2
+        cbImage.clipsToBounds = true
+        secondCBImage.layer.cornerRadius = secondCBImage.frame.width / 2
+        secondCBImage.clipsToBounds = true
+        lbImage.layer.cornerRadius = lbImage.frame.width / 2
+        lbImage.clipsToBounds = true
+        rwImage.layer.cornerRadius = rwImage.frame.width / 2
+        rwImage.clipsToBounds = true
+        cmImage.layer.cornerRadius = cmImage.frame.width / 2
+        cmImage.clipsToBounds = true
+        secondCMImage.layer.cornerRadius = secondCMImage.frame.width / 2
+        secondCMImage.clipsToBounds = true
+        lwImage.layer.cornerRadius = lwImage.frame.width / 2
+        lwImage.clipsToBounds = true
+        cfImage.layer.cornerRadius = cfImage.frame.width / 2
+        cfImage.clipsToBounds = true
+        secondCFImage.layer.cornerRadius = secondCFImage.frame.width / 2
+        secondCFImage.clipsToBounds = true
+    }
 
+    private func setPlayers() {
+        let players = viewModel.getTeam
+        for player in players {
+            switch player.position {
+            case "Goalkeeper":
+                gkImage.loadImage(from: player.picture)
+                gkLabel.text = player.name
+            case "Left Back":
+                lbImage.loadImage(from: player.picture)
+                lbLabel.text = player.name
+            case "Center Back":
+                if cbLabel.text == nil {
+                    cbImage.loadImage(from: player.picture)
+                    cbLabel.text = player.name
+                } else {
+                    secondCBImage.loadImage(from: player.picture)
+                    secondCBLabel.text = player.name
+                }
+            case "Right Back":
+                rbImage.loadImage(from: player.picture)
+                rbLabel.text = player.name
+            case "Center Midfielder":
+                if cmLabel.text == nil {
+                    cmImage.loadImage(from: player.picture)
+                    cmLabel.text = player.name
+                } else {
+                    secondCMImage.loadImage(from: player.picture)
+                    secondCMLabel.text = player.name
+                }
+            case "Right Winger":
+                rwImage.loadImage(from: player.picture)
+                rwLabel.text = player.name
+            case "Left Winger":
+                lwImage.loadImage(from: player.picture)
+                lwLabel.text = player.name
+            case "Center Forward":
+                if cfLabel.text == nil {
+                    cfImage.loadImage(from: player.picture)
+                    cfLabel.text = player.name
+                } else {
+                    secondCFImage.loadImage(from: player.picture)
+                    secondCFLabel.text = player.name
+                }
+            default:
+                break
+            }
+        }
+    }
+}
 
+extension MatchDetailTeamViewController: MatchDetailTeamViewModelDelegate {
 
 }
