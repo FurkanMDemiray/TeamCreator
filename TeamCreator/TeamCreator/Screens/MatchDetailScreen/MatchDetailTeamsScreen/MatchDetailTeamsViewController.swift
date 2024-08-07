@@ -7,7 +7,7 @@
 
 import UIKit
 
-class MatchDetailTeamsViewController: UIViewController {
+final class MatchDetailTeamsViewController: UIViewController {
 
     @IBOutlet private weak var collectionView: UICollectionView!
 
@@ -35,6 +35,7 @@ extension MatchDetailTeamsViewController: MatchDetailTeamsViewModelDelegate {
 
 }
 
+//MARK: - CollectionView
 extension MatchDetailTeamsViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return viewModel.team1.count + viewModel.team2.count

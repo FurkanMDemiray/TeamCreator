@@ -91,20 +91,6 @@ final class MatchDetailTeamViewController: UIViewController {
             }
         }
     }
-
-}
-extension UIImageView {
-    func loadImage(from binaryString: String?) {
-        // encode
-        guard let binaryString = binaryString else { return }
-        let imageData = Data(base64Encoded: binaryString, options: .ignoreUnknownCharacters)
-        // decode
-        guard let data = imageData else { return }
-        let image = UIImage(data: data)
-        DispatchQueue.main.async {
-            self.image = image
-        }
-    }
 }
 
 extension MatchDetailTeamViewController: MatchDetailTeamViewModelDelegate {

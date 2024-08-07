@@ -10,6 +10,8 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="VolleyballViewController" customModule="TeamCreator" customModuleProvider="target">
             <connections>
+                <outlet property="liberoImage" destination="FmN-fW-hgQ" id="ivx-Rm-8Lg"/>
+                <outlet property="liberoLabel" destination="NXb-Ab-HXb" id="a0x-xX-iE1"/>
                 <outlet property="mbImage" destination="X8D-fc-oHM" id="hDW-7V-fGv"/>
                 <outlet property="mbLabel" destination="5Iq-SJ-eYo" id="FkU-d2-yfS"/>
                 <outlet property="oImage" destination="PRu-Aq-bMA" id="cq2-Jw-2Ht"/>
@@ -20,8 +22,6 @@
                 <outlet property="rhLabel" destination="EhW-tM-DC8" id="hBZ-FC-qTm"/>
                 <outlet property="sImage" destination="vuA-f4-T1r" id="ZAc-P5-DXu"/>
                 <outlet property="sLabel" destination="Ffv-rs-VBw" id="lkr-Vq-cvz"/>
-                <outlet property="secondMBImage" destination="FmN-fW-hgQ" id="ivx-Rm-8Lg"/>
-                <outlet property="secondMBLabel" destination="NXb-Ab-HXb" id="a0x-xX-iE1"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -133,7 +133,7 @@
                                     <nil key="textColor"/>
                                     <nil key="highlightedColor"/>
                                 </label>
-                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="MB" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="NXb-Ab-HXb">
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="L" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="NXb-Ab-HXb">
                                     <rect key="frame" x="76" y="0.0" width="60" height="20.333333333333332"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
