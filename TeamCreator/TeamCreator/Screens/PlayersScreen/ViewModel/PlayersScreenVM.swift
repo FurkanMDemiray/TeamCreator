@@ -9,6 +9,7 @@ import Foundation
 
 protocol PlayersScreenVMDelegate: AnyObject {
     func navigateToAddPlayers(with selectedSport: Sport)
+    func navigateToDetail(at indexPath: IndexPath)
 }
 
 protocol PlayersScreenVMProtocol {
@@ -16,10 +17,11 @@ protocol PlayersScreenVMProtocol {
     var view: PlayersScreenVCProtocol? { get set }
     func viewWillAppear()
     func viewDidLoad()
-    func numberOfRows() -> Int
-    func cellForRow(at indexPath: IndexPath) -> PlayerCellVM
-    func deletePlayer(at indexPath: IndexPath)
+    func numberOfItem(in section: Int) -> Int
+    func cellForItem(at indexPath: IndexPath) -> PlayersCardCellVM
     func addButtonTapped()
+    func cellTapped(at indexPath: IndexPath)
+    func updateCollectionData()
 }
 
 final class PlayersScreenVM {
@@ -41,7 +43,8 @@ final class PlayersScreenVM {
             case .success(let data):
                 DispatchQueue.main.async {
                     self.players = data.filter { $0.sport == HomeViewModel.whichSport }
-                    self.view?.reloadTableView()
+                    print("fetchplayers")
+                    self.view?.reloadCollectionView()
                 }
             case .failure(let error):
                 print(error.localizedDescription)
@@ -52,40 +55,33 @@ final class PlayersScreenVM {
 }
 
 extension PlayersScreenVM: PlayersScreenVMProtocol {
-
     func viewWillAppear() {
         fetchPlayers()
     }
 
     func viewDidLoad() {
         view?.setupNavBar()
-        view?.registerTableView()
+        view?.registerCollectionView()
     }
 
-
-    func numberOfRows() -> Int {
-        return players.count
+    func numberOfItem(in section: Int) -> Int {
+        players.count
     }
-
-    func cellForRow(at indexPath: IndexPath) -> PlayerCellVM {
-        let playerCellVM = PlayerCellVM(player: players[indexPath.row])
-        return playerCellVM
-    }
-
-    func deletePlayer(at indexPath: IndexPath) {
-        let player = players[indexPath.row]
-        firebaseManager.deletePlayer(player: player) { result in
-            switch result {
-            case .success:
-                self.players.remove(at: indexPath.row)
-                self.view?.reloadTableView()
-            case .failure(let error):
-                print(error.localizedDescription)
-            }
-        }
+    
+    func cellForItem(at indexPath: IndexPath) -> PlayersCardCellVM {
+        let playersCardCellVM = PlayersCardCellVM(player: players[indexPath.row])
+        return playersCardCellVM
     }
 
     func addButtonTapped() {
         delegate?.navigateToAddPlayers(with: selectedSport)
+    }
+    
+    func cellTapped(at indexPath: IndexPath) {
+        delegate?.navigateToDetail(at: indexPath)
+    }
+    
+    func updateCollectionData() {
+        fetchPlayers()
     }
 }

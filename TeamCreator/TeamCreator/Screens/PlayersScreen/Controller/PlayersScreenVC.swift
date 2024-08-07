@@ -9,8 +9,8 @@ import UIKit
 
 protocol PlayersScreenVCProtocol: AnyObject {
     func setupNavBar()
-    func registerTableView()
-    func reloadTableView()
+    func registerCollectionView()
+    func reloadCollectionView()
 }
 
 final class PlayersScreenVC: UIViewController {
@@ -22,7 +22,7 @@ final class PlayersScreenVC: UIViewController {
         }
     }
     
-    @IBOutlet private weak var tableView: UITableView!
+    @IBOutlet private weak var collectionView: UICollectionView!
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -46,60 +46,69 @@ extension PlayersScreenVC: PlayersScreenVCProtocol {
     @objc private func addButtonTapped() {
         viewModel.addButtonTapped()
     }
-
-    func registerTableView() {
-        let playerCellName = String(describing: PlayerCell.self)
-        let playerCellNib = UINib(nibName: playerCellName, bundle: nil)
-        tableView.register(playerCellNib, forCellReuseIdentifier: playerCellName)
+    
+    func registerCollectionView() {
+        let playerCardCell = String(describing: PlayersCardCell.self)
+        let playerCellNib = UINib(nibName: playerCardCell, bundle: nil)
+        collectionView.register(playerCellNib, forCellWithReuseIdentifier: playerCardCell)
     }
-
-    func reloadTableView() {
-        tableView.reloadData()
+    
+    func reloadCollectionView() {
+        collectionView.reloadData()
     }
 }
 
-extension PlayersScreenVC: UITableViewDataSource {
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        viewModel.numberOfRows()
+extension PlayersScreenVC: UICollectionViewDataSource {
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        viewModel.numberOfItem(in: section)
     }
-
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        if let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: PlayerCell.self)) as? PlayerCell {
-            cell.prepareCell(with: viewModel.cellForRow(at: indexPath))
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        if let cell = collectionView.dequeueReusableCell(withReuseIdentifier: String(describing: PlayersCardCell.self), for: indexPath) as? PlayersCardCell {
+            cell.prepareCell(with: viewModel.cellForItem(at: indexPath))
             return cell
         }
-        return UITableViewCell()
-    }
-
-    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
-        if editingStyle == .delete {
-            let alert = UIAlertController(title: "Delete", message: "Are you sure?", preferredStyle: .alert)
-            alert.addAction(UIAlertAction(title: "Cancel", style: .cancel))
-            alert.addAction(UIAlertAction(title: "Delete", style: .destructive, handler: { _ in
-                self.viewModel.deletePlayer(at: indexPath)
-            }))
-            present(alert, animated: true)
-        }
+        return UICollectionViewCell()
     }
 }
 
-extension PlayersScreenVC: UITableViewDelegate {
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        print("tapped")
+extension PlayersScreenVC: UICollectionViewDelegate {
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        viewModel.cellTapped(at: indexPath)
     }
+}
 
-    func tableView(_ tableView: UITableView, editingStyleForRowAt indexPath: IndexPath) -> UITableViewCell.EditingStyle {
-        return .delete
+extension PlayersScreenVC: UICollectionViewDelegateFlowLayout {
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        let padding: CGFloat = 10
+        let collectionViewWidth = collectionView.frame.size.width - padding
+        let cellWidth = collectionViewWidth / 2
+        let cellHeight = cellWidth * (348/224)
+        return CGSize(width: cellWidth, height: cellHeight)
     }
 }
 
 extension PlayersScreenVC: PlayersScreenVMDelegate {
+    func navigateToDetail(at indexPath: IndexPath) {
+        let playerCellVM = viewModel.cellForItem(at: indexPath)
+        let detailVC = PlayerDetailScreenVC()
+        let detailVM = PlayerDetailScreenVM(player: playerCellVM.player)
+        detailVM.delegate = self
+        detailVC.viewModel = detailVM as any PLayerDetailScreenVMProtocol
+        navigationController?.pushViewController(detailVC, animated: true)
+    }
+    
     func navigateToAddPlayers(with selectedSport: Sport) {
         let addPlayerVC = AddPlayerScreenVC()
         let addPlayerVM = AddPlayerScreenVM(selectedSport: selectedSport)
         addPlayerVC.viewModel = addPlayerVM
         navigationController?.pushViewController(addPlayerVC, animated: true)
     }
+}
 
-
+extension PlayersScreenVC: PlayerDetailScreenVmDelegate {
+    func playerDetailScreenDidDeletePlayer() {
+        viewModel.updateCollectionData()
+    }
 }
