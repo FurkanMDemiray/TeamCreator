@@ -17,11 +17,12 @@ final class PlayersCardCell: UICollectionViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        
+        setupCard()
     }
     
     private func setupCard() {
-        
+        cardNameLabel.adjustsFontSizeToFitWidth = true
+        cardNameLabel.minimumScaleFactor = 0.5
     }
     
     func prepareCell(with model: PlayersCardCellVM) {
