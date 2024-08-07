@@ -20,13 +20,15 @@ final class MatchDetailTeamsViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         configureCollectionView()
-
     }
 
     private func configureCollectionView() {
         collectionView.delegate = self
         collectionView.dataSource = self
         collectionView.register(UINib(nibName: MatchDetailTeamsCell.matchDetailTeamsCellId, bundle: nil), forCellWithReuseIdentifier: MatchDetailTeamsCell.matchDetailTeamsCellId)
+        let layout = UICollectionViewFlowLayout()
+        layout.scrollDirection = .vertical
+        collectionView.collectionViewLayout = layout
     }
 
 }
@@ -35,31 +37,54 @@ extension MatchDetailTeamsViewController: MatchDetailTeamsViewModelDelegate {
 
 }
 
-//MARK: - CollectionView
+// MARK: - CollectionView
 extension MatchDetailTeamsViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return viewModel.team1.count + viewModel.team2.count
+        return max(viewModel.team1.count, viewModel.team2.count) * 2
     }
 
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: MatchDetailTeamsCell.matchDetailTeamsCellId, for: indexPath) as! MatchDetailTeamsCell
-        cell.configure(with: indexPath.row < viewModel.team1.count ? viewModel.team1[indexPath.row] : viewModel.team2[indexPath.row - viewModel.team1.count])
+        if indexPath.row % 2 == 0 {
+            let index = indexPath.row / 2
+            if index < viewModel.team1.count {
+                cell.configure(with: viewModel.team1[index])
+            }
+        } else {
+            let index = indexPath.row / 2
+            if index < viewModel.team2.count {
+                cell.configure(with: viewModel.team2[index])
+            }
+        }
         return cell
     }
 }
 
 extension MatchDetailTeamsViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-
+        // Seçilen öğeye göre işlem yap
     }
 }
 
 extension MatchDetailTeamsViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        let width = (collectionView.frame.width - 10) / 2
+        let width = collectionView.frame.width / 2
         let height: CGFloat = 120
         return CGSize(width: width, height: height)
     }
+
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
+        return UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
+    }
+
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
+        return 0
+    }
+
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
+        return 0
+    }
 }
+
 
 

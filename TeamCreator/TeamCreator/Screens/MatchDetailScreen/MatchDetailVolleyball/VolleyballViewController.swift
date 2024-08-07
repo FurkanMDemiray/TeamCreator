@@ -30,7 +30,23 @@ final class VolleyballViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        configureImages()
         setPlayers()
+    }
+
+    private func configureImages() {
+        oImage.layer.cornerRadius = oImage.frame.width / 2
+        oImage.clipsToBounds = true
+        mbImage.layer.cornerRadius = mbImage.frame.width / 2
+        mbImage.clipsToBounds = true
+        rhImage.layer.cornerRadius = rhImage.frame.width / 2
+        rhImage.clipsToBounds = true
+        ohImage.layer.cornerRadius = ohImage.frame.width / 2
+        ohImage.clipsToBounds = true
+        liberoImage.layer.cornerRadius = liberoImage.frame.width / 2
+        liberoImage.clipsToBounds = true
+        sImage.layer.cornerRadius = sImage.frame.width / 2
+        sImage.clipsToBounds = true
     }
 
     private func setPlayers() {

@@ -26,13 +26,7 @@ class MatchDetailTeamsCell: UICollectionViewCell {
         playerNameLabel.text = player.name
         skillPointLabel.text = "\(player.skillPoint ?? 0)"
         playerPositionLabel.text = player.position
-        encodeImage(model: player)
-    }
-
-    private func encodeImage(model: Player) {
-        let imageData = Data(base64Encoded: model.picture ?? "")
-        let image = UIImage(data: imageData ?? Data())
-        playerImageView.image = image
+        playerImageView.loadImage(from: player.picture)
     }
 
     private func configureImageView() {
