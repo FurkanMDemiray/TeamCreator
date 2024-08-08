@@ -7,7 +7,7 @@
 
 import UIKit
 
-class MatchDetailTeamsCell: UICollectionViewCell {
+final class MatchDetailTeamsCell: UICollectionViewCell {
 
     @IBOutlet private weak var playerImageView: UIImageView!
     @IBOutlet private weak var playerNameLabel: UILabel!
