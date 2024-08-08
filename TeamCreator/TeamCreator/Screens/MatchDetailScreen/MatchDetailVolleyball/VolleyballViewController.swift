@@ -57,21 +57,11 @@ final class VolleyballViewController: UIViewController {
                 sImage.loadImage(from: player.picture)
                 sLabel.text = player.name
             case "Outside Hitter":
-                if ohLabel.text == nil {
-                    ohImage.loadImage(from: player.picture)
-                    ohLabel.text = player.name
-                } else {
-                    rhImage.loadImage(from: player.picture)
-                    rhLabel.text = player.name
-                }
+                ohImage.loadImage(from: player.picture)
+                ohLabel.text = player.name
             case "Middle Blocker":
-                if mbLabel.text == nil {
-                    mbImage.loadImage(from: player.picture)
-                    mbLabel.text = player.name
-                } else {
-                    liberoImage.loadImage(from: player.picture)
-                    liberoLabel.text = player.name
-                }
+                mbImage.loadImage(from: player.picture)
+                mbLabel.text = player.name
             case "Opposite":
                 oImage.loadImage(from: player.picture)
                 oLabel.text = player.name

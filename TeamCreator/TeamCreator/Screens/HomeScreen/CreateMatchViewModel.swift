@@ -25,12 +25,14 @@ protocol CreateMatchViewModelProtocol {
     var getPlayersCount: Int { get }
     var getPlayers: [Player] { get }
     var getSelectedPlayers: [Player] { get }
+    var getPlayersTmp: [Player] { get }
     var getTeam1: [Player] { get }
     var getTeam2: [Player] { get }
 
     func fetchPlayers()
     func addSelectedPlayer(indexPath: IndexPath)
     func setTeams()
+    func refreshSelectedPlayers()
 }
 
 final class CreateMatchViewModel: NSObject {
@@ -47,6 +49,7 @@ final class CreateMatchViewModel: NSObject {
     private var locationData: CLLocation?
     private var players = [Player]()
     private var selectedPlayers = [Player]()
+    private var playersTmp = [Player]()
     private var team1 = [Player]()
     private var team2 = [Player]()
 
@@ -68,8 +71,8 @@ final class CreateMatchViewModel: NSObject {
     // Volleyball position limits
     let volleyballPositionLimits: [String: Int] = [
         "Setter": 1,
-        "Outside Hitter": 2,
-        "Middle Blocker": 2,
+        "Outside Hitter": 1,
+        "Middle Blocker": 1,
         "Opposite": 1,
         "Libero": 1,
         "Right Side Hitter": 1
@@ -108,9 +111,12 @@ final class CreateMatchViewModel: NSObject {
         var team1Limits = positionLimits
         var team2Limits = positionLimits
 
+        // Fisher-Yates shuffle
+        var shuffledPlayers = players.shuffled()
+
         var positionGroups = [String: [Player]]()
         for position in positions {
-            positionGroups[position] = players.filter { $0.position == position }
+            positionGroups[position] = shuffledPlayers.filter { $0.position == position }
         }
 
         for position in positions {
@@ -131,25 +137,88 @@ final class CreateMatchViewModel: NSObject {
                 }
             }
         }
+
+        // Distribute remaining players if any
+        var remainingPlayers = shuffledPlayers.filter { !team1.contains($0) && !team2.contains($0) }
+        for player in remainingPlayers {
+            if team1.count <= team2.count {
+                team1.append(player)
+            } else {
+                team2.append(player)
+            }
+        }
+
         return (team1, team2)
     }
 
     fileprivate func setFootballTeams() {
-        let teams = splitIntoTeams(players: players, positions: footballPositions, positionLimits: footballPositionLimits)
+        let teams = splitIntoTeams(players: selectedPlayers, positions: footballPositions, positionLimits: footballPositionLimits)
         team1 = teams.0
         team2 = teams.1
     }
 
     fileprivate func setVolleyballTeams() {
-        let teams = splitIntoTeams(players: players, positions: volleyballPositions, positionLimits: volleyballPositionLimits)
+        let teams = splitIntoTeams(players: selectedPlayers, positions: volleyballPositions, positionLimits: volleyballPositionLimits)
         team1 = teams.0
         team2 = teams.1
     }
 
+    fileprivate func writePositionsShortVolleyball() {
+        playersTmp = players
+        for (index, var player) in playersTmp.enumerated() {
+            switch player.position {
+            case "Setter":
+                player.position = "S"
+            case "Outside Hitter":
+                player.position = "OH"
+            case "Middle Blocker":
+                player.position = "MB"
+            case "Opposite":
+                player.position = "O"
+            case "Libero":
+                player.position = "L"
+            case "Right Side Hitter":
+                player.position = "RH"
+            default:
+                break
+            }
+            playersTmp[index] = player
+        }
+    }
+
+    fileprivate func writePositionsShortFootball() {
+        playersTmp = players
+        for (index, var player) in playersTmp.enumerated() {
+            switch player.position {
+            case "Goalkeeper":
+                player.position = "GK"
+            case "Left Back":
+                player.position = "LB"
+            case "Center Back":
+                player.position = "CB"
+            case "Right Back":
+                player.position = "RB"
+            case "Center Midfielder":
+                player.position = "CM"
+            case "Right Winger":
+                player.position = "RW"
+            case "Left Winger":
+                player.position = "LW"
+            case "Center Forward":
+                player.position = "CF"
+            default:
+                break
+            }
+            playersTmp[index] = player
+        }
+    }
 }
 
 //MARK: - Protocol Extension
 extension CreateMatchViewModel: CreateMatchViewModelProtocol {
+    func refreshSelectedPlayers() {
+        selectedPlayers.removeAll()
+    }
 
     func setTeams() {
         if HomeViewModel.whichSport == "Volleyball" {
@@ -186,6 +255,15 @@ extension CreateMatchViewModel: CreateMatchViewModelProtocol {
 
     var getPlayers: [Player] {
         players
+    }
+
+    var getPlayersTmp: [Player] {
+        if HomeViewModel.whichSport == "Volleyball" {
+            writePositionsShortVolleyball()
+        } else {
+            writePositionsShortFootball()
+        }
+        return playersTmp
     }
 
     var getPlayersCount: Int {
