@@ -7,7 +7,6 @@
 
 import UIKit
 
-
 final class CreateMatchViewController: UIViewController {
 
     @IBOutlet private weak var locationTimeLabel: UILabel!
@@ -24,6 +23,7 @@ final class CreateMatchViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         viewModel.fetchPlayers()
+        viewModel.refreshSelectedPlayers()
     }
 
     override func viewDidLoad() {
@@ -80,21 +80,22 @@ extension CreateMatchViewController: CreateMatchViewModelDelegate {
 //MARK: - TableView Delegate & DataSource
 extension CreateMatchViewController: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        viewModel.getPlayersCount
+        return viewModel.getPlayersCount
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: CreateMatchCell.createMatchCellId, for: indexPath) as! CreateMatchCell
-        cell.configure(with: viewModel.getPlayers[indexPath.row])
+        let player = viewModel.getPlayersTmp[indexPath.row]
+        let isChecked = viewModel.getSelectedPlayers.contains(player)
+        cell.configure(with: player, isChecked: isChecked)
         return cell
     }
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if let cell = tableView.cellForRow(at: indexPath) as? CreateMatchCell {
+        if tableView.cellForRow(at: indexPath) is CreateMatchCell {
             viewModel.addSelectedPlayer(indexPath: indexPath)
-            cell.toggleCheckButton()
+            tableView.reloadRows(at: [indexPath], with: .automatic)
         }
     }
 }
-
 

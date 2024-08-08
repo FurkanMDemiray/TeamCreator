@@ -46,6 +46,12 @@ final class CreateMatchDetailViewModel {
         self.networkManager = networkManager
     }
 
+    deinit {
+        selectedPlayers.removeAll()
+        team1.removeAll()
+        team2.removeAll()
+    }
+
     fileprivate func fetchWeather() {
         delegate?.loadingIndicator()
         guard let longitude, let latitude else { return }
@@ -101,7 +107,7 @@ extension CreateMatchDetailViewModel: CreateMatchDetailViewModelProtocol {
 
     var setSelectedPlayers: [Player] {
         get {
-            return selectedPlayers
+            selectedPlayers
         }
         set {
             selectedPlayers = newValue

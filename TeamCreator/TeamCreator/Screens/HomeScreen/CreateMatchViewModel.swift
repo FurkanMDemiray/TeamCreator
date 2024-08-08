@@ -25,12 +25,14 @@ protocol CreateMatchViewModelProtocol {
     var getPlayersCount: Int { get }
     var getPlayers: [Player] { get }
     var getSelectedPlayers: [Player] { get }
+    var getPlayersTmp: [Player] { get }
     var getTeam1: [Player] { get }
     var getTeam2: [Player] { get }
 
     func fetchPlayers()
     func addSelectedPlayer(indexPath: IndexPath)
     func setTeams()
+    func refreshSelectedPlayers()
 }
 
 final class CreateMatchViewModel: NSObject {
@@ -47,6 +49,7 @@ final class CreateMatchViewModel: NSObject {
     private var locationData: CLLocation?
     private var players = [Player]()
     private var selectedPlayers = [Player]()
+    private var playersTmp = [Player]()
     private var team1 = [Player]()
     private var team2 = [Player]()
 
@@ -108,9 +111,12 @@ final class CreateMatchViewModel: NSObject {
         var team1Limits = positionLimits
         var team2Limits = positionLimits
 
+        // Fisher-Yates shuffle
+        var shuffledPlayers = players.shuffled()
+
         var positionGroups = [String: [Player]]()
         for position in positions {
-            positionGroups[position] = players.filter { $0.position == position }
+            positionGroups[position] = shuffledPlayers.filter { $0.position == position }
         }
 
         for position in positions {
@@ -131,23 +137,35 @@ final class CreateMatchViewModel: NSObject {
                 }
             }
         }
+
+        // Distribute remaining players if any
+        var remainingPlayers = shuffledPlayers.filter { !team1.contains($0) && !team2.contains($0) }
+        for player in remainingPlayers {
+            if team1.count <= team2.count {
+                team1.append(player)
+            } else {
+                team2.append(player)
+            }
+        }
+
         return (team1, team2)
     }
 
     fileprivate func setFootballTeams() {
-        let teams = splitIntoTeams(players: players, positions: footballPositions, positionLimits: footballPositionLimits)
+        let teams = splitIntoTeams(players: selectedPlayers, positions: footballPositions, positionLimits: footballPositionLimits)
         team1 = teams.0
         team2 = teams.1
     }
 
     fileprivate func setVolleyballTeams() {
-        let teams = splitIntoTeams(players: players, positions: volleyballPositions, positionLimits: volleyballPositionLimits)
+        let teams = splitIntoTeams(players: selectedPlayers, positions: volleyballPositions, positionLimits: volleyballPositionLimits)
         team1 = teams.0
         team2 = teams.1
     }
 
     fileprivate func writePositionsShortVolleyball() {
-        for (index, var player) in players.enumerated() {
+        playersTmp = players
+        for (index, var player) in playersTmp.enumerated() {
             switch player.position {
             case "Setter":
                 player.position = "S"
@@ -164,12 +182,13 @@ final class CreateMatchViewModel: NSObject {
             default:
                 break
             }
-            players[index] = player
+            playersTmp[index] = player
         }
     }
 
     fileprivate func writePositionsShortFootball() {
-        for (index, var player) in players.enumerated() {
+        playersTmp = players
+        for (index, var player) in playersTmp.enumerated() {
             switch player.position {
             case "Goalkeeper":
                 player.position = "GK"
@@ -190,13 +209,27 @@ final class CreateMatchViewModel: NSObject {
             default:
                 break
             }
-            players[index] = player
+            playersTmp[index] = player
         }
+    }
+}
+
+extension Array {
+    func shuffled() -> Array {
+        var elements = self
+        for index in elements.indices.dropLast() {
+            let randomIndex = index.advanced(by: Int.random(in: 0..<(elements.distance(from: index, to: elements.endIndex))))
+            elements.swapAt(index, randomIndex)
+        }
+        return elements
     }
 }
 
 //MARK: - Protocol Extension
 extension CreateMatchViewModel: CreateMatchViewModelProtocol {
+    func refreshSelectedPlayers() {
+        selectedPlayers.removeAll()
+    }
 
     func setTeams() {
         if HomeViewModel.whichSport == "Volleyball" {
@@ -232,12 +265,16 @@ extension CreateMatchViewModel: CreateMatchViewModelProtocol {
     }
 
     var getPlayers: [Player] {
+        players
+    }
+
+    var getPlayersTmp: [Player] {
         if HomeViewModel.whichSport == "Volleyball" {
             writePositionsShortVolleyball()
         } else {
             writePositionsShortFootball()
         }
-        return players
+        return playersTmp
     }
 
     var getPlayersCount: Int {

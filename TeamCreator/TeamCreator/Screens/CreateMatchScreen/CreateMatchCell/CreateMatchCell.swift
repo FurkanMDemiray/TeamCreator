@@ -7,7 +7,7 @@
 
 import UIKit
 
-class CreateMatchCell: UITableViewCell {
+final class CreateMatchCell: UITableViewCell {
 
     static let createMatchCellId = "CreateMatchCell"
     @IBOutlet private weak var playerNameLabel: UILabel!
@@ -22,10 +22,13 @@ class CreateMatchCell: UITableViewCell {
         configureButton()
     }
 
-    func configure(with player: Player) {
+    func configure(with player: Player, isChecked: Bool) {
         playerNameLabel.text = player.name
         positionLabel.text = player.position
         skillPointLabel.text = "\(player.skillPoint ?? 0)"
+        self.isChecked = isChecked
+        let imageName = isChecked ? "checkmark.square" : "square"
+        checkButton.setImage(UIImage(systemName: imageName), for: .normal)
     }
 
     private func configureButton() {
@@ -39,8 +42,6 @@ class CreateMatchCell: UITableViewCell {
     }
 
     @IBAction func checkButtonClicked(_ sender: UIButton) {
-        isChecked.toggle()
-        let imageName = isChecked ? "checkmark.square" : "square"
-        checkButton.setImage(UIImage(systemName: imageName), for: .normal)
+        toggleCheckButton()
     }
 }

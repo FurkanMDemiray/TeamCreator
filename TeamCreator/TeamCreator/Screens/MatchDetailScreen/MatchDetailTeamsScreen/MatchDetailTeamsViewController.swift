@@ -40,7 +40,7 @@ extension MatchDetailTeamsViewController: MatchDetailTeamsViewModelDelegate {
 // MARK: - CollectionView
 extension MatchDetailTeamsViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return max(viewModel.team1.count, viewModel.team2.count) * 2
+        return viewModel.team1.count + viewModel.team2.count
     }
 
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
