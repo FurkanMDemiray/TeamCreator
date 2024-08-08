@@ -108,16 +108,14 @@ extension PlayerDetailScreenVM: PLayerDetailScreenVMProtocol {
         player.position = position
         player.skillPoint = skill
         player.picture = image
-        print("updated player is : \(player)")
         
         firebaseManager.updatePlayer(player: player) { result in
             switch result {
             case .success():
-                print("Player updated successfully")
+                self.delegate?.playerDetailScreenDidEditPlayer()
             case .failure(let error):
                 print("Failed to update player: \(error.localizedDescription)")
             }
         }
-        self.delegate?.playerDetailScreenDidEditPlayer()
     }
 }

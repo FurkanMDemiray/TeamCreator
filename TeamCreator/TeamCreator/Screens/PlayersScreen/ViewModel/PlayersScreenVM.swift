@@ -43,6 +43,7 @@ final class PlayersScreenVM {
             case .success(let data):
                 DispatchQueue.main.async {
                     self.players = data.filter { $0.sport == HomeViewModel.whichSport }
+                    print(self.players.first?.name as Any)
                     self.view?.reloadCollectionView()
                 }
             case .failure(let error):
@@ -50,7 +51,6 @@ final class PlayersScreenVM {
             }
         }
     }
-
 }
 
 extension PlayersScreenVM: PlayersScreenVMProtocol {
