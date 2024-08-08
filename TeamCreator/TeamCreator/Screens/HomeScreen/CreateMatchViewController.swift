@@ -94,7 +94,7 @@ extension CreateMatchViewController: UITableViewDataSource, UITableViewDelegate 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if tableView.cellForRow(at: indexPath) is CreateMatchCell {
             viewModel.addSelectedPlayer(indexPath: indexPath)
-            tableView.reloadRows(at: [indexPath], with: .automatic)
+            tableView.reloadRows(at: [indexPath], with: .right)
         }
     }
 }
