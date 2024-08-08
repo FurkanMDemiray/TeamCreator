@@ -146,6 +146,53 @@ final class CreateMatchViewModel: NSObject {
         team2 = teams.1
     }
 
+    fileprivate func writePositionsShortVolleyball() {
+        for (index, var player) in players.enumerated() {
+            switch player.position {
+            case "Setter":
+                player.position = "S"
+            case "Outside Hitter":
+                player.position = "OH"
+            case "Middle Blocker":
+                player.position = "MB"
+            case "Opposite":
+                player.position = "O"
+            case "Libero":
+                player.position = "L"
+            case "Right Side Hitter":
+                player.position = "RH"
+            default:
+                break
+            }
+            players[index] = player
+        }
+    }
+
+    fileprivate func writePositionsShortFootball() {
+        for (index, var player) in players.enumerated() {
+            switch player.position {
+            case "Goalkeeper":
+                player.position = "GK"
+            case "Left Back":
+                player.position = "LB"
+            case "Center Back":
+                player.position = "CB"
+            case "Right Back":
+                player.position = "RB"
+            case "Center Midfielder":
+                player.position = "CM"
+            case "Right Winger":
+                player.position = "RW"
+            case "Left Winger":
+                player.position = "LW"
+            case "Center Forward":
+                player.position = "CF"
+            default:
+                break
+            }
+            players[index] = player
+        }
+    }
 }
 
 //MARK: - Protocol Extension
@@ -185,7 +232,12 @@ extension CreateMatchViewModel: CreateMatchViewModelProtocol {
     }
 
     var getPlayers: [Player] {
-        players
+        if HomeViewModel.whichSport == "Volleyball" {
+            writePositionsShortVolleyball()
+        } else {
+            writePositionsShortFootball()
+        }
+        return players
     }
 
     var getPlayersCount: Int {
