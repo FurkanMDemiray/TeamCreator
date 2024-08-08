@@ -238,3 +238,12 @@ extension PlayerDetailScreenVC: UIPickerViewDelegate {
         detailPositionTextField.text = viewModel.titleForRow(row: row)
     }
 }
+
+extension PlayerDetailScreenVC: UITextFieldDelegate {
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        if textField == detailNameTextField {
+            detailPositionTextField.becomeFirstResponder()
+        }
+        return true
+    }
+}

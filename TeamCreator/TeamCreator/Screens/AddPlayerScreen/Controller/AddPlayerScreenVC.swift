@@ -59,7 +59,6 @@ final class AddPlayerScreenVC: UIViewController {
         let newPlayer = Player(id: id, name: "\(name!) \(surname!)", age: 18, skillPoint: Int(rating ?? "0"), position: position, sport: HomeViewModel.whichSport, picture: imageString)
 
         viewModel.addPlayer(player: newPlayer)
-
     }
 
     @objc private func keyboardWillShow(notification: NSNotification) {
