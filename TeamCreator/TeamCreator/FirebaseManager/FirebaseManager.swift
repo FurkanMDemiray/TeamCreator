@@ -16,6 +16,7 @@ protocol FirebaseManagerProtocol {
     // func fetchMatches(completion: @escaping (Result<[Match], Error>) -> Void)
     func deletePlayer(player: Player, completion: @escaping (Result<Void, Error>) -> Void)
     // func deleteMatch(match: Match, completion: @escaping (Result<Void, Error>) -> Void)
+    func updatePlayer(player: Player, completion: @escaping (Result<Void, Error>) -> Void)
 }
 
 final class FirebaseManager: FirebaseManagerProtocol {
@@ -122,6 +123,35 @@ final class FirebaseManager: FirebaseManagerProtocol {
         }
     }*/
 
+    func updatePlayer(player: Player, completion: @escaping (Result<Void, Error>) -> Void) {
+        let db = Firestore.firestore()
+        let collectionRef = db.collection("players")
+
+        // Query the document with the specific player ID
+        collectionRef.whereField("id", isEqualTo: player.id).getDocuments { (querySnapshot, error) in
+            if let error = error {
+                print("Error querying player: \(error.localizedDescription)")
+                completion(.failure(error))
+                return
+            }
+
+            guard let document = querySnapshot?.documents.first else {
+                print("No matching player found")
+                completion(.failure(NSError(domain: "", code: 404, userInfo: [NSLocalizedDescriptionKey: "No matching player found"])))
+                return
+            }
+
+            // Update the document with the new player data
+            do {
+                try document.reference.setData(from: player, merge: true)  // merge: true will keep existing fields
+                print("Successfully updated player with id \(player.id)")
+                completion(.success(()))
+            } catch {
+                print("Error updating player: \(error.localizedDescription)")
+                completion(.failure(error))
+            }
+        }
+    }
 
 
 }
