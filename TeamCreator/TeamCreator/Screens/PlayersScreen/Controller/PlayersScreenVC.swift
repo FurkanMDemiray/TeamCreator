@@ -108,6 +108,10 @@ extension PlayersScreenVC: PlayersScreenVMDelegate {
 }
 
 extension PlayersScreenVC: PlayerDetailScreenVmDelegate {
+    func playerDetailScreenDidEditPlayer() {
+        viewModel.updateCollectionData()
+    }
+    
     func playerDetailScreenDidDeletePlayer() {
         viewModel.updateCollectionData()
     }

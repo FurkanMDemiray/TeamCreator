@@ -8,7 +8,7 @@
 import UIKit
 
 protocol PlayerDetailScreenVCProtocol: AnyObject {
-    func setupEditButton()
+    func setupNavBarButton()
     func toggleEditing(isEditing: Bool)
     func configureImage(image: String)
     func configureLabels(name: String, position: String, skill: String)
@@ -33,6 +33,8 @@ final class PlayerDetailScreenVC: UIViewController{
     @IBOutlet private weak var detailSkillTextField: UITextField!
     private let positionPickerView = UIPickerView()
     @IBOutlet private weak var deleteButton: UIButton!
+    @IBOutlet private weak var editButton: UIButton!
+    @IBOutlet private weak var actionButtonStackView: UIStackView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -49,7 +51,7 @@ final class PlayerDetailScreenVC: UIViewController{
     @objc private func keyboardWillShow(notification: NSNotification) {
         if let keyboardFrame = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? CGRect {
             let keyboardHeight = keyboardFrame.height
-            let bottomSpace = self.view.frame.height - (deleteButton.frame.origin.y + deleteButton.frame.height)
+            let bottomSpace = self.view.frame.height - (actionButtonStackView.frame.origin.y + actionButtonStackView.frame.height)
             if bottomSpace < keyboardHeight {
                 self.view.frame.origin.y = 0 - (keyboardHeight - (bottomSpace) + 10)
             }
@@ -70,6 +72,19 @@ final class PlayerDetailScreenVC: UIViewController{
         }))
         present(alert, animated: true)
     }
+    
+    @IBAction func editButtonClicked(_ sender: UIButton) {
+        let alert = UIAlertController(title: "Edit Player", message: "Are you sure you want to update this player?", preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "Cancel", style: .cancel))
+        alert.addAction(UIAlertAction(title: "Update", style: .default, handler: { _ in
+            //TODO: check datas given for any wrong type of edit 
+            self.saveChanges()
+            self.viewModel.delegate?.playerDetailScreenDidEditPlayer()
+            self.navigationController?.popViewController(animated: true)
+        }))
+        present(alert, animated: true)
+    }
+    
 }
 
 extension PlayerDetailScreenVC: PlayerDetailScreenVCProtocol {
@@ -106,17 +121,45 @@ extension PlayerDetailScreenVC: PlayerDetailScreenVCProtocol {
         detailSkillTextField.text = skill
     }
     
-    func setupEditButton() {
-        let editButton = UIBarButtonItem(barButtonSystemItem: .edit, target: self, action: #selector(editButtonTapped))
-        navigationItem.rightBarButtonItem = editButton
+    func setupNavBarButton() {
+        if isEditingMode {
+            let discardButton = UIBarButtonItem(barButtonSystemItem: .trash, target: self, action: #selector(discardButtonTapped))
+            navigationItem.rightBarButtonItem = discardButton
+        } else {
+            let editButton = UIBarButtonItem(barButtonSystemItem: .edit, target: self, action: #selector(editButtonTapped))
+            navigationItem.rightBarButtonItem = editButton
+        }
+    }
+    
+    private func updateActionButton() {
+        editButton.isHidden = !isEditingMode
+        deleteButton.isHidden = isEditingMode
     }
     
     @objc private func editButtonTapped() {
         isEditingMode.toggle()
         toggleEditing(isEditing: isEditingMode)
-        if !isEditingMode {
-            saveChanges()
-        }
+        setupNavBarButton()
+        updateActionButton()
+    }
+    
+    @objc private func discardButtonTapped() {
+        isEditingMode.toggle()
+        toggleEditing(isEditing: isEditingMode)
+        setupNavBarButton()
+        updateActionButton()
+        discardChanges()
+        
+    }
+    
+    private func discardChanges() {
+        
+        // TODO: alert
+        let player = viewModel.discardEditPlayer()
+        detailNameTextField.text = player.name
+        detailSkillTextField.text = String(describing: player.skillPoint ?? 0)
+        detailPositionTextField.text = player.position
+        
     }
     
     private func saveChanges() {
@@ -174,8 +217,6 @@ extension PlayerDetailScreenVC: PlayerDetailScreenVCProtocol {
     @objc private func doneTapped() {
         detailSkillTextField.resignFirstResponder()
     }
-
-    
 }
 
 extension PlayerDetailScreenVC: UIPickerViewDataSource {

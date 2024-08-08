@@ -9,6 +9,7 @@ import Foundation
 
 protocol PlayerDetailScreenVmDelegate: AnyObject {
     func playerDetailScreenDidDeletePlayer()
+    func playerDetailScreenDidEditPlayer()
 }
 
 protocol PLayerDetailScreenVMProtocol {
@@ -16,6 +17,7 @@ protocol PLayerDetailScreenVMProtocol {
     var delegate: PlayerDetailScreenVmDelegate? { get set }
     func viewDidLoad()
     func deletePlayer()
+    func discardEditPlayer() -> Player
     func updatePlayer(name: String, position: String, skill: Int)
     func numberOfRows() -> Int
     func titleForRow(row: Int) -> String
@@ -49,7 +51,7 @@ final class PlayerDetailScreenVM {
 extension PlayerDetailScreenVM: PLayerDetailScreenVMProtocol {
     
     func viewDidLoad() {
-        view?.setupEditButton()
+        view?.setupNavBarButton()
         view?.configureLabels(name: player.name ?? "", position: player.position ?? "", skill: String(describing: player.skillPoint ?? 0))
         view?.configureImage(image: player.picture ?? "")
         view?.setupPickerView()
@@ -64,6 +66,9 @@ extension PlayerDetailScreenVM: PLayerDetailScreenVMProtocol {
         positions[row]
     }
     
+    func discardEditPlayer() -> Player {
+        player
+    }
     
     func deletePlayer() {
         firebaseManager.deletePlayer(player: player) { result in
@@ -82,5 +87,6 @@ extension PlayerDetailScreenVM: PLayerDetailScreenVMProtocol {
         player.skillPoint = skill
         //update user firebase manager
         print("updated player is : \(player)")
+        self.delegate?.playerDetailScreenDidEditPlayer()
     }
 }

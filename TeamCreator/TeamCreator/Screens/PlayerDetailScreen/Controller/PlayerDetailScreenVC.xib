@@ -10,11 +10,13 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="PlayerDetailScreenVC" customModule="TeamCreator" customModuleProvider="target">
             <connections>
-                <outlet property="deleteButton" destination="7m7-4M-0mo" id="bhZ-Df-Y3Q"/>
+                <outlet property="actionButtonStackView" destination="Go8-vV-8W1" id="k1K-cY-oHU"/>
+                <outlet property="deleteButton" destination="7m7-4M-0mo" id="qTw-Uv-dZW"/>
                 <outlet property="detailImageView" destination="9We-Xk-D88" id="SJa-07-v6B"/>
                 <outlet property="detailNameTextField" destination="CEL-Zd-mf5" id="7dn-x2-eRx"/>
                 <outlet property="detailPositionTextField" destination="aLX-Jg-TsC" id="cv7-MC-eNb"/>
                 <outlet property="detailSkillTextField" destination="ju0-MK-pLz" id="aTc-XW-Mp8"/>
+                <outlet property="editButton" destination="u7w-5m-u1p" id="3fd-8i-Gkf"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -69,24 +71,44 @@
                     <fontDescription key="fontDescription" type="system" pointSize="20"/>
                     <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
                 </textField>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7m7-4M-0mo">
-                    <rect key="frame" x="121.66666666666669" y="733" width="150" height="45"/>
-                    <constraints>
-                        <constraint firstAttribute="width" constant="150" id="LQ8-iO-rGp"/>
-                        <constraint firstAttribute="height" constant="45" id="xJe-Mv-xdg"/>
-                    </constraints>
-                    <buttonConfiguration key="configuration" style="filled" title="Delete">
-                        <color key="baseBackgroundColor" red="0.80102041820000003" green="0.26204525379999999" blue="0.20947501960000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
-                    </buttonConfiguration>
-                    <connections>
-                        <action selector="deleteButtonClicked:" destination="-1" eventType="touchUpInside" id="lQC-AD-xFK"/>
-                    </connections>
-                </button>
+                <stackView opaque="NO" contentMode="scaleToFill" distribution="equalSpacing" alignment="bottom" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="Go8-vV-8W1">
+                    <rect key="frame" x="121.66666666666669" y="565.33333333333337" width="150" height="222.66666666666663"/>
+                    <subviews>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7m7-4M-0mo">
+                            <rect key="frame" x="0.0" y="177.66666666666663" width="150" height="45"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="45" id="2ZR-z7-O0b"/>
+                                <constraint firstAttribute="width" constant="150" id="F3e-nc-iAG"/>
+                            </constraints>
+                            <buttonConfiguration key="configuration" style="filled" title="Delete">
+                                <color key="baseBackgroundColor" systemColor="systemRedColor"/>
+                            </buttonConfiguration>
+                            <connections>
+                                <action selector="deleteButtonClicked:" destination="-1" eventType="touchUpInside" id="Ikr-2u-vB8"/>
+                            </connections>
+                        </button>
+                        <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="u7w-5m-u1p">
+                            <rect key="frame" x="0.0" y="177.66666666666663" width="150" height="45"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="150" id="4u3-Z9-InP"/>
+                                <constraint firstAttribute="height" constant="45" id="F7B-ig-blm"/>
+                            </constraints>
+                            <state key="normal" title="Button"/>
+                            <buttonConfiguration key="configuration" style="filled" title="Edit">
+                                <color key="baseBackgroundColor" systemColor="systemGreenColor"/>
+                            </buttonConfiguration>
+                            <connections>
+                                <action selector="editButtonClicked:" destination="-1" eventType="touchUpInside" id="2mu-CN-r8S"/>
+                            </connections>
+                        </button>
+                    </subviews>
+                </stackView>
             </subviews>
             <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
             <color key="backgroundColor" systemColor="systemBackgroundColor"/>
             <constraints>
                 <constraint firstItem="S9N-td-3e9" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="32" id="1IM-jC-2fH"/>
+                <constraint firstItem="Go8-vV-8W1" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="2uR-q4-x5I"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="RJ7-hs-5fI" secondAttribute="trailing" constant="32" id="33k-el-l65"/>
                 <constraint firstItem="qJ2-Ta-IfG" firstAttribute="top" secondItem="CEL-Zd-mf5" secondAttribute="bottom" constant="8" id="4E6-Qg-EZ0"/>
                 <constraint firstItem="S9N-td-3e9" firstAttribute="top" secondItem="9We-Xk-D88" secondAttribute="bottom" constant="32" id="6Oo-UR-fSj"/>
@@ -97,17 +119,17 @@
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="qJ2-Ta-IfG" secondAttribute="trailing" constant="32" id="DY8-t9-aMz"/>
                 <constraint firstItem="9We-Xk-D88" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="DgX-sf-fd2"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="S9N-td-3e9" secondAttribute="trailing" constant="32" id="DhI-YS-jbM"/>
-                <constraint firstItem="7m7-4M-0mo" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="Ns1-8x-Etu"/>
                 <constraint firstItem="ju0-MK-pLz" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="32" id="Qju-8A-Gnd"/>
-                <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="7m7-4M-0mo" secondAttribute="bottom" constant="40" id="WAn-fV-erw"/>
                 <constraint firstItem="aLX-Jg-TsC" firstAttribute="top" secondItem="qJ2-Ta-IfG" secondAttribute="bottom" constant="8" id="XlG-aw-uHM"/>
                 <constraint firstItem="r9z-rB-26c" firstAttribute="top" secondItem="aLX-Jg-TsC" secondAttribute="bottom" constant="8" id="aZM-CX-CPd"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="aLX-Jg-TsC" secondAttribute="trailing" constant="32" id="ag5-pW-Ah2"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="r9z-rB-26c" secondAttribute="trailing" constant="32" id="c6H-LE-YYg"/>
+                <constraint firstItem="Go8-vV-8W1" firstAttribute="top" secondItem="ju0-MK-pLz" secondAttribute="bottom" constant="30" id="dJs-6S-0EX"/>
                 <constraint firstItem="ju0-MK-pLz" firstAttribute="top" secondItem="r9z-rB-26c" secondAttribute="bottom" constant="8" id="ghN-ff-7vh"/>
                 <constraint firstItem="r9z-rB-26c" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="32" id="hcg-0b-V1A"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="CEL-Zd-mf5" secondAttribute="trailing" constant="32" id="j1v-Gh-BVh"/>
                 <constraint firstItem="9We-Xk-D88" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" constant="32" id="jMf-T4-N3o"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="Go8-vV-8W1" secondAttribute="bottom" constant="30" id="sWd-jd-HVq"/>
                 <constraint firstItem="qJ2-Ta-IfG" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="32" id="uOg-lu-d9i"/>
                 <constraint firstItem="CEL-Zd-mf5" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="32" id="xsW-ga-0nB"/>
                 <constraint firstItem="CEL-Zd-mf5" firstAttribute="top" secondItem="RJ7-hs-5fI" secondAttribute="bottom" constant="8" id="zlV-mY-X4n"/>
@@ -118,6 +140,12 @@
     <resources>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+        <systemColor name="systemGreenColor">
+            <color red="0.20392156859999999" green="0.78039215689999997" blue="0.34901960780000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+        <systemColor name="systemRedColor">
+            <color red="1" green="0.23137254900000001" blue="0.18823529410000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>
