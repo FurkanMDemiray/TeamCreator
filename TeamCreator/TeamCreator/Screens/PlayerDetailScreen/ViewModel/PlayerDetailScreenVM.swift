@@ -7,16 +7,19 @@
 
 import Foundation
 
+//MARK: - Enum
 enum ValidationResult {
     case success
     case failure(message: String)
 }
 
+//MARK: - Delegate
 protocol PlayerDetailScreenVmDelegate: AnyObject {
     func playerDetailScreenDidDeletePlayer()
     func playerDetailScreenDidEditPlayer()
 }
 
+//MARK: - Protocol
 protocol PLayerDetailScreenVMProtocol {
     var view: PlayerDetailScreenVCProtocol? { get set }
     var delegate: PlayerDetailScreenVmDelegate? { get set }
@@ -29,7 +32,10 @@ protocol PLayerDetailScreenVMProtocol {
     func titleForRow(row: Int) -> String
 }
 
+//MARK: - Class
 final class PlayerDetailScreenVM {
+    
+    //MARK: - Variables
     private var player: Player
     weak var view: PlayerDetailScreenVCProtocol?
     weak var delegate: PlayerDetailScreenVmDelegate?
@@ -41,6 +47,7 @@ final class PlayerDetailScreenVM {
     ]
     let firebaseManager: FirebaseManagerProtocol
     
+    //MARK: - Initialize
     init(firebaseManager: FirebaseManagerProtocol = FirebaseManager(), player: Player, selectedSport: Sport ) {
         self.firebaseManager = firebaseManager
         self.player = player
@@ -55,7 +62,7 @@ final class PlayerDetailScreenVM {
 }
 
 extension PlayerDetailScreenVM: PLayerDetailScreenVMProtocol {
-    
+    //MARK: - Functions
     func viewDidLoad() {
         view?.setupNavBarButton()
         view?.configureLabels(name: player.name ?? "", position: player.position ?? "", skill: String(describing: player.skillPoint ?? 0))
@@ -88,6 +95,9 @@ extension PlayerDetailScreenVM: PLayerDetailScreenVMProtocol {
     }
     
     func validatePlayerDetails(name: String?, position: String?, skill: String?, image: String?) -> ValidationResult {
+        guard let imageString = image, !imageString.isEmpty else {
+            return .failure(message: "Please select an image.")
+        }
         guard let name = name, !name.isEmpty else {
             return .failure(message: "Name cannot be empty.")
         }
@@ -96,9 +106,6 @@ extension PlayerDetailScreenVM: PLayerDetailScreenVMProtocol {
         }
         guard let skillText = skill, !skillText.isEmpty, let skill = Int(skillText), skill > 0, skill <= 100 else {
             return .failure(message: "Skill must be a valid number between 1 and 100.")
-        }
-        guard let imageString = image, !imageString.isEmpty else {
-            return .failure(message: "Please select an image.")
         }
         return .success
     }
