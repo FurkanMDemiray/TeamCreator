@@ -214,17 +214,6 @@ final class CreateMatchViewModel: NSObject {
     }
 }
 
-extension Array {
-    func shuffled() -> Array {
-        var elements = self
-        for index in elements.indices.dropLast() {
-            let randomIndex = index.advanced(by: Int.random(in: 0..<(elements.distance(from: index, to: elements.endIndex))))
-            elements.swapAt(index, randomIndex)
-        }
-        return elements
-    }
-}
-
 //MARK: - Protocol Extension
 extension CreateMatchViewModel: CreateMatchViewModelProtocol {
     func refreshSelectedPlayers() {
