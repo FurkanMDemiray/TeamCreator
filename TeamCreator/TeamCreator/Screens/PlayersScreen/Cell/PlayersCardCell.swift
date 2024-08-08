@@ -9,11 +9,11 @@ import UIKit
 
 final class PlayersCardCell: UICollectionViewCell {
 
-    @IBOutlet weak var cardImage: UIImageView!
-    @IBOutlet weak var cardRatingLabel: UILabel!
-    @IBOutlet weak var cardPlayerImage: UIImageView!
-    @IBOutlet weak var cardNameLabel: UILabel!
-    @IBOutlet weak var cardPositionLabel: UILabel!
+    @IBOutlet private weak var cardImage: UIImageView!
+    @IBOutlet private weak var cardRatingLabel: UILabel!
+    @IBOutlet private weak var cardPlayerImage: UIImageView!
+    @IBOutlet private weak var cardNameLabel: UILabel!
+    @IBOutlet private weak var cardPositionLabel: UILabel!
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -30,6 +30,7 @@ final class PlayersCardCell: UICollectionViewCell {
         cardNameLabel.text = model.playerName
         cardPositionLabel.text = model.playerPosition
         encodeImage(model: model)
+        cardImage.image = UIImage(named: model.cardImage)
     }
     
     private func encodeImage(model: PlayersCardCellVM) {

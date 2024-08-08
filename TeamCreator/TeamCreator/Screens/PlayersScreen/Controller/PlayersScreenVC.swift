@@ -90,10 +90,10 @@ extension PlayersScreenVC: UICollectionViewDelegateFlowLayout {
 }
 
 extension PlayersScreenVC: PlayersScreenVMDelegate {
-    func navigateToDetail(at indexPath: IndexPath) {
+    func navigateToDetail(at indexPath: IndexPath, with selectedSport: Sport) {
         let playerCellVM = viewModel.cellForItem(at: indexPath)
         let detailVC = PlayerDetailScreenVC()
-        let detailVM = PlayerDetailScreenVM(player: playerCellVM.player)
+        let detailVM = PlayerDetailScreenVM(player: playerCellVM.player, selectedSport: selectedSport )
         detailVM.delegate = self
         detailVC.viewModel = detailVM as any PLayerDetailScreenVMProtocol
         navigationController?.pushViewController(detailVC, animated: true)
@@ -108,6 +108,10 @@ extension PlayersScreenVC: PlayersScreenVMDelegate {
 }
 
 extension PlayersScreenVC: PlayerDetailScreenVmDelegate {
+    func playerDetailScreenDidEditPlayer() {
+        viewModel.updateCollectionData()
+    }
+    
     func playerDetailScreenDidDeletePlayer() {
         viewModel.updateCollectionData()
     }

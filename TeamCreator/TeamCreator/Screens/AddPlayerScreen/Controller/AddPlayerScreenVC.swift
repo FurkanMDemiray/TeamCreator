@@ -52,16 +52,22 @@ final class AddPlayerScreenVC: UIViewController {
         let rating = ratingTextField.text
         let id = UUID().uuidString
 
-        // convert image to binary data
         let imageData = imageView.image?.jpegData(compressionQuality: 0.5)
-        // convert binary data to base64 string
         let imageString = imageData?.base64EncodedString()
         guard let imageString else { return }
 
         let newPlayer = Player(id: id, name: "\(name!) \(surname!)", age: 18, skillPoint: Int(rating ?? "0"), position: position, sport: HomeViewModel.whichSport, picture: imageString)
-
-        viewModel.addPlayer(player: newPlayer)
-
+        
+        let validationResult = viewModel.validatePlayerDetails(player: newPlayer)
+        
+        switch validationResult {
+        case .success:
+            viewModel.addPlayer(player: newPlayer)
+        case .failure(let message):
+            let alert = UIAlertController(title: "Incomplete Information", message: message, preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "OK", style: .default))
+            present(alert, animated: true)
+        }
     }
 
     @objc private func keyboardWillShow(notification: NSNotification) {
@@ -69,7 +75,7 @@ final class AddPlayerScreenVC: UIViewController {
             let keyboardHeight = keyboardFrame.height
             let bottomSpace = self.view.frame.height - (addPlayerButton.frame.origin.y + addPlayerButton.frame.height)
             if bottomSpace < keyboardHeight {
-                self.view.frame.origin.y = 0 - (keyboardHeight - (bottomSpace))
+                self.view.frame.origin.y = 0 - (keyboardHeight - (bottomSpace) + 10)
             }
         }
     }
@@ -197,7 +203,6 @@ extension AddPlayerScreenVC: UIImagePickerControllerDelegate, UINavigationContro
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey: Any]) {
         if let selectedImage = info[UIImagePickerController.InfoKey.originalImage] as? UIImage {
             imageView.image = selectedImage
-            //TODO: save image?
         }
         picker.dismiss(animated: true)
     }
