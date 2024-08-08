@@ -18,6 +18,7 @@ protocol AddPlayerScreenVMProtocol {
     func viewDidLoad()
     func numberOfRows() -> Int
     func titleForRow(row: Int) -> String
+    func validatePlayerDetails(player: Player) -> ValidationResult
     func addPlayer(player: Player)
 }
 
@@ -51,7 +52,6 @@ extension AddPlayerScreenVM: AddPlayerScreenVMProtocol {
         view?.setupVC()
         view?.setupImageView()
         view?.setupPickerView()
-        
     }
 
     func numberOfRows() -> Int {
@@ -60,6 +60,23 @@ extension AddPlayerScreenVM: AddPlayerScreenVMProtocol {
 
     func titleForRow(row: Int) -> String {
         positions[row]
+    }
+    
+    func validatePlayerDetails(player: Player) -> ValidationResult {
+        guard let name = player.name, !name.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty  else {
+            return .failure(message: "Name cannot be empty.")
+        }
+        print("player \(name)")
+        guard let position = player.position, !position.isEmpty else {
+            return .failure(message: "Position cannot be empty.")
+        }
+        guard let skill = player.skillPoint, skill > 0, skill <= 100 else {
+            return .failure(message: "Skill must be a valid number between 1 and 100.")
+        }
+        guard let imageString = player.picture, !imageString.isEmpty else {
+            return .failure(message: "Please select an image.")
+        }
+        return .success
     }
 
     func addPlayer(player: Player) {

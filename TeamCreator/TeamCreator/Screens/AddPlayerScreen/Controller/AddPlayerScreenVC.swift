@@ -57,8 +57,17 @@ final class AddPlayerScreenVC: UIViewController {
         guard let imageString else { return }
 
         let newPlayer = Player(id: id, name: "\(name!) \(surname!)", age: 18, skillPoint: Int(rating ?? "0"), position: position, sport: HomeViewModel.whichSport, picture: imageString)
-
-        viewModel.addPlayer(player: newPlayer)
+        
+        let validationResult = viewModel.validatePlayerDetails(player: newPlayer)
+        
+        switch validationResult {
+        case .success:
+            viewModel.addPlayer(player: newPlayer)
+        case .failure(let message):
+            let alert = UIAlertController(title: "Incomplete Information", message: message, preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "OK", style: .default))
+            present(alert, animated: true)
+        }
     }
 
     @objc private func keyboardWillShow(notification: NSNotification) {
@@ -194,7 +203,6 @@ extension AddPlayerScreenVC: UIImagePickerControllerDelegate, UINavigationContro
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey: Any]) {
         if let selectedImage = info[UIImagePickerController.InfoKey.originalImage] as? UIImage {
             imageView.image = selectedImage
-            //TODO: save image?
         }
         picker.dismiss(animated: true)
     }

@@ -74,15 +74,36 @@ final class PlayerDetailScreenVC: UIViewController{
     }
     
     @IBAction func editButtonClicked(_ sender: UIButton) {
-        let alert = UIAlertController(title: "Edit Player", message: "Are you sure you want to update this player?", preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: "Cancel", style: .cancel))
-        alert.addAction(UIAlertAction(title: "Update", style: .default, handler: { _ in
-            //TODO: check datas given for any wrong type of edit 
-            self.saveChanges()
-            self.viewModel.delegate?.playerDetailScreenDidEditPlayer()
-            self.navigationController?.popViewController(animated: true)
-        }))
-        present(alert, animated: true)
+        let name = detailNameTextField.text ?? ""
+        let position = detailPositionTextField.text ?? ""
+        let skill = Int(detailSkillTextField.text ?? "") ?? 0
+        let imageData = detailImageView.image?.jpegData(compressionQuality: 0.5)
+        let imageString = imageData?.base64EncodedString()
+        guard let imageString else { return }
+        
+        let validationResult = viewModel.validatePlayerDetails(
+            name: detailNameTextField.text,
+            position: detailPositionTextField.text,
+            skill: detailSkillTextField.text,
+            image: imageString
+        )
+        
+        switch validationResult {
+        case .success:
+            let alert = UIAlertController(title: "Edit Player", message: "Are you sure you want to update this player?", preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "Cancel", style: .cancel))
+            alert.addAction(UIAlertAction(title: "Update", style: .default, handler: { _ in
+                self.saveChanges()
+                self.viewModel.delegate?.playerDetailScreenDidEditPlayer()
+                self.navigationController?.popViewController(animated: true)
+            }))
+            present(alert, animated: true)
+            
+        case .failure(let message):
+            let alert = UIAlertController(title: "Incomplete Information", message: message, preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "OK", style: .default))
+            present(alert, animated: true)
+        }
     }
     
 }
@@ -141,32 +162,38 @@ extension PlayerDetailScreenVC: PlayerDetailScreenVCProtocol {
         toggleEditing(isEditing: isEditingMode)
         setupNavBarButton()
         updateActionButton()
+        setupImageView()
     }
     
     @objc private func discardButtonTapped() {
-        isEditingMode.toggle()
-        toggleEditing(isEditing: isEditingMode)
-        setupNavBarButton()
-        updateActionButton()
-        discardChanges()
-        
+        let alert = UIAlertController(title: "Discard Changes?", message: "Are you sure you want to discard the changes made for this player?", preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "Cancel", style: .cancel))
+        alert.addAction(UIAlertAction(title: "Discard", style: .destructive, handler: { _ in
+            self.isEditingMode.toggle()
+            self.toggleEditing(isEditing: self.isEditingMode)
+            self.setupNavBarButton()
+            self.updateActionButton()
+            self.discardChanges()
+        }))
+        present(alert, animated: true)
     }
     
     private func discardChanges() {
-        
-        // TODO: alert
         let player = viewModel.discardEditPlayer()
         detailNameTextField.text = player.name
         detailSkillTextField.text = String(describing: player.skillPoint ?? 0)
         detailPositionTextField.text = player.position
-        
+        configureImage(image: player.picture ?? "")
     }
     
     private func saveChanges() {
         let name = detailNameTextField.text ?? ""
         let position = detailPositionTextField.text ?? ""
         let skill = Int(detailSkillTextField.text ?? "") ?? 0
-        viewModel.updatePlayer(name: name, position: position, skill: skill)
+        let imageData = detailImageView.image?.jpegData(compressionQuality: 0.5)
+        let imageString = imageData?.base64EncodedString()
+        guard let imageString else { return }
+        viewModel.updatePlayer(name: name, position: position, skill: skill, image: imageString)
     }
     
     func setupPickerView() {
@@ -217,6 +244,19 @@ extension PlayerDetailScreenVC: PlayerDetailScreenVCProtocol {
     @objc private func doneTapped() {
         detailSkillTextField.resignFirstResponder()
     }
+    
+    private func setupImageView() {
+        let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(imageViewTapped))
+        detailImageView.isUserInteractionEnabled = true
+        detailImageView.addGestureRecognizer(tapGestureRecognizer)
+    }
+
+    @objc private func imageViewTapped() {
+        let imagePickerController = UIImagePickerController()
+        imagePickerController.delegate = self
+        imagePickerController.sourceType = .photoLibrary
+        present(imagePickerController, animated: true)
+    }
 }
 
 extension PlayerDetailScreenVC: UIPickerViewDataSource {
@@ -236,6 +276,19 @@ extension PlayerDetailScreenVC: UIPickerViewDataSource {
 extension PlayerDetailScreenVC: UIPickerViewDelegate {
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         detailPositionTextField.text = viewModel.titleForRow(row: row)
+    }
+}
+
+extension PlayerDetailScreenVC: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey: Any]) {
+        if let selectedImage = info[UIImagePickerController.InfoKey.originalImage] as? UIImage {
+            detailImageView.image = selectedImage
+        }
+        picker.dismiss(animated: true)
+    }
+
+    func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
+        picker.dismiss(animated: true)
     }
 }
 

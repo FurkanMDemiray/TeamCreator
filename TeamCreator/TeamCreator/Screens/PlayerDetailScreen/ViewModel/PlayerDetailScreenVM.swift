@@ -7,6 +7,11 @@
 
 import Foundation
 
+enum ValidationResult {
+    case success
+    case failure(message: String)
+}
+
 protocol PlayerDetailScreenVmDelegate: AnyObject {
     func playerDetailScreenDidDeletePlayer()
     func playerDetailScreenDidEditPlayer()
@@ -18,7 +23,8 @@ protocol PLayerDetailScreenVMProtocol {
     func viewDidLoad()
     func deletePlayer()
     func discardEditPlayer() -> Player
-    func updatePlayer(name: String, position: String, skill: Int)
+    func validatePlayerDetails(name: String?, position: String?, skill: String?, image: String?) -> ValidationResult
+    func updatePlayer(name: String, position: String, skill: Int, image: String)
     func numberOfRows() -> Int
     func titleForRow(row: Int) -> String
 }
@@ -81,10 +87,27 @@ extension PlayerDetailScreenVM: PLayerDetailScreenVMProtocol {
         }
     }
     
-    func updatePlayer(name: String, position: String, skill: Int) {
+    func validatePlayerDetails(name: String?, position: String?, skill: String?, image: String?) -> ValidationResult {
+        guard let name = name, !name.isEmpty else {
+            return .failure(message: "Name cannot be empty.")
+        }
+        guard let position = position, !position.isEmpty else {
+            return .failure(message: "Position cannot be empty.")
+        }
+        guard let skillText = skill, !skillText.isEmpty, let skill = Int(skillText), skill > 0, skill <= 100 else {
+            return .failure(message: "Skill must be a valid number between 1 and 100.")
+        }
+        guard let imageString = image, !imageString.isEmpty else {
+            return .failure(message: "Please select an image.")
+        }
+        return .success
+    }
+    
+    func updatePlayer(name: String, position: String, skill: Int, image: String) {
         player.name = name
         player.position = position
         player.skillPoint = skill
+        player.picture = image
         //update user firebase manager
         print("updated player is : \(player)")
         self.delegate?.playerDetailScreenDidEditPlayer()
