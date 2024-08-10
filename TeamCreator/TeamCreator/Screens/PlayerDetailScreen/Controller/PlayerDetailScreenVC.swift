@@ -115,16 +115,6 @@ extension PlayerDetailScreenVC: PlayerDetailScreenVCProtocol {
         detailNameTextField.isEnabled = isEditing
         detailPositionTextField.isEnabled = isEditing
         detailSkillTextField.isEnabled = isEditing
-        
-        if isEditing {
-            detailNameTextField.borderStyle = .roundedRect
-            detailPositionTextField.borderStyle = .roundedRect
-            detailSkillTextField.borderStyle = .roundedRect
-        } else {
-            detailNameTextField.borderStyle = .none
-            detailPositionTextField.borderStyle = .none
-            detailSkillTextField.borderStyle = .none
-        }
     }
     
     //MARK: - Configure Variables
@@ -142,6 +132,8 @@ extension PlayerDetailScreenVC: PlayerDetailScreenVCProtocol {
         detailNameTextField.text = name
         detailPositionTextField.text = position
         detailSkillTextField.text = skill
+        detailNameTextField.placeholder = name
+        detailSkillTextField.placeholder = skill
     }
     
     //MARK: - Navigation RightBar Button Items
