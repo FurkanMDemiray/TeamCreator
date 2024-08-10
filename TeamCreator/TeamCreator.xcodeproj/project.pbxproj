@@ -22,6 +22,20 @@
 		08CC858D2C60C54A007A5B2B /* PlayersCardCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08CC858B2C60C54A007A5B2B /* PlayersCardCell.swift */; };
 		08CC858E2C60C54A007A5B2B /* PlayersCardCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 08CC858C2C60C54A007A5B2B /* PlayersCardCell.xib */; };
 		08CC85902C60C901007A5B2B /* PlayersCardCellVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08CC858F2C60C901007A5B2B /* PlayersCardCellVM.swift */; };
+		08D3024A2C663DEC009D542A /* PlayerDetailImageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08D302482C663DEC009D542A /* PlayerDetailImageCell.swift */; };
+		08D3024B2C663DEC009D542A /* PlayerDetailImageCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 08D302492C663DEC009D542A /* PlayerDetailImageCell.xib */; };
+		08D302502C663E0E009D542A /* PlayerDetailNameCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08D3024E2C663E0E009D542A /* PlayerDetailNameCell.swift */; };
+		08D302512C663E0E009D542A /* PlayerDetailNameCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 08D3024F2C663E0E009D542A /* PlayerDetailNameCell.xib */; };
+		08D302562C663E5E009D542A /* PlayerDetailPositionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08D302542C663E5E009D542A /* PlayerDetailPositionCell.swift */; };
+		08D302572C663E5E009D542A /* PlayerDetailPositionCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 08D302552C663E5E009D542A /* PlayerDetailPositionCell.xib */; };
+		08D3025A2C663E81009D542A /* PlayerDetailSkillCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08D302582C663E81009D542A /* PlayerDetailSkillCell.swift */; };
+		08D3025B2C663E81009D542A /* PlayerDetailSkillCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 08D302592C663E81009D542A /* PlayerDetailSkillCell.xib */; };
+		08D3025D2C663F6F009D542A /* PlayerDetailImageCellVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08D3025C2C663F6F009D542A /* PlayerDetailImageCellVM.swift */; };
+		08D3025F2C664286009D542A /* PlayerDetailNameCellVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08D3025E2C664286009D542A /* PlayerDetailNameCellVM.swift */; };
+		08D302612C664356009D542A /* PlayerDetailPositionCellVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08D302602C664356009D542A /* PlayerDetailPositionCellVM.swift */; };
+		08D302632C664364009D542A /* PlayerDetailSkillCellVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08D302622C664364009D542A /* PlayerDetailSkillCellVM.swift */; };
+		08D302652C664D6B009D542A /* UITableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08D302642C664D6B009D542A /* UITableView.swift */; };
+		08D302672C6657E9009D542A /* UITableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08D302662C6657E9009D542A /* UITableViewCell.swift */; };
 		DD1A24A22C57AA2A0020AC04 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD1A24A12C57AA2A0020AC04 /* AppDelegate.swift */; };
 		DD1A24A42C57AA2A0020AC04 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD1A24A32C57AA2A0020AC04 /* SceneDelegate.swift */; };
 		DD1A24AB2C57AA2B0020AC04 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DD1A24AA2C57AA2B0020AC04 /* Assets.xcassets */; };
@@ -99,6 +113,20 @@
 		08CC858B2C60C54A007A5B2B /* PlayersCardCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayersCardCell.swift; sourceTree = "<group>"; };
 		08CC858C2C60C54A007A5B2B /* PlayersCardCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PlayersCardCell.xib; sourceTree = "<group>"; };
 		08CC858F2C60C901007A5B2B /* PlayersCardCellVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayersCardCellVM.swift; sourceTree = "<group>"; };
+		08D302482C663DEC009D542A /* PlayerDetailImageCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerDetailImageCell.swift; sourceTree = "<group>"; };
+		08D302492C663DEC009D542A /* PlayerDetailImageCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PlayerDetailImageCell.xib; sourceTree = "<group>"; };
+		08D3024E2C663E0E009D542A /* PlayerDetailNameCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerDetailNameCell.swift; sourceTree = "<group>"; };
+		08D3024F2C663E0E009D542A /* PlayerDetailNameCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PlayerDetailNameCell.xib; sourceTree = "<group>"; };
+		08D302542C663E5E009D542A /* PlayerDetailPositionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerDetailPositionCell.swift; sourceTree = "<group>"; };
+		08D302552C663E5E009D542A /* PlayerDetailPositionCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PlayerDetailPositionCell.xib; sourceTree = "<group>"; };
+		08D302582C663E81009D542A /* PlayerDetailSkillCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerDetailSkillCell.swift; sourceTree = "<group>"; };
+		08D302592C663E81009D542A /* PlayerDetailSkillCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PlayerDetailSkillCell.xib; sourceTree = "<group>"; };
+		08D3025C2C663F6F009D542A /* PlayerDetailImageCellVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerDetailImageCellVM.swift; sourceTree = "<group>"; };
+		08D3025E2C664286009D542A /* PlayerDetailNameCellVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerDetailNameCellVM.swift; sourceTree = "<group>"; };
+		08D302602C664356009D542A /* PlayerDetailPositionCellVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerDetailPositionCellVM.swift; sourceTree = "<group>"; };
+		08D302622C664364009D542A /* PlayerDetailSkillCellVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerDetailSkillCellVM.swift; sourceTree = "<group>"; };
+		08D302642C664D6B009D542A /* UITableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UITableView.swift; sourceTree = "<group>"; };
+		08D302662C6657E9009D542A /* UITableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UITableViewCell.swift; sourceTree = "<group>"; };
 		DD1A249E2C57AA2A0020AC04 /* TeamCreator.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TeamCreator.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DD1A24A12C57AA2A0020AC04 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		DD1A24A32C57AA2A0020AC04 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -177,6 +205,7 @@
 			children = (
 				084DC9952C61039500F3356D /* Controller */,
 				084DC9982C6103AD00F3356D /* ViewModel */,
+				08D302472C663708009D542A /* Cell */,
 			);
 			path = PlayerDetailScreen;
 			sourceTree = "<group>";
@@ -194,6 +223,10 @@
 			isa = PBXGroup;
 			children = (
 				084DC9962C6103AA00F3356D /* PlayerDetailScreenVM.swift */,
+				08D3025C2C663F6F009D542A /* PlayerDetailImageCellVM.swift */,
+				08D3025E2C664286009D542A /* PlayerDetailNameCellVM.swift */,
+				08D302602C664356009D542A /* PlayerDetailPositionCellVM.swift */,
+				08D302622C664364009D542A /* PlayerDetailSkillCellVM.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -249,6 +282,21 @@
 			children = (
 				08CC858B2C60C54A007A5B2B /* PlayersCardCell.swift */,
 				08CC858C2C60C54A007A5B2B /* PlayersCardCell.xib */,
+			);
+			path = Cell;
+			sourceTree = "<group>";
+		};
+		08D302472C663708009D542A /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				08D302482C663DEC009D542A /* PlayerDetailImageCell.swift */,
+				08D302492C663DEC009D542A /* PlayerDetailImageCell.xib */,
+				08D3024E2C663E0E009D542A /* PlayerDetailNameCell.swift */,
+				08D3024F2C663E0E009D542A /* PlayerDetailNameCell.xib */,
+				08D302542C663E5E009D542A /* PlayerDetailPositionCell.swift */,
+				08D302552C663E5E009D542A /* PlayerDetailPositionCell.xib */,
+				08D302582C663E81009D542A /* PlayerDetailSkillCell.swift */,
+				08D302592C663E81009D542A /* PlayerDetailSkillCell.xib */,
 			);
 			path = Cell;
 			sourceTree = "<group>";
@@ -410,6 +458,8 @@
 				DD38C18E2C6215680028E515 /* UIColor.swift */,
 				DD38C1942C634C280028E515 /* UIImage.swift */,
 				DD38C1962C64B64F0028E515 /* Array.swift */,
+				08D302642C664D6B009D542A /* UITableView.swift */,
+				08D302662C6657E9009D542A /* UITableViewCell.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -594,15 +644,19 @@
 				DD3A08AC2C5E96A40056C8D7 /* VolleyballViewController.xib in Resources */,
 				084DC9932C61007F00F3356D /* PlayerDetailScreenVC.xib in Resources */,
 				DD1A24AB2C57AA2B0020AC04 /* Assets.xcassets in Resources */,
+				08D3024B2C663DEC009D542A /* PlayerDetailImageCell.xib in Resources */,
 				DD85DA202C5BAC5000AF1652 /* MatchDetailTeamsViewController.xib in Resources */,
 				DD85DA112C5A82B300AF1652 /* CreateMatchDetailViewController.xib in Resources */,
 				DD85DA2C2C5BB96E00AF1652 /* MatchDetailTeamViewController.xib in Resources */,
 				DD3A08A12C5CB7750056C8D7 /* MenuViewController.xib in Resources */,
+				08D3025B2C663E81009D542A /* PlayerDetailSkillCell.xib in Resources */,
 				086B87832C5B60760065CF13 /* AddPlayerScreenVC.xib in Resources */,
+				08D302512C663E0E009D542A /* PlayerDetailNameCell.xib in Resources */,
 				08B464712C5A78A900529D6A /* PlayersScreenVC.xib in Resources */,
 				DD1A24DA2C57AB070020AC04 /* GoogleService-Info.plist in Resources */,
 				DD1A24F82C58DC3E0020AC04 /* CreateMatchViewController.xib in Resources */,
 				DD85DA252C5BACD400AF1652 /* MatchDetailTeamsCell.xib in Resources */,
+				08D302572C663E5E009D542A /* PlayerDetailPositionCell.xib in Resources */,
 				DD1A24AE2C57AA2B0020AC04 /* Base in Resources */,
 				08CC858E2C60C54A007A5B2B /* PlayersCardCell.xib in Resources */,
 				DD1A24F42C58CDD70020AC04 /* HomeViewController.xib in Resources */,
@@ -630,12 +684,16 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				08D302672C6657E9009D542A /* UITableViewCell.swift in Sources */,
 				086B87862C5B60920065CF13 /* AddPlayerScreenVM.swift in Sources */,
 				084DC9922C61007F00F3356D /* PlayerDetailScreenVC.swift in Sources */,
 				DD85DA242C5BACD400AF1652 /* MatchDetailTeamsCell.swift in Sources */,
 				086B87842C5B60760065CF13 /* AddPlayerScreenVC.swift in Sources */,
+				08D302632C664364009D542A /* PlayerDetailSkillCellVM.swift in Sources */,
 				DD38C18F2C6215680028E515 /* UIColor.swift in Sources */,
+				08D3025F2C664286009D542A /* PlayerDetailNameCellVM.swift in Sources */,
 				DD3A08A72C5E253B0056C8D7 /* Player.swift in Sources */,
+				08D302562C663E5E009D542A /* PlayerDetailPositionCell.swift in Sources */,
 				DD1A24FE2C594DDC0020AC04 /* CreateMatchCell.swift in Sources */,
 				0871D8302C5E694300B9EC1E /* Sport.swift in Sources */,
 				DD1A24F32C58CDD70020AC04 /* HomeViewController.swift in Sources */,
@@ -643,6 +701,7 @@
 				DD85DA272C5BACE200AF1652 /* MatchDetailTeamsViewModel.swift in Sources */,
 				DD3A08AB2C5E96A40056C8D7 /* VolleyballViewController.swift in Sources */,
 				DD1A24E62C57AD660020AC04 /* NetworkManager.swift in Sources */,
+				08D3025D2C663F6F009D542A /* PlayerDetailImageCellVM.swift in Sources */,
 				DD85DA132C5A82B300AF1652 /* WeatherModel.swift in Sources */,
 				08CC858D2C60C54A007A5B2B /* PlayersCardCell.swift in Sources */,
 				DD1A24F72C58DC3E0020AC04 /* CreateMatchViewController.swift in Sources */,
@@ -650,9 +709,12 @@
 				DD85DA102C5A82B300AF1652 /* CreateMatchDetailViewController.swift in Sources */,
 				DD38C1912C6264020028E515 /* MatchDetailTeamViewModel.swift in Sources */,
 				DD85DA1F2C5BAC5000AF1652 /* MatchDetailTeamsViewController.swift in Sources */,
+				08D3025A2C663E81009D542A /* PlayerDetailSkillCell.swift in Sources */,
 				0871D8342C5E6A4900B9EC1E /* VolleyballPosition.swift in Sources */,
+				08D302502C663E0E009D542A /* PlayerDetailNameCell.swift in Sources */,
 				0871D8322C5E69C300B9EC1E /* FootballPosition.swift in Sources */,
 				DD1A24A22C57AA2A0020AC04 /* AppDelegate.swift in Sources */,
+				08D302652C664D6B009D542A /* UITableView.swift in Sources */,
 				DD85DA2B2C5BB96E00AF1652 /* MatchDetailTeamViewController.swift in Sources */,
 				084DC9972C6103AA00F3356D /* PlayerDetailScreenVM.swift in Sources */,
 				DD3A08A22C5CB7750056C8D7 /* MenuViewController.swift in Sources */,
@@ -661,8 +723,10 @@
 				DD38C1932C6265160028E515 /* VolleyballViewModel.swift in Sources */,
 				DD1A24FA2C58DC4A0020AC04 /* CreateMatchViewModel.swift in Sources */,
 				DD85DA122C5A82B300AF1652 /* CreateMatchDetailViewModel.swift in Sources */,
+				08D302612C664356009D542A /* PlayerDetailPositionCellVM.swift in Sources */,
 				DD1A24A42C57AA2A0020AC04 /* SceneDelegate.swift in Sources */,
 				DD3A08A52C5E22790056C8D7 /* FirebaseManager.swift in Sources */,
+				08D3024A2C663DEC009D542A /* PlayerDetailImageCell.swift in Sources */,
 				08B4646C2C5A789B00529D6A /* PlayersScreenVM.swift in Sources */,
 				08B464702C5A78A900529D6A /* PlayersScreenVC.swift in Sources */,
 			);

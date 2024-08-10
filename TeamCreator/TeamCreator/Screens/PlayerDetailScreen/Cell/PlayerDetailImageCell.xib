@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="32700.99.1234" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_12" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22685"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="181" id="KGk-i7-Jjw" customClass="PlayerDetailImageCell" customModule="TeamCreator" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="181"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="320" height="181"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="iIA-9r-gsB">
+                        <rect key="frame" x="8" y="0.0" width="304" height="181"/>
+                        <subviews>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="0cc-Nu-IOL">
+                                <rect key="frame" x="100" y="16" width="104" height="149"/>
+                            </imageView>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="secondarySystemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="0cc-Nu-IOL" firstAttribute="leading" secondItem="iIA-9r-gsB" secondAttribute="leading" constant="100" id="OlN-1S-ttO"/>
+                            <constraint firstItem="0cc-Nu-IOL" firstAttribute="top" secondItem="iIA-9r-gsB" secondAttribute="top" constant="16" id="PTl-Cz-Ji2"/>
+                            <constraint firstAttribute="bottom" secondItem="0cc-Nu-IOL" secondAttribute="bottom" constant="16" id="c3H-Z5-sTl"/>
+                            <constraint firstAttribute="trailing" secondItem="0cc-Nu-IOL" secondAttribute="trailing" constant="100" id="s2Y-D5-y4n"/>
+                        </constraints>
+                    </view>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="iIA-9r-gsB" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="8" id="CeB-Ys-V6M"/>
+                    <constraint firstAttribute="trailing" secondItem="iIA-9r-gsB" secondAttribute="trailing" constant="8" id="Vre-Wv-GuA"/>
+                    <constraint firstAttribute="bottom" secondItem="iIA-9r-gsB" secondAttribute="bottom" id="gf0-3y-Ty9"/>
+                    <constraint firstItem="iIA-9r-gsB" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="kqF-cz-fDr"/>
+                </constraints>
+            </tableViewCellContentView>
+            <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
+            <connections>
+                <outlet property="playerDetailImageView" destination="0cc-Nu-IOL" id="G46-YX-9FV"/>
+                <outlet property="view" destination="iIA-9r-gsB" id="pp3-8m-fIp"/>
+            </connections>
+            <point key="canvasLocation" x="-35.114503816793892" y="68.661971830985919"/>
+        </tableViewCell>
+    </objects>
+    <resources>
+        <systemColor name="secondarySystemBackgroundColor">
+            <color red="0.94901960780000005" green="0.94901960780000005" blue="0.96862745100000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+    </resources>
+</document>

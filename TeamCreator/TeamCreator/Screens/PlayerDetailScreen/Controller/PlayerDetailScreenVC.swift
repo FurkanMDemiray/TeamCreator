@@ -11,28 +11,20 @@ import UIKit
 protocol PlayerDetailScreenVCProtocol: AnyObject {
     func setupNavBarButton()
     func toggleEditing(isEditing: Bool)
-    func configureImage(image: String)
-    func configureLabels(name: String, position: String, skill: String)
-    func setupPickerView()
-    func reloadPickerView()
-    func setupToolBar()
+    func registerTableView()
+    func reloadTableView()
 }
 
 //MARK: - Class
 final class PlayerDetailScreenVC: UIViewController{
     
     //MARK: - Variables
-    var viewModel: PLayerDetailScreenVMProtocol! {
+    var viewModel: PlayerDetailScreenVMProtocol! {
         didSet {
             viewModel.view = self
         }
     }
-    private var isEditingMode: Bool = false
-    @IBOutlet private weak var detailImageView: UIImageView!
-    @IBOutlet private weak var detailNameTextField: UITextField!
-    @IBOutlet private weak var detailPositionTextField: UITextField!
-    @IBOutlet private weak var detailSkillTextField: UITextField!
-    private let positionPickerView = UIPickerView()
+    @IBOutlet private weak var tableView: UITableView!
     @IBOutlet private weak var deleteButton: UIButton!
     @IBOutlet private weak var editButton: UIButton!
     @IBOutlet private weak var actionButtonStackView: UIStackView!
@@ -65,88 +57,39 @@ final class PlayerDetailScreenVC: UIViewController{
     }
 
     @IBAction private func deleteButtonClicked(_ sender: UIButton) {
-        let alert = UIAlertController(title: "Delete Player", message: "Are you sure you want to delete this player?", preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: "Cancel", style: .cancel))
-        alert.addAction(UIAlertAction(title: "Delete", style: .destructive, handler: { _ in
-            self.viewModel.deletePlayer()
-            self.viewModel.delegate?.playerDetailScreenDidDeletePlayer()
-            self.navigationController?.popViewController(animated: true)
-        }))
-        present(alert, animated: true)
+        
     }
     
     @IBAction private func editButtonClicked(_ sender: UIButton) {
-        let name = detailNameTextField.text ?? ""
-        let position = detailPositionTextField.text ?? ""
-        let skill = Int(detailSkillTextField.text ?? "") ?? 0
-        let imageData = detailImageView.image?.jpegData(compressionQuality: 0.5)
-        let imageString = imageData?.base64EncodedString()
-        guard let imageString else { return }
         
-        let validationResult = viewModel.validatePlayerDetails(
-            name: name,
-            position: position,
-            skill: String(skill),
-            image: imageString
-        )
-        switch validationResult {
-        case .success:
-            let alert = UIAlertController(title: "Edit Player", message: "Are you sure you want to update this player?", preferredStyle: .alert)
-            alert.addAction(UIAlertAction(title: "Cancel", style: .cancel))
-            alert.addAction(UIAlertAction(title: "Update", style: .default, handler: { _ in
-                self.saveChanges()
-                self.viewModel.delegate?.playerDetailScreenDidEditPlayer()
-                self.navigationController?.popViewController(animated: true)
-            }))
-            present(alert, animated: true)
-            
-        case .failure(let message):
-            let alert = UIAlertController(title: "Incomplete Information", message: message, preferredStyle: .alert)
-            alert.addAction(UIAlertAction(title: "OK", style: .default))
-            present(alert, animated: true)
-        }
     }
 }
 
 extension PlayerDetailScreenVC: PlayerDetailScreenVCProtocol {
     
+    func registerTableView() {
+        tableView.registerCell(type: PlayerDetailImageCell.self)
+        tableView.registerCell(type: PlayerDetailNameCell.self)
+        tableView.registerCell(type: PlayerDetailPositionCell.self)
+        tableView.registerCell(type: PlayerDetailSkillCell.self)
+    }
+    
+    func reloadTableView() {
+        tableView.reloadData()
+    }
+    
     //MARK: - Update TextFields UI
     func toggleEditing(isEditing: Bool) {
-        detailNameTextField.isEnabled = isEditing
-        detailPositionTextField.isEnabled = isEditing
-        detailSkillTextField.isEnabled = isEditing
-        
-        if isEditing {
-            detailNameTextField.borderStyle = .roundedRect
-            detailPositionTextField.borderStyle = .roundedRect
-            detailSkillTextField.borderStyle = .roundedRect
-        } else {
-            detailNameTextField.borderStyle = .none
-            detailPositionTextField.borderStyle = .none
-            detailSkillTextField.borderStyle = .none
+        tableView.visibleCells.forEach { cell in
+            if let editableCell = cell as? EditableCellProtocol {
+                editableCell.setEditing(isEditing: isEditing)
+            }
         }
-    }
-    
-    //MARK: - Configure Variables
-    func configureImage(image: String) {
-      encodeImage(image: image)
-    }
-    
-    private func encodeImage(image: String) {
-        let imageData = Data(base64Encoded: image)
-        let image = UIImage(data: imageData ?? Data())
-        detailImageView.image = image
-    }
-    
-    func configureLabels(name: String, position: String, skill: String) {
-        detailNameTextField.text = name
-        detailPositionTextField.text = position
-        detailSkillTextField.text = skill
     }
     
     //MARK: - Navigation RightBar Button Items
     func setupNavBarButton() {
-        if isEditingMode {
+        if viewModel.getEditingMode() {
             let discardButton = UIBarButtonItem(barButtonSystemItem: .trash, target: self, action: #selector(discardButtonTapped))
             navigationItem.rightBarButtonItem = discardButton
         } else {
@@ -157,156 +100,88 @@ extension PlayerDetailScreenVC: PlayerDetailScreenVCProtocol {
     
     //MARK: - Update Action Button UI
     private func updateActionButton() {
-        editButton.isHidden = !isEditingMode
-        deleteButton.isHidden = isEditingMode
+        editButton.isHidden = !viewModel.getEditingMode()
+        deleteButton.isHidden = viewModel.getEditingMode()
     }
     
     //MARK: - Navigation RightBar Button Actions
     @objc private func editButtonTapped() {
-        isEditingMode.toggle()
-        toggleEditing(isEditing: isEditingMode)
+        viewModel.changeEditingMode(viewModel.getEditingMode())
+        toggleEditing(isEditing: viewModel.getEditingMode())
         setupNavBarButton()
         updateActionButton()
-        setupImageView()
     }
     
     @objc private func discardButtonTapped() {
-        let alert = UIAlertController(title: "Discard Changes?", message: "Are you sure you want to discard the changes made for this player?", preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: "Cancel", style: .cancel))
-        alert.addAction(UIAlertAction(title: "Discard", style: .destructive, handler: { _ in
-            self.isEditingMode.toggle()
-            self.toggleEditing(isEditing: self.isEditingMode)
-            self.setupNavBarButton()
-            self.updateActionButton()
-            self.discardChanges()
-        }))
-        present(alert, animated: true)
-    }
-    
-    private func discardChanges() {
-        let player = viewModel.discardEditPlayer()
-        detailNameTextField.text = player.name
-        detailSkillTextField.text = String(describing: player.skillPoint ?? 0)
-        detailPositionTextField.text = player.position
-        configureImage(image: player.picture ?? "")
+        viewModel.changeEditingMode(viewModel.getEditingMode())
+        self.toggleEditing(isEditing: viewModel.getEditingMode())
+        self.setupNavBarButton()
+        self.updateActionButton()
+        self.discardChanges()
+        
     }
     
     //MARK: - Action Button Activities
+    private func discardChanges() {
+        
+    }
+    
+    
     private func saveChanges() {
-        let name = detailNameTextField.text ?? ""
-        let position = detailPositionTextField.text ?? ""
-        let skill = Int(detailSkillTextField.text ?? "") ?? 0
-        let imageData = detailImageView.image?.jpegData(compressionQuality: 0.5)
-        let imageString = imageData?.base64EncodedString()
-        guard let imageString else { return }
-        viewModel.updatePlayer(name: name, position: position, skill: skill, image: imageString)
-    }
-    
-    //MARK: - UI Variables Setup and Update
-    func setupPickerView() {
-        positionPickerView.delegate = self
-        positionPickerView.dataSource = self
-        detailPositionTextField.inputView = positionPickerView
-    }
-    
-    func reloadPickerView() {
-        positionPickerView.reloadAllComponents()
-    }
-    
-    func setupToolBar() {
-        setupPickerViewToolBar(for: detailPositionTextField)
-        setupNumberPadToolBar(for: detailSkillTextField)
-    }
-    
-    private func setupPickerViewToolBar(for textField: UITextField) {
-        let toolbar = UIToolbar()
-        toolbar.sizeToFit()
-        let cancelButton = UIBarButtonItem(title: "Cancel", style: .plain, target: self, action: #selector(cancelTapped))
-        let flexibleSpace = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
-        let doneButton = UIBarButtonItem(title: "Next", style: .plain, target: self, action: #selector(nextTapped))
-        toolbar.setItems([cancelButton, flexibleSpace, doneButton], animated: true)
-        textField.inputAccessoryView = toolbar
-    }
-
-    @objc private func cancelTapped() {
-        detailPositionTextField.resignFirstResponder()
-    }
-
-    @objc private func nextTapped() {
-        let selectedRow = positionPickerView.selectedRow(inComponent: 0)
-        detailPositionTextField.text = viewModel.titleForRow(row: selectedRow)
-        detailPositionTextField.resignFirstResponder()
-        detailSkillTextField.becomeFirstResponder()
-    }
-
-    private func setupNumberPadToolBar(for textField: UITextField) {
-        let toolbar = UIToolbar()
-        toolbar.sizeToFit()
-        let flexibleSpace = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
-        let doneButton = UIBarButtonItem(title: "Done", style: .plain, target: self, action: #selector(doneTapped))
-        toolbar.setItems([flexibleSpace, doneButton], animated: true)
-        textField.inputAccessoryView = toolbar
-    }
-
-    @objc private func doneTapped() {
-        detailSkillTextField.resignFirstResponder()
-    }
-    
-    private func setupImageView() {
-        let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(imageViewTapped))
-        detailImageView.isUserInteractionEnabled = true
-        detailImageView.addGestureRecognizer(tapGestureRecognizer)
-    }
-
-    @objc private func imageViewTapped() {
-        let imagePickerController = UIImagePickerController()
-        imagePickerController.delegate = self
-        imagePickerController.sourceType = .photoLibrary
-        present(imagePickerController, animated: true)
+       
     }
 }
 
-//MARK: - PickerView Extension
-extension PlayerDetailScreenVC: UIPickerViewDataSource {
-    func numberOfComponents(in pickerView: UIPickerView) -> Int {
-        1
+//MARK: - UITableView Extension
+extension PlayerDetailScreenVC: UITableViewDataSource {
+    
+    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        viewModel.titleForHeader(section: section)
     }
-
-    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-        viewModel.numberOfRows()
+    
+    func numberOfSections(in tableView: UITableView) -> Int {
+        viewModel.numberOfSections()
     }
-
-    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-        viewModel.titleForRow(row: row)
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        viewModel.numberOfRows(section: section)
     }
-}
-
-extension PlayerDetailScreenVC: UIPickerViewDelegate {
-    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-        detailPositionTextField.text = viewModel.titleForRow(row: row)
-    }
-}
-
-//MARK: - ImagePicker Extension
-extension PlayerDetailScreenVC: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
-    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey: Any]) {
-        if let selectedImage = info[UIImagePickerController.InfoKey.originalImage] as? UIImage {
-            detailImageView.image = selectedImage
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cellVM = viewModel.cellForRow(at: indexPath)
+        
+        switch cellVM {
+        case let imageCellVM as PlayerDetailImageCellVM:
+            if let cell = tableView.dequeueCell(withType: PlayerDetailImageCell.self) as? PlayerDetailImageCell {
+                cell.prepareCell(with: imageCellVM)
+                return cell
+            }
+        case let nameCellVM as PlayerDetailNameCellVM:
+            if let cell = tableView.dequeueCell(withType: PlayerDetailNameCell.self) as? PlayerDetailNameCell {
+                cell.prepareCell(with: nameCellVM)
+                return cell
+            }
+        case let positionCellVM as PlayerDetailPositionCellVM:
+            if let cell = tableView.dequeueCell(withType: PlayerDetailPositionCell.self) as? PlayerDetailPositionCell {
+                cell.prepareCell(with: positionCellVM)
+                return cell
+            }
+        case let skillCellVM as PlayerDetailSkillCellVM:
+            if let cell = tableView.dequeueCell(withType: PlayerDetailSkillCell.self) as? PlayerDetailSkillCell {
+                cell.prepareCell(with: skillCellVM)
+                return cell
+            }
+        default:
+            return UITableViewCell()
         }
-        picker.dismiss(animated: true)
-    }
-
-    func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
-        picker.dismiss(animated: true)
+        return UITableViewCell()
     }
 }
 
-//MARK: - TextField Extension
-extension PlayerDetailScreenVC: UITextFieldDelegate {
-    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        if textField == detailNameTextField {
-            detailPositionTextField.becomeFirstResponder()
-        }
-        return true
+extension PlayerDetailScreenVC: UITableViewDelegate {
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        viewModel.heightForRow(at: indexPath)
     }
 }
+
+

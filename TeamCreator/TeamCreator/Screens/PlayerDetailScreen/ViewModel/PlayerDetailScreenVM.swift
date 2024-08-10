@@ -8,9 +8,11 @@
 import Foundation
 
 //MARK: - Enum
-enum ValidationResult {
-    case success
-    case failure(message: String)
+enum CellType {
+    case image(_ image: String?)
+    case name(_ name: String?)
+    case position(_ position: String?)
+    case skill(_ skill: Int?)
 }
 
 //MARK: - Delegate
@@ -20,16 +22,18 @@ protocol PlayerDetailScreenVmDelegate: AnyObject {
 }
 
 //MARK: - Protocol
-protocol PLayerDetailScreenVMProtocol {
+protocol PlayerDetailScreenVMProtocol {
     var view: PlayerDetailScreenVCProtocol? { get set }
     var delegate: PlayerDetailScreenVmDelegate? { get set }
     func viewDidLoad()
     func deletePlayer()
-    func discardEditPlayer() -> Player
-    func validatePlayerDetails(name: String?, position: String?, skill: String?, image: String?) -> ValidationResult
-    func updatePlayer(name: String, position: String, skill: Int, image: String)
-    func numberOfRows() -> Int
-    func titleForRow(row: Int) -> String
+    func numberOfSections() -> Int
+    func numberOfRows(section: Int) -> Int
+    func cellForRow(at indexPath: IndexPath) -> CellVM
+    func titleForHeader(section: Int) -> String
+    func heightForRow(at indexPath: IndexPath) -> CGFloat
+    func getEditingMode() -> Bool
+    func changeEditingMode(_ isEditingMode: Bool)
 }
 
 //MARK: - Class
@@ -37,8 +41,11 @@ final class PlayerDetailScreenVM {
     
     //MARK: - Variables
     private var player: Player
+    private var editedPlayer: Player?
+    private var isEditingMode: Bool = false
     weak var view: PlayerDetailScreenVCProtocol?
     weak var delegate: PlayerDetailScreenVmDelegate?
+    var cellTypes: [CellType] = []
     var selectedSport: Sport
     private var positions = [String]()
     private let sportPositions: [Sport: [String]] = [
@@ -57,31 +64,27 @@ final class PlayerDetailScreenVM {
     
     private func setupPositions() {
         positions = sportPositions[selectedSport] ?? []
-        view?.reloadPickerView()
+    }
+    
+    private func updateCellTypes() {
+        cellTypes.removeAll()
+        cellTypes.append(.image(player.picture))
+        cellTypes.append(.name(player.name))
+        cellTypes.append(.position(player.position))
+        cellTypes.append(.skill(player.skillPoint))
+        view?.reloadTableView()
     }
 }
 
-extension PlayerDetailScreenVM: PLayerDetailScreenVMProtocol {
+extension PlayerDetailScreenVM: PlayerDetailScreenVMProtocol {
+    
     //MARK: - Functions
     func viewDidLoad() {
         view?.setupNavBarButton()
-        view?.configureLabels(name: player.name ?? "", position: player.position ?? "", skill: String(describing: player.skillPoint ?? 0))
-        view?.configureImage(image: player.picture ?? "")
-        view?.setupPickerView()
-        view?.setupToolBar()
+        view?.registerTableView()
+        updateCellTypes()
     }
-    
-    func numberOfRows() -> Int {
-        positions.count
-    }
-    
-    func titleForRow(row: Int) -> String {
-        positions[row]
-    }
-    
-    func discardEditPlayer() -> Player {
-        player
-    }
+
     
     func deletePlayer() {
         firebaseManager.deletePlayer(player: player) { result in
@@ -94,35 +97,54 @@ extension PlayerDetailScreenVM: PLayerDetailScreenVMProtocol {
         }
     }
     
-    func validatePlayerDetails(name: String?, position: String?, skill: String?, image: String?) -> ValidationResult {
-        guard let imageString = image, !imageString.isEmpty else {
-            return .failure(message: "Please select an image.")
-        }
-        guard let name = name, !name.isEmpty else {
-            return .failure(message: "Name cannot be empty.")
-        }
-        guard let position = position, !position.isEmpty else {
-            return .failure(message: "Position cannot be empty.")
-        }
-        guard let skillText = skill, !skillText.isEmpty, let skill = Int(skillText), skill > 0, skill <= 100 else {
-            return .failure(message: "Skill must be a valid number between 1 and 100.")
-        }
-        return .success
+    func numberOfSections() -> Int {
+        cellTypes.count
     }
     
-    func updatePlayer(name: String, position: String, skill: Int, image: String) {
-        player.name = name
-        player.position = position
-        player.skillPoint = skill
-        player.picture = image
-        
-        firebaseManager.updatePlayer(player: player) { result in
-            switch result {
-            case .success():
-                self.delegate?.playerDetailScreenDidEditPlayer()
-            case .failure(let error):
-                print("Failed to update player: \(error.localizedDescription)")
-            }
+    func numberOfRows(section: Int) -> Int {
+        1
+    }
+    
+    func cellForRow(at indexPath: IndexPath) -> CellVM {
+        switch cellTypes[indexPath.section] {
+        case .image:
+            return PlayerDetailImageCellVM(image: player.picture)
+        case .name:
+            return PlayerDetailNameCellVM(name: player.name)
+        case .position:
+            return PlayerDetailPositionCellVM(position: player.position)
+        case .skill:
+            return PlayerDetailSkillCellVM(skill: player.skillPoint)
         }
+    }
+    
+    func titleForHeader(section: Int) -> String {
+        switch cellTypes[section] {
+        case .image:
+            return ""
+        case .name:
+            return "Name"
+        case .position:
+            return "Position"
+        case .skill:
+            return "Skill"
+        }
+    }
+    
+    func heightForRow(at indexPath: IndexPath) -> CGFloat {
+        switch cellTypes[indexPath.section] {
+        case .image:
+            return 200
+        case .name, .position, .skill:
+            return 44
+        }
+    }
+    
+    func getEditingMode() -> Bool {
+        isEditingMode
+    }
+    
+    func changeEditingMode(_ isEditingMode: Bool) {
+        self.isEditingMode = isEditingMode
     }
 }

@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="32700.99.1234" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_12" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22685"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="KGk-i7-Jjw" customClass="PlayerDetailSkillCell" customModule="TeamCreator" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5E8-I4-zWa">
+                        <rect key="frame" x="8" y="0.0" width="304" height="44"/>
+                        <subviews>
+                            <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="cCQ-9M-GI1">
+                                <rect key="frame" x="16" y="8" width="272" height="28"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="secondarySystemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="cCQ-9M-GI1" firstAttribute="leading" secondItem="5E8-I4-zWa" secondAttribute="leading" constant="16" id="9RM-RY-Zsp"/>
+                            <constraint firstItem="cCQ-9M-GI1" firstAttribute="top" secondItem="5E8-I4-zWa" secondAttribute="top" constant="8" id="Dih-5L-5Ch"/>
+                            <constraint firstAttribute="bottom" secondItem="cCQ-9M-GI1" secondAttribute="bottom" constant="8" id="Ir0-rT-MNg"/>
+                            <constraint firstAttribute="trailing" secondItem="cCQ-9M-GI1" secondAttribute="trailing" constant="16" id="zx9-d9-m4l"/>
+                        </constraints>
+                    </view>
+                </subviews>
+                <constraints>
+                    <constraint firstAttribute="bottom" secondItem="5E8-I4-zWa" secondAttribute="bottom" id="MDG-r6-iLA"/>
+                    <constraint firstItem="5E8-I4-zWa" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="8" id="SdN-RV-2Fe"/>
+                    <constraint firstAttribute="trailing" secondItem="5E8-I4-zWa" secondAttribute="trailing" constant="8" id="lKg-l0-LFu"/>
+                    <constraint firstItem="5E8-I4-zWa" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="mDP-qB-rCe"/>
+                </constraints>
+            </tableViewCellContentView>
+            <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
+            <connections>
+                <outlet property="playerDetailSkillTextField" destination="cCQ-9M-GI1" id="utF-I3-tjD"/>
+                <outlet property="view" destination="5E8-I4-zWa" id="b2K-7w-UPt"/>
+            </connections>
+            <point key="canvasLocation" x="139" y="21"/>
+        </tableViewCell>
+    </objects>
+    <resources>
+        <systemColor name="secondarySystemBackgroundColor">
+            <color red="0.94901960780000005" green="0.94901960780000005" blue="0.96862745100000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+    </resources>
+</document>

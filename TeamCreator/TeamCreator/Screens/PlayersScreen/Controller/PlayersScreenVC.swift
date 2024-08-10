@@ -95,7 +95,7 @@ extension PlayersScreenVC: PlayersScreenVMDelegate {
         let detailVC = PlayerDetailScreenVC()
         let detailVM = PlayerDetailScreenVM(player: playerCellVM.player, selectedSport: selectedSport )
         detailVM.delegate = self
-        detailVC.viewModel = detailVM as any PLayerDetailScreenVMProtocol
+        detailVC.viewModel = detailVM as any PlayerDetailScreenVMProtocol
         navigationController?.pushViewController(detailVC, animated: true)
     }
     

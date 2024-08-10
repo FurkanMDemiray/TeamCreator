@@ -7,6 +7,12 @@
 
 import Foundation
 
+//MARK: - Enum
+enum ValidationResult {
+    case success
+    case failure(message: String)
+}
+
 //MARK: - Delegate Protocol
 protocol AddPlayerScreenVMDelegate: AnyObject {
     func navigateBackToPlayers()
