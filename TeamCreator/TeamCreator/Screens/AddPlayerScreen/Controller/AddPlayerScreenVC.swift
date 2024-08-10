@@ -33,7 +33,9 @@ final class AddPlayerScreenVC: UIViewController {
     @IBOutlet private weak var positionTextField: UITextField!
     @IBOutlet private weak var ratingTextField: UITextField!
     @IBOutlet weak var addPlayerButton: UIButton!
+    
     private let positionPickerView = UIPickerView()
+    private var activeTextField: UITextField?
 
     //MARK: - Lifecycles
     override func viewDidLoad() {
@@ -74,12 +76,17 @@ final class AddPlayerScreenVC: UIViewController {
     }
 
     @objc private func keyboardWillShow(notification: NSNotification) {
-        if let keyboardFrame = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? CGRect {
-            let keyboardHeight = keyboardFrame.height
-            let bottomSpace = self.view.frame.height - (addPlayerButton.frame.origin.y + addPlayerButton.frame.height)
-            if bottomSpace < keyboardHeight {
-                self.view.frame.origin.y = 0 - (keyboardHeight - (bottomSpace) + 10)
-            }
+        guard let keyboardFrame = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? CGRect,
+              let activeTextField = activeTextField else { return }
+
+        let textFieldFrameInWindow = activeTextField.convert(activeTextField.bounds, to: view.window)
+
+        let textFieldBottomY = textFieldFrameInWindow.maxY
+        let keyboardOriginY = view.frame.height - keyboardFrame.height
+
+        if textFieldBottomY > keyboardOriginY {
+            let offset = textFieldBottomY - keyboardOriginY + 50
+            self.view.frame.origin.y = 0 - offset
         }
     }
 
@@ -182,6 +189,14 @@ extension AddPlayerScreenVC: UITextFieldDelegate {
             ratingTextField.resignFirstResponder()
         }
         return true
+    }
+    
+    func textFieldDidEndEditing(_ textField: UITextField) {
+        activeTextField = nil
+    }
+    
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+        activeTextField = textField
     }
 }
 
