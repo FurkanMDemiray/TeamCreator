@@ -123,22 +123,26 @@ final class CreateMatchViewModel: NSObject {
             guard let groupedPlayers = positionGroups[position] else { continue }
             let sortedPlayers = groupedPlayers.sorted { ($0.skillPoint ?? 0) > ($1.skillPoint ?? 0) }
 
+            var addToTeam1 = true
             for player in sortedPlayers {
-                if let limit1 = team1Limits[player.position ?? ""] {
-                    if limit1 > 0 {
-                        team1.append(player)
-                        team1Limits[player.position ?? ""] = limit1 - 1
-                    } else if let limit2 = team2Limits[player.position ?? ""] {
-                        if limit2 > 0 {
-                            team2.append(player)
-                            team2Limits[player.position ?? ""] = limit2 - 1
-                        }
-                    }
+                if addToTeam1, let limit1 = team1Limits[player.position ?? ""], limit1 > 0 {
+                    team1.append(player)
+                    team1Limits[player.position ?? ""] = limit1 - 1
+                } else if let limit2 = team2Limits[player.position ?? ""], limit2 > 0 {
+                    team2.append(player)
+                    team2Limits[player.position ?? ""] = limit2 - 1
+                } else if let limit1 = team1Limits[player.position ?? ""], limit1 > 0 {
+                    team1.append(player)
+                    team1Limits[player.position ?? ""] = limit1 - 1
+                } else if let limit2 = team2Limits[player.position ?? ""], limit2 > 0 {
+                    team2.append(player)
+                    team2Limits[player.position ?? ""] = limit2 - 1
                 }
+                addToTeam1.toggle() // Sıradaki oyuncuyu diğer takıma eklemek için toggle
             }
         }
 
-        // Distribute remaining players if any
+        // Kalan oyuncuları dağıt
         var remainingPlayers = shuffledPlayers.filter { !team1.contains($0) && !team2.contains($0) }
         for player in remainingPlayers {
             if team1.count <= team2.count {

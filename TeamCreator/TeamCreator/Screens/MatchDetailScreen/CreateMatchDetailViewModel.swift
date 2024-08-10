@@ -24,6 +24,8 @@ protocol CreateMatchDetailViewModelProtocol {
     var setSelectedPlayers: [Player] { get set }
     var getSetTeam1: [Player] { get set }
     var getSetTeam2: [Player] { get set }
+    var sumOfSkillTeamOne: Int { get }
+    var sumOfSkillTeamTwo: Int { get }
 
     func fetch()
 }
@@ -87,6 +89,18 @@ final class CreateMatchDetailViewModel {
 
 //MARK: - Protocol Extension
 extension CreateMatchDetailViewModel: CreateMatchDetailViewModelProtocol {
+    var sumOfSkillTeamTwo: Int {
+        var sum = 0
+        team2.forEach { sum += $0.skillPoint ?? 0 }
+        return sum
+    }
+
+    var sumOfSkillTeamOne: Int {
+        var sum = 0
+        team1.forEach { sum += $0.skillPoint ?? 0 }
+        return sum
+    }
+
     var getSetTeam1: [Player] {
         get {
             team1
