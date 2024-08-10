@@ -28,6 +28,8 @@ final class CreateMatchDetailViewController: UIViewController {
         viewModel.fetch()
         configureImages()
         configureWeatherOuterView()
+        print("team 1 ",viewModel.sumOfSkillTeamOne)
+        print("team 2 ",viewModel.sumOfSkillTeamTwo)
     }
 
     private func configureImages() {
