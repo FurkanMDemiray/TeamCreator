@@ -163,16 +163,11 @@ extension PlayerDetailScreenVC: PlayerDetailScreenVCProtocol {
     }
     
     @objc private func discardButtonTapped() {
-        let alert = UIAlertController(title: "Discard Changes?", message: "Are you sure you want to discard the changes made for this player?", preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: "Cancel", style: .cancel))
-        alert.addAction(UIAlertAction(title: "Discard", style: .destructive, handler: { _ in
-            self.isEditingMode.toggle()
-            self.toggleEditing(isEditing: self.isEditingMode)
-            self.setupNavBarButton()
-            self.updateActionButton()
-            self.discardChanges()
-        }))
-        present(alert, animated: true)
+        isEditingMode.toggle()
+        toggleEditing(isEditing: self.isEditingMode)
+        setupNavBarButton()
+        updateActionButton()
+        discardChanges()
     }
     
     private func discardChanges() {

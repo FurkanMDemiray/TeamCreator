@@ -30,6 +30,7 @@ protocol PLayerDetailScreenVMProtocol {
     func updatePlayer(name: String, position: String, skill: Int, image: String)
     func numberOfRows() -> Int
     func titleForRow(row: Int) -> String
+    func discardValidation()
 }
 
 //MARK: - Class
@@ -108,6 +109,10 @@ extension PlayerDetailScreenVM: PLayerDetailScreenVMProtocol {
             return .failure(message: "Skill must be a valid number between 1 and 100.")
         }
         return .success
+    }
+    
+    func discardValidation() {
+        
     }
     
     func updatePlayer(name: String, position: String, skill: Int, image: String) {

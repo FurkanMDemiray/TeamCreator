@@ -73,7 +73,6 @@ extension AddPlayerScreenVM: AddPlayerScreenVMProtocol {
         guard let name = player.name, !name.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty  else {
             return .failure(message: "Name cannot be empty.")
         }
-        print("player \(name)")
         guard let position = player.position, !position.isEmpty else {
             return .failure(message: "Position cannot be empty.")
         }
