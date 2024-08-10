@@ -7,6 +7,7 @@
 
 import UIKit
 
+//MARK: - Protocol
 protocol PlayerDetailScreenVCProtocol: AnyObject {
     func setupNavBarButton()
     func toggleEditing(isEditing: Bool)
@@ -17,16 +18,16 @@ protocol PlayerDetailScreenVCProtocol: AnyObject {
     func setupToolBar()
 }
 
+//MARK: - Class
 final class PlayerDetailScreenVC: UIViewController{
     
+    //MARK: - Variables
     var viewModel: PLayerDetailScreenVMProtocol! {
         didSet {
             viewModel.view = self
         }
     }
-    
     private var isEditingMode: Bool = false
-    
     @IBOutlet private weak var detailImageView: UIImageView!
     @IBOutlet private weak var detailNameTextField: UITextField!
     @IBOutlet private weak var detailPositionTextField: UITextField!
@@ -36,10 +37,10 @@ final class PlayerDetailScreenVC: UIViewController{
     @IBOutlet private weak var editButton: UIButton!
     @IBOutlet private weak var actionButtonStackView: UIStackView!
     
+    //MARK: - Lifecycles
     override func viewDidLoad() {
         super.viewDidLoad()
         viewModel.viewDidLoad()
-        
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
     }
@@ -48,6 +49,7 @@ final class PlayerDetailScreenVC: UIViewController{
         NotificationCenter.default.removeObserver(self)
     }
     
+    //MARK: - Private functions
     @objc private func keyboardWillShow(notification: NSNotification) {
         if let keyboardFrame = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? CGRect {
             let keyboardHeight = keyboardFrame.height
@@ -73,7 +75,7 @@ final class PlayerDetailScreenVC: UIViewController{
         present(alert, animated: true)
     }
     
-    @IBAction func editButtonClicked(_ sender: UIButton) {
+    @IBAction private func editButtonClicked(_ sender: UIButton) {
         let name = detailNameTextField.text ?? ""
         let position = detailPositionTextField.text ?? ""
         let skill = Int(detailSkillTextField.text ?? "") ?? 0
@@ -82,12 +84,11 @@ final class PlayerDetailScreenVC: UIViewController{
         guard let imageString else { return }
         
         let validationResult = viewModel.validatePlayerDetails(
-            name: detailNameTextField.text,
-            position: detailPositionTextField.text,
-            skill: detailSkillTextField.text,
+            name: name,
+            position: position,
+            skill: String(skill),
             image: imageString
         )
-        
         switch validationResult {
         case .success:
             let alert = UIAlertController(title: "Edit Player", message: "Are you sure you want to update this player?", preferredStyle: .alert)
@@ -105,27 +106,18 @@ final class PlayerDetailScreenVC: UIViewController{
             present(alert, animated: true)
         }
     }
-    
 }
 
 extension PlayerDetailScreenVC: PlayerDetailScreenVCProtocol {
     
+    //MARK: - Update TextFields UI
     func toggleEditing(isEditing: Bool) {
         detailNameTextField.isEnabled = isEditing
         detailPositionTextField.isEnabled = isEditing
         detailSkillTextField.isEnabled = isEditing
-        
-        if isEditing {
-            detailNameTextField.borderStyle = .roundedRect
-            detailPositionTextField.borderStyle = .roundedRect
-            detailSkillTextField.borderStyle = .roundedRect
-        } else {
-            detailNameTextField.borderStyle = .none
-            detailPositionTextField.borderStyle = .none
-            detailSkillTextField.borderStyle = .none
-        }
     }
     
+    //MARK: - Configure Variables
     func configureImage(image: String) {
       encodeImage(image: image)
     }
@@ -140,8 +132,11 @@ extension PlayerDetailScreenVC: PlayerDetailScreenVCProtocol {
         detailNameTextField.text = name
         detailPositionTextField.text = position
         detailSkillTextField.text = skill
+        detailNameTextField.placeholder = name
+        detailSkillTextField.placeholder = skill
     }
     
+    //MARK: - Navigation RightBar Button Items
     func setupNavBarButton() {
         if isEditingMode {
             let discardButton = UIBarButtonItem(barButtonSystemItem: .trash, target: self, action: #selector(discardButtonTapped))
@@ -152,11 +147,13 @@ extension PlayerDetailScreenVC: PlayerDetailScreenVCProtocol {
         }
     }
     
+    //MARK: - Update Action Button UI
     private func updateActionButton() {
         editButton.isHidden = !isEditingMode
         deleteButton.isHidden = isEditingMode
     }
     
+    //MARK: - Navigation RightBar Button Actions
     @objc private func editButtonTapped() {
         isEditingMode.toggle()
         toggleEditing(isEditing: isEditingMode)
@@ -166,16 +163,11 @@ extension PlayerDetailScreenVC: PlayerDetailScreenVCProtocol {
     }
     
     @objc private func discardButtonTapped() {
-        let alert = UIAlertController(title: "Discard Changes?", message: "Are you sure you want to discard the changes made for this player?", preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: "Cancel", style: .cancel))
-        alert.addAction(UIAlertAction(title: "Discard", style: .destructive, handler: { _ in
-            self.isEditingMode.toggle()
-            self.toggleEditing(isEditing: self.isEditingMode)
-            self.setupNavBarButton()
-            self.updateActionButton()
-            self.discardChanges()
-        }))
-        present(alert, animated: true)
+        isEditingMode.toggle()
+        toggleEditing(isEditing: self.isEditingMode)
+        setupNavBarButton()
+        updateActionButton()
+        discardChanges()
     }
     
     private func discardChanges() {
@@ -186,6 +178,7 @@ extension PlayerDetailScreenVC: PlayerDetailScreenVCProtocol {
         configureImage(image: player.picture ?? "")
     }
     
+    //MARK: - Action Button Activities
     private func saveChanges() {
         let name = detailNameTextField.text ?? ""
         let position = detailPositionTextField.text ?? ""
@@ -196,6 +189,7 @@ extension PlayerDetailScreenVC: PlayerDetailScreenVCProtocol {
         viewModel.updatePlayer(name: name, position: position, skill: skill, image: imageString)
     }
     
+    //MARK: - UI Variables Setup and Update
     func setupPickerView() {
         positionPickerView.delegate = self
         positionPickerView.dataSource = self
@@ -259,6 +253,7 @@ extension PlayerDetailScreenVC: PlayerDetailScreenVCProtocol {
     }
 }
 
+//MARK: - PickerView Extension
 extension PlayerDetailScreenVC: UIPickerViewDataSource {
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
         1
@@ -279,6 +274,7 @@ extension PlayerDetailScreenVC: UIPickerViewDelegate {
     }
 }
 
+//MARK: - ImagePicker Extension
 extension PlayerDetailScreenVC: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey: Any]) {
         if let selectedImage = info[UIImagePickerController.InfoKey.originalImage] as? UIImage {
@@ -292,6 +288,7 @@ extension PlayerDetailScreenVC: UIImagePickerControllerDelegate, UINavigationCon
     }
 }
 
+//MARK: - TextField Extension
 extension PlayerDetailScreenVC: UITextFieldDelegate {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         if textField == detailNameTextField {

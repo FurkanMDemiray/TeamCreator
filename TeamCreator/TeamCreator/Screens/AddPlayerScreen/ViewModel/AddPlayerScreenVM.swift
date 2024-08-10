@@ -7,10 +7,12 @@
 
 import Foundation
 
+//MARK: - Delegate Protocol
 protocol AddPlayerScreenVMDelegate: AnyObject {
     func navigateBackToPlayers()
 }
 
+//MARK: - Protocol
 protocol AddPlayerScreenVMProtocol {
     var view: AddPlayerScreenVCProtocol? { get set }
     var delegate: AddPlayerScreenVMDelegate? { get set }
@@ -22,7 +24,10 @@ protocol AddPlayerScreenVMProtocol {
     func addPlayer(player: Player)
 }
 
+//MARK: - Class
 final class AddPlayerScreenVM {
+    
+    //MARK: - Variables
     weak var view: AddPlayerScreenVCProtocol?
     weak var delegate: AddPlayerScreenVMDelegate?
     var selectedSport: Sport
@@ -33,6 +38,7 @@ final class AddPlayerScreenVM {
     ]
     let firebaseManager: FirebaseManagerProtocol
 
+    //MARK: - Initialize 
     init(firebaseManager: FirebaseManagerProtocol = FirebaseManager(), selectedSport: Sport) {
         self.firebaseManager = firebaseManager
         self.selectedSport = selectedSport
@@ -48,6 +54,7 @@ final class AddPlayerScreenVM {
 
 extension AddPlayerScreenVM: AddPlayerScreenVMProtocol {
     
+    //MARK: - Functions
     func viewDidLoad() {
         view?.setupVC()
         view?.setupImageView()
@@ -66,7 +73,6 @@ extension AddPlayerScreenVM: AddPlayerScreenVMProtocol {
         guard let name = player.name, !name.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty  else {
             return .failure(message: "Name cannot be empty.")
         }
-        print("player \(name)")
         guard let position = player.position, !position.isEmpty else {
             return .failure(message: "Position cannot be empty.")
         }

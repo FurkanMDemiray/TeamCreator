@@ -7,6 +7,7 @@
 
 import UIKit
 
+//MARK: - Protocol
 protocol AddPlayerScreenVCProtocol: AnyObject {
     func setupVC()
     func setupPickerView()
@@ -16,27 +17,30 @@ protocol AddPlayerScreenVCProtocol: AnyObject {
     func clearFields()
 }
 
+//MARK: - Class
 final class AddPlayerScreenVC: UIViewController {
-
+    
+    //MARK: - Variables
     var viewModel: AddPlayerScreenVMProtocol! {
         didSet {
             viewModel.view = self
             viewModel.delegate = self
         }
     }
-
     @IBOutlet private weak var imageView: UIImageView!
     @IBOutlet private weak var nameTextField: UITextField!
     @IBOutlet private weak var surnameTextField: UITextField!
     @IBOutlet private weak var positionTextField: UITextField!
     @IBOutlet private weak var ratingTextField: UITextField!
     @IBOutlet weak var addPlayerButton: UIButton!
+    
     private let positionPickerView = UIPickerView()
+    private var activeTextField: UITextField?
 
+    //MARK: - Lifecycles
     override func viewDidLoad() {
         super.viewDidLoad()
         viewModel.viewDidLoad()
-
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
     }
@@ -44,22 +48,23 @@ final class AddPlayerScreenVC: UIViewController {
     deinit {
         NotificationCenter.default.removeObserver(self)
     }
-
+    
+    //MARK: - Private Functions
     @IBAction private func addPlayerButtonTapped(_ sender: UIButton) {
         let name = nameTextField.text
         let surname = surnameTextField.text
         let position = positionTextField.text
         let rating = ratingTextField.text
         let id = UUID().uuidString
-
-        let imageData = imageView.image?.jpegData(compressionQuality: 0.5)
-        let imageString = imageData?.base64EncodedString()
-        guard let imageString else { return }
-
+        var imageString: String? = nil
+        if imageView.image !=  UIImage(systemName: "hand.tap.fill") {
+            if let imageData = imageView.image?.jpegData(compressionQuality: 0.5) {
+                imageString = imageData.base64EncodedString()
+            }
+        }
         let newPlayer = Player(id: id, name: "\(name!) \(surname!)", age: 18, skillPoint: Int(rating ?? "0"), position: position, sport: HomeViewModel.whichSport, picture: imageString)
         
         let validationResult = viewModel.validatePlayerDetails(player: newPlayer)
-        
         switch validationResult {
         case .success:
             viewModel.addPlayer(player: newPlayer)
@@ -71,12 +76,17 @@ final class AddPlayerScreenVC: UIViewController {
     }
 
     @objc private func keyboardWillShow(notification: NSNotification) {
-        if let keyboardFrame = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? CGRect {
-            let keyboardHeight = keyboardFrame.height
-            let bottomSpace = self.view.frame.height - (addPlayerButton.frame.origin.y + addPlayerButton.frame.height)
-            if bottomSpace < keyboardHeight {
-                self.view.frame.origin.y = 0 - (keyboardHeight - (bottomSpace) + 10)
-            }
+        guard let keyboardFrame = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? CGRect,
+              let activeTextField = activeTextField else { return }
+
+        let textFieldFrameInWindow = activeTextField.convert(activeTextField.bounds, to: view.window)
+
+        let textFieldBottomY = textFieldFrameInWindow.maxY
+        let keyboardOriginY = view.frame.height - keyboardFrame.height
+
+        if textFieldBottomY > keyboardOriginY {
+            let offset = textFieldBottomY - keyboardOriginY + 50
+            self.view.frame.origin.y = 0 - offset
         }
     }
 
@@ -87,6 +97,7 @@ final class AddPlayerScreenVC: UIViewController {
 
 extension AddPlayerScreenVC: AddPlayerScreenVCProtocol {
 
+    //MARK: - PickerView
     func setupPickerView() {
         positionPickerView.delegate = self
         positionPickerView.dataSource = self
@@ -135,7 +146,8 @@ extension AddPlayerScreenVC: AddPlayerScreenVCProtocol {
     @objc private func doneTapped() {
         ratingTextField.resignFirstResponder()
     }
-
+    
+    //MARK: - ImageView
     func setupImageView() {
         let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(imageViewTapped))
         imageView.isUserInteractionEnabled = true
@@ -164,6 +176,7 @@ extension AddPlayerScreenVC: AddPlayerScreenVCProtocol {
 
 }
 
+//MARK: - TextField Extension
 extension AddPlayerScreenVC: UITextFieldDelegate {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         if textField == nameTextField {
@@ -177,8 +190,17 @@ extension AddPlayerScreenVC: UITextFieldDelegate {
         }
         return true
     }
+    
+    func textFieldDidEndEditing(_ textField: UITextField) {
+        activeTextField = nil
+    }
+    
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+        activeTextField = textField
+    }
 }
 
+//MARK: - PickerView Extension
 extension AddPlayerScreenVC: UIPickerViewDataSource {
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
         return 1
@@ -199,6 +221,7 @@ extension AddPlayerScreenVC: UIPickerViewDelegate {
     }
 }
 
+//MARK: - ImagePicker Extension
 extension AddPlayerScreenVC: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey: Any]) {
         if let selectedImage = info[UIImagePickerController.InfoKey.originalImage] as? UIImage {
@@ -212,6 +235,7 @@ extension AddPlayerScreenVC: UIImagePickerControllerDelegate, UINavigationContro
     }
 }
 
+//MARK: - Delegate Extension
 extension AddPlayerScreenVC: AddPlayerScreenVMDelegate {
     func navigateBackToPlayers() {
         navigationController?.popViewController(animated: true)
