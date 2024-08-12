@@ -21,7 +21,7 @@ Welcome to Team Creator. This app allows user to create sport matches with their
   - [Create Match](#create-match)
   - [Match Detail](#match-detail)
 - [Known Issue](#known-issue)
-- [IMprovements](#improvements)
+- [Improvements](#improvements)
 
 
 ## Features
