@@ -16,6 +16,8 @@
 		0871D8302C5E694300B9EC1E /* Sport.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0871D82F2C5E694300B9EC1E /* Sport.swift */; };
 		0871D8322C5E69C300B9EC1E /* FootballPosition.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0871D8312C5E69C300B9EC1E /* FootballPosition.swift */; };
 		0871D8342C5E6A4900B9EC1E /* VolleyballPosition.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0871D8332C5E6A4900B9EC1E /* VolleyballPosition.swift */; };
+		087AA4552C6A568900AF48D6 /* OnboardingVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 087AA4532C6A568900AF48D6 /* OnboardingVC.swift */; };
+		087AA4562C6A568900AF48D6 /* OnboardingVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 087AA4542C6A568900AF48D6 /* OnboardingVC.xib */; };
 		08B4646C2C5A789B00529D6A /* PlayersScreenVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08B464692C5A789B00529D6A /* PlayersScreenVM.swift */; };
 		08B464702C5A78A900529D6A /* PlayersScreenVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08B4646D2C5A78A900529D6A /* PlayersScreenVC.swift */; };
 		08B464712C5A78A900529D6A /* PlayersScreenVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 08B4646E2C5A78A900529D6A /* PlayersScreenVC.xib */; };
@@ -93,6 +95,8 @@
 		0871D82F2C5E694300B9EC1E /* Sport.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sport.swift; sourceTree = "<group>"; };
 		0871D8312C5E69C300B9EC1E /* FootballPosition.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FootballPosition.swift; sourceTree = "<group>"; };
 		0871D8332C5E6A4900B9EC1E /* VolleyballPosition.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VolleyballPosition.swift; sourceTree = "<group>"; };
+		087AA4532C6A568900AF48D6 /* OnboardingVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingVC.swift; sourceTree = "<group>"; };
+		087AA4542C6A568900AF48D6 /* OnboardingVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = OnboardingVC.xib; sourceTree = "<group>"; };
 		08B464692C5A789B00529D6A /* PlayersScreenVM.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlayersScreenVM.swift; sourceTree = "<group>"; };
 		08B4646D2C5A78A900529D6A /* PlayersScreenVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlayersScreenVC.swift; sourceTree = "<group>"; };
 		08B4646E2C5A78A900529D6A /* PlayersScreenVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PlayersScreenVC.xib; sourceTree = "<group>"; };
@@ -253,6 +257,15 @@
 			path = Cell;
 			sourceTree = "<group>";
 		};
+		08DAD41C2C6A62320004B2A9 /* OnboardingScreen */ = {
+			isa = PBXGroup;
+			children = (
+				087AA4532C6A568900AF48D6 /* OnboardingVC.swift */,
+				087AA4542C6A568900AF48D6 /* OnboardingVC.xib */,
+			);
+			path = OnboardingScreen;
+			sourceTree = "<group>";
+		};
 		DD1A24952C57AA2A0020AC04 = {
 			isa = PBXGroup;
 			children = (
@@ -326,6 +339,7 @@
 		DD1A24DD2C57AC3E0020AC04 /* Screens */ = {
 			isa = PBXGroup;
 			children = (
+				08DAD41C2C6A62320004B2A9 /* OnboardingScreen */,
 				DD1A24DE2C57AC430020AC04 /* HomeScreen */,
 				DD1A24DF2C57AC5A0020AC04 /* MenuScreen */,
 				DD1A24E02C57ACB00020AC04 /* PlayersScreen */,
@@ -602,6 +616,7 @@
 				08B464712C5A78A900529D6A /* PlayersScreenVC.xib in Resources */,
 				DD1A24DA2C57AB070020AC04 /* GoogleService-Info.plist in Resources */,
 				DD1A24F82C58DC3E0020AC04 /* CreateMatchViewController.xib in Resources */,
+				087AA4562C6A568900AF48D6 /* OnboardingVC.xib in Resources */,
 				DD85DA252C5BACD400AF1652 /* MatchDetailTeamsCell.xib in Resources */,
 				DD1A24AE2C57AA2B0020AC04 /* Base in Resources */,
 				08CC858E2C60C54A007A5B2B /* PlayersCardCell.xib in Resources */,
@@ -631,6 +646,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				086B87862C5B60920065CF13 /* AddPlayerScreenVM.swift in Sources */,
+				087AA4552C6A568900AF48D6 /* OnboardingVC.swift in Sources */,
 				084DC9922C61007F00F3356D /* PlayerDetailScreenVC.swift in Sources */,
 				DD85DA242C5BACD400AF1652 /* MatchDetailTeamsCell.swift in Sources */,
 				086B87842C5B60760065CF13 /* AddPlayerScreenVC.swift in Sources */,

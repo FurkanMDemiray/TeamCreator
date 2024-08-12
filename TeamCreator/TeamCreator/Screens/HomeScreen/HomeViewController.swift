@@ -21,6 +21,7 @@ final class HomeViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         configureImages()
+        navigationController?.present(OnboardingVC(), animated: true)
     }
 
     private func configureImages() {
