@@ -18,7 +18,6 @@ protocol PlayerDetailScreenVCProtocol: AnyObject {
     func setupToolBar()
 }
 
-//MARK: - Class
 final class PlayerDetailScreenVC: UIViewController{
     
     //MARK: - Variables
@@ -28,11 +27,13 @@ final class PlayerDetailScreenVC: UIViewController{
         }
     }
     private var isEditingMode: Bool = false
+    private let positionPickerView = UIPickerView()
+    
+    //MARK: - IBOutlets
     @IBOutlet private weak var detailImageView: UIImageView!
     @IBOutlet private weak var detailNameTextField: UITextField!
     @IBOutlet private weak var detailPositionTextField: UITextField!
     @IBOutlet private weak var detailSkillTextField: UITextField!
-    private let positionPickerView = UIPickerView()
     @IBOutlet private weak var deleteButton: UIButton!
     @IBOutlet private weak var editButton: UIButton!
     @IBOutlet private weak var actionButtonStackView: UIStackView!
@@ -41,15 +42,24 @@ final class PlayerDetailScreenVC: UIViewController{
     override func viewDidLoad() {
         super.viewDidLoad()
         viewModel.viewDidLoad()
-        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
+        setupKeyboardObservers()
     }
     
     deinit {
-        NotificationCenter.default.removeObserver(self)
+        removeKeyboardObservers()
     }
     
-    //MARK: - Private functions
+    //MARK: = Keyboard Observers
+    private func setupKeyboardObservers() {
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
+    }
+
+    private func removeKeyboardObservers() {
+        NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillHideNotification, object: nil)
+    }
+    
     @objc private func keyboardWillShow(notification: NSNotification) {
         if let keyboardFrame = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? CGRect {
             let keyboardHeight = keyboardFrame.height
@@ -64,10 +74,11 @@ final class PlayerDetailScreenVC: UIViewController{
         self.view.frame.origin.y = 0
     }
 
+    //MARK: - Private Action Button Functions
     @IBAction private func deleteButtonClicked(_ sender: UIButton) {
-        let alert = UIAlertController(title: "Delete Player", message: "Are you sure you want to delete this player?", preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: "Cancel", style: .cancel))
-        alert.addAction(UIAlertAction(title: "Delete", style: .destructive, handler: { _ in
+        let alert = UIAlertController(title: Constant.deleteTitle, message: Constant.deleteMessage, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: Constant.cancel, style: .cancel))
+        alert.addAction(UIAlertAction(title: Constant.deleteAction, style: .destructive, handler: { _ in
             self.viewModel.deletePlayer()
             self.viewModel.delegate?.playerDetailScreenDidDeletePlayer()
             self.navigationController?.popViewController(animated: true)
@@ -91,9 +102,9 @@ final class PlayerDetailScreenVC: UIViewController{
         )
         switch validationResult {
         case .success:
-            let alert = UIAlertController(title: "Edit Player", message: "Are you sure you want to update this player?", preferredStyle: .alert)
-            alert.addAction(UIAlertAction(title: "Cancel", style: .cancel))
-            alert.addAction(UIAlertAction(title: "Update", style: .default, handler: { _ in
+            let alert = UIAlertController(title: Constant.editTitle, message: Constant.editMessage, preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: Constant.cancel, style: .cancel))
+            alert.addAction(UIAlertAction(title: Constant.editAction, style: .default, handler: { _ in
                 self.saveChanges()
                 self.viewModel.delegate?.playerDetailScreenDidEditPlayer()
                 self.navigationController?.popViewController(animated: true)
@@ -101,8 +112,8 @@ final class PlayerDetailScreenVC: UIViewController{
             present(alert, animated: true)
             
         case .failure(let message):
-            let alert = UIAlertController(title: "Incomplete Information", message: message, preferredStyle: .alert)
-            alert.addAction(UIAlertAction(title: "OK", style: .default))
+            let alert = UIAlertController(title: Constant.editFailedTitle, message: message, preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: Constant.ok, style: .default))
             present(alert, animated: true)
         }
     }
@@ -208,9 +219,9 @@ extension PlayerDetailScreenVC: PlayerDetailScreenVCProtocol {
     private func setupPickerViewToolBar(for textField: UITextField) {
         let toolbar = UIToolbar()
         toolbar.sizeToFit()
-        let cancelButton = UIBarButtonItem(title: "Cancel", style: .plain, target: self, action: #selector(cancelTapped))
+        let cancelButton = UIBarButtonItem(title: Constant.cancel, style: .plain, target: self, action: #selector(cancelTapped))
         let flexibleSpace = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
-        let doneButton = UIBarButtonItem(title: "Next", style: .plain, target: self, action: #selector(nextTapped))
+        let doneButton = UIBarButtonItem(title: Constant.next, style: .plain, target: self, action: #selector(nextTapped))
         toolbar.setItems([cancelButton, flexibleSpace, doneButton], animated: true)
         textField.inputAccessoryView = toolbar
     }
@@ -230,7 +241,7 @@ extension PlayerDetailScreenVC: PlayerDetailScreenVCProtocol {
         let toolbar = UIToolbar()
         toolbar.sizeToFit()
         let flexibleSpace = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
-        let doneButton = UIBarButtonItem(title: "Done", style: .plain, target: self, action: #selector(doneTapped))
+        let doneButton = UIBarButtonItem(title: Constant.done, style: .plain, target: self, action: #selector(doneTapped))
         toolbar.setItems([flexibleSpace, doneButton], animated: true)
         textField.inputAccessoryView = toolbar
     }
@@ -295,5 +306,22 @@ extension PlayerDetailScreenVC: UITextFieldDelegate {
             detailPositionTextField.becomeFirstResponder()
         }
         return true
+    }
+}
+
+//MARK: - Constants Enum
+private extension PlayerDetailScreenVC {
+    enum Constant {
+        static let cancel = "Cancel"
+        static let ok = "OK"
+        static let next = "Next"
+        static let done = "Done"
+        static let deleteTitle = "Delete Player"
+        static let deleteMessage = "Are you sure you want to delete this player?"
+        static let deleteAction = "Delete"
+        static let editTitle = "Edit Player"
+        static let editMessage = "Are you sure you want to edit this player?"
+        static let editAction = "Edit"
+        static let editFailedTitle = "Incomplete Information"
     }
 }
