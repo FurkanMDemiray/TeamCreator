@@ -27,6 +27,10 @@ final class AddPlayerScreenVC: UIViewController {
             viewModel.delegate = self
         }
     }
+    private let positionPickerView = UIPickerView()
+    private var activeTextField: UITextField?
+    
+    //MARK: - IBOutlets
     @IBOutlet private weak var imageView: UIImageView!
     @IBOutlet private weak var nameTextField: UITextField!
     @IBOutlet private weak var surnameTextField: UITextField!
@@ -34,22 +38,18 @@ final class AddPlayerScreenVC: UIViewController {
     @IBOutlet private weak var ratingTextField: UITextField!
     @IBOutlet weak var addPlayerButton: UIButton!
     
-    private let positionPickerView = UIPickerView()
-    private var activeTextField: UITextField?
-
     //MARK: - Lifecycles
     override func viewDidLoad() {
         super.viewDidLoad()
         viewModel.viewDidLoad()
-        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
+        addKeyboardObservers()
     }
 
     deinit {
-        NotificationCenter.default.removeObserver(self)
+        removeKeyboardObservers()
     }
     
-    //MARK: - Private Functions
+    //MARK: - Add Player Action Button Function
     @IBAction private func addPlayerButtonTapped(_ sender: UIButton) {
         let name = nameTextField.text
         let surname = surnameTextField.text
@@ -57,11 +57,12 @@ final class AddPlayerScreenVC: UIViewController {
         let rating = ratingTextField.text
         let id = UUID().uuidString
         var imageString: String? = nil
-        if imageView.image !=  UIImage(systemName: "hand.tap.fill") {
+        if imageView.image !=  UIImage(systemName: Constant.image) {
             if let imageData = imageView.image?.jpegData(compressionQuality: 0.5) {
                 imageString = imageData.base64EncodedString()
             }
         }
+        
         let newPlayer = Player(id: id, name: "\(name!) \(surname!)", age: 18, skillPoint: Int(rating ?? "0"), position: position, sport: HomeViewModel.whichSport, picture: imageString)
         
         let validationResult = viewModel.validatePlayerDetails(player: newPlayer)
@@ -69,10 +70,21 @@ final class AddPlayerScreenVC: UIViewController {
         case .success:
             viewModel.addPlayer(player: newPlayer)
         case .failure(let message):
-            let alert = UIAlertController(title: "Incomplete Information", message: message, preferredStyle: .alert)
-            alert.addAction(UIAlertAction(title: "OK", style: .default))
+            let alert = UIAlertController(title: Constant.addPlayerFailedTitle, message: message, preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: Constant.ok, style: .default))
             present(alert, animated: true)
         }
+    }
+    
+    //MARK: - Keyboard Observations
+    private func addKeyboardObservers() {
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
+    }
+
+    private func removeKeyboardObservers() {
+        NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillHideNotification, object: nil)
     }
 
     @objc private func keyboardWillShow(notification: NSNotification) {
@@ -116,9 +128,9 @@ extension AddPlayerScreenVC: AddPlayerScreenVCProtocol {
     private func setupPickerViewToolBar(for textField: UITextField) {
         let toolbar = UIToolbar()
         toolbar.sizeToFit()
-        let cancelButton = UIBarButtonItem(title: "Cancel", style: .plain, target: self, action: #selector(cancelTapped))
+        let cancelButton = UIBarButtonItem(title: Constant.cancel, style: .plain, target: self, action: #selector(cancelTapped))
         let flexibleSpace = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
-        let doneButton = UIBarButtonItem(title: "Next", style: .plain, target: self, action: #selector(nextTapped))
+        let doneButton = UIBarButtonItem(title: Constant.next, style: .plain, target: self, action: #selector(nextTapped))
         toolbar.setItems([cancelButton, flexibleSpace, doneButton], animated: true)
         textField.inputAccessoryView = toolbar
     }
@@ -138,7 +150,7 @@ extension AddPlayerScreenVC: AddPlayerScreenVCProtocol {
         let toolbar = UIToolbar()
         toolbar.sizeToFit()
         let flexibleSpace = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
-        let doneButton = UIBarButtonItem(title: "Done", style: .plain, target: self, action: #selector(doneTapped))
+        let doneButton = UIBarButtonItem(title: Constant.done, style: .plain, target: self, action: #selector(doneTapped))
         toolbar.setItems([flexibleSpace, doneButton], animated: true)
         textField.inputAccessoryView = toolbar
     }
@@ -162,8 +174,8 @@ extension AddPlayerScreenVC: AddPlayerScreenVCProtocol {
     }
 
     func showError(message: String) {
-        let alert = UIAlertController(title: "Empty Field", message: message, preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: "OK", style: .default))
+        let alert = UIAlertController(title: Constant.emptyFieldTitle, message: message, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: Constant.ok, style: .default))
         present(alert, animated: true)
     }
 
@@ -173,7 +185,6 @@ extension AddPlayerScreenVC: AddPlayerScreenVCProtocol {
         positionTextField.text = ""
         ratingTextField.text = ""
     }
-
 }
 
 //MARK: - TextField Extension
@@ -239,5 +250,18 @@ extension AddPlayerScreenVC: UIImagePickerControllerDelegate, UINavigationContro
 extension AddPlayerScreenVC: AddPlayerScreenVMDelegate {
     func navigateBackToPlayers() {
         navigationController?.popViewController(animated: true)
+    }
+}
+
+//MARK: - Constant Extension
+private extension AddPlayerScreenVC {
+    enum Constant {
+        static let ok = "OK"
+        static let done = "Done"
+        static let next = "next"
+        static let cancel = "Cancel"
+        static let image = "hand.tap.fill"
+        static let addPlayerFailedTitle = "Incomplete Information"
+        static let emptyFieldTitle = "Empty Field"
     }
 }
