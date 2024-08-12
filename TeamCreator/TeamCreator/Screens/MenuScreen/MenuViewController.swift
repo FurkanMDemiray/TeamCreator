@@ -7,18 +7,18 @@
 
 import UIKit
 
-class MenuViewController: UIViewController {
+final class MenuViewController: UIViewController {
 
     var selectedSport: Sport?
     @IBOutlet private weak var playersView: UIView!
     @IBOutlet private weak var createMatchView: UIView!
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
         setupTapGesture()
     }
-    
-    
+
+
     private func setupTapGesture() {
         let playersTapGesture = UITapGestureRecognizer(target: self, action: #selector(playersViewTapped))
         playersView.addGestureRecognizer(playersTapGesture)
@@ -32,7 +32,7 @@ class MenuViewController: UIViewController {
         vc.viewModel = viewModel
         navigationController?.pushViewController(vc, animated: true)
     }
-    
+
     @objc private func createMathcViewTapped() {
         let vc = CreateMatchViewController()
         let createMatchViewModel = CreateMatchViewModel()

@@ -42,8 +42,8 @@ final class CreateMatchViewController: UIViewController {
 //MARK: - Actions
     @IBAction func continueButtonClicked(_ sender: Any) {
         viewModel.setTeams()
-        let createMatchDetailViewController = CreateMatchDetailViewController()
-        let createMatchDetailViewModel = CreateMatchDetailViewModel()
+        let createMatchDetailViewController = MatchDetailViewController()
+        let createMatchDetailViewModel = MatchDetailViewModel()
         createMatchDetailViewController.viewModel = createMatchDetailViewModel
 
         createMatchDetailViewModel.longitude = viewModel.getLongitude

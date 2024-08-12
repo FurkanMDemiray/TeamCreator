@@ -15,8 +15,8 @@ final class HomeViewController: UIViewController {
         }
     }
 
-    @IBOutlet weak var soccerImageView: UIImageView!
-    @IBOutlet weak var volleyballImageView: UIImageView!
+    @IBOutlet private weak var soccerImageView: UIImageView!
+    @IBOutlet private weak var volleyballImageView: UIImageView!
 
     override func viewDidLoad() {
         super.viewDidLoad()

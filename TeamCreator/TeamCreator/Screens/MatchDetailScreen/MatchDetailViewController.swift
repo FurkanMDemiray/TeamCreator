@@ -7,7 +7,7 @@
 
 import UIKit
 
-final class CreateMatchDetailViewController: UIViewController {
+final class MatchDetailViewController: UIViewController {
     @IBOutlet private weak var locationTimeLabel: UILabel!
     @IBOutlet private weak var weatherImageView: UIImageView!
     @IBOutlet private weak var weatherLabel: UILabel!
@@ -17,7 +17,7 @@ final class CreateMatchDetailViewController: UIViewController {
     @IBOutlet private weak var weatherOuterView: UIView!
     @IBOutlet private weak var activityIndicator: UIActivityIndicatorView!
 
-    var viewModel: CreateMatchDetailViewModelProtocol! {
+    var viewModel: MatchDetailViewModelProtocol! {
         didSet {
             viewModel.delegate = self
         }
@@ -65,8 +65,8 @@ final class CreateMatchDetailViewController: UIViewController {
     //MARK: - Actions
     @objc private func galatasarayTapped() {
         if HomeViewModel.whichSport == "Football" {
-            let vc = MatchDetailTeamViewController()
-            let matchDetailTeamViewModel = MatchDetailTeamViewModel()
+            let vc = MatchDetailFootballViewController()
+            let matchDetailTeamViewModel = MatchDetailFootballViewModel()
             vc.viewModel = matchDetailTeamViewModel
             matchDetailTeamViewModel.getTeam = viewModel.getSetTeam1
             navigationController?.pushViewController(vc, animated: true)
@@ -81,8 +81,8 @@ final class CreateMatchDetailViewController: UIViewController {
 
     @objc private func fenerbahceTapped() {
         if HomeViewModel.whichSport == "Football" {
-            let vc = MatchDetailTeamViewController()
-            let matchDetailTeamViewModel = MatchDetailTeamViewModel()
+            let vc = MatchDetailFootballViewController()
+            let matchDetailTeamViewModel = MatchDetailFootballViewModel()
             vc.viewModel = matchDetailTeamViewModel
             matchDetailTeamViewModel.getTeam = viewModel.getSetTeam2
             navigationController?.pushViewController(vc, animated: true)
@@ -106,7 +106,7 @@ final class CreateMatchDetailViewController: UIViewController {
 }
 
 //MARK: - ViewModel Delegate
-extension CreateMatchDetailViewController: CreateMatchDetailViewModelDelegate {
+extension MatchDetailViewController: MatchDetailViewModelDelegate {
     func loadingIndicator() {
         activityIndicator.startAnimating()
     }
