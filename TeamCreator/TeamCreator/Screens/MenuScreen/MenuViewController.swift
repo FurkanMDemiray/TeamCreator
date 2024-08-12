@@ -18,7 +18,6 @@ final class MenuViewController: UIViewController {
         setupTapGesture()
     }
 
-
     private func setupTapGesture() {
         let playersTapGesture = UITapGestureRecognizer(target: self, action: #selector(playersViewTapped))
         playersView.addGestureRecognizer(playersTapGesture)

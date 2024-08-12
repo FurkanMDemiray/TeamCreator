@@ -25,11 +25,11 @@ protocol PlayersScreenVMProtocol {
 }
 
 final class PlayersScreenVM {
+    
     weak var view: PlayersScreenVCProtocol?
     weak var delegate: PlayersScreenVMDelegate?
     var selectedSport: Sport
     var players = [Player]()
-
     let firebaseManager: FirebaseManagerProtocol
 
     init(firebaseManager: FirebaseManagerProtocol = FirebaseManager(), selectedSport: Sport) {
