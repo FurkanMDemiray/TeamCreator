@@ -45,20 +45,25 @@ final class HomeViewController: UIViewController {
     @objc func soccerButtonTapped() {
         let vc = MenuViewController()
         vc.selectedSport = .football
-        HomeViewModel.whichSport = "Football"
+        HomeViewModel.whichSport = Constant.football
         self.navigationController?.pushViewController(vc, animated: true)
     }
 
     @objc func volleyballButtonTapped() {
         let vc = MenuViewController()
         vc.selectedSport = .volleyball
-        HomeViewModel.whichSport = "Volleyball"
+        HomeViewModel.whichSport = Constant.volleyball
         self.navigationController?.pushViewController(vc, animated: true)
     }
-
-
 }
 
 extension HomeViewController: HomeViewModelDelegate {
 
+}
+
+private extension HomeViewController {
+    enum Constant {
+        static let football = "Football"
+        static let volleyball = "Volleyball"
+    }
 }
