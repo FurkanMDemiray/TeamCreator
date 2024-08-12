@@ -10,7 +10,7 @@ Welcome to Team Creator. This app allows user to create sport matches with their
   - [Screenshots](#screenshots)
   - [Tech Stack](#tech-stack)
   - [Architecture](#architecture)
-- [Getting Readt](#getting-ready)
+- [Getting Started](#getting-started)
   - [Prerequisites](#prerequisites)
   - [Instalation](#instalation)
 - [Usage](#usage)
