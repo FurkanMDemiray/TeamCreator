@@ -57,25 +57,25 @@ final class MatchDetailViewModel {
     fileprivate func fetchWeather() {
         delegate?.loadingIndicator()
         guard let longitude, let latitude else { return }
-        networkManager.fetch(url: "https://api.openweathermap.org/data/2.5/weather?lat=\(latitude)&lon=\(longitude)&appid=7322abaed58e1f99fa30adbc734b7ae7&units=metric", method: .get, parameters: nil, headers: nil) { [weak self] (result: Result<WeatherModel, Error>) in
+        networkManager.fetch(url: "\(Constant.weatherBaseURL)\(latitude)\(Constant.weatherLongitude)\(longitude)\(Constant.weatherAPIKey)", method: .get, parameters: nil, headers: nil) { [weak self] (result: Result<WeatherModel, Error>) in
             guard let self else { return }
             switch result {
             case .success(let weather):
                 self.weather = weather
-                if ((weather.weather?.first?.main?.contains("Cloud")) == true) {
-                    self.delegate?.changeWeatherImage("cloud")
+                if ((weather.weather?.first?.main?.contains(Constant.weatherCloud)) == true) {
+                    self.delegate?.changeWeatherImage(Constant.weatherCloudImage)
                 }
-                else if ((weather.weather?.first?.main?.contains("Thunder")) == true) {
-                    self.delegate?.changeWeatherImage("thunder")
+                else if ((weather.weather?.first?.main?.contains(Constant.weatherThunder)) == true) {
+                    self.delegate?.changeWeatherImage(Constant.weatherThunderImage)
                 }
-                else if ((weather.weather?.first?.main?.contains("Rainy")) == true) {
-                    self.delegate?.changeWeatherImage("rain")
+                else if ((weather.weather?.first?.main?.contains(Constant.weatherRain)) == true) {
+                    self.delegate?.changeWeatherImage(Constant.weatherRainImage)
                 }
-                else if ((weather.weather?.first?.main?.contains("Clear")) == true) || ((weather.weather?.first?.main?.contains("sunny")) == true) {
-                    self.delegate?.changeWeatherImage("sun")
+                else if ((weather.weather?.first?.main?.contains(Constant.weatherClear)) == true) || ((weather.weather?.first?.main?.contains(Constant.weatherSun)) == true) {
+                    self.delegate?.changeWeatherImage(Constant.weatherSunImage)
                 }
-                else if ((weather.weather?.first?.main?.contains("Snow")) == true) {
-                    self.delegate?.changeWeatherImage("snow")
+                else if ((weather.weather?.first?.main?.contains(Constant.weatherSnow)) == true) {
+                    self.delegate?.changeWeatherImage(Constant.weatherSnowImage)
                 }
                 delegate?.didFetchWeather()
                 delegate?.stopLoadingIndicator()
@@ -148,4 +148,23 @@ extension MatchDetailViewModel: MatchDetailViewModelProtocol {
     }
 }
 
+//MARK: - Constant Extension
+private extension MatchDetailViewModel {
+    enum Constant {
+        static let weatherBaseURL = "https://api.openweathermap.org/data/2.5/weather?lat="
+        static let weatherLongitude = "&lon="
+        static let weatherAPIKey = "&appid=7322abaed58e1f99fa30adbc734b7ae7&units=metric"
+        static let weatherCloud = "Cloud"
+        static let weatherCloudImage = "cloud"
+        static let weatherThunder = "Thunder"
+        static let weatherThunderImage = "thunder"
+        static let weatherRain = "Rainy"
+        static let weatherRainImage = "rain"
+        static let weatherClear = "Clear"
+        static let weatherSun = "sunny"
+        static let weatherSunImage = "sun"
+        static let weatherSnow = "Snow"
+        static let weatherSnowImage = "snow"
+    }
+}
 
