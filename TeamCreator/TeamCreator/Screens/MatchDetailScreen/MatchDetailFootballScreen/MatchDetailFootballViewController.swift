@@ -7,7 +7,7 @@
 
 import UIKit
 
-final class MatchDetailTeamViewController: UIViewController {
+final class MatchDetailFootballViewController: UIViewController {
 
     @IBOutlet private weak var gkImage: UIImageView!
     @IBOutlet private weak var gkLabel: UILabel!
@@ -32,7 +32,7 @@ final class MatchDetailTeamViewController: UIViewController {
     @IBOutlet private weak var secondCFImage: UIImageView!
     @IBOutlet private weak var secondCFLabel: UILabel!
 
-    var viewModel: MatchDetailTeamViewModelProtocol! {
+    var viewModel: MatchDetailFootballViewModelProtocol! {
         didSet {
             viewModel.delegate = self
         }
@@ -119,6 +119,6 @@ final class MatchDetailTeamViewController: UIViewController {
     }
 }
 
-extension MatchDetailTeamViewController: MatchDetailTeamViewModelDelegate {
+extension MatchDetailFootballViewController: MatchDetailFootballViewModelDelegate {
 
 }

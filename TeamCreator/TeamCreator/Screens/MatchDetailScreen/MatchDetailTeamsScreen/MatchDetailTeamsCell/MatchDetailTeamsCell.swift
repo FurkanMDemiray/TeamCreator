@@ -19,7 +19,6 @@ final class MatchDetailTeamsCell: UICollectionViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         configureImageView()
-        configureOuterView()
     }
 
     func configure(with player: Player) {
@@ -27,6 +26,7 @@ final class MatchDetailTeamsCell: UICollectionViewCell {
         skillPointLabel.text = "\(player.skillPoint ?? 0)"
         playerPositionLabel.text = player.position
         playerImageView.loadImage(from: player.picture)
+        configureOuterView()
     }
 
     private func configureImageView() {
@@ -35,12 +35,17 @@ final class MatchDetailTeamsCell: UICollectionViewCell {
     }
 
     private func configureOuterView() {
-        outerView.layer.cornerRadius = 10
-        outerView.layer.shadowColor = UIColor.black.cgColor
-        outerView.layer.shadowOffset = CGSize(width: 0, height: 1)
-        outerView.layer.shadowOpacity = 0.5
-        outerView.layer.shadowRadius = 2
-        outerView.backgroundColor = UIColor(hex: "C7C8CC")
+        if playerNameLabel.text == "" {
+            return
+        } else {
+            outerView.layer.cornerRadius = 10
+            outerView.layer.shadowColor = UIColor.black.cgColor
+            outerView.layer.shadowOffset = CGSize(width: 0, height: 1)
+            outerView.layer.shadowOpacity = 0.5
+            outerView.layer.shadowRadius = 2
+            outerView.backgroundColor = UIColor(hex: "C7C8CC")
+        }
+
     }
 
 }

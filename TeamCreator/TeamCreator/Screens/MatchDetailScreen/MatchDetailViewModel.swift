@@ -8,7 +8,7 @@
 import Foundation
 
 //MARK: - Delegate
-protocol CreateMatchDetailViewModelDelegate: AnyObject {
+protocol MatchDetailViewModelDelegate: AnyObject {
     func didFetchWeather()
     func changeWeatherImage(_ imageName: String)
     func loadingIndicator()
@@ -16,8 +16,8 @@ protocol CreateMatchDetailViewModelDelegate: AnyObject {
 }
 
 //MARK: - Protocol
-protocol CreateMatchDetailViewModelProtocol {
-    var delegate: CreateMatchDetailViewModelDelegate? { get set }
+protocol MatchDetailViewModelProtocol {
+    var delegate: MatchDetailViewModelDelegate? { get set }
     var getTime: String { get }
     var getCity: String { get }
     var getWeather: WeatherModel { get }
@@ -31,9 +31,9 @@ protocol CreateMatchDetailViewModelProtocol {
 }
 
 //MARK: - ViewModel
-final class CreateMatchDetailViewModel {
+final class MatchDetailViewModel {
 
-    weak var delegate: CreateMatchDetailViewModelDelegate?
+    weak var delegate: MatchDetailViewModelDelegate?
     private var networkManager: NetworkManagerProtocol
     private var selectedPlayers = [Player]()
     private var team1 = [Player]()
@@ -88,7 +88,7 @@ final class CreateMatchDetailViewModel {
 }
 
 //MARK: - Protocol Extension
-extension CreateMatchDetailViewModel: CreateMatchDetailViewModelProtocol {
+extension MatchDetailViewModel: MatchDetailViewModelProtocol {
     var sumOfSkillTeamTwo: Int {
         var sum = 0
         team2.forEach { sum += $0.skillPoint ?? 0 }
