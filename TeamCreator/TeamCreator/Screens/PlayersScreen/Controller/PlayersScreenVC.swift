@@ -15,6 +15,7 @@ protocol PlayersScreenVCProtocol: AnyObject {
 
 final class PlayersScreenVC: UIViewController {
 
+    //MARK: - Variable
     var viewModel: PlayersScreenVMProtocol! {
         didSet {
             viewModel.view = self
@@ -22,8 +23,10 @@ final class PlayersScreenVC: UIViewController {
         }
     }
     
+    //MARK: - IBOutlet
     @IBOutlet private weak var collectionView: UICollectionView!
     
+    //MARK: - Lifecycles
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         viewModel.viewWillAppear()
@@ -35,6 +38,7 @@ final class PlayersScreenVC: UIViewController {
     }
 }
 
+//MARK: - UI Setup
 extension PlayersScreenVC: PlayersScreenVCProtocol {
     func setupNavBar() {
         let title = String(describing: Player.self)
@@ -58,6 +62,7 @@ extension PlayersScreenVC: PlayersScreenVCProtocol {
     }
 }
 
+//MARK: - UICollectionView Extensions
 extension PlayersScreenVC: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         viewModel.numberOfItem(in: section)
@@ -89,6 +94,7 @@ extension PlayersScreenVC: UICollectionViewDelegateFlowLayout {
     }
 }
 
+//MARK: - Delegation
 extension PlayersScreenVC: PlayersScreenVMDelegate {
     func navigateToDetail(at indexPath: IndexPath, with selectedSport: Sport) {
         let playerCellVM = viewModel.cellForItem(at: indexPath)

@@ -9,6 +9,7 @@ import UIKit
 
 final class PlayersCardCell: UICollectionViewCell {
 
+    //MARK: - IBOutlets
     @IBOutlet private weak var cardImage: UIImageView!
     @IBOutlet private weak var cardRatingLabel: UILabel!
     @IBOutlet private weak var cardPlayerImage: UIImageView!

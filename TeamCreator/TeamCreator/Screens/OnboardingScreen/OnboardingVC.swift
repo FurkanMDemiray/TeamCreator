@@ -12,7 +12,6 @@ final class OnboardingVC: UIViewController {
     @IBOutlet private weak var actionButton: UIButton!
     override func viewDidLoad() {
         super.viewDidLoad()
-
     }
     
     @IBAction private func actionButtonClicked(_ sender: UIButton) {

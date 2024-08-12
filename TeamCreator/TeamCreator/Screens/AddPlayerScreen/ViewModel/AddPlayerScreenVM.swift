@@ -71,16 +71,16 @@ extension AddPlayerScreenVM: AddPlayerScreenVMProtocol {
     
     func validatePlayerDetails(player: Player) -> ValidationResult {
         guard let name = player.name, !name.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty  else {
-            return .failure(message: "Name cannot be empty.")
+            return .failure(message: Constant.validateNameFail)
         }
         guard let position = player.position, !position.isEmpty else {
-            return .failure(message: "Position cannot be empty.")
+            return .failure(message: Constant.validatePositionFail)
         }
         guard let skill = player.skillPoint, skill > 0, skill <= 100 else {
-            return .failure(message: "Skill must be a valid number between 1 and 100.")
+            return .failure(message: Constant.validateSkillFail)
         }
         guard let imageString = player.picture, !imageString.isEmpty else {
-            return .failure(message: "Please select an image.")
+            return .failure(message: Constant.validateImageFail)
         }
         return .success
     }
@@ -92,9 +92,21 @@ extension AddPlayerScreenVM: AddPlayerScreenVMProtocol {
                 self.view?.clearFields()
                 self.delegate?.navigateBackToPlayers()
             case .failure(let error):
-                print("error adding players \(error.localizedDescription)")
-                self.view?.showError(message: "Failed to add player. Try Again.")
+                print("\(Constant.errorAddPlayer)\(error.localizedDescription)")
+                self.view?.showError(message: Constant.failedMessage)
             }
         }
+    }
+}
+
+//MARK: - Constants Extension
+private extension AddPlayerScreenVM {
+    enum Constant {
+        static let validateNameFail = "Name cannot be empty."
+        static let validatePositionFail = "Position cannot be empty."
+        static let validateSkillFail = "Skill must be a valid number between 1 and 100."
+        static let validateImageFail = "Please select an image."
+        static let errorAddPlayer = "error adding players"
+        static let failedMessage = "Failed to add player. Try Again."
     }
 }

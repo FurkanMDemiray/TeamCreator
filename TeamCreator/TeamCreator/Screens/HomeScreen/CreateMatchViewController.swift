@@ -9,6 +9,7 @@ import UIKit
 
 final class CreateMatchViewController: UIViewController {
 
+    //MARK: - IBOutlets
     @IBOutlet private weak var locationTimeLabel: UILabel!
     @IBOutlet private weak var tableView: UITableView!
     @IBOutlet private weak var activityIndicator: UIActivityIndicatorView!

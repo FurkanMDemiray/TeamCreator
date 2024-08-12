@@ -266,6 +266,22 @@
 			path = OnboardingScreen;
 			sourceTree = "<group>";
 		};
+		08DAD41D2C6AAB080004B2A9 /* Player */ = {
+			isa = PBXGroup;
+			children = (
+				DD3A08A62C5E253B0056C8D7 /* Player.swift */,
+			);
+			path = Player;
+			sourceTree = "<group>";
+		};
+		08DAD41E2C6AAB1B0004B2A9 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				08DAD41D2C6AAB080004B2A9 /* Player */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
 		DD1A24952C57AA2A0020AC04 = {
 			isa = PBXGroup;
 			children = (
@@ -291,6 +307,7 @@
 			children = (
 				DD3A08A32C5E22680056C8D7 /* FirebaseManager */,
 				DD1A24E42C57AD530020AC04 /* NetworkManager */,
+				08DAD41E2C6AAB1B0004B2A9 /* Model */,
 				DD1A24DD2C57AC3E0020AC04 /* Screens */,
 				0871D82E2C5E692100B9EC1E /* Utilities */,
 				DD1A24DC2C57AC360020AC04 /* App */,
@@ -396,7 +413,6 @@
 			children = (
 				086B87802C5B60610065CF13 /* Controller */,
 				086B87872C5B60970065CF13 /* ViewModel */,
-				DD3A08A62C5E253B0056C8D7 /* Player.swift */,
 			);
 			path = AddPlayerScreen;
 			sourceTree = "<group>";

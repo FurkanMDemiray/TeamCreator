@@ -32,7 +32,7 @@ final class FirebaseManager: FirebaseManagerProtocol {
     func addPlayer(player: Player, completion: @escaping (Result<Void, Error>) -> Void) {
         let db = Firestore.firestore()
         do {
-            let _ = try db.collection("players").addDocument(from: player)
+            let _ = try db.collection(Constant.players).addDocument(from: player)
             completion(.success(()))
         } catch {
             completion(.failure(error))
@@ -41,7 +41,7 @@ final class FirebaseManager: FirebaseManagerProtocol {
 
     func fetchPlayers(completion: @escaping (Result<[Player], Error>) -> Void) {
         let db = Firestore.firestore()
-        db.collection("players").getDocuments { (snapshot, error) in
+        db.collection(Constant.players).getDocuments { (snapshot, error) in
             if let error = error {
                 completion(.failure(error))
             }
@@ -81,19 +81,19 @@ final class FirebaseManager: FirebaseManagerProtocol {
 
     func deletePlayer(player: Player, completion: @escaping (Result<Void, Error>) -> Void) {
         let db = Firestore.firestore()
-        let collectionRef = db.collection("players")
+        let collectionRef = db.collection(Constant.players)
 
         // player.id alanına göre belgeyi sorgula
-        collectionRef.whereField("id", isEqualTo: player.id).getDocuments { (querySnapshot, error) in
+        collectionRef.whereField(Constant.id, isEqualTo: player.id).getDocuments { (querySnapshot, error) in
             if let error = error {
-                print("Error querying player: \(error.localizedDescription)")
+                print("\(Constant.errorQuery) \(error.localizedDescription)")
                 completion(.failure(error))
                 return
             }
 
             guard let documents = querySnapshot?.documents, !documents.isEmpty else {
-                print("No matching player found")
-                completion(.failure(NSError(domain: "", code: 404, userInfo: [NSLocalizedDescriptionKey: "No matching player found"])))
+                print(Constant.noPlayerFound)
+                completion(.failure(NSError(domain: "", code: 404, userInfo: [NSLocalizedDescriptionKey: Constant.noPlayerFound])))
                 return
             }
 
@@ -101,10 +101,10 @@ final class FirebaseManager: FirebaseManagerProtocol {
             for document in documents {
                 document.reference.delete { error in
                     if let error = error {
-                        print("Error deleting player: \(error.localizedDescription)")
+                        print("\(Constant.errorDelete) \(error.localizedDescription)")
                         completion(.failure(error))
                     } else {
-                        print("Successfully deleted player with id \(player.id)")
+                        print("\(Constant.succesDelete) \(player.id)")
                         completion(.success(()))
                     }
                 }
@@ -125,33 +125,44 @@ final class FirebaseManager: FirebaseManagerProtocol {
 
     func updatePlayer(player: Player, completion: @escaping (Result<Void, Error>) -> Void) {
         let db = Firestore.firestore()
-        let collectionRef = db.collection("players")
+        let collectionRef = db.collection(Constant.players)
 
         // Query the document with the specific player ID
-        collectionRef.whereField("id", isEqualTo: player.id).getDocuments { (querySnapshot, error) in
+        collectionRef.whereField(Constant.id, isEqualTo: player.id).getDocuments { (querySnapshot, error) in
             if let error = error {
-                print("Error querying player: \(error.localizedDescription)")
+                print("\(Constant.errorQuery) \(error.localizedDescription)")
                 completion(.failure(error))
                 return
             }
 
             guard let document = querySnapshot?.documents.first else {
-                print("No matching player found")
-                completion(.failure(NSError(domain: "", code: 404, userInfo: [NSLocalizedDescriptionKey: "No matching player found"])))
+                print(Constant.noPlayerFound)
+                completion(.failure(NSError(domain: "", code: 404, userInfo: [NSLocalizedDescriptionKey: Constant.noPlayerFound])))
                 return
             }
 
             // Update the document with the new player data
             do {
                 try document.reference.setData(from: player, merge: true)  // merge: true will keep existing fields
-                print("Successfully updated player with id \(player.id)")
+                print("\(Constant.successUpdate) \(player.id)")
                 completion(.success(()))
             } catch {
-                print("Error updating player: \(error.localizedDescription)")
+                print("\(Constant.errorUpdate) \(error.localizedDescription)")
                 completion(.failure(error))
             }
         }
     }
+}
 
-
+private extension FirebaseManager {
+    enum Constant {
+        static let players = "players"
+        static let id = "id"
+        static let errorQuery = "Error querying player:"
+        static let errorUpdate = "Error updating player:"
+        static let errorDelete = "Error deleting player:"
+        static let noPlayerFound = "No matching player found"
+        static let successUpdate = "Successfully updated player with id"
+        static let succesDelete = "Successfully deleted player with id "
+    }
 }
