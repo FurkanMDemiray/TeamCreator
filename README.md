@@ -7,9 +7,21 @@ Welcome to Team Creator. This app allows user to create sport matches with their
 
 ## Table of Contents
 - [Features](#features)
-- [Tech Stack](#tech-stack)
-- [Architecture](#architecture)
+  - [Screenshots](#screenshots)
+  - [Tech Stack](#tech-stack)
+  - [Architecture](#architecture)
+- [Getting Readt](#getting-ready)
+  - [Prerequisites](#prerequisites)
+  - [Instalation](#instalation)
 - [Usage](#usage)
+  - [Listing Players](#listing-players)
+  - [Adding a New Player](#adding-a-new-player)
+  - [Player Detail](#player-detail)
+  - [Player Detail - Edit or Delete](#player-detail---edit-or-delete)
+  - [Create Match](#create-match)
+  - [Match Detail])#match-detail
+- [Known Issue](#known-issue)
+- [IMprovements](#improvements)
 
 
 ## Features
@@ -20,6 +32,8 @@ Welcome to Team Creator. This app allows user to create sport matches with their
 - Users can choose various players for different positions to create matches.
 - After match creation users can check their teams and team players in their position. 
 - Users also can look for the weather for their location.
+
+## Screenshots
 
 ## Tech Stack
 - **Xcode:** Version 15.4
@@ -34,6 +48,11 @@ In developing Team Creator app, MVVM (Model - View - ViewModel) is being use for
 - **Reusability:** By isolating business logic in the ViewModel, you can reuse the same logic across different views.
 - **Simplified Maintenance:** MVVM helps in managing complex UIs and business logic, leading to easier updates and improvements.
 
+## Getting Started
+
+### Prerequisites
+
+### Instalation
 
 ## Usage
 
@@ -51,7 +70,7 @@ In developing Team Creator app, MVVM (Model - View - ViewModel) is being use for
 1. In player screen tap the exiting player to see their detailed information.
 2. Players can be able edited with the Edit button in the navigation bar.
 
-### PLayer Detail - Edit or Delete
+### Player Detail - Edit or Delete
 1. In player detail screen tap the Edit button for the change the information of the selected player.
 2. After changes made, player changes saved by tapping the save button or be removed by tapping the discard button.
 3. Players can be deleted by tapping the Delete button.
@@ -64,3 +83,7 @@ In developing Team Creator app, MVVM (Model - View - ViewModel) is being use for
 ### Match Detail
 1. By clicking the teams button team players can be seen as an opposite.
 2. Players line ups as been seen after clicking the team logos.
+
+## Known Issue
+
+## Improvements
