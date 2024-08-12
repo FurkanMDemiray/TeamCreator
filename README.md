@@ -19,7 +19,7 @@ Welcome to Team Creator. This app allows user to create sport matches with their
   - [Player Detail](#player-detail)
   - [Player Detail - Edit or Delete](#player-detail---edit-or-delete)
   - [Create Match](#create-match)
-  - [Match Detail])#match-detail
+  - [Match Detail](#match-detail)
 - [Known Issue](#known-issue)
 - [IMprovements](#improvements)
 
