@@ -8,6 +8,8 @@
 import UIKit
 
 final class MatchDetailViewController: UIViewController {
+    
+    //MARK: IBOutlets
     @IBOutlet private weak var locationTimeLabel: UILabel!
     @IBOutlet private weak var weatherImageView: UIImageView!
     @IBOutlet private weak var weatherLabel: UILabel!
@@ -23,13 +25,14 @@ final class MatchDetailViewController: UIViewController {
         }
     }
 
+    //MARK: - Lifecycles
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         viewModel.fetch()
         configureImages()
         configureWeatherOuterView()
-        print("team 1 ",viewModel.sumOfSkillTeamOne)
-        print("team 2 ",viewModel.sumOfSkillTeamTwo)
+        print(Constant.firstTeam, viewModel.sumOfSkillTeamOne)
+        print(Constant.secondTeam,viewModel.sumOfSkillTeamTwo)
     }
 
     private func configureImages() {
@@ -47,24 +50,24 @@ final class MatchDetailViewController: UIViewController {
         weatherOuterView.layer.shadowOpacity = 0.5
         weatherOuterView.layer.shadowOffset = .zero
         weatherOuterView.layer.shadowRadius = 5
-        weatherOuterView.backgroundColor = UIColor(hex: "E4F1FF")
+        weatherOuterView.backgroundColor = UIColor(hex: Constant.backgroundColor )
     }
 
     //MARK: - Animations
     private func startPulseAnimation(for imageView: UIImageView) {
-        let pulseAnimation = CABasicAnimation(keyPath: "transform.scale")
+        let pulseAnimation = CABasicAnimation(keyPath: Constant.animationKeyPath)
         pulseAnimation.duration = 1.0
         pulseAnimation.fromValue = 1.0
         pulseAnimation.toValue = 1.2
         pulseAnimation.timingFunction = CAMediaTimingFunction(name: .easeInEaseOut)
         pulseAnimation.autoreverses = true
         pulseAnimation.repeatCount = .infinity
-        imageView.layer.add(pulseAnimation, forKey: "pulse")
+        imageView.layer.add(pulseAnimation, forKey: Constant.animationKeyPathImage)
     }
 
     //MARK: - Actions
     @objc private func galatasarayTapped() {
-        if HomeViewModel.whichSport == "Football" {
+        if HomeViewModel.whichSport == Constant.football {
             let vc = MatchDetailFootballViewController()
             let matchDetailTeamViewModel = MatchDetailFootballViewModel()
             vc.viewModel = matchDetailTeamViewModel
@@ -80,7 +83,7 @@ final class MatchDetailViewController: UIViewController {
     }
 
     @objc private func fenerbahceTapped() {
-        if HomeViewModel.whichSport == "Football" {
+        if HomeViewModel.whichSport == Constant.football {
             let vc = MatchDetailFootballViewController()
             let matchDetailTeamViewModel = MatchDetailFootballViewModel()
             vc.viewModel = matchDetailTeamViewModel
@@ -125,5 +128,16 @@ extension MatchDetailViewController: MatchDetailViewModelDelegate {
         weatherLabel.text = viewModel.getWeather.weather?.first?.main
         tempatureLabel.text = "\(viewModel.getWeather.main?.temp ?? 0)°C"
     }
+}
 
+//MARK: - Constant Extension
+private extension MatchDetailViewController {
+    enum Constant {
+        static let firstTeam = "Team 1:"
+        static let secondTeam = "Team 2:"
+        static let backgroundColor = "E4F1FF"
+        static let animationKeyPath = "transform.scale"
+        static let animationKeyPathImage = "pulse"
+        static let football = "Football"
+    }
 }
