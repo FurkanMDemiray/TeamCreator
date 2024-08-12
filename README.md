@@ -1,6 +1,6 @@
 <div  align="center">
 <h1> Team Creator  </h1>
-<h1> by Furkan Melik Demiray & Agah Berkin Güler </h1>
+<h2> Furkan Melik Demiray & Agah Berkin Güler </h2>
 </div>
  
 Welcome to Team Creator. This app allows user to create sport matches with their selection of the players for selected sport.
