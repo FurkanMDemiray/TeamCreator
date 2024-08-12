@@ -8,8 +8,11 @@
 import UIKit
 
 final class CreateMatchCell: UITableViewCell {
-
-    static let createMatchCellId = "CreateMatchCell"
+    
+    //MARK: - Identifier
+    static let createMatchCellId = Constant.identifier
+    
+    //MARK: - IBOutlets
     @IBOutlet private weak var playerNameLabel: UILabel!
     @IBOutlet private weak var checkButton: UIButton!
     @IBOutlet private weak var positionLabel: UILabel!
@@ -27,17 +30,26 @@ final class CreateMatchCell: UITableViewCell {
         positionLabel.text = player.position
         skillPointLabel.text = "\(player.skillPoint ?? 0)"
         self.isChecked = isChecked
-        let imageName = isChecked ? "checkmark.square" : "square"
+        let imageName = isChecked ? Constant.imageCheckmark : Constant.imageSquare
         checkButton.setImage(UIImage(systemName: imageName), for: .normal)
     }
 
     private func configureButton() {
-        checkButton.setImage(UIImage(systemName: "square"), for: .normal)
+        checkButton.setImage(UIImage(systemName: Constant.imageSquare), for: .normal)
     }
 
     func toggleCheckButton() {
         isChecked.toggle()
-        let imageName = isChecked ? "checkmark.square" : "square"
+        let imageName = isChecked ? Constant.imageCheckmark : Constant.imageSquare
         checkButton.setImage(UIImage(systemName: imageName), for: .normal)
+    }
+}
+
+//MARK: - Constants Enum
+private extension CreateMatchCell {
+    enum Constant {
+        static let identifier = "CreateMatchCell"
+        static let imageCheckmark = "checkmark.square"
+        static let imageSquare = "square"
     }
 }

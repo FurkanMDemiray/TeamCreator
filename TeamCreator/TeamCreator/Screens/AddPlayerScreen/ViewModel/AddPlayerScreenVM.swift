@@ -99,6 +99,7 @@ extension AddPlayerScreenVM: AddPlayerScreenVMProtocol {
     }
 }
 
+//MARK: - Constants Extension
 private extension AddPlayerScreenVM {
     enum Constant {
         static let validateNameFail = "Name cannot be empty."
