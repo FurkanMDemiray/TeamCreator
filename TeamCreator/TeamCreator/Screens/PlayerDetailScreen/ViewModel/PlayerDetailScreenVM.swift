@@ -30,7 +30,6 @@ protocol PLayerDetailScreenVMProtocol {
     func updatePlayer(name: String, position: String, skill: Int, image: String)
     func numberOfRows() -> Int
     func titleForRow(row: Int) -> String
-    func discardValidation()
 }
 
 //MARK: - Class
@@ -97,22 +96,18 @@ extension PlayerDetailScreenVM: PLayerDetailScreenVMProtocol {
     
     func validatePlayerDetails(name: String?, position: String?, skill: String?, image: String?) -> ValidationResult {
         guard let imageString = image, !imageString.isEmpty else {
-            return .failure(message: "Please select an image.")
+            return .failure(message: Constant.validateImageFail)
         }
         guard let name = name, !name.isEmpty else {
-            return .failure(message: "Name cannot be empty.")
+            return .failure(message: Constant.validateNameFail)
         }
         guard let position = position, !position.isEmpty else {
-            return .failure(message: "Position cannot be empty.")
+            return .failure(message: Constant.validatePositionFail)
         }
         guard let skillText = skill, !skillText.isEmpty, let skill = Int(skillText), skill > 0, skill <= 100 else {
-            return .failure(message: "Skill must be a valid number between 1 and 100.")
+            return .failure(message: Constant.validateSkillFail)
         }
         return .success
-    }
-    
-    func discardValidation() {
-        
     }
     
     func updatePlayer(name: String, position: String, skill: Int, image: String) {
@@ -126,8 +121,19 @@ extension PlayerDetailScreenVM: PLayerDetailScreenVMProtocol {
             case .success():
                 self.delegate?.playerDetailScreenDidEditPlayer()
             case .failure(let error):
-                print("Failed to update player: \(error.localizedDescription)")
+                print("\(Constant.failedToUpdate) \(error.localizedDescription)")
             }
         }
+    }
+}
+
+//MARK: - Constant Extension
+private extension PlayerDetailScreenVM {
+    enum Constant {
+        static let validateNameFail = "Name cannot be empty."
+        static let validatePositionFail = "Position cannot be empty."
+        static let validateSkillFail = "Skill must be a valid number between 1 and 100."
+        static let validateImageFail = "Please select an image."
+        static let failedToUpdate = "Failed to update player:"
     }
 }
