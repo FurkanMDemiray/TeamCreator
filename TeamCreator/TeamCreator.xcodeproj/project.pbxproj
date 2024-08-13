@@ -49,7 +49,7 @@
 		DD38C1932C6265160028E515 /* VolleyballViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD38C1922C6265160028E515 /* VolleyballViewModel.swift */; };
 		DD38C1952C634C280028E515 /* UIImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD38C1942C634C280028E515 /* UIImageView.swift */; };
 		DD38C1972C64B64F0028E515 /* Array.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD38C1962C64B64F0028E515 /* Array.swift */; };
-		DD38C1A72C6BAB890028E515 /* ResizeImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD38C1A62C6BAB890028E515 /* ResizeImage.swift */; };
+		DD38C1A72C6BAB890028E515 /* UIImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD38C1A62C6BAB890028E515 /* UIImage.swift */; };
 		DD3A08A12C5CB7750056C8D7 /* MenuViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = DD3A08A02C5CB7750056C8D7 /* MenuViewController.xib */; };
 		DD3A08A22C5CB7750056C8D7 /* MenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD3A089F2C5CB7750056C8D7 /* MenuViewController.swift */; };
 		DD3A08A52C5E22790056C8D7 /* FirebaseManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD3A08A42C5E22790056C8D7 /* FirebaseManager.swift */; };
@@ -130,7 +130,7 @@
 		DD38C1922C6265160028E515 /* VolleyballViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VolleyballViewModel.swift; sourceTree = "<group>"; };
 		DD38C1942C634C280028E515 /* UIImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIImageView.swift; sourceTree = "<group>"; };
 		DD38C1962C64B64F0028E515 /* Array.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Array.swift; sourceTree = "<group>"; };
-		DD38C1A62C6BAB890028E515 /* ResizeImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResizeImage.swift; sourceTree = "<group>"; };
+		DD38C1A62C6BAB890028E515 /* UIImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIImage.swift; sourceTree = "<group>"; };
 		DD3A089F2C5CB7750056C8D7 /* MenuViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuViewController.swift; sourceTree = "<group>"; };
 		DD3A08A02C5CB7750056C8D7 /* MenuViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MenuViewController.xib; sourceTree = "<group>"; };
 		DD3A08A42C5E22790056C8D7 /* FirebaseManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseManager.swift; sourceTree = "<group>"; };
@@ -434,7 +434,7 @@
 				DD38C18E2C6215680028E515 /* UIColor.swift */,
 				DD38C1942C634C280028E515 /* UIImageView.swift */,
 				DD38C1962C64B64F0028E515 /* Array.swift */,
-				DD38C1A62C6BAB890028E515 /* ResizeImage.swift */,
+				DD38C1A62C6BAB890028E515 /* UIImage.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -791,7 +791,7 @@
 				08CC85902C60C901007A5B2B /* PlayersCardCellVM.swift in Sources */,
 				DD38C1932C6265160028E515 /* VolleyballViewModel.swift in Sources */,
 				DD1A24FA2C58DC4A0020AC04 /* CreateMatchViewModel.swift in Sources */,
-				DD38C1A72C6BAB890028E515 /* ResizeImage.swift in Sources */,
+				DD38C1A72C6BAB890028E515 /* UIImage.swift in Sources */,
 				DD85DA122C5A82B300AF1652 /* MatchDetailViewModel.swift in Sources */,
 				DD1A24A42C57AA2A0020AC04 /* SceneDelegate.swift in Sources */,
 				DD3A08A52C5E22790056C8D7 /* FirebaseManager.swift in Sources */,
@@ -970,6 +970,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 794WKWM2LJ;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = TeamCreator/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -996,6 +997,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 794WKWM2LJ;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = TeamCreator/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
