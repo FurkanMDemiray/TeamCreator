@@ -12,10 +12,7 @@ import FirebaseFirestore
 protocol FirebaseManagerProtocol {
     func addPlayer(player: Player, completion: @escaping (Result<Void, Error>) -> Void)
     func fetchPlayers(completion: @escaping (Result<[Player], Error>) -> Void)
-    // func addMatch(match: Match, completion: @escaping (Result<Void, Error>) -> Void)
-    // func fetchMatches(completion: @escaping (Result<[Match], Error>) -> Void)
     func deletePlayer(player: Player, completion: @escaping (Result<Void, Error>) -> Void)
-    // func deleteMatch(match: Match, completion: @escaping (Result<Void, Error>) -> Void)
     func updatePlayer(player: Player, completion: @escaping (Result<Void, Error>) -> Void)
 }
 
@@ -54,36 +51,10 @@ final class FirebaseManager: FirebaseManagerProtocol {
         }
     }
 
-    /*func addMatch(match: Match, completion: @escaping (Result<Void, Error>) -> Void) {
-        let db = Firestore.firestore()
-        do {
-            let _ = try db.collection("matches").addDocument(from: match)
-            completion(.success(()))
-        } catch {
-            completion(.failure(error))
-        }
-    }
-
-    func fetchMatches(completion: @escaping (Result<[Match], Error>) -> Void) {
-        let db = Firestore.firestore()
-        db.collection("matches").getDocuments { (snapshot, error) in
-            if let error = error {
-                completion(.failure(error))
-            }
-            if let snapshot = snapshot {
-                let matches = snapshot.documents.compactMap { (queryDocumentSnapshot) -> Match? in
-                    return try? queryDocumentSnapshot.data(as: Match.self)
-                }
-                completion(.success(matches))
-            }
-        }
-    }*/
-
     func deletePlayer(player: Player, completion: @escaping (Result<Void, Error>) -> Void) {
         let db = Firestore.firestore()
         let collectionRef = db.collection(Constant.players)
 
-        // player.id alanına göre belgeyi sorgula
         collectionRef.whereField(Constant.id, isEqualTo: player.id).getDocuments { (querySnapshot, error) in
             if let error = error {
                 print("\(Constant.errorQuery) \(error.localizedDescription)")
@@ -97,7 +68,6 @@ final class FirebaseManager: FirebaseManagerProtocol {
                 return
             }
 
-            // Belgeyi sil
             for document in documents {
                 document.reference.delete { error in
                     if let error = error {
@@ -111,17 +81,6 @@ final class FirebaseManager: FirebaseManagerProtocol {
             }
         }
     }
-
-    /* func deleteMatch(match: Match, completion: @escaping (Result<Void, Error>) -> Void) {
-        let db = Firestore.firestore()
-        db.collection("matches").document(match.id).delete { error in
-            if let error = error {
-                completion(.failure(error))
-            } else {
-                completion(.success(()))
-            }
-        }
-    }*/
 
     func updatePlayer(player: Player, completion: @escaping (Result<Void, Error>) -> Void) {
         let db = Firestore.firestore()
@@ -143,7 +102,7 @@ final class FirebaseManager: FirebaseManagerProtocol {
 
             // Update the document with the new player data
             do {
-                try document.reference.setData(from: player, merge: true)  // merge: true will keep existing fields
+                try document.reference.setData(from: player, merge: true) // merge: true will keep existing fields
                 print("\(Constant.successUpdate) \(player.id)")
                 completion(.success(()))
             } catch {

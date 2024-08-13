@@ -119,9 +119,9 @@
 		DD1A24E72C57AE500020AC04 /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
 		DD1A24F12C58CDD70020AC04 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		DD1A24F22C58CDD70020AC04 /* HomeViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HomeViewController.xib; sourceTree = "<group>"; };
-		DD1A24F52C58DC3E0020AC04 /* CreateMatchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = CreateMatchViewController.swift; path = TeamCreator/Screens/HomeScreen/CreateMatchViewController.swift; sourceTree = SOURCE_ROOT; };
-		DD1A24F62C58DC3E0020AC04 /* CreateMatchViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = CreateMatchViewController.xib; path = TeamCreator/Screens/HomeScreen/CreateMatchViewController.xib; sourceTree = SOURCE_ROOT; };
-		DD1A24F92C58DC4A0020AC04 /* CreateMatchViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = CreateMatchViewModel.swift; path = TeamCreator/Screens/HomeScreen/CreateMatchViewModel.swift; sourceTree = SOURCE_ROOT; };
+		DD1A24F52C58DC3E0020AC04 /* CreateMatchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = CreateMatchViewController.swift; path = TeamCreator/Screens/CreateMatchScreen/Controller/CreateMatchViewController.swift; sourceTree = SOURCE_ROOT; };
+		DD1A24F62C58DC3E0020AC04 /* CreateMatchViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = CreateMatchViewController.xib; path = TeamCreator/Screens/CreateMatchScreen/Controller/CreateMatchViewController.xib; sourceTree = SOURCE_ROOT; };
+		DD1A24F92C58DC4A0020AC04 /* CreateMatchViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = CreateMatchViewModel.swift; path = TeamCreator/Screens/CreateMatchScreen/ViewModel/CreateMatchViewModel.swift; sourceTree = SOURCE_ROOT; };
 		DD1A24FC2C594DDC0020AC04 /* CreateMatchCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateMatchCell.swift; sourceTree = "<group>"; };
 		DD1A24FD2C594DDC0020AC04 /* CreateMatchCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CreateMatchCell.xib; sourceTree = "<group>"; };
 		DD38C18E2C6215680028E515 /* UIColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIColor.swift; sourceTree = "<group>"; };
@@ -222,10 +222,8 @@
 		0871D82E2C5E692100B9EC1E /* Utilities */ = {
 			isa = PBXGroup;
 			children = (
+				DD38C1992C6B53350028E515 /* Enums */,
 				DD38C18D2C62155A0028E515 /* Extensions */,
-				0871D82F2C5E694300B9EC1E /* Sport.swift */,
-				0871D8312C5E69C300B9EC1E /* FootballPosition.swift */,
-				0871D8332C5E6A4900B9EC1E /* VolleyballPosition.swift */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -277,6 +275,7 @@
 		08DAD41E2C6AAB1B0004B2A9 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				DD38C1982C6B53200028E515 /* Weather */,
 				08DAD41D2C6AAB080004B2A9 /* Player */,
 			);
 			path = Model;
@@ -364,6 +363,9 @@
 				DD1A24E32C57ACEE0020AC04 /* AddPlayerScreen */,
 				DD1A24E12C57ACBD0020AC04 /* CreateMatchScreen */,
 				DD85DA0F2C5A82B300AF1652 /* MatchDetailScreen */,
+				DD85DA1C2C5BABD100AF1652 /* MatchDetailTeamsScreen */,
+				DD85DA282C5BB94200AF1652 /* MatchDetailFootballScreen */,
+				DD3A08A82C5E965B0056C8D7 /* MatchDetailVolleyball */,
 			);
 			path = Screens;
 			sourceTree = "<group>";
@@ -371,9 +373,8 @@
 		DD1A24DE2C57AC430020AC04 /* HomeScreen */ = {
 			isa = PBXGroup;
 			children = (
-				DD1A24F12C58CDD70020AC04 /* HomeViewController.swift */,
-				DD1A24F22C58CDD70020AC04 /* HomeViewController.xib */,
-				DD1A24E72C57AE500020AC04 /* HomeViewModel.swift */,
+				DD38C1A52C6B57EA0028E515 /* Controller */,
+				DD38C1A42C6B57EA0028E515 /* ViewModel */,
 			);
 			path = HomeScreen;
 			sourceTree = "<group>";
@@ -401,9 +402,8 @@
 			isa = PBXGroup;
 			children = (
 				DD1A24FB2C594DBB0020AC04 /* CreateMatchCell */,
-				DD1A24F52C58DC3E0020AC04 /* CreateMatchViewController.swift */,
-				DD1A24F62C58DC3E0020AC04 /* CreateMatchViewController.xib */,
-				DD1A24F92C58DC4A0020AC04 /* CreateMatchViewModel.swift */,
+				DD38C19F2C6B56010028E515 /* Controller */,
+				DD38C19E2C6B56010028E515 /* ViewModel */,
 			);
 			path = CreateMatchScreen;
 			sourceTree = "<group>";
@@ -444,6 +444,126 @@
 			path = Extensions;
 			sourceTree = "<group>";
 		};
+		DD38C1982C6B53200028E515 /* Weather */ = {
+			isa = PBXGroup;
+			children = (
+				DD85DA0E2C5A82B300AF1652 /* WeatherModel.swift */,
+			);
+			path = Weather;
+			sourceTree = "<group>";
+		};
+		DD38C1992C6B53350028E515 /* Enums */ = {
+			isa = PBXGroup;
+			children = (
+				0871D82F2C5E694300B9EC1E /* Sport.swift */,
+				0871D8312C5E69C300B9EC1E /* FootballPosition.swift */,
+				0871D8332C5E6A4900B9EC1E /* VolleyballPosition.swift */,
+			);
+			path = Enums;
+			sourceTree = "<group>";
+		};
+		DD38C19A2C6B54C10028E515 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				DD85DA0B2C5A82B300AF1652 /* MatchDetailViewController.swift */,
+				DD85DA0C2C5A82B300AF1652 /* MatchDetailViewController.xib */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		DD38C19B2C6B54CD0028E515 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				DD85DA0D2C5A82B300AF1652 /* MatchDetailViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		DD38C19C2C6B55D70028E515 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				DD85DA1D2C5BAC5000AF1652 /* MatchDetailTeamsViewController.swift */,
+				DD85DA1E2C5BAC5000AF1652 /* MatchDetailTeamsViewController.xib */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		DD38C19D2C6B55E70028E515 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				DD85DA262C5BACE200AF1652 /* MatchDetailTeamsViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		DD38C19E2C6B56010028E515 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				DD1A24F92C58DC4A0020AC04 /* CreateMatchViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		DD38C19F2C6B56010028E515 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				DD1A24F52C58DC3E0020AC04 /* CreateMatchViewController.swift */,
+				DD1A24F62C58DC3E0020AC04 /* CreateMatchViewController.xib */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		DD38C1A02C6B562B0028E515 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				DD38C1902C6264020028E515 /* MatchDetailFootballViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		DD38C1A12C6B562C0028E515 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				DD85DA292C5BB96E00AF1652 /* MatchDetailFootballViewController.swift */,
+				DD85DA2A2C5BB96E00AF1652 /* MatchDetailFootballViewController.xib */,
+			);
+			name = Controller;
+			sourceTree = "<group>";
+		};
+		DD38C1A22C6B56400028E515 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				DD38C1922C6265160028E515 /* VolleyballViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		DD38C1A32C6B56400028E515 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				DD3A08A92C5E96A40056C8D7 /* VolleyballViewController.swift */,
+				DD3A08AA2C5E96A40056C8D7 /* VolleyballViewController.xib */,
+			);
+			name = Controller;
+			sourceTree = "<group>";
+		};
+		DD38C1A42C6B57EA0028E515 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				DD1A24E72C57AE500020AC04 /* HomeViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		DD38C1A52C6B57EA0028E515 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				DD1A24F12C58CDD70020AC04 /* HomeViewController.swift */,
+				DD1A24F22C58CDD70020AC04 /* HomeViewController.xib */,
+			);
+			name = Controller;
+			sourceTree = "<group>";
+		};
 		DD3A08A32C5E22680056C8D7 /* FirebaseManager */ = {
 			isa = PBXGroup;
 			children = (
@@ -455,9 +575,8 @@
 		DD3A08A82C5E965B0056C8D7 /* MatchDetailVolleyball */ = {
 			isa = PBXGroup;
 			children = (
-				DD3A08A92C5E96A40056C8D7 /* VolleyballViewController.swift */,
-				DD3A08AA2C5E96A40056C8D7 /* VolleyballViewController.xib */,
-				DD38C1922C6265160028E515 /* VolleyballViewModel.swift */,
+				DD38C1A32C6B56400028E515 /* Controller */,
+				DD38C1A22C6B56400028E515 /* ViewModel */,
 			);
 			path = MatchDetailVolleyball;
 			sourceTree = "<group>";
@@ -465,13 +584,8 @@
 		DD85DA0F2C5A82B300AF1652 /* MatchDetailScreen */ = {
 			isa = PBXGroup;
 			children = (
-				DD85DA0B2C5A82B300AF1652 /* MatchDetailViewController.swift */,
-				DD85DA0C2C5A82B300AF1652 /* MatchDetailViewController.xib */,
-				DD85DA0D2C5A82B300AF1652 /* MatchDetailViewModel.swift */,
-				DD85DA0E2C5A82B300AF1652 /* WeatherModel.swift */,
-				DD85DA1C2C5BABD100AF1652 /* MatchDetailTeamsScreen */,
-				DD85DA282C5BB94200AF1652 /* MatchDetailFootballScreen */,
-				DD3A08A82C5E965B0056C8D7 /* MatchDetailVolleyball */,
+				DD38C19A2C6B54C10028E515 /* Controller */,
+				DD38C19B2C6B54CD0028E515 /* ViewModel */,
 			);
 			path = MatchDetailScreen;
 			sourceTree = "<group>";
@@ -480,9 +594,8 @@
 			isa = PBXGroup;
 			children = (
 				DD85DA212C5BACB000AF1652 /* MatchDetailTeamsCell */,
-				DD85DA1D2C5BAC5000AF1652 /* MatchDetailTeamsViewController.swift */,
-				DD85DA1E2C5BAC5000AF1652 /* MatchDetailTeamsViewController.xib */,
-				DD85DA262C5BACE200AF1652 /* MatchDetailTeamsViewModel.swift */,
+				DD38C19C2C6B55D70028E515 /* Controller */,
+				DD38C19D2C6B55E70028E515 /* ViewModel */,
 			);
 			path = MatchDetailTeamsScreen;
 			sourceTree = "<group>";
@@ -499,9 +612,8 @@
 		DD85DA282C5BB94200AF1652 /* MatchDetailFootballScreen */ = {
 			isa = PBXGroup;
 			children = (
-				DD85DA292C5BB96E00AF1652 /* MatchDetailFootballViewController.swift */,
-				DD85DA2A2C5BB96E00AF1652 /* MatchDetailFootballViewController.xib */,
-				DD38C1902C6264020028E515 /* MatchDetailFootballViewModel.swift */,
+				DD38C1A12C6B562C0028E515 /* Controller */,
+				DD38C1A02C6B562B0028E515 /* ViewModel */,
 			);
 			path = MatchDetailFootballScreen;
 			sourceTree = "<group>";
