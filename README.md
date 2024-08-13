@@ -35,6 +35,10 @@ Welcome to Team Creator. This app allows user to create sport matches with their
 
 ## Screenshots
 
+| Image 1                | Image 2                | Image 3                |
+|------------------------|------------------------|------------------------|
+| ![Onboarding](https://github.com/FurkanMDemiray/TeamCreator/blob/ReadmeUpdate/Screenshots/onboarding.png) | ![SportCategory](https://github.com/FurkanMDemiray/TeamCreator/blob/ReadmeUpdate/Screenshots/sports.png) | ![Menu](https://github.com/FurkanMDemiray/TeamCreator/blob/ReadmeUpdate/Screenshots/menu.png) |
+| Onboarding | Sport Category Menu | Menu Screen |
 
 
 
