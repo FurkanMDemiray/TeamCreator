@@ -47,10 +47,10 @@ final class CreateMatchViewController: UIViewController {
         let createMatchDetailViewModel = MatchDetailViewModel()
         createMatchDetailViewController.viewModel = createMatchDetailViewModel
 
-        createMatchDetailViewModel.longitude = viewModel.getLongitude
-        createMatchDetailViewModel.latitude = viewModel.getLatitude
-        createMatchDetailViewModel.time = viewModel.time
-        createMatchDetailViewModel.city = viewModel.getCity
+        createMatchDetailViewModel.getLongitude = viewModel.getLongitude
+        createMatchDetailViewModel.getLatitude = viewModel.getLatitude
+        createMatchDetailViewModel.getTime = viewModel.time
+        createMatchDetailViewModel.getCity = viewModel.getCity
         createMatchDetailViewModel.setSelectedPlayers = viewModel.getSelectedPlayers
         createMatchDetailViewModel.getSetTeam1 = viewModel.getTeam1
         createMatchDetailViewModel.getSetTeam2 = viewModel.getTeam2

@@ -9,6 +9,13 @@ import UIKit
 
 final class VolleyballViewController: UIViewController {
 
+    var viewModel: VolleyballViewModelProtocol! {
+        didSet {
+            viewModel.delegate = self
+        }
+    }
+
+    //MARK: - IBOutlets
     @IBOutlet private weak var oImage: UIImageView!
     @IBOutlet private weak var oLabel: UILabel!
     @IBOutlet private weak var mbImage: UIImageView!
@@ -21,12 +28,6 @@ final class VolleyballViewController: UIViewController {
     @IBOutlet private weak var liberoLabel: UILabel!
     @IBOutlet private weak var sImage: UIImageView!
     @IBOutlet private weak var sLabel: UILabel!
-
-    var viewModel: VolleyballViewModelProtocol! {
-        didSet {
-            viewModel.delegate = self
-        }
-    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -78,6 +79,4 @@ final class VolleyballViewController: UIViewController {
     }
 }
 
-extension VolleyballViewController: VolleyballViewModelDelegate {
-
-}
+extension VolleyballViewController: VolleyballViewModelDelegate { }

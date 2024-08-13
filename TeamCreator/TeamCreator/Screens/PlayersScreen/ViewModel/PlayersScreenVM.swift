@@ -7,11 +7,13 @@
 
 import Foundation
 
+//MARK: - Delegate
 protocol PlayersScreenVMDelegate: AnyObject {
     func navigateToAddPlayers(with selectedSport: Sport)
     func navigateToDetail(at indexPath: IndexPath, with selectedSport: Sport)
 }
 
+//MARK: - Protocol
 protocol PlayersScreenVMProtocol {
     var delegate: PlayersScreenVMDelegate? { get set }
     var view: PlayersScreenVCProtocol? { get set }
@@ -25,7 +27,8 @@ protocol PlayersScreenVMProtocol {
 }
 
 final class PlayersScreenVM {
-    
+
+    //MARK: - Variables
     weak var view: PlayersScreenVCProtocol?
     weak var delegate: PlayersScreenVMDelegate?
     var selectedSport: Sport
@@ -52,6 +55,7 @@ final class PlayersScreenVM {
     }
 }
 
+//MARK: - Protocol Extension
 extension PlayersScreenVM: PlayersScreenVMProtocol {
     func viewWillAppear() {
         fetchPlayers()
@@ -65,7 +69,7 @@ extension PlayersScreenVM: PlayersScreenVMProtocol {
     func numberOfItem(in section: Int) -> Int {
         players.count
     }
-    
+
     func cellForItem(at indexPath: IndexPath) -> PlayersCardCellVM {
         let playersCardCellVM = PlayersCardCellVM(player: players[indexPath.row])
         return playersCardCellVM
@@ -74,11 +78,11 @@ extension PlayersScreenVM: PlayersScreenVMProtocol {
     func addButtonTapped() {
         delegate?.navigateToAddPlayers(with: selectedSport)
     }
-    
+
     func cellTapped(at indexPath: IndexPath) {
         delegate?.navigateToDetail(at: indexPath, with: selectedSport)
     }
-    
+
     func updateCollectionData() {
         fetchPlayers()
     }
