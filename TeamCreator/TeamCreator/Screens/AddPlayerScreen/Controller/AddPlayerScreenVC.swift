@@ -177,9 +177,26 @@ extension AddPlayerScreenVC: AddPlayerScreenVCProtocol {
     }
 
     @objc private func imageViewTapped() {
+        let actionSheet = UIAlertController(title: Constant.imageSourceTitle, message: nil, preferredStyle: .actionSheet)
+        let photoLibraryAction = UIAlertAction(title: Constant.photoLib, style: .default) { [weak self] _ in
+            self?.presentImagePickerController(sourceType: .photoLibrary)
+        }
+        actionSheet.addAction(photoLibraryAction)
+        if UIImagePickerController.isSourceTypeAvailable(.camera) {
+            let cameraAction = UIAlertAction(title: Constant.camera, style: .default) { [weak self] _ in
+                self?.presentImagePickerController(sourceType: .camera)
+            }
+            actionSheet.addAction(cameraAction)
+        }
+        let cancelAction = UIAlertAction(title: Constant.cancel, style: .cancel)
+        actionSheet.addAction(cancelAction)
+        present(actionSheet, animated: true)
+    }
+    
+    private func presentImagePickerController(sourceType: UIImagePickerController.SourceType) {
         let imagePickerController = UIImagePickerController()
         imagePickerController.delegate = self
-        imagePickerController.sourceType = .photoLibrary
+        imagePickerController.sourceType = sourceType
         present(imagePickerController, animated: true)
     }
 
@@ -273,5 +290,8 @@ private extension AddPlayerScreenVC {
         static let image = "hand.tap.fill"
         static let addPlayerFailedTitle = "Incomplete Information"
         static let emptyFieldTitle = "Empty Field"
+        static let camera = "Camera"
+        static let photoLib = "Photo Library"
+        static let imageSourceTitle = "Choose Image Source"
     }
 }
