@@ -57,10 +57,9 @@ final class AddPlayerScreenVC: UIViewController {
         let rating = ratingTextField.text
         let id = UUID().uuidString
         var imageString: String? = nil
-
-        let resizedImage = resizeImage(image: imageView.image!, targetSize: CGSize(width: 100, height: 100))
+        let resizedImage = imageView.image?.resize(targetSize: CGSize(width: 100, height: 100))
         if imageView.image != UIImage(systemName: Constant.image) {
-            if let imageData = resizedImage.jpegData(compressionQuality: 0.5) {
+            if let imageData = resizedImage?.jpegData(compressionQuality: 0.5) {
                 imageString = imageData.base64EncodedString()
             }
         }
@@ -178,9 +177,26 @@ extension AddPlayerScreenVC: AddPlayerScreenVCProtocol {
     }
 
     @objc private func imageViewTapped() {
+        let actionSheet = UIAlertController(title: Constant.imageSourceTitle, message: nil, preferredStyle: .actionSheet)
+        let photoLibraryAction = UIAlertAction(title: Constant.photoLib, style: .default) { [weak self] _ in
+            self?.presentImagePickerController(sourceType: .photoLibrary)
+        }
+        actionSheet.addAction(photoLibraryAction)
+        if UIImagePickerController.isSourceTypeAvailable(.camera) {
+            let cameraAction = UIAlertAction(title: Constant.camera, style: .default) { [weak self] _ in
+                self?.presentImagePickerController(sourceType: .camera)
+            }
+            actionSheet.addAction(cameraAction)
+        }
+        let cancelAction = UIAlertAction(title: Constant.cancel, style: .cancel)
+        actionSheet.addAction(cancelAction)
+        present(actionSheet, animated: true)
+    }
+    
+    private func presentImagePickerController(sourceType: UIImagePickerController.SourceType) {
         let imagePickerController = UIImagePickerController()
         imagePickerController.delegate = self
-        imagePickerController.sourceType = .photoLibrary
+        imagePickerController.sourceType = sourceType
         present(imagePickerController, animated: true)
     }
 
@@ -269,10 +285,13 @@ private extension AddPlayerScreenVC {
     enum Constant {
         static let ok = "OK"
         static let done = "Done"
-        static let next = "next"
+        static let next = "Next"
         static let cancel = "Cancel"
         static let image = "hand.tap.fill"
         static let addPlayerFailedTitle = "Incomplete Information"
         static let emptyFieldTitle = "Empty Field"
+        static let camera = "Camera"
+        static let photoLib = "Photo Library"
+        static let imageSourceTitle = "Choose Image Source"
     }
 }
