@@ -37,24 +37,41 @@ protocol CreateMatchViewModelProtocol {
 
 final class CreateMatchViewModel: NSObject {
 
+    //MARK: - Variables
     weak var delegate: CreateMatchViewModelDelegate?
     private var networkManager: NetworkManagerProtocol?
-
-    private var city: String?
     private let locationManager = CLLocationManager()
     private let firebaseManager: FirebaseManagerProtocol?
     private let geocoder = CLGeocoder()
     private var longitude: Double?
     private var latitude: Double?
     private var locationData: CLLocation?
+    private var city: String?
     private var players = [Player]()
     private var selectedPlayers = [Player]()
     private var playersTmp = [Player]()
     private var team1 = [Player]()
     private var team2 = [Player]()
 
-    private let footballPositions = ["Goalkeeper", "Left Back", "Center Back", "Right Back", "Center Midfielder", "Right Winger", "Left Winger", "Center Forward"]
-    private let volleyballPositions = ["Setter", "Outside Hitter", "Middle Blocker", "Opposite", "Libero", "Right Side Hitter"]
+    private let footballPositions = [
+        "Goalkeeper",
+        "Left Back",
+        "Center Back",
+        "Right Back",
+        "Center Midfielder",
+        "Right Winger",
+        "Left Winger",
+        "Center Forward"
+    ]
+
+    private let volleyballPositions = [
+        "Setter",
+        "Outside Hitter",
+        "Middle Blocker",
+        "Opposite",
+        "Libero",
+        "Right Side Hitter"
+    ]
 
     // Football position limits
     let footballPositionLimits: [String: Int] = [
@@ -91,7 +108,7 @@ final class CreateMatchViewModel: NSObject {
     }
 
 //MARK: - Private Functions
-    fileprivate func fetch() {
+    private func fetch() {
         delegate?.loadingIndicator()
         firebaseManager?.fetchPlayers { result in
             switch result {
@@ -105,14 +122,14 @@ final class CreateMatchViewModel: NSObject {
         }
     }
 
-    fileprivate func splitIntoTeams(players: [Player], positions: [String], positionLimits: [String: Int]) -> ([Player], [Player]) {
+    private func splitIntoTeams(players: [Player], positions: [String], positionLimits: [String: Int]) -> ([Player], [Player]) {
         var team1 = [Player]()
         var team2 = [Player]()
         var team1Limits = positionLimits
         var team2Limits = positionLimits
 
-        // Fisher-Yates shuffle
-        var shuffledPlayers = players.shuffled()
+        // Shuffle players to make the teams more random
+        let shuffledPlayers = players.shuffled()
 
         var positionGroups = [String: [Player]]()
         for position in positions {
@@ -138,12 +155,11 @@ final class CreateMatchViewModel: NSObject {
                     team2.append(player)
                     team2Limits[player.position ?? ""] = limit2 - 1
                 }
-                addToTeam1.toggle() // Sıradaki oyuncuyu diğer takıma eklemek için toggle
+                addToTeam1.toggle()
             }
         }
 
-        // Kalan oyuncuları dağıt
-        var remainingPlayers = shuffledPlayers.filter { !team1.contains($0) && !team2.contains($0) }
+        let remainingPlayers = shuffledPlayers.filter { !team1.contains($0) && !team2.contains($0) }
         for player in remainingPlayers {
             if team1.count <= team2.count {
                 team1.append(player)
@@ -155,19 +171,19 @@ final class CreateMatchViewModel: NSObject {
         return (team1, team2)
     }
 
-    fileprivate func setFootballTeams() {
+    private func setFootballTeams() {
         let teams = splitIntoTeams(players: selectedPlayers, positions: footballPositions, positionLimits: footballPositionLimits)
         team1 = teams.0
         team2 = teams.1
     }
 
-    fileprivate func setVolleyballTeams() {
+    private func setVolleyballTeams() {
         let teams = splitIntoTeams(players: selectedPlayers, positions: volleyballPositions, positionLimits: volleyballPositionLimits)
         team1 = teams.0
         team2 = teams.1
     }
 
-    fileprivate func writePositionsShortVolleyball() {
+    private func writePositionsShortVolleyball() {
         playersTmp = players
         for (index, var player) in playersTmp.enumerated() {
             switch player.position {
@@ -190,7 +206,7 @@ final class CreateMatchViewModel: NSObject {
         }
     }
 
-    fileprivate func writePositionsShortFootball() {
+    private func writePositionsShortFootball() {
         playersTmp = players
         for (index, var player) in playersTmp.enumerated() {
             switch player.position {

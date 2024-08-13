@@ -24,6 +24,7 @@ final class HomeViewController: UIViewController {
         navigationController?.present(OnboardingVC(), animated: true)
     }
 
+//MARK: - Configure
     private func configureImages() {
         soccerImageView.isUserInteractionEnabled = true
         let gestureRecognizerSoccer = UITapGestureRecognizer(target: self, action: #selector(soccerButtonTapped))
@@ -42,6 +43,7 @@ final class HomeViewController: UIViewController {
         volleyballImageView.layer.shadowRadius = 5
     }
 
+//MARK: - Actions
     @objc func soccerButtonTapped() {
         let vc = MenuViewController()
         vc.selectedSport = .football
@@ -57,9 +59,7 @@ final class HomeViewController: UIViewController {
     }
 }
 
-extension HomeViewController: HomeViewModelDelegate {
-
-}
+extension HomeViewController: HomeViewModelDelegate { }
 
 private extension HomeViewController {
     enum Constant {

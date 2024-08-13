@@ -7,27 +7,18 @@
 
 import Foundation
 
-protocol MatchDetailTeamsViewModelDelegate: AnyObject {
-
-}
+protocol MatchDetailTeamsViewModelDelegate: AnyObject { }
 
 protocol MatchDetailTeamsViewModelProtocol {
     var delegate: MatchDetailTeamsViewModelDelegate? { get set }
-
     var team1: [Player] { get set }
     var team2: [Player] { get set }
 }
 
 final class MatchDetailTeamsViewModel {
-
     weak var delegate: MatchDetailTeamsViewModelDelegate?
     private var getTeam1 = [Player]()
     private var getTeam2 = [Player]()
-
-    init() {
-
-    }
-
 }
 
 extension MatchDetailTeamsViewModel: MatchDetailTeamsViewModelProtocol {
@@ -48,6 +39,4 @@ extension MatchDetailTeamsViewModel: MatchDetailTeamsViewModelProtocol {
             getTeam2 = newValue
         }
     }
-
-
 }

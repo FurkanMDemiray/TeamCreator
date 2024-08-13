@@ -25,6 +25,7 @@ final class CreateMatchCell: UITableViewCell {
         configureButton()
     }
 
+//MARK: Configure
     func configure(with player: Player, isChecked: Bool) {
         playerNameLabel.text = player.name
         positionLabel.text = player.position

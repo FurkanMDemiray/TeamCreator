@@ -9,12 +9,14 @@ import UIKit
 
 final class MatchDetailTeamsCell: UICollectionViewCell {
 
+    static let matchDetailTeamsCellId = "MatchDetailTeamsCell"
+
+    //MARK: - IBOutlets
     @IBOutlet private weak var playerImageView: UIImageView!
     @IBOutlet private weak var playerNameLabel: UILabel!
     @IBOutlet private weak var skillPointLabel: UILabel!
     @IBOutlet private weak var playerPositionLabel: UILabel!
     @IBOutlet private weak var outerView: UIView!
-    static let matchDetailTeamsCellId = "MatchDetailTeamsCell"
 
     override func awakeFromNib() {
         super.awakeFromNib()

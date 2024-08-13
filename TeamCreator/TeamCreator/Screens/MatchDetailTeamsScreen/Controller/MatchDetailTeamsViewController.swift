@@ -33,9 +33,7 @@ final class MatchDetailTeamsViewController: UIViewController {
 
 }
 
-extension MatchDetailTeamsViewController: MatchDetailTeamsViewModelDelegate {
-
-}
+extension MatchDetailTeamsViewController: MatchDetailTeamsViewModelDelegate { }
 
 // MARK: - CollectionView
 extension MatchDetailTeamsViewController: UICollectionViewDataSource {
@@ -60,12 +58,6 @@ extension MatchDetailTeamsViewController: UICollectionViewDataSource {
     }
 }
 
-extension MatchDetailTeamsViewController: UICollectionViewDelegate {
-    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        // Seçilen öğeye göre işlem yap
-    }
-}
-
 extension MatchDetailTeamsViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         let width = collectionView.frame.width / 2
@@ -85,6 +77,3 @@ extension MatchDetailTeamsViewController: UICollectionViewDelegateFlowLayout {
         return 0
     }
 }
-
-
-

@@ -18,14 +18,17 @@ protocol MatchDetailViewModelDelegate: AnyObject {
 //MARK: - Protocol
 protocol MatchDetailViewModelProtocol {
     var delegate: MatchDetailViewModelDelegate? { get set }
-    var getTime: String { get }
-    var getCity: String { get }
+    var getTime: String { get set }
+    var getCity: String { get set }
+    var getLongitude: Double? { get set }
+    var getLatitude: Double? { get set }
     var getWeather: WeatherModel { get }
     var setSelectedPlayers: [Player] { get set }
     var getSetTeam1: [Player] { get set }
     var getSetTeam2: [Player] { get set }
     var sumOfSkillTeamOne: Int { get }
     var sumOfSkillTeamTwo: Int { get }
+
 
     func fetch()
 }
@@ -38,11 +41,11 @@ final class MatchDetailViewModel {
     private var selectedPlayers = [Player]()
     private var team1 = [Player]()
     private var team2 = [Player]()
-    var longitude: Double?
-    var latitude: Double?
-    var time: String?
-    var city: String?
-    var weather: WeatherModel?
+    private var longitude: Double?
+    private var latitude: Double?
+    private var time: String?
+    private var city: String?
+    private var weather: WeatherModel?
 
     init(networkManager: NetworkManagerProtocol = NetworkManager.shared) {
         self.networkManager = networkManager
@@ -54,7 +57,7 @@ final class MatchDetailViewModel {
         team2.removeAll()
     }
 
-    fileprivate func fetchWeather() {
+    private func fetchWeather() {
         delegate?.loadingIndicator()
         guard let longitude, let latitude else { return }
         networkManager.fetch(url: "\(Constant.weatherBaseURL)\(latitude)\(Constant.weatherLongitude)\(longitude)\(Constant.weatherAPIKey)", method: .get, parameters: nil, headers: nil) { [weak self] (result: Result<WeatherModel, Error>) in
@@ -89,6 +92,45 @@ final class MatchDetailViewModel {
 
 //MARK: - Protocol Extension
 extension MatchDetailViewModel: MatchDetailViewModelProtocol {
+
+    var getTime: String {
+        get {
+            guard let time else { return "" }
+            return time
+        }
+        set {
+            time = newValue
+        }
+    }
+
+    var getCity: String {
+        get {
+            guard let city else { return "" }
+            return city
+        }
+        set {
+            city = newValue
+        }
+    }
+
+    var getLongitude: Double? {
+        get {
+            longitude
+        }
+        set {
+            longitude = newValue
+        }
+    }
+
+    var getLatitude: Double? {
+        get {
+            latitude
+        }
+        set {
+            latitude = newValue
+        }
+    }
+
     var sumOfSkillTeamTwo: Int {
         var sum = 0
         team2.forEach { sum += $0.skillPoint ?? 0 }
@@ -131,16 +173,6 @@ extension MatchDetailViewModel: MatchDetailViewModelProtocol {
     var getWeather: WeatherModel {
         guard let weather else { return WeatherModel(coord: nil, weather: nil, base: nil, main: nil, visibility: nil, wind: nil, clouds: nil, dt: nil, sys: nil, timezone: nil, id: nil, name: nil, cod: nil) }
         return weather
-    }
-
-    var getCity: String {
-        guard let city else { return "" }
-        return city
-    }
-
-    var getTime: String {
-        guard let time else { return "" }
-        return time
     }
 
     func fetch() {

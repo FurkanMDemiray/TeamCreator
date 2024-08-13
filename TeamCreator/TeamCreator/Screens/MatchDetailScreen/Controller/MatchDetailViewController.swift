@@ -8,7 +8,7 @@
 import UIKit
 
 final class MatchDetailViewController: UIViewController {
-    
+
     //MARK: IBOutlets
     @IBOutlet private weak var locationTimeLabel: UILabel!
     @IBOutlet private weak var weatherImageView: UIImageView!
@@ -32,9 +32,10 @@ final class MatchDetailViewController: UIViewController {
         configureImages()
         configureWeatherOuterView()
         print(Constant.firstTeam, viewModel.sumOfSkillTeamOne)
-        print(Constant.secondTeam,viewModel.sumOfSkillTeamTwo)
+        print(Constant.secondTeam, viewModel.sumOfSkillTeamTwo)
     }
 
+//MARK: Configure
     private func configureImages() {
         galatasarayImageView.isUserInteractionEnabled = true
         fenerbahceImageView.isUserInteractionEnabled = true
@@ -50,7 +51,7 @@ final class MatchDetailViewController: UIViewController {
         weatherOuterView.layer.shadowOpacity = 0.5
         weatherOuterView.layer.shadowOffset = .zero
         weatherOuterView.layer.shadowRadius = 5
-        weatherOuterView.backgroundColor = UIColor(hex: Constant.backgroundColor )
+        weatherOuterView.backgroundColor = UIColor(hex: Constant.backgroundColor)
     }
 
     //MARK: - Animations

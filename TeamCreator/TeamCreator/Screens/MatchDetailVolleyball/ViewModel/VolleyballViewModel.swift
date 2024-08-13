@@ -7,9 +7,7 @@
 
 import Foundation
 
-protocol VolleyballViewModelDelegate: AnyObject {
-
-}
+protocol VolleyballViewModelDelegate: AnyObject { }
 
 protocol VolleyballViewModelProtocol {
     var delegate: VolleyballViewModelDelegate? { get set }

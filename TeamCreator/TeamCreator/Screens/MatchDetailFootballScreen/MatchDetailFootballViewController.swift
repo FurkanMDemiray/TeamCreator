@@ -9,6 +9,13 @@ import UIKit
 
 final class MatchDetailFootballViewController: UIViewController {
 
+    var viewModel: MatchDetailFootballViewModelProtocol! {
+        didSet {
+            viewModel.delegate = self
+        }
+    }
+
+    //MARK: - IBOutlets
     @IBOutlet private weak var gkImage: UIImageView!
     @IBOutlet private weak var gkLabel: UILabel!
     @IBOutlet private weak var rbImage: UIImageView!
@@ -31,12 +38,6 @@ final class MatchDetailFootballViewController: UIViewController {
     @IBOutlet private weak var cfLabel: UILabel!
     @IBOutlet private weak var secondCFImage: UIImageView!
     @IBOutlet private weak var secondCFLabel: UILabel!
-
-    var viewModel: MatchDetailFootballViewModelProtocol! {
-        didSet {
-            viewModel.delegate = self
-        }
-    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -119,6 +120,4 @@ final class MatchDetailFootballViewController: UIViewController {
     }
 }
 
-extension MatchDetailFootballViewController: MatchDetailFootballViewModelDelegate {
-
-}
+extension MatchDetailFootballViewController: MatchDetailFootballViewModelDelegate { }
