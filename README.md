@@ -1,3 +1,6 @@
+<p align="center">
+  <img src="TeamCreator/Recources/Assets.xcassets/AppIcon.appiconset/1024.png" alt="Team Creator App Icon" width="150" height="150">
+</p>
 <div  align="center">
 <h1> Team Creator  </h1>
 <h2> Furkan Melik Demiray & Agah Berkin Güler </h2>
@@ -73,9 +76,9 @@ Before you begin, ensure you have the following:
 
 Also, make sure that these dependencies are added in your project's target:
 
-- [Alamofire](https://github.com/Alamofire/Alamofire.git): 
-- [SDWebImage](https://github.com/SDWebImage/SDWebImage.git)
-- [Firebase](https://github.com/firebase/firebase-ios-sdk)
+- [Alamofire](https://github.com/Alamofire/Alamofire.git): A powerful and easy-to-use HTTP networking library for Swift, used to handle network requests, such as fetching data from APIs.
+- [SDWebImage](https://github.com/SDWebImage/SDWebImage.git): A popular library for downloading and caching images, used to efficiently load and display player images in the app.
+- [Firebase](https://github.com/firebase/firebase-ios-sdk): A comprehensive platform from Google that provides a suite of tools for app development, including a real-time database, authentication, and analytics. It’s used to store and manage player data and match information in the cloud.
 
 ### Instalation
 
