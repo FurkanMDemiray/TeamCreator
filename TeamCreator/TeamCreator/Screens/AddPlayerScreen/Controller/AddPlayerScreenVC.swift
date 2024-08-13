@@ -19,7 +19,7 @@ protocol AddPlayerScreenVCProtocol: AnyObject {
 
 //MARK: - Class
 final class AddPlayerScreenVC: UIViewController {
-    
+
     //MARK: - Variables
     var viewModel: AddPlayerScreenVMProtocol! {
         didSet {
@@ -29,7 +29,7 @@ final class AddPlayerScreenVC: UIViewController {
     }
     private let positionPickerView = UIPickerView()
     private var activeTextField: UITextField?
-    
+
     //MARK: - IBOutlets
     @IBOutlet private weak var imageView: UIImageView!
     @IBOutlet private weak var nameTextField: UITextField!
@@ -37,7 +37,7 @@ final class AddPlayerScreenVC: UIViewController {
     @IBOutlet private weak var positionTextField: UITextField!
     @IBOutlet private weak var ratingTextField: UITextField!
     @IBOutlet weak var addPlayerButton: UIButton!
-    
+
     //MARK: - Lifecycles
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -48,7 +48,7 @@ final class AddPlayerScreenVC: UIViewController {
     deinit {
         removeKeyboardObservers()
     }
-    
+
     //MARK: - Add Player Action Button Function
     @IBAction private func addPlayerButtonTapped(_ sender: UIButton) {
         let name = nameTextField.text
@@ -57,14 +57,25 @@ final class AddPlayerScreenVC: UIViewController {
         let rating = ratingTextField.text
         let id = UUID().uuidString
         var imageString: String? = nil
-        if imageView.image !=  UIImage(systemName: Constant.image) {
-            if let imageData = imageView.image?.jpegData(compressionQuality: 0.5) {
+
+        let resizedImage = resizeImage(image: imageView.image!, targetSize: CGSize(width: 100, height: 100))
+        if imageView.image != UIImage(systemName: Constant.image) {
+            if let imageData = resizedImage.jpegData(compressionQuality: 0.5) {
                 imageString = imageData.base64EncodedString()
             }
         }
-        
-        let newPlayer = Player(id: id, name: "\(name!) \(surname!)", age: 18, skillPoint: Int(rating ?? "0"), position: position, sport: HomeViewModel.whichSport, picture: imageString)
-        
+
+        let newPlayer = Player(
+            id: id,
+            name: "\(name!) \(surname!)",
+            skillPoint: Int(
+                rating ?? "0"
+            ),
+            position: position,
+            sport: HomeViewModel.whichSport,
+            picture: imageString
+        )
+
         let validationResult = viewModel.validatePlayerDetails(player: newPlayer)
         switch validationResult {
         case .success:
@@ -75,7 +86,7 @@ final class AddPlayerScreenVC: UIViewController {
             present(alert, animated: true)
         }
     }
-    
+
     //MARK: - Keyboard Observations
     private func addKeyboardObservers() {
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
@@ -89,7 +100,7 @@ final class AddPlayerScreenVC: UIViewController {
 
     @objc private func keyboardWillShow(notification: NSNotification) {
         guard let keyboardFrame = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? CGRect,
-              let activeTextField = activeTextField else { return }
+            let activeTextField = activeTextField else { return }
 
         let textFieldFrameInWindow = activeTextField.convert(activeTextField.bounds, to: view.window)
 
@@ -158,7 +169,7 @@ extension AddPlayerScreenVC: AddPlayerScreenVCProtocol {
     @objc private func doneTapped() {
         ratingTextField.resignFirstResponder()
     }
-    
+
     //MARK: - ImageView
     func setupImageView() {
         let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(imageViewTapped))
@@ -201,11 +212,11 @@ extension AddPlayerScreenVC: UITextFieldDelegate {
         }
         return true
     }
-    
+
     func textFieldDidEndEditing(_ textField: UITextField) {
         activeTextField = nil
     }
-    
+
     func textFieldDidBeginEditing(_ textField: UITextField) {
         activeTextField = textField
     }

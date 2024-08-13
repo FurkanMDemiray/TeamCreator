@@ -26,34 +26,37 @@ protocol AddPlayerScreenVMProtocol {
 
 //MARK: - Class
 final class AddPlayerScreenVM {
-    
+
     //MARK: - Variables
     weak var view: AddPlayerScreenVCProtocol?
     weak var delegate: AddPlayerScreenVMDelegate?
     var selectedSport: Sport
     private var positions = [String]()
     private let sportPositions: [Sport: [String]] = [
-        .football: FootballPosition.allCases.map { $0.rawValue },
-        .volleyball: VolleyballPosition.allCases.map { $0.rawValue }
+            .football: FootballPosition.allCases.map {
+            $0.rawValue
+        },
+            .volleyball: VolleyballPosition.allCases.map {
+            $0.rawValue
+        }
     ]
     let firebaseManager: FirebaseManagerProtocol
 
-    //MARK: - Initialize 
+    //MARK: - Initialize
     init(firebaseManager: FirebaseManagerProtocol = FirebaseManager(), selectedSport: Sport) {
         self.firebaseManager = firebaseManager
         self.selectedSport = selectedSport
         setupPositions()
     }
-    
+
     private func setupPositions() {
         positions = sportPositions[selectedSport] ?? []
         view?.reloadPickerView()
     }
-    
 }
 
 extension AddPlayerScreenVM: AddPlayerScreenVMProtocol {
-    
+
     //MARK: - Functions
     func viewDidLoad() {
         view?.setupVC()
@@ -68,9 +71,9 @@ extension AddPlayerScreenVM: AddPlayerScreenVMProtocol {
     func titleForRow(row: Int) -> String {
         positions[row]
     }
-    
+
     func validatePlayerDetails(player: Player) -> ValidationResult {
-        guard let name = player.name, !name.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty  else {
+        guard let name = player.name, !name.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty else {
             return .failure(message: Constant.validateNameFail)
         }
         guard let position = player.position, !position.isEmpty else {
