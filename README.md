@@ -35,6 +35,9 @@ Welcome to Team Creator. This app allows user to create sport matches with their
 
 ## Screenshots
 
+
+
+
 ## Tech Stack
 - **Xcode:** Version 15.4
 - **Language:** Swift 5.10
@@ -52,7 +55,40 @@ In developing Team Creator app, MVVM (Model - View - ViewModel) is being use for
 
 ### Prerequisites
 
+Before you begin, ensure you have the following:
+
+- Xcode installed
+
+Also, make sure that these dependencies are added in your project's target:
+
+- [Alamofire](https://github.com/Alamofire/Alamofire.git): 
+- [SDWebImage](https://github.com/SDWebImage/SDWebImage.git)
+- [Firebase](https://github.com/firebase/firebase-ios-sdk)
+
 ### Instalation
+
+1. Clone the repository:
+
+    ```bash
+    git clone https://github.com/FurkanMDemiray/TeamCreator.git
+    ```
+    
+2. Open the project in Xcode:
+
+    ```bash
+    cd TeamCreator
+    open TeamCreator.xcodeproj
+    ```
+    
+3. Add required dependencies using Swift Package Manager:
+
+   ```bash
+   - Alamofire
+   - SDWebImage
+   - Firebase
+    ```
+    
+4. Build and run the project.
 
 ## Usage
 
@@ -85,5 +121,13 @@ In developing Team Creator app, MVVM (Model - View - ViewModel) is being use for
 2. Players line ups as been seen after clicking the team logos.
 
 ## Known Issue
+- While creating a match with selected players, if the player count is not enough or when the selected players do not have the different positions, there is some issues on the lineup screen.
+- After adding a new player, if user edit the player that added new, sometimes player can be deleted from database.
 
 ## Improvements
+- Localiziation for other languages can be added to be able to reach more user.
+- Adaption to dark mode can be supported for better user friendly UI.
+- As an new feature users can add a new sport category to create matches. 
+- When adding a new player to the database user can be able to use their device camera.
+- Users be able to change their team logos as a new logo or a photo.
+- After match is created user can be able to see old match screens and teams are setted for that match.
