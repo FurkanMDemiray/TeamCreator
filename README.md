@@ -137,12 +137,10 @@ Also, make sure that these dependencies are added in your project's target:
 
 ## Known Issue
 - While creating a match with selected players, if the player count is not enough or when the selected players do not have the different positions, there is some issues on the lineup screen.
-- After adding a new player, if user edit the player that added new, sometimes player can be deleted from database.
 
 ## Improvements
 - Localiziation for other languages can be added to be able to reach more user.
 - Adaption to dark mode can be supported for better user friendly UI.
 - As an new feature users can add a new sport category to create matches. 
-- When adding a new player to the database user can be able to use their device camera.
 - Users be able to change their team logos as a new logo or a photo.
 - After match is created user can be able to see old match screens and teams are setted for that match.
