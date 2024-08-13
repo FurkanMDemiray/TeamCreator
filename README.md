@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="TeamCreator/Recources/Assets.xcassets/AppIcon.appiconset/1024.png" alt="Team Creator App Icon" width="150" height="150">
+  <img src="TeamCreator/TeamCreator/Recources/Assets.xcassets/AppIcon.appiconset/1024.jpg" alt="Team Creator App Icon" width="150" height="150">
 </p>
 <div  align="center">
 <h1> Team Creator  </h1>
