@@ -40,7 +40,15 @@ Welcome to Team Creator. This app allows user to create sport matches with their
 | ![Onboarding](https://github.com/FurkanMDemiray/TeamCreator/blob/ReadmeUpdate/Screenshots/onboarding.png) | ![SportCategory](https://github.com/FurkanMDemiray/TeamCreator/blob/ReadmeUpdate/Screenshots/sports.png) | ![Menu](https://github.com/FurkanMDemiray/TeamCreator/blob/ReadmeUpdate/Screenshots/menu.png) |
 | Onboarding | Sport Category Menu | Menu Screen |
 
+| Image 4                | Image 5                | Image 6                |
+|------------------------|------------------------|------------------------|
+| ![Players](https://github.com/FurkanMDemiray/TeamCreator/blob/ReadmeUpdate/Screenshots/players.png) | ![AddPlayer](https://github.com/FurkanMDemiray/TeamCreator/blob/ReadmeUpdate/Screenshots/addplayer.png) | ![PlayerDetail](https://github.com/FurkanMDemiray/TeamCreator/blob/ReadmeUpdate/Screenshots/editplayer.png) |
+| Players List | Add Player | Player Detail |
 
+| Image 7                | Image 8                | Image 9                | Image 10               |
+|------------------------|------------------------|------------------------|------------------------|
+| ![CreateMatch](https://github.com/FurkanMDemiray/TeamCreator/blob/ReadmeUpdate/Screenshots/creatematch.png) | ![MatchDetail](https://github.com/FurkanMDemiray/TeamCreator/blob/ReadmeUpdate/Screenshots/matchdetail.png) | ![Teams](https://github.com/FurkanMDemiray/TeamCreator/blob/ReadmeUpdate/Screenshots/teams.png) |  ![Lineups](https://github.com/FurkanMDemiray/TeamCreator/blob/ReadmeUpdate/Screenshots/lineups.png) |
+| Create Match | Match Detail | Teams | Lineups |
 
 ## Tech Stack
 - **Xcode:** Version 15.4
