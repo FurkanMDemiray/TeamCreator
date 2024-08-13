@@ -57,10 +57,9 @@ final class AddPlayerScreenVC: UIViewController {
         let rating = ratingTextField.text
         let id = UUID().uuidString
         var imageString: String? = nil
-
-        let resizedImage = resizeImage(image: imageView.image!, targetSize: CGSize(width: 100, height: 100))
+        let resizedImage = imageView.image?.resize(targetSize: CGSize(width: 100, height: 100))
         if imageView.image != UIImage(systemName: Constant.image) {
-            if let imageData = resizedImage.jpegData(compressionQuality: 0.5) {
+            if let imageData = resizedImage?.jpegData(compressionQuality: 0.5) {
                 imageString = imageData.base64EncodedString()
             }
         }
@@ -269,7 +268,7 @@ private extension AddPlayerScreenVC {
     enum Constant {
         static let ok = "OK"
         static let done = "Done"
-        static let next = "next"
+        static let next = "Next"
         static let cancel = "Cancel"
         static let image = "hand.tap.fill"
         static let addPlayerFailedTitle = "Incomplete Information"

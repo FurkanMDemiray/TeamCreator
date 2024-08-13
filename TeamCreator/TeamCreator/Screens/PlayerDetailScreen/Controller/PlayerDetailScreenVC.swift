@@ -194,7 +194,8 @@ extension PlayerDetailScreenVC: PlayerDetailScreenVCProtocol {
         let name = detailNameTextField.text ?? ""
         let position = detailPositionTextField.text ?? ""
         let skill = Int(detailSkillTextField.text ?? "") ?? 0
-        let imageData = detailImageView.image?.jpegData(compressionQuality: 0.5)
+        let resizedImage = detailImageView.image?.resize(targetSize: CGSize(width: 100, height: 100))
+        let imageData = resizedImage?.jpegData(compressionQuality: 0.5)
         let imageString = imageData?.base64EncodedString()
         guard let imageString else { return }
         viewModel.updatePlayer(name: name, position: position, skill: skill, image: imageString)
