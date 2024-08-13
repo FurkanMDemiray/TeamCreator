@@ -30,6 +30,7 @@ Welcome to Team Creator. This app allows user to create sport matches with their
 ## Features
  **Players Section:**
  - Users can add new players to selected sport, and edit or delete the existing player.
+ - Users can use their device camera to add photos for the players.
  
 **Create Match Screen:**
 - Users can choose various players for different positions to create matches.
